@@ -7,6 +7,7 @@ type BoolNet
   gt::String # graph type in ["random","smallworld"]
   network::AbstractGraph
   functionlist::Array{Array{Bool,1},1}
+  P::Float64
   initstate::Array{Bool,1}
   state::Array{Bool,1}
 
@@ -14,10 +15,19 @@ type BoolNet
     network = gengraph(N,K,gt)
     indegs = [in_degree(i,network) for i in network.vertices]
     functionlist = [samplerba(2^i) for i in indegs]
+    P = mean(map(homogeneity,functionlist))
     state = samplerba(N)
-    new(N,K,gt,network,functionlist,deepcopy(state),deepcopy(state))
+    new(N,K,gt,network,functionlist,P,deepcopy(state),deepcopy(state))
   end
 
+end
+
+function homogeneity(I::Array{Bool,1})
+  if sum(I) > length(I)/2
+    return sum(I)/length(I)
+  else
+    return (length(I)-sum(I))/length(I)
+  end
 end
 
 function samplerba(K::Integer)

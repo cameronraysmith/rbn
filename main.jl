@@ -1,6 +1,6 @@
 require("booleannetwork.jl")
 
-bn = BoolNet(10, 2, "random")
+bn = BoolNet(10, 3, "random")
 
 T = 100
 
