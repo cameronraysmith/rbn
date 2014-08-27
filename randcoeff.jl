@@ -24,7 +24,9 @@ function randsys(N::Integer,C::Float64,sigma::Float64)
   randsys(N,N,C,sigma)
 end
 
+
 function connectmods(modarray::Array{Array{Float64,2},1},C::Float64,sigma::Float64)
+
   L = length(modarray)
   modulepairs = Iterators.product(1:L,1:L)
   n = map(x->size(x,1),modarray) # array of nodes in each module
@@ -33,24 +35,26 @@ function connectmods(modarray::Array{Array{Float64,2},1},C::Float64,sigma::Float
 
   for(i,j) in modulepairs
     if i==j
-      M[(n[i]*(i-1)+1):(n[i]*i),(n[j]*(j-1)+1):(n[j]*j)] = modarray[i]
+      M[(n[i]*(i-1)+1):(n[i]*i),(n[j]*(j-1)+1):(n[j]*j)] = deepcopy(modarray[i])
     else
       M[(n[i]*(i-1)+1):(n[i]*i),(n[j]*(j-1)+1):(n[j]*j)] = randsys(n[i],n[j],C,sigma)
     end
   end
 
   return M
+
 end
 
+
 function randhiermodsys(n::Integer,C::Float64,sigma::Float64,m::Integer,h::Integer,r::Float64)
-  # N - number of nodes at level 0
+
+  # n - number of nodes at level 0
   # m - number of modules at level 1
   # h - number of hierarchical levels
   # r - \frac{\rho_{h+1}}{\rho_h} ratio
 
   L = 2^(h-1)*m # total number of modules
   N = L*n # total number of nodes
-  M = zeros(Float64,N,N)
 
   rhovec = zeros(Float64,h+1)
   rhovec[1] = C
@@ -62,31 +66,24 @@ function randhiermodsys(n::Integer,C::Float64,sigma::Float64,m::Integer,h::Integ
   modvec[1] = m
   modvec[2:end] = 2
 
-  modarray = [[randsys(n,rhovec[1],sigma) for j in 1:m] for k in 1:2^(h-1)]
+  M = [connectmods([randsys(n,rhovec[1],sigma) for j in 1:m],rhovec[2],sigma) for k in 1:2^(h-1)]
 
-  connectmods(vcat(
-                connectmods()
-              ))
+  ind = length(M)/2
+  hcount = 3
+  mcont = Array(Array{Float64,2},2)
+  while length(M)>1
+    mcont[1] = shift!(M)
+    mcont[2] = shift!(M)
+    push!(M,connectmods(mcont,rhovec[hcount],sigma))
+    ind -= 1
+    if ind==0
+      hcount += 1
+      ind = length(M)/2
+    end
+  end
 
-  # for i in 1:h
+  return M[1]
 
-
-
-  # for i = 2:h
-  #   modarray = [connectmods(modarray,rhovec[i]) for j in 1:modvec[i]]
-  # end
-
-  # modulepairs = Iterators.product(1:L,1:L)
-
-  # for (i,j) in modulepairs
-  #   if i==j
-  #     M[(n*(i-1)+1):n*i,(n*(j-1)+1):n*j] = randsys(n,rhovec[1],sigma)
-  #   else
-  #     M[(n*(i-1)+1):n*i,(n*(j-1)+1):n*j] = randsys(n,rhovec[2],sigma)
-  #   end
-  # end
-
-  # return M
 end
 
 
