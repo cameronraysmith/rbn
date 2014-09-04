@@ -1,0 +1,110 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: comment start ]
+Numerator
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((a*c/d+1)^2, c, d/a, -d/a), a, -1, -d), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((a*c/d+1)^2, c, -1, 1), a, -d, d), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((a*c/d+1)^2, c, -d/a, d/a), a, d, 1), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate(2, c, -1, d/a), a, -1, -d), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate(2, c, d/a, 1), a, d, 1), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Denominator
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((a*c/d+1), c, d/a, -d/a), a, -1, -d), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((a*c/d+1), c, -1, 1), a, -d, d), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((a*c/d+1), c, -d/a, d/a), a, d, 1), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Simulate replacing b
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+n1 : 0;
+n2 : 0;
+block([a,b,c,d], 
+  for i : 1 thru 1000000 do
+  block(
+    a : random(2.0)-1.0,
+    b : random(2.0)-1.0,
+    c : random(2.0)-1.0,
+    d : random(2.0)-1.0,
+    if ((a*c > b*d) and (a+c<0)) then block(
+       n1 : n1 + 1,
+       b : random(2.0)-1.0,
+       if ((a*c > b*d) and (a+c<0)) then n2 : n2 + 1)));
+n1;
+n2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+time(%o72);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+25.0/36.0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+17377.0/25110.0;
+17350.0/25059.0;
+173830.0/249971.0;
+173976.0/249927.0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Simulate replacing a
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+n1 : 0;
+n2 : 0;
+block([a,b,c,d], 
+  for i : 1 thru 1000000 do
+  block(
+    a : random(2.0)-1.0,
+    b : random(2.0)-1.0,
+    c : random(2.0)-1.0,
+    d : random(2.0)-1.0,
+    if ((a*c > b*d) and (a+c<0)) then block(
+       n1 : n1 + 1,
+       a : random(2.0)-1.0,
+       if ((a*c > b*d) and (a+c<0)) then n2 : n2 + 1)));
+n1;
+n2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+13534.0/25001.0;
+13616.0/24956.0;
+136240.0/249792.0;
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
