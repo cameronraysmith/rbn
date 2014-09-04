@@ -102,18 +102,17 @@ d & c
 $$
 where $a + c < 0$ and $ac > bd$.  We want to know the probability
 that, if we resample an element of this matrix, the result will be
-stable.  By symmetry, there are two cases to consider; resampling 
+stable.  By symmetry, there are two cases to consider; resampling
 $a$ is equivalent to resampling $d$ and resampling $b$ is equivalent
 to resampling $c$.
 
 Suppose that we resample $b$.  Since the trace does not involve $b$,
 that condition will be satisfied automatically and we only need to
-examine the determinant.  We will consider seperately the cases of $d
-< 0$ and $d > 0$.  When $d > 0$, the condition becomes $ac/d > b$,
-which is satisfiable when $ac > -d$ and results in probability $(ac/d
-+ 1)/2$ of remaining stable.  When $d < 0$, the condition becomes
-$ac/d < b$, which is satisfiable when $ac > d$, so we have probability
-$(1 - ac/d)/2$.
+examine the determinant.  Thus, we have the inequalities $ac > bd$ and $-1 < b < 1$.  We will consider seperately the cases of $d
+< 0$ and $d > 0$.  When $d > 0$, the first condition becomes $ac/d > b$.
+Since $b > -1$, this can only be satisfied when $ac/d > -1$, i.e. when $ac > -d$.  In the subcase that $ac < d$, we then have the limits $-1 < b < ac/d$ and in the subcase $ac < d$, we have the limits $-1 < b < 1$.  When $d < 0$, the condition becomes
+$ac/d < b$, which is satisfiable when $ac > d$.  In the subcase where $ac > -d$, we have $ac/d < b < 1$ and, in the subcase where $ac < -d$, we have $-1 < b <
+1$.
 
 Thus, the probability that a random stable matrix will remain stable
 upon resampling $b$ is given as follows:
@@ -123,7 +122,7 @@ upon resampling $b$ is given as follows:
   P(ac>b'd, a+c < 0) \over
 \int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,1} = \cr
 &{{{1 \over 32} \int_0^1 dd \int_{d > ac > -d} da\,dc \int_{-1}^{ac/d} db \,
-({ac \over d} + 1) + {1 \over 32} \int_{0}^{1} dd \int_{ac>d} da\,dc \int_{-1}^{1} db 2 \atop + 
+({ac \over d} + 1) + {1 \over 32} \int_{0}^{1} dd \int_{ac>d} da\,dc \int_{-1}^{1} db 2 \atop +
 {1 \over 32} \int_{-1}^0 dd \int_{-d > ac > d} da\,dc \int_{ac/d}^1 db\, (1
 - {ac \over d}) + {1 \over 32} \int_{-1}^{0} dd \int_{ac>-d} da\,dc \int_{-1}^{1} db 2}
 \over
@@ -140,18 +139,32 @@ variables $d \mapsto -d$ in the second integrals in the numerator and
 denominator, we can combine terms and simplify the expression to the
 following:
 $$
-{\int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)^2 + \int_0^1 dd \int_{d > ac} da\,dc\, 4 \over
-{2 \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)} + 2 \int_0^1 dd \int_{d > ac} da\,dc\, 2}
+\frac{\int_0^1 dd \int_{ac > d} da\,dc\, 4 + \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)^2}{2 \int_0^1 dd \int_{ac > d} da\,dc\, 2 + 2 \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)}
 $$
-For $d > 0$ we have
-$$
-\int_{-d<ac<d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc \, f(a,c) + \int_{-d}^{d} da \int_{-1}^{1} dc \, f(a,c) + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc \, f(a,c) 
-%\over {\int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc + \int {-d}^{d} da \int_{-1}^{1} dc + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc}
-$$
-and 
+
+\begin{figure}[!ht]
+\centering
+\noindent\includegraphics[width=0.5\columnwidth]{fig/2x2-resample-b.pdf}
+\caption{{\bf Resampling b.} (A) The region defined by $ac > d$ (B) The region defined by $d > ac > -d$}
+\label{fig:2x2-resample-b}
+\end{figure}
+
+For $ac > d$ we divide the $a$-axis into two parts indicated in Fig. \ref{fig:2x2-resample-b}A
 $$
 \int_{ac>d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{-1}^{d \over a} dc \, f(a,c) + \int_{d}^{1} da \int_{d \over a}^1 dc \, f(a,c)$$
-
+for the numerator $f(a,c) = 4$ and the integral is equal to 2. For $d > ac > -d$ we divide the $a$-axis into three parts indicated in Fig. \ref{fig:2x2-resample-b}B
+$$
+\int_{d > ac > -d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc \, f(a,c) + \int_{-d}^{d} da \int_{-1}^{1} dc \, f(a,c) + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc \, f(a,c)
+% \over {\int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc + \int {-d}^{d} da \int_{-1}^{1} dc + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc}
+$$
+for the numerator $f(a,c) = (\frac{ac}{d} + 1)^2$ and the integral is equal to $\frac{32}{9}$ and for the denominator $f(a,c) = \frac{ac}{d} + 1$ and the integral is equal to $3$. Therefore
+$$P\left(\begin{pmatrix}
+a & b' \\
+d & c
+\end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{25}{36} \approx 0.69.$$
 
 % Thus, our expression becomes
 % $$
@@ -164,16 +177,13 @@ $$
 % 2 \int_0^1 dd \int_d^1 da \int_{-d/a}^{1} dc\, ({ac \over d} + 1) }
 % $$
 
-Suppose that we resample $a$.  Then we have to satisfy the conditions
-$a + c < 0$ and $ac > bd$ for fixed values of $b,c,d$.  We will
+Now suppose we resample $a$.  Then we have to satisfy the conditions
+$a + c < 0$, $ac > bd$, and $-1 < a < 1$ for fixed values of $b,c,d$.  We will
 consider seperately the cases $c > 0$ and $c < 0$.  When $c > 0$, our
 inequalities become $a < -c$ and $a > bd/c$.  For these to be
-consistent, we must have $-c > bd/c$, or $bd < -c^2$ and, when we do,
-we have a probability $(-c-bd/c)/2$ of reasmpling an $a$ that keeps
-our matrix stable.  When $c < 0$, the conditions become $a < -c$ and
+consistent, we must have $-c > bd/c$, or $bd < -c^2$.  In the subcase where $bd < -c$, we have $-1 < a < -c$ and, in the subcase where $-c < bd < -c^2$, we have $bd/c < a < -c$. When $c < 0$, the conditions become $a < -c$ and
 $a < bd/c$, which will have a solution as long as $bd/c > -1$, or $bd
-< -c$.  Then the probability of resampling an $a$ which keeps the
-matrix stable is $(\min(-c, bd/c) + 1)/2$.
+< -c$.  In the subcase where $bd < -c^2$, we have $-1 < a < bd/c$ and, in the subcase where $bd > -c^2$, we have $-1 < a < -c$.
 
 Thus, the probability that a random stable matrix will remain stable upon resampling $a$ is given as follows:
 \begin{align*}
@@ -186,6 +196,13 @@ bd/c)} da\, (\min(-c, bd/c) + 1)}}{{1 \over 16} \int_0^1 dc \int_{bd < -c^2} db\
 +
 {1 \over 16} \int_{-1}^0 dc \int_{bd < -c} db\,dd \int_{-1}^{\min(-c, bd/c)} da\,1}
 \end{align*}
+
+\begin{figure}[!ht]
+\centering
+\noindent\includegraphics[width=0.5\columnwidth]{fig/2x2-resample-a.pdf}
+\caption{{\bf Resampling a.} (A) The region defined by $bd < -c$ (B) The region defined by $-c < bd < -c^2$ (C) The region defined by $bd < -c^2$ (D) The region defined by $bd > -c^2$}
+\label{fig:2x2-resample-a}
+\end{figure}
 
 For the case $c>0, {bd \over c} < a < -c, bd < -c^2$ we have two possibilities. For $bd < -c$ we have
 $$
@@ -203,7 +220,7 @@ $$
 $$
 and for $bd > -c^2$
 $$
-\int_{-1}^{-c^2} dd\, \int_{-1}^{-c^2/d} db\, + \int_{-c^2}^{c^2} dd\, \int_{-1}^{1} db + 
+\int_{-1}^{-c^2} dd\, \int_{-1}^{-c^2/d} db\, + \int_{-c^2}^{c^2} dd\, \int_{-1}^{1} db +
 \int_{c^2}^{1} dd \int_{-c^2/d}^{1} db.
 $$
 
@@ -219,7 +236,7 @@ $p$.
 Let us start by fixing some notation.  Suppose that $M$ is of size $n
 \times n$.  Denote the coefficients of $p$ as $s_j$ and its roots as
 $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n
-(x-r_k)$. 
+(x-r_k)$.
 
 Introduce $V$ as the parameter space of all polynomials or degree $n$
 with real coefficients.  In other words, $V$ is a real vector space of
@@ -244,7 +261,7 @@ D &= \prod_{k=1}^n r_n \cr
 Since these quantities are invariant under permutation of the roots
 $r_j$, they may be expressed as functions of the coefficients $s_j$.
 The explicit expressions may be obtained by such techniques as long
-division and determinants.  
+division and determinants.
 
 These quantities are of interest because they describe the boundaries
 between the regions introduced above.  Suppose that we have a family
@@ -276,9 +293,9 @@ s_2, \delta = s_1^2 - 4s_2, \Delta = s_1$.  The relation between these
 is summarized in the following table:
 \begin{align}
 R_{2000} \qquad &D > 0, \delta > 0, \Delta > 0 \cr
-R_{1100} \qquad &D < 0, \delta > 0 \cr  
+R_{1100} \qquad &D < 0, \delta > 0 \cr
 R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0 \cr
-R_{0020} \qquad &\delta < 0, \Delta > 0 \cr 
+R_{0020} \qquad &\delta < 0, \Delta > 0 \cr
 R_{0002} \qquad &\delta < 0, \Delta < 0 \cr
 \end{align}
 
