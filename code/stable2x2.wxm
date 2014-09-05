@@ -2,8 +2,13 @@
 /* [ Created with wxMaxima version 13.04.2 ] */
 
 /* [wxMaxima: comment start ]
-Numerator
+Replacing b Numerator
    [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(d > 0);
+assume(d < 1);
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
 integrate(integrate(integrate((a*c/d+1)^2, c, d/a, -d/a), a, -1, -d), d, 0, 1);
@@ -26,7 +31,7 @@ integrate(integrate(integrate(2, c, d/a, 1), a, d, 1), d, 0, 1);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Denominator
+Replacing b Denominator
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -39,6 +44,134 @@ integrate(integrate(integrate((a*c/d+1), c, -1, 1), a, -d, d), d, 0, 1);
 
 /* [wxMaxima: input   start ] */
 integrate(integrate(integrate((a*c/d+1), c, -d/a, d/a), a, d, 1), d, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Replacing a part I
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(c > 0);
+assume(c < 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((1 - c)^2, b, -1, -c/d), d, c, 1), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((1 - c)^2, b, -c/d, 1), d, -1, -c), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((1 - c), b, -1, -c/d), d, c, 1), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((1 - c), b, -c/d, 1), d, -1, -c), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Replacing a part II
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(c > 0);
+assume(c < 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c)^2, b, -c^2/d, -c/d), d, -1, -c), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c)^2, b, -c/d, -c^2/d), d, c, 1), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c)^2, b, -c^2/d, 1), d, -c, -c^2), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c)^2, b, -1, -c^2/d), d, c^2, c), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c), b, -c^2/d, -c/d), d, -1, -c), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c), b, -c/d, -c^2/d), d, c, 1), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c), b, -c^2/d, 1), d, -c, -c^2), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((-c-b*d/c), b, -1, -c^2/d), d, c^2, c), c, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Replacing a part III
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(c < 0);
+assume(c > -1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate((b*d/c + 1)^2, b, -1, -c^2/d);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate((b*d/c + 1)^2, b, -1, -c^2/d), d, c^2, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((b*d/c + 1)^2, b, -1, -c^2/d), d, c^2, 1), c);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+factor(%o16);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Replacing a part IV
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(c < 0);
+assume(c > -1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate((1 - c)^2, b, -c^2/d, 1), d);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate((1 - c^2)*(1 - c^2 - 2*c^2*log(-c)), c, -1, 0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((1 - c)^2, b, -1, 1), d, -c^2, c^2), c, -1, 0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate((1-c), b, -c^2/d, 1), d);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate((1 - c)*(1 - c^2 - 2*c^2*log(-c)), c, -1, 0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(integrate(integrate((1 - c), b, -1, 1), d, -c^2, c^2), c, -1, 0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+91/72+91/72+7/3;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
