@@ -1,0 +1,139 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3826,        130]
+NotebookOptionsPosition[      3478,        114]
+NotebookOutlinePosition[      3815,        129]
+CellTagsIndexPosition[      3772,        126]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Integrate", "[", 
+  RowBox[{
+   RowBox[{"Boole", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "*", "c"}], ">", 
+      RowBox[{"b", "*", "d"}]}], " ", "&&", " ", 
+     RowBox[{
+      RowBox[{"a", "+", "c"}], "<", "0"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"b", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"c", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"d", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.618874296223716*^9, 3.6188743439267807`*^9}, {
+  3.618874645091412*^9, 3.618874648951254*^9}, {3.618874709734116*^9, 
+  3.618874711532071*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RegionPlot3D", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"a", "*", "c"}], ">", 
+       RowBox[{"b", "*", "d"}]}], " ", "&&", " ", 
+      RowBox[{
+       RowBox[{"a", "+", "c"}], "<", "0"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.6188749643510942`*^9, 3.61887500968342*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Reduce", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "*", "c"}], ">", 
+      RowBox[{"b", "*", "d"}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "+", "c"}], ">", "0"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.61887458142243*^9, 3.6188746092222433`*^9}, {
+  3.618874740041113*^9, 3.618874741672902*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Integrate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"b", "*", 
+       RowBox[{"d", "/", "c"}]}], "+", "1"}], ")"}], "^", "2"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"c", ",", 
+     RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"d", ",", 
+     RowBox[{"c", "^", "2"}], ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"b", ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"c", "^", "2"}]}], "/", "d"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.6188746359745073`*^9, {3.6188753188806677`*^9, 3.618875444060772*^9}, {
+   3.618875483486691*^9, 3.618875493450686*^9}, {3.618875535446409*^9, 
+   3.618875549678989*^9}, {3.6188756024206944`*^9, 3.618875611875473*^9}, {
+   3.618875646341696*^9, 3.618875646491125*^9}, {3.618875684610941*^9, 
+   3.618875685397799*^9}}]
+},
+WindowSize->{740, 599},
+WindowMargins->{{219, Automatic}, {15, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 803, 24, 55, "Input"],
+Cell[1363, 46, 757, 24, 77, "Input"],
+Cell[2123, 72, 449, 13, 32, "Input"],
+Cell[2575, 87, 899, 25, 32, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
