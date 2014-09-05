@@ -89,8 +89,7 @@ publication-specific variants of that class for AMS-\LaTeX{} version 2.
 \maketitle
 
 \section{$2 \times 2$ systems}
-We call a matrix stable when all its eigenvalues are negative.  For a
-$2 \times 2$ matrix, this amounts to the conditions $T < 0$ and $D >
+We call a matrix stable when the real part of all its eigenvalues is negative.  For a $2 \times 2$ matrix, this amounts to the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant.
 
 Suppose we have a stable matrix
@@ -100,129 +99,233 @@ a & b \\
 d & c
 \end{pmatrix}
 $$
-where $a + c < 0$ and $ac > bd$.  We want to know the probability
-that, if we resample an element of this matrix, the result will be
-stable.  By symmetry, there are two cases to consider; resampling
-$a$ is equivalent to resampling $d$ and resampling $b$ is equivalent
-to resampling $c$.
+where $a + c < 0$ and $ac > bd$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $d$-dimensional hypercube, $H^d$, of edge length $r=2$, centered about the origin, and having volume $r^d$.  We want to know the probability that, if we resample an element of this matrix, the result will be stable.  By symmetry, there are two cases to consider; resampling $a$ is equivalent to resampling $c$ and resampling $b$ is equivalent
+to resampling $d$.
 
-Suppose that we resample $b$.  Since the trace does not involve $b$,
-that condition will be satisfied automatically and we only need to
-examine the determinant.  Thus, we have the inequalities $ac > bd$ and $-1 < b < 1$.  We will consider seperately the cases of $d
-< 0$ and $d > 0$.  When $d > 0$, the first condition becomes $ac/d > b$.
-Since $b > -1$, this can only be satisfied when $ac/d > -1$, i.e. when $ac > -d$.  In the subcase that $ac < d$, we then have the limits $-1 < b < ac/d$ and in the subcase $ac < d$, we have the limits $-1 < b < 1$.  When $d < 0$, the condition becomes
-$ac/d < b$, which is satisfiable when $ac > d$.  In the subcase where $ac > -d$, we have $ac/d < b < 1$ and, in the subcase where $ac < -d$, we have $-1 < b <
-1$.
-
-Thus, the probability that a random stable matrix will remain stable
-upon resampling $b$ is given as follows:
+Suppose that we resample $b$.  We want to compute the probability that a random stable matrix will remain stable upon resampling $b$, which is
 % \begin{strip}
-\begin{align*}
-&{\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,
-  P(ac>b'd, a+c < 0) \over
-\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,1} = \cr
-&{{{1 \over 32} \int_0^1 dd \int_{d > ac > -d} da\,dc \int_{-1}^{ac/d} db \,
-({ac \over d} + 1) + {1 \over 32} \int_{0}^{1} dd \int_{ac>d} da\,dc \int_{-1}^{1} db 2 \atop +
-{1 \over 32} \int_{-1}^0 dd \int_{-d > ac > d} da\,dc \int_{ac/d}^1 db\, (1
-- {ac \over d}) + {1 \over 32} \int_{-1}^{0} dd \int_{ac>-d} da\,dc \int_{-1}^{1} db 2}
-\over
-{{{1 \over 16} \int_0^1 dd \int_{d > ac > -d} da\,dc \int_{-1}^{ac/d} db\,1
-+ {1 \over 16} \int_{0}^{1} dd \int_{ac>d} da\,dc \int_{-1}^{1} db 1} \atop
-{+ {1 \over 16} \int_{-1}^0 dd \int_{-d > ac > d} da\,dc \int_{ac/d}^1 db\,1} + {1 \over 16} \int_{-1}^{0} dd \int_{ac>-d} da\,dc \int_{-1}^{1} db 1}}
-\end{align*}
-% \end{strip}
-
-In order to evaluate the integrals, we begin with the
-integrals over $b$, which are particularly easy because none of the
-integrands depends upon $b$.  Once we do that and make the change of
-variables $d \mapsto -d$ in the second integrals in the numerator and
-denominator, we can combine terms and simplify the expression to the
-following:
-$$
-\frac{\int_0^1 dd \int_{ac > d} da\,dc\, 4 + \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)^2}{2 \int_0^1 dd \int_{ac > d} da\,dc\, 2 + 2 \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)}
-$$
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.5\columnwidth]{fig/2x2-resample-b.pdf}
-\caption{{\bf Resampling b.} (A) The region defined by $ac > d$ (B) The region defined by $d > ac > -d$}
-\label{fig:2x2-resample-b}
-\end{figure}
-
-For $ac > d$ we divide the $a$-axis into two parts indicated in Fig. \ref{fig:2x2-resample-b}A
-$$
-\int_{ac>d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{-1}^{d \over a} dc \, f(a,c) + \int_{d}^{1} da \int_{d \over a}^1 dc \, f(a,c)$$
-for the numerator $f(a,c) = 4$ and the integral is equal to 2. For $d > ac > -d$ we divide the $a$-axis into three parts indicated in Fig. \ref{fig:2x2-resample-b}B
-$$
-\int_{d > ac > -d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc \, f(a,c) + \int_{-d}^{d} da \int_{-1}^{1} dc \, f(a,c) + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc \, f(a,c)
-% \over {\int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc + \int {-d}^{d} da \int_{-1}^{1} dc + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc}
-$$
-for the numerator $f(a,c) = (\frac{ac}{d} + 1)^2$ and the integral is equal to $\frac{32}{9}$ and for the denominator $f(a,c) = \frac{ac}{d} + 1$ and the integral is equal to $3$. Therefore
-$$P\left(\begin{pmatrix}
+\begin{align}\label{eq:condprob}
+P\left(\begin{pmatrix}
 a & b' \\
 d & c
 \end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
 a & b \\
 d & c
-\end{pmatrix} \textrm{stable } \right) = \frac{25}{36} \approx 0.69.$$
-
-% Thus, our expression becomes
-% $$
-% {\int_0^1 dd \int_{-1}^{-d} da \int_{-1}^{-d/a} dc\, ({ac \over d} + 1)^2 +
-% \int_0^1 dd \int_{-d}^{d} da \int_{-1}^{1} dc\, ({ac \over d} + 1)^2 +
-% \int_0^1 dd \int_d^1 da \int_{-d/a}^{1} dc\, ({ac \over d} + 1)^2
-% \over
-% 2\int_0^1 dd \int_{-1}^{-d} da \int_{-1}^{-d/a} dc\, ({ac \over d} + 1) +
-% 2 \int_0^1 dd \int_{-d}^{d} da \int_{-1}^{1} dc\, ({ac \over d} + 1) +
-% 2 \int_0^1 dd \int_d^1 da \int_{-d/a}^{1} dc\, ({ac \over d} + 1) }
-% $$
-
-Now suppose we resample $a$.  Then we have to satisfy the conditions
-$a + c < 0$, $ac > bd$, and $-1 < a < 1$ for fixed values of $b,c,d$.  We will
-consider seperately the cases $c > 0$ and $c < 0$.  When $c > 0$, our
-inequalities become $a < -c$ and $a > bd/c$.  For these to be
-consistent, we must have $-c > bd/c$, or $bd < -c^2$.  In the subcase where $bd < -c$, we have $-1 < a < -c$ and, in the subcase where $-c < bd < -c^2$, we have $bd/c < a < -c$. When $c < 0$, the conditions become $a < -c$ and
-$a < bd/c$, which will have a solution as long as $bd/c > -1$, or $bd
-< -c$.  In the subcase where $bd < -c^2$, we have $-1 < a < bd/c$ and, in the subcase where $bd > -c^2$, we have $-1 < a < -c$.
-
-Thus, the probability that a random stable matrix will remain stable upon resampling $a$ is given as follows:
+\end{pmatrix} \textrm{stable } \right)
+& = \frac{P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable and } \begin{pmatrix}
+a & b' \\
+d & c
+\end{pmatrix} \textrm{stable } \right)}{P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right)}.
+\end{align}
+The denominator of \ref{eq:condprob} is given by
 \begin{align*}
-&\frac{\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,
-  P(a'c>bd, a'+c < 0)}{\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,1} = \\
-&\frac{\genfrac{}{}{0pt}{}{{1 \over 32} \int_0^1 dc \int_{bd < -c^2} db\,dd \int_{\max(bd/c,-1)}^{-c} da \,
-(-c - \max({bd \over c},-1)}{+
-{1 \over 32} \int_{-1}^0 dc \int_{bd < -c} db\,dd \int_{-1}^{\min(-c,
-bd/c)} da\, (\min(-c, bd/c) + 1)}}{{1 \over 16} \int_0^1 dc \int_{bd < -c^2} db\,dd \int_{bd/c}^{-c} da\,1
-+
-{1 \over 16} \int_{-1}^0 dc \int_{bd < -c} db\,dd \int_{-1}^{\min(-c, bd/c)} da\,1}
+P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{ac>bd \atop a+c<0} \atop H^4} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
+\end{align*}
+Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprob}
+\begin{align*}
+P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable and } \begin{pmatrix}
+a & b' \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
+\end{align*}
+The analogous equation for resampling $a$ is
+\begin{align*}
+P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable and } \begin{pmatrix}
+a' & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
 
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.5\columnwidth]{fig/2x2-resample-a.pdf}
-\caption{{\bf Resampling a.} (A) The region defined by $bd < -c$ (B) The region defined by $-c < bd < -c^2$ (C) The region defined by $bd < -c^2$ (D) The region defined by $bd > -c^2$}
-\label{fig:2x2-resample-a}
-\end{figure}
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
-For the case $c>0, {bd \over c} < a < -c, bd < -c^2$ we have two possibilities. For $bd < -c$ we have
-$$
-\int_{-1}^{-c} dd\, \int_{c/d}^1 db\, + \int_c^1 dd\, \int_{-1}^{-c/d} db,
-$$
-and for $bd > c$
-$$
-\int_{-1}^{-c} dd\, \int_{-c^2/d}^{-c/d} db\, + \int_{-c}^{-c^2} dd\, \int_{-c^2/d}^{1} db +
-\int_{c^2}^{c} dd \int_{-1}^{-c^2/d} db +
-\int_{c}^{1}dd\,\int_{-c/d}^{-c^2/d}db.
-$$
-For the case $c < 0, a < -c, a < bd/c$ we also have two possibilities. For $bd < -c^2$ we have
-$$
-\int_{-1}^{-c^2} dd\, \int_{-c^2/d}^1 db\, + \int_{c^2}^1 dd\, \int_{-1}^{-c^2/d} db,
-$$
-and for $bd > -c^2$
-$$
-\int_{-1}^{-c^2} dd\, \int_{-1}^{-c^2/d} db\, + \int_{-c^2}^{c^2} dd\, \int_{-1}^{1} db +
-\int_{c^2}^{1} dd \int_{-c^2/d}^{1} db.
-$$
+\begin{table}[h]
+\begin{tabular}{ c || c | c }
+\hline
+matrix & \specialcell{probability of stability\\to perturbation} & probability of stability\\
+\hline
+  $\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix}$ & 0.62 & 0.25 \\
+  $\begin{pmatrix}
+a & b \\
+d & 0
+\end{pmatrix}$, $\begin{pmatrix}
+0 & b \\
+d & c
+\end{pmatrix}$ & 0.5 & 0.25 \\
+  $\begin{pmatrix}
+a & 0 \\
+d & c
+\end{pmatrix}$, $\begin{pmatrix}
+a & b \\
+0 & c
+\end{pmatrix}$ & 0.67 & 0.25 \\
+$\begin{pmatrix}
+a & 0 \\
+0 & c
+\end{pmatrix}$ & 0.5 & 0.25 \\
+\end{tabular}
+\caption{Probability of matrix stability under resampling and \emph{a priori} stability. All matrices not listed have probability $0$ of stability.}\label{tab:structstabmat}
+\end{table}
+
+The probability of \emph{a priori} stability and of stability to perturbations for all $2 \times 2$-matrices are given in Table \ref{tab:structstabmat}.
+
+%---------------------------------------------
+
+% We will consider seperately the cases of $d
+% < 0$ and $d > 0$.  When $d > 0$, the first condition becomes $ac/d > b$.
+% Since $b > -1$, this can only be satisfied when $ac/d > -1$, i.e. when $ac > -d$.  In the subcase that $ac < d$, we then have the limits $-1 < b < ac/d$ and in the subcase $ac < d$, we have the limits $-1 < b < 1$.  When $d < 0$, the condition becomes
+% $ac/d < b$, which is satisfiable when $ac > d$.  In the subcase where $ac > -d$, we have $ac/d < b < 1$ and, in the subcase where $ac < -d$, we have $-1 < b <
+% 1$.
+
+% Thus, the probability that a random stable matrix will remain stable
+% upon resampling $b$ is given as follows:
+% % \begin{strip}
+% \begin{align*}
+% P\left(\begin{pmatrix}
+% a & b' \\
+% d & c
+% \end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right)
+% & = \frac{P\left(\begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable and } \begin{pmatrix}
+% a & b' \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right)}{P\left(\begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right)}
+% \end{align*}
+% which becomes
+% \begin{align*}
+% &{\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,
+%   P(ac>b'd, a+c < 0) \over
+% \int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,1} = \cr
+% &{{{1 \over 32} \int_0^1 dd \int_{d > ac > -d} da\,dc \int_{-1}^{ac/d} db \,
+% ({ac \over d} + 1) + {1 \over 32} \int_{0}^{1} dd \int_{ac>d} da\,dc \int_{-1}^{1} db 2 \atop +
+% {1 \over 32} \int_{-1}^0 dd \int_{-d > ac > d} da\,dc \int_{ac/d}^1 db\, (1
+% - {ac \over d}) + {1 \over 32} \int_{-1}^{0} dd \int_{ac>-d} da\,dc \int_{-1}^{1} db 2}
+% \over
+% {{{1 \over 16} \int_0^1 dd \int_{d > ac > -d} da\,dc \int_{-1}^{ac/d} db\,1
+% + {1 \over 16} \int_{0}^{1} dd \int_{ac>d} da\,dc \int_{-1}^{1} db 1} \atop
+% {+ {1 \over 16} \int_{-1}^0 dd \int_{-d > ac > d} da\,dc \int_{ac/d}^1 db\,1} + {1 \over 16} \int_{-1}^{0} dd \int_{ac>-d} da\,dc \int_{-1}^{1} db 1}}
+% \end{align*}
+% % \end{strip}
+
+% In order to evaluate the integrals, we begin with the
+% integrals over $b$, which are particularly easy because none of the
+% integrands depends upon $b$.  Once we do that and make the change of
+% variables $d \mapsto -d$ in the second integrals in the numerator and
+% denominator, we can combine terms and simplify the expression to the
+% following:
+% $$
+% \frac{\int_0^1 dd \int_{ac > d} da\,dc\, 4 + \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)^2}{2 \int_0^1 dd \int_{ac > d} da\,dc\, 2 + 2 \int_0^1 dd \int_{d > ac > -d} da\,dc ({ac \over d} + 1)}
+% $$
+
+% \begin{figure}[!ht]
+% \centering
+% \noindent\includegraphics[width=0.5\columnwidth]{fig/2x2-resample-b.pdf}
+% \caption{{\bf Resampling b.} (A) The region defined by $ac > d$ (B) The region defined by $d > ac > -d$}
+% \label{fig:2x2-resample-b}
+% \end{figure}
+
+% For $ac > d$ we divide the $a$-axis into two parts indicated in Fig. \ref{fig:2x2-resample-b}A
+% $$
+% \int_{ac>d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{-1}^{d \over a} dc \, f(a,c) + \int_{d}^{1} da \int_{d \over a}^1 dc \, f(a,c)$$
+% for the numerator $f(a,c) = 4$ and the integral is equal to 2. For $d > ac > -d$ we divide the $a$-axis into three parts indicated in Fig. \ref{fig:2x2-resample-b}B
+% $$
+% \int_{d > ac > -d} da\,dc \, f(a,c) = \int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc \, f(a,c) + \int_{-d}^{d} da \int_{-1}^{1} dc \, f(a,c) + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc \, f(a,c)
+% % \over {\int_{-1}^{-d} da \int_{d \over a}^{- d \over a} dc + \int {-d}^{d} da \int_{-1}^{1} dc + \int_{d}^{1} da \int_{-d \over a}^{d \over a} dc}
+% $$
+% for the numerator $f(a,c) = (\frac{ac}{d} + 1)^2$ and the integral is equal to $\frac{32}{9}$ and for the denominator $f(a,c) = \frac{ac}{d} + 1$ and the integral is equal to $3$. Therefore
+% $$P\left(\begin{pmatrix}
+% a & b' \\
+% d & c
+% \end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right) = \frac{25}{36} \approx 0.69.$$
+
+% % Thus, our expression becomes
+% % $$
+% % {\int_0^1 dd \int_{-1}^{-d} da \int_{-1}^{-d/a} dc\, ({ac \over d} + 1)^2 +
+% % \int_0^1 dd \int_{-d}^{d} da \int_{-1}^{1} dc\, ({ac \over d} + 1)^2 +
+% % \int_0^1 dd \int_d^1 da \int_{-d/a}^{1} dc\, ({ac \over d} + 1)^2
+% % \over
+% % 2\int_0^1 dd \int_{-1}^{-d} da \int_{-1}^{-d/a} dc\, ({ac \over d} + 1) +
+% % 2 \int_0^1 dd \int_{-d}^{d} da \int_{-1}^{1} dc\, ({ac \over d} + 1) +
+% % 2 \int_0^1 dd \int_d^1 da \int_{-d/a}^{1} dc\, ({ac \over d} + 1) }
+% % $$
+
+% Now suppose we resample $a$.  Then we have to satisfy the conditions
+% $a + c < 0$, $ac > bd$, and $-1 < a < 1$ for fixed values of $b,c,d$.  We will
+% consider seperately the cases $c > 0$ and $c < 0$.  When $c > 0$, our
+% inequalities become $a < -c$ and $a > bd/c$.  For these to be
+% consistent, we must have $-c > bd/c$, or $bd < -c^2$.  In the subcase where $bd < -c$, we have $-1 < a < -c$ and, in the subcase where $-c < bd < -c^2$, we have $bd/c < a < -c$. When $c < 0$, the conditions become $a < -c$ and
+% $a < bd/c$, which will have a solution as long as $bd/c > -1$, or $bd
+% < -c$.  In the subcase where $bd < -c^2$, we have $-1 < a < bd/c$ and, in the subcase where $bd > -c^2$, we have $-1 < a < -c$.
+
+% Thus, the probability that a random stable matrix will remain stable upon resampling $a$ is given as follows:
+% \begin{align*}
+% &\frac{\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,
+%   P(a'c>bd, a'+c < 0)}{\int_{ac>bd \atop a+c<0} da\,db\,dc\,dd\,1} = \\
+% &\frac{\genfrac{}{}{0pt}{}{{1 \over 32} \int_0^1 dc \int_{bd < -c^2} db\,dd \int_{\max(bd/c,-1)}^{-c} da \,
+% (-c - \max({bd \over c},-1)}{+
+% {1 \over 32} \int_{-1}^0 dc \int_{bd < -c} db\,dd \int_{-1}^{\min(-c,
+% bd/c)} da\, (\min(-c, bd/c) + 1)}}{{1 \over 16} \int_0^1 dc \int_{bd < -c^2} db\,dd \int_{bd/c}^{-c} da\,1
+% +
+% {1 \over 16} \int_{-1}^0 dc \int_{bd < -c} db\,dd \int_{-1}^{\min(-c, bd/c)} da\,1}
+% \end{align*}
+
+% \begin{figure}[!ht]
+% \centering
+% \noindent\includegraphics[width=0.5\columnwidth]{fig/2x2-resample-a.pdf}
+% \caption{{\bf Resampling a.} (A) The region defined by $bd < -c$ (B) The region defined by $-c < bd < -c^2$ (C) The region defined by $bd < -c^2$ (D) The region defined by $bd > -c^2$}
+% \label{fig:2x2-resample-a}
+% \end{figure}
+
+% For the case $c>0, {bd \over c} < a < -c, bd < -c^2$ we have two possibilities. For $bd < -c$ we have
+% $$
+% \int_{-1}^{-c} dd\, \int_{c/d}^1 db\, + \int_c^1 dd\, \int_{-1}^{-c/d} db,
+% $$
+% and for $bd > c$
+% $$
+% \int_{-1}^{-c} dd\, \int_{-c^2/d}^{-c/d} db\, + \int_{-c}^{-c^2} dd\, \int_{-c^2/d}^{1} db +
+% \int_{c^2}^{c} dd \int_{-1}^{-c^2/d} db +
+% \int_{c}^{1}dd\,\int_{-c/d}^{-c^2/d}db.
+% $$
+% For the case $c < 0, a < -c, a < bd/c$ we also have two possibilities. For $bd < -c^2$ we have
+% $$
+% \int_{-1}^{-c^2} dd\, \int_{-c^2/d}^1 db\, + \int_{c^2}^1 dd\, \int_{-1}^{-c^2/d} db,
+% $$
+% and for $bd > -c^2$
+% $$
+% \int_{-1}^{-c^2} dd\, \int_{-1}^{-c^2/d} db\, + \int_{-c^2}^{c^2} dd\, \int_{-1}^{1} db +
+% \int_{c^2}^{1} dd \int_{-c^2/d}^{1} db.
+% $$
+
+%---------------------------------------------
 
 \section{Arbitrary system size}
 We call a matrix $M$ stable if all its eigenvalues have negative real
