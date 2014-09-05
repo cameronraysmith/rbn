@@ -1,0 +1,278 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8778,        269]
+NotebookOptionsPosition[      8054,        243]
+NotebookOutlinePosition[      8389,        258]
+CellTagsIndexPosition[      8346,        255]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+The trace and determinant are given by\
+\>", "Text",
+ CellChangeTimes->{{3.6189385279202642`*^9, 3.6189385496245813`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"DD", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"a", "*", "c"}], " ", "-", " ", 
+   RowBox[{"b", " ", "*", " ", "d"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"DDpA", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"a2", "*", "c"}], "-", 
+   RowBox[{"b", "*", "d"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"DDpB", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"a", "*", "c"}], "-", 
+   RowBox[{"b2", "*", "d"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"T", " ", "=", " ", 
+  RowBox[{"a", " ", "+", " ", "c"}]}], "\[IndentingNewLine]", 
+ RowBox[{"TpA", " ", "=", " ", 
+  RowBox[{"a2", " ", "+", " ", "c"}]}]}], "Input",
+ CellChangeTimes->{{3.618938060371565*^9, 3.6189380866164303`*^9}, {
+  3.6189381576245823`*^9, 3.6189381820814457`*^9}, {3.618938218577661*^9, 
+  3.618938218882194*^9}, {3.61893900080191*^9, 3.6189390287626247`*^9}}],
+
+Cell["\<\
+The volumes of the 4 and 5-dimensional hypercubes are\
+\>", "Text",
+ CellChangeTimes->{{3.618938556589052*^9, 3.618938571964217*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"V4", " ", "=", " ", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"1", ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"V5", " ", "=", " ", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"1", ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"e", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}]}], "Input"],
+
+Cell["\<\
+The volume of the stable region is\
+\>", "Text",
+ CellChangeTimes->{{3.618938575906908*^9, 3.618938596462029*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"VStable", " ", "=", " ", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"Boole", "[", 
+     RowBox[{
+      RowBox[{"DD", ">", 
+       RowBox[{
+        RowBox[{"-", "T"}], "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DD", ">", 
+       RowBox[{"T", "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DD", "<", "1"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", "%", "]"}]}], "Input",
+ CellChangeTimes->{{3.618938050368251*^9, 3.6189380531228533`*^9}, {
+  3.618938097410973*^9, 3.618938128306547*^9}, {3.6189381888073273`*^9, 
+  3.6189381932485657`*^9}, {3.61893822540783*^9, 3.618938232370813*^9}, {
+  3.618938334377091*^9, 3.618938340120261*^9}}],
+
+Cell["\<\
+The probability for a real random 2x2 matrix to lie in the stable region is\
+\>", "Text",
+ CellChangeTimes->{{3.6189386008649893`*^9, 3.6189386479221897`*^9}}],
+
+Cell[BoxData[{
+ FractionBox["VStable", "V4"], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", "%", "]"}]}], "Input",
+ CellChangeTimes->{{3.618938463054669*^9, 3.618938489591961*^9}}],
+
+Cell["\<\
+For the case of resampling B we have\
+\>", "Text",
+ CellChangeTimes->{{3.6189390542209263`*^9, 3.618939069211443*^9}, 
+   3.61893917843255*^9}],
+
+Cell[BoxData[{
+ RowBox[{"VResampB", " ", "=", " ", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"Boole", "[", 
+     RowBox[{
+      RowBox[{"DDpB", ">", 
+       RowBox[{
+        RowBox[{"-", "T"}], "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DDpB", ">", 
+       RowBox[{"T", "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DDpB", "<", "1"}], "&&", 
+      RowBox[{"DD", ">", 
+       RowBox[{
+        RowBox[{"-", "T"}], "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DD", ">", 
+       RowBox[{"T", "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DD", "<", "1"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b2", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", "%", "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.618939046874228*^9, 3.6189391449633503`*^9}, {
+  3.618939191133852*^9, 3.6189391936945744`*^9}}],
+
+Cell["\<\
+For the case of resampling A we have\
+\>", "Text",
+ CellChangeTimes->{{3.6189390542209263`*^9, 3.618939069211443*^9}, {
+  3.6189391711225367`*^9, 3.618939176414628*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"VResampA", "=", " ", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"Boole", "[", 
+     RowBox[{
+      RowBox[{"DDpA", ">", 
+       RowBox[{
+        RowBox[{"-", "TpA"}], "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DDpA", ">", 
+       RowBox[{"TpA", "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DDpA", "<", "1"}], "&&", 
+      RowBox[{"DD", ">", 
+       RowBox[{
+        RowBox[{"-", "T"}], "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DD", ">", 
+       RowBox[{"T", "-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"DD", "<", "1"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"b", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a2", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", "%", "]"}]}], "Input",
+ CellChangeTimes->{{3.618939046874228*^9, 3.6189391449633503`*^9}, {
+  3.618939182642424*^9, 3.618939203089479*^9}, {3.618939286659896*^9, 
+  3.618939302575316*^9}}],
+
+Cell["\<\
+And finally, for the probability of a random matrix being stable to \
+perturbations\
+\>", "Text",
+ CellChangeTimes->{{3.6189392392918653`*^9, 3.618939265205729*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  FractionBox["1", "4"], 
+  FractionBox[
+   RowBox[{
+    FractionBox["1", "V5"], 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", "*", "VResampB"}], "+", 
+      RowBox[{"2", "*", "VResampA"}]}], ")"}]}], 
+   RowBox[{
+    FractionBox["1", "V4"], "VStable"}]]}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", "%", "]"}]}], "Input",
+ CellChangeTimes->{{3.618927634945572*^9, 3.6189276723669*^9}, {
+   3.6189279120385*^9, 3.61892794205647*^9}, {3.618928135893511*^9, 
+   3.618928166615817*^9}, {3.61892824755435*^9, 3.618928275473134*^9}, 
+   3.618928628760414*^9, {3.618928916558963*^9, 3.618928916844762*^9}, {
+   3.6189296608053837`*^9, 3.618929702647257*^9}, 3.618930276452257*^9}]
+},
+WindowSize->{1317, 744},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 132, 3, 31, "Text"],
+Cell[692, 25, 829, 19, 121, "Input"],
+Cell[1524, 46, 143, 3, 31, "Text"],
+Cell[1670, 51, 1060, 33, 55, "Input"],
+Cell[2733, 86, 124, 3, 31, "Text"],
+Cell[2860, 91, 1064, 28, 55, "Input"],
+Cell[3927, 121, 169, 3, 31, "Text"],
+Cell[4099, 126, 177, 3, 81, "Input"],
+Cell[4279, 131, 153, 4, 31, "Text"],
+Cell[4435, 137, 1260, 35, 99, "Input"],
+Cell[5698, 174, 179, 4, 31, "Text"],
+Cell[5880, 180, 1283, 36, 77, "Input"],
+Cell[7166, 218, 175, 4, 31, "Text"],
+Cell[7344, 224, 706, 17, 110, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
