@@ -43,7 +43,7 @@
 
 \begin{document}
 
-\title{Structural Stability of Random Dynamical Systems}
+\title{Structural Stability of Dynamical System Ensembles}
 
 %    Information for first author
 \author{Aviv Bergman}
@@ -81,12 +81,42 @@
 \keywords{Differential geometry, algebraic geometry}
 
 \begin{abstract}
-This paper is a sample prepared to illustrate the use of the American
-Mathematical Society's \LaTeX{} document class \texttt{amsart} and
-publication-specific variants of that class for AMS-\LaTeX{} version 2.
+The analysis of dynamical systems that attempts to model chemical reaction, gene-regulatory, population, and ecosystem networks all rely on models having many parameters and thus many degrees of freedom. When the details of a system are unknown, one effective approach is to study the dynamical properties of a collection of models determined by constraints applying to all such systems. Here we analyze the stability of a large class of dynamical systems to perturbations in the underlying structure of the system: a property referred to as \emph{structural stability}. In particular, we precisely determine the probability distribution over system connectivity, a parameter which has significant implications from the study of gene-regulatory networks to ecosystem dynamics, of structural stability for systems with two interacting components. We show in this case that structural stability has a non-monotonic relationship with system connectivity. These results support future work attempting to characterize the scaling relationship between structural stability and system connectivity. The latter investigation is necessary to evaluate several conjectured but ultimately untested hypotheses about biological networks.
 \end{abstract}
 
 \maketitle
+
+\section{Stability analysis of arbitrary systems}
+
+Consider an n-dimensional vector
+$$
+x(t) = (x_1(t), \ldots x_n(t)) = \vec{x}(t)
+$$
+whose components are solutions to the arbitrary first order system
+$$
+\frac{dx_i(t)}{dt} = F_i(\vec{x}(t)), \; (i=1,\ldots,n)
+$$
+where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables. Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
+$$
+\frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
+$$
+where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$-matirx $A$ has components
+$$
+a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
+$$
+The spectral abscissa of the matrix $A$ is defined as
+$$
+\eta(A) = \max_i \{\Re(\lambda_i)\}
+$$
+where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$.
+
+To determine whether a randomly selected dynamical system evaluated at a random critical point, given by a matrix such as $A$, is stable, it is sufficient to check the above condition. Integrating over the region of the parameter space defining $A$ enables the determination of the probability of stability to perturbations in state $\vec{x}$ over an ensemble of dynamical systems.
+
+Another form of stability, referred to as structural stability, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
+$$
+P(A' \, \textrm{stable} | A \, \textrm{stable})
+$$
+where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
 \section{$2 \times 2$ systems}
 We call a matrix stable when the real part of all its eigenvalues is negative.  For a $2 \times 2$ matrix, this amounts to the conditions $T < 0$ and $D >
