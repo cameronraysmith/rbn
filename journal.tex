@@ -43,7 +43,7 @@
 
 \begin{document}
 
-\title{Structural Stability of Dynamical System Ensembles}
+\title{Stability of Dynamical System Ensembles}
 
 %    Information for first author
 \author{Aviv Bergman}
@@ -86,6 +86,14 @@ The analysis of dynamical systems that attempts to model chemical reaction, gene
 
 \maketitle
 
+\section{Introduction}
+
+The traditional approach taken in the study of chemical reaction, gene-regulatory, population, and ecosystem networks is to consider a particular example, derive a system of differential equations to model that example, try to fit the model to data and adjust the modeling assumptions along with parameter values until a good fit is achieved. Recent work has demonstrated that as a result of sloppiness in the dependence of qualitative dynamic phenomena on the geometry of parameter space that this approach allows for a large variety of models to ``fit the data'' \cite{Brown2003,Gutenkunst2007,Daniels2008a,Machta2013,Hines2014,Prabakaran2014}. In the face of uncertainty about the structure of such biological networks, to model the components under consideration as randomly interlinked becomes a reasonable approximation. This approach enables one to gain insight into what dynamical phenomena are possible to observe within a given class of dynamical systems, which is necessary to understand in order to determine whether or not a particular dynamical phenomenon should be regarded as unique or generic in the development and investigation of models applied to particular systems \cite{Gunawardena2013,Gunawardena2014}.
+
+Indeed, investigating generic properties of a large class of dynamical systems was the approach taken by May in models of ecosystem dynamics \cite{Gardner1970,May1972}. The class of dynamical systems studied by May is so general that to restrict its applicability to ecosystem dynamics is certainly not necessary and perhaps even inefficient with respect to the goal of understanding how biological networks operate across the various relevant levels of organization. For example, the study of chemical reaction, population, and gene-regulatory networks all utilize essentially equivalent mathematical structure as that discussed by May in the context of ecosystem dynamics \cite{RossCr2003,Alon2006,Palsson2006,HamidBolouri2008,Palsson2011a,Voit2012,Sauro2012}. Developing unified mathematical descriptions of all of these is one of the paramount goals of systems biology. This incredibly generic applicability of gaining a better understanding of the class of models investigated by May demonstrates the unequivocal value of deeper investigation.  However, work attempting to continue the development of the so-called May-Wigner stability theorem revealed that May's conjectured stability criterion was not as easy to demonstrate as was initially believed \cite{Cohen1984,May1972a,Radius2014}.
+
+Here we build on work aimed at investigating the stability of randomly connected dynamical systems to state-based perturbations. We precisely compute the probability of stability as a distribution over system connectivity for all systems containing two interacting components. We then proceed to determine the probability of structural stability over the same domain. We find that while stability to perturbations in the state of this class of dynamical systems is independent of system connectivity, perturbations to the magnitude of connections is correlated with connectivity in a non-linear manner. This work reestablishes and clarifies a thread of research that is extremely important for the continuing development of systems biology.
+
 \section{Stability analysis of arbitrary systems}
 
 Consider an n-dimensional vector
@@ -112,7 +120,7 @@ where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\
 
 To determine whether a randomly selected dynamical system evaluated at a random critical point, given by a matrix such as $A$, is stable, it is sufficient to check the above condition. Integrating over the region of the parameter space defining $A$ enables the determination of the probability of stability to perturbations in state $\vec{x}$ over an ensemble of dynamical systems.
 
-Another form of stability, referred to as structural stability, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
+Another form of stability, referred to as structural stability \cite{Smale1967}, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
 $$
 P(A' \, \textrm{stable} | A \, \textrm{stable})
 $$
@@ -444,8 +452,9 @@ sign of $\Delta$ will not help here because, while $\Delta > 0$ in the
 region $R_{3000}$, it is also positive for some elements of $R_{1200}$
 as well.)
 
-% \bibliographystyle{amsplain}
+\bibliographystyle{amsplain}
 % \begin{thebibliography}{10}
+\bibliography{bib/books,bib/papers}
 
 % \bibitem {A} T. Aoki, \textit{Calcul exponentiel des op\'erateurs
 % microdifferentiels d'ordre infini.} I, Ann. Inst. Fourier (Grenoble)
