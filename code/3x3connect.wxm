@@ -1,0 +1,109 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+ind(m) := sum(sum(2^(i+3*j-4)*m[i,j], i, 1, 3), j, 1, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+perms : [matrix([0,1,0],[1,0,0],[0,0,1]),
+         matrix([1,0,0],[0,0,1],[0,1,0]),
+         matrix([0,0,1],[0,1,0],[1,0,0]),
+         matrix([0,1,0],[0,0,1],[1,0,0]),
+         matrix([0,0,1],[1,0,0],[0,1,0])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+keep(m) := block([p:1],
+    if (ind(transpose(m)) < ind(m)) then p : 0,
+    for i:1 thru 5 do if (ind(perms[i].m.invert(perms[i])) < ind(m)) then p:0,
+    for i:1 thru 5 do if (ind(transpose(perms[i].m.invert(perms[i]))) < ind(m)) then p:0,
+    p);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+keepers : []$
+for a11 : 0 thru 1 do
+ for a12 : 0 thru 1 do
+  for a13 : 0 thru 1 do
+   for a21 : 0 thru 1 do
+    for a22 : 0 thru 1 do
+     for a23 : 0 thru 1 do
+      for a31 : 0 thru 1 do
+       for a32 : 0 thru 1 do
+        for a33 : 0 thru 1 do
+         block([m:matrix([a11,a12,a13],[a21,a22,a23],[a31,a32,a33])],
+               if (keep(m)=1) then keepers : cons(m,keepers));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+length(keepers);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+tot(m) := sum(sum(m[i,j], i, 1, 3), j, 1, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+keepn : [[],[],[],[],[],[],[],[],[],[]]$
+for i : 0 thru 9 do
+    for j : 1 thru 74 do 
+        if (tot(keepers[j]) = i) then 
+            keepn[i+1] : cons(keepers[j], keepn[i+1])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(length, keepn);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+save("3x3connectivities", keepn);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+keepn[5];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+charpoly : expand(determinant(matrix([x+a11,a12,a13],[a21,x+a22,a23],[a31,a32,x+a33])));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s1 : coeff(charpoly,x,2);
+s2 : coeff(charpoly,x);
+s3 : subst(0,x,charpoly);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Delta : factor(s1*s2-s3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n1 : 0;
+n2 : 0;
+block([a11,a12,a13,a21,a22,a23,a31,a32,a33], 
+  for i : 1 thru 10000 do
+  block(
+    a11 : random(2.0)-1.0,
+    a12 : random(2.0)-1.0,
+    a13 : random(2.0)-1.0,
+    a21 : random(2.0)-1.0,
+    a22 : random(2.0)-1.0,
+    a23 : random(2.0)-1.0,
+    a31 : random(2.0)-1.0,
+    a32 : random(2.0)-1.0,
+    a33 : random(2.0)-1.0,
+    if ((Delta > 0) and (s3 > 0)) then block(
+       n1 : n1 + 1,
+       a11 : random(2.0)-1.0,
+       if ((Delta > 0) and (s3 > 0)) then n2 : n2 + 1)));
+n1;
+n2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+time(%o55);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
