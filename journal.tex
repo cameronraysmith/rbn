@@ -41,6 +41,9 @@
   }%
 }
 
+% user added
+\usepackage{longtable}
+
 \begin{document}
 
 \title{Stability of Dynamical System Ensembles}
@@ -126,7 +129,94 @@ P(A' \, \textrm{stable} | A \, \textrm{stable})
 $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
-\section{$2 \times 2$ systems}
+\section{Arbitrary system size}
+We call a matrix $M$ stable if all its eigenvalues have negative real
+part.  Define the polynomial $p(x) = \det(xI + M)$.  Then, since the
+roots of $p$ are minus the eigenvalues of $M$, asking that $M$ be
+stable is equivalent to asking that the roots of $p$ all have real
+part.  Using some good old fashioned invariant theory, we will
+formulate conditions for this to happen in terms of the coefficients of
+$p$.
+
+Let us start by fixing some notation.  Suppose that $M$ is of size $n
+\times n$.  Denote the coefficients of $p$ as $s_j$ and its roots as
+$r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n
+(x-r_k)$.
+
+Introduce $V$ as the parameter space of all polynomials of degree $n$
+with real coefficients.  In other words, $V$ is a real vector space of
+dimension $n$ whose coordinates we will identify with the coefficients
+$s_k$ of our polynomial.  We now partition this space into regions
+corresponding to specific types of polynomials.  Let $R_{abcd}$ be the
+subset of $V$ such that $x \in R_{abcd}$ iff the polynomial
+corresponding to $x$ has $a$ positive real roots, $b$ negative real
+roots, $c$ complex roots with positive real part and $d$ complex roots
+with negative real part.  Once we characterize these regions using
+invariants, we will have solved the original problem because a matrix
+is stable if the point of $V$ corresponding to it lies in a region of
+the form $R_{a0c0}$.
+
+Next, we introduce some products:
+\begin{align}
+D &= \prod_{k=1}^n r_n \cr
+\delta &= \prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 - r_j)^2 \cr
+\Delta &= \prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 + r_j) \cr
+\end{align}
+
+Since these quantities are invariant under permutation of the roots
+$r_j$, they may be expressed as functions of the coefficients $s_j$.
+The explicit expressions may be obtained by such techniques as long
+division and determinants.
+
+These quantities are of interest because they describe the boundaries
+between the regions introduced above.  Suppose that we have a family
+of polynomials whose roots are of one type but turn into another type.
+There are three ways this could happen:
+\begin{itemize}
+\item{1.} A real root could go from being positive to being negative
+  or vice versa.  For this to happen, we must pass through an
+  intermediate value with a zero root.  For that intermediate value,
+  we have $D = 0$.
+\item{2.} A pair of real roots could turn into a pair of complex roots
+  or vice versa.  For this to happen, we must pass through an
+  intermediate value with a repeated root.  For that intermediate
+  value, we have $\delta = 0$.
+\item{3.} A conjugate pair of complex roots could go from having
+  positive real part to having negative real part or vice versa.  For
+  this to happen, we must pass through an intermediate value in which
+  the real part is zero.  For that intermediate value, the two roots
+  are imaginary so, bing conjugates, they sum to zero, hence we have
+  $\Delta = 0$.
+\end{itemize}
+\noindent  Thus, we conclude that the boundaries of our regions
+$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
+\Delta=0$ and we will characterize them by studying these surfaces.
+
+The simplest case is $n=2$.  There we have the regions $R_{2000},
+R_{1100}, R_{0200}, R_{0020}, R_{0002}$ and our invariants are $D =
+s_2, \delta = s_1^2 - 4s_2, \Delta = s_1$.  The relation between these
+is summarized in the following table:
+\begin{align}
+R_{2000} \qquad &D > 0, \delta > 0, \Delta > 0 \cr
+R_{1100} \qquad &D < 0, \delta > 0 \cr
+R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0 \cr
+R_{0020} \qquad &\delta < 0, \Delta > 0 \cr
+R_{0002} \qquad &\delta < 0, \Delta < 0 \cr
+\end{align}
+
+Moving to $n=3$, our invariants now look as follows: $D = s_3, \delta
+= 18 s_1 s_2 s_2 + s_1^2 s_2^2 - 4 s_2^3 - 4 s_1^3 s_3 - 27 s_3,
+\Delta = s_1 s_2 - s_3$.  However, now we can no longer simply use their
+signs to distinguish regions.  For instance, consider the regions
+$R_{3000}$ and $R_{1200}$.  These both have $D > 0$ and $\delta > 0$
+but to tell them apart, we need to note that the region $\delta > 0$
+has two connected components and use some auxiliary equalities to
+specify which of the components contains our region.  (Looking at the
+sign of $\Delta$ will not help here because, while $\Delta > 0$ in the
+region $R_{3000}$, it is also positive for some elements of $R_{1200}$
+as well.)
+
+\section{Two component systems}
 We call a matrix stable when the real part of all its eigenvalues is negative.  For a $2 \times 2$ matrix, this amounts to the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant.
 
@@ -193,37 +283,37 @@ d & c
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \begin{table}[h]
-\begin{tabular}{ c || c | c }
+\begin{tabular}{ c || c | c | c }
 \hline
-matrix & \specialcell{probability of stability\\to perturbation} & probability of stability\\
+matrix & connectivity & \specialcell{probability of stability\\to perturbation} & probability of stability\\
 \hline
   $\begin{pmatrix}
 a & b \\
 d & c
-\end{pmatrix}$ & 0.62 & 0.25 \\
+\end{pmatrix}$ & 4 & 0.62 & 0.25 \\
   $\begin{pmatrix}
 a & b \\
 d & 0
 \end{pmatrix}$, $\begin{pmatrix}
 0 & b \\
 d & c
-\end{pmatrix}$ & 0.5 & 0.25 \\
+\end{pmatrix}$ & 3 & 0.5 & 0.25 \\
   $\begin{pmatrix}
 a & 0 \\
 d & c
 \end{pmatrix}$, $\begin{pmatrix}
 a & b \\
 0 & c
-\end{pmatrix}$ & 0.67 & 0.25 \\
+\end{pmatrix}$ & 3 & 0.67 & 0.25 \\
 $\begin{pmatrix}
 a & 0 \\
 0 & c
-\end{pmatrix}$ & 0.5 & 0.25 \\
+\end{pmatrix}$ & 2 & 0.5 & 0.25 \\
 \end{tabular}
-\caption{Probability of matrix stability under resampling and \emph{a priori} stability. All matrices not listed have probability $0$ of stability.}\label{tab:structstabmat}
+\caption{{\bf Probability of stability under resampling and \emph{a priori} stability for two component systems derived analytically}. All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat}
 \end{table}
 
-The probability of \emph{a priori} stability and of stability to perturbations for all $2 \times 2$-matrices are given in Table \ref{tab:structstabmat}.
+The probability of \emph{a priori} stability and of stability to perturbations for all two component systems is given in Table \ref{tab:structstabmat}.
 
 %---------------------------------------------
 
@@ -365,92 +455,185 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 
 %---------------------------------------------
 
-\section{Arbitrary system size}
-We call a matrix $M$ stable if all its eigenvalues have negative real
-part.  Define the polynomial $p(x) = \det(xI + M)$.  Then, since the
-roots of $p$ are minus the eigenvalues of $M$, asking that $M$ be
-stable is equivalent to asking that the roots of $p$ all have real
-part.  Using some good old fashioned invariant theory, we will
-formulate conditions for this to happen in terms of the coefficients of
-$p$.
+\section{Three component systems}
 
-Let us start by fixing some notation.  Suppose that $M$ is of size $n
-\times n$.  Denote the coefficients of $p$ as $s_j$ and its roots as
-$r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n
-(x-r_k)$.
+The probability of \emph{a priori} stability and of stability to perturbations for all three component systems is given in Table \ref{tab:structstabmat3}.
 
-Introduce $V$ as the parameter space of all polynomials of degree $n$
-with real coefficients.  In other words, $V$ is a real vector space of
-dimension $n$ whose coordinates we will identify with the coefficients
-$s_k$ of our polynomial.  We now partition this space into regions
-corresponding to specific types of polynomials.  Let $R_{abcd}$ be the
-subset of $V$ such that $x \in R_{abcd}$ iff the polynomial
-corresponding to $x$ has $a$ positive real roots, $b$ negative real
-roots, $c$ complex roots with positive real part and $d$ complex roots
-with negative real part.  Once we characterize these regions using
-invariants, we will have solved the original problem because a matrix
-is stable if the point of $V$ corresponding to it lies in a region of
-the form $R_{a0c0}$.
+% \begin{table}[h]
+\begin{longtable}{ c || c | c | c }
+\hline
+matrix & connectivity & \specialcell{probability of stability\\to perturbation} & probability of stability\\
+\hline
+$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 4 & 0.496 & 0.125\\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 0 & 1\\
+1 & 1 & 0\\
+\end{pmatrix}$ & 5 & 0.117 & 0.07\\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 0\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 5 & 0.49 & 0.123\\
+$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 5 & 0.62 & 0.128\\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 0 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 6 & 0.32 & 0.089\\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 0.599 & 0.123\\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 1 & 0\\
+\end{pmatrix}$ & 6 & 0.499 & 0.127\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 0 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 0.398 & 0.064\\
+$\begin{pmatrix}
+0 & 1 & 0\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 0.431 & 0.08\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 0\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 0.597 & 0.126\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 0 & 0\\
+\end{pmatrix}$ & 6 & 0.41 & 0.061\\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 6 & 0.7 & 0.122\\
+$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 6 & 0.595 & 0.123\\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 0\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 6 & 0.701 & 0.125\\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 7 & 0.574 & 0.117\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 0 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 7 & 0.486 & 0.075\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 7 & 0.539 & 0.092\\
+$\begin{pmatrix}
+0 & 1 & 0\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 7 & 0.497 & 0.088\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 0\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 7 & 0.664 & 0.126\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 1 & 0\\
+\end{pmatrix}$ & 7 & 0.482 & 0.086\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 1 & 0\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 7 & 0.589 & 0.126\\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 7 & 0.66 & 0.127\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 7 & 0.749 & 0.121\\
+$\begin{pmatrix}
+1 & 1 & 0\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 7 & 0.61 & 0.097\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 8 & 0.571 & 0.102\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 0 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 8 & 0.472 & 0.077\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 8 & 0.59 & 0.11\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 8 & 0.709 & 0.125\\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 8 & 0.642 & 0.122\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 8 & 0.63 & 0.108\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 9 & 0.57 & 0.092\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 9 & 0.649 & 0.111\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 10 & 0.645 & 0.103\\
+\caption{{\bf Probability of stability under resampling and \emph{a priori} stability for three component systems estimated via Monte Carlo sampling.} All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat3}
+\end{longtable}
+%
+% \end{table}
 
-Next, we introduce some products:
-\begin{align}
-D &= \prod_{k=1}^n r_n \cr
-\delta &= \prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 - r_j)^2 \cr
-\Delta &= \prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 + r_j) \cr
-\end{align}
-
-Since these quantities are invariant under permutation of the roots
-$r_j$, they may be expressed as functions of the coefficients $s_j$.
-The explicit expressions may be obtained by such techniques as long
-division and determinants.
-
-These quantities are of interest because they describe the boundaries
-between the regions introduced above.  Suppose that we have a family
-of polynomials whose roots are of one type but turn into another type.
-There are three ways this could happen:
-\begin{itemize}
-\item{1.} A real root could go from being positive to being negative
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a zero root.  For that intermediate value,
-  we have $D = 0$.
-\item{2.} A pair of real roots could turn into a pair of complex roots
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a repeated root.  For that intermediate
-  value, we have $\delta = 0$.
-\item{3.} A conjugate pair of complex roots could go from having
-  positive real part to having negative real part or vice versa.  For
-  this to happen, we must pass through an intermediate value in which
-  the real part is zero.  For that intermediate value, the two roots
-  are imaginary so, bing conjugates, they sum to zero, hence we have
-  $\Delta = 0$.
-\end{itemize}
-\noindent  Thus, we conclude that the boundaries of our regions
-$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
-\Delta=0$ and we will characterize them by studying these surfaces.
-
-The simplest case is $n=2$.  There we have the regions $R_{2000},
-R_{1100}, R_{0200}, R_{0020}, R_{0002}$ and our invariants are $D =
-s_2, \delta = s_1^2 - 4s_2, \Delta = s_1$.  The relation between these
-is summarized in the following table:
-\begin{align}
-R_{2000} \qquad &D > 0, \delta > 0, \Delta > 0 \cr
-R_{1100} \qquad &D < 0, \delta > 0 \cr
-R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0 \cr
-R_{0020} \qquad &\delta < 0, \Delta > 0 \cr
-R_{0002} \qquad &\delta < 0, \Delta < 0 \cr
-\end{align}
-
-Moving to $n=3$, our invariants now look as follows: $D = s_3, \delta
-= 18 s_1 s_2 s_2 + s_1^2 s_2^2 - 4 s_2^3 - 4 s_1^3 s_3 - 27 s_3,
-\Delta = s_1 s_2 - s_3$.  However, now we can no longer simply use their
-signs to distinguish regions.  For instance, consider the regions
-$R_{3000}$ and $R_{1200}$.  These both have $D > 0$ and $\delta > 0$
-but to tell them apart, we need to note that the region $\delta > 0$
-has two connected components and use some auxiliary equalities to
-specify which of the components contains our region.  (Looking at the
-sign of $\Delta$ will not help here because, while $\Delta > 0$ in the
-region $R_{3000}$, it is also positive for some elements of $R_{1200}$
-as well.)
 
 \bibliographystyle{amsplain}
 % \begin{thebibliography}{10}
