@@ -136,7 +136,7 @@ function teststab(N::Integer,K::Integer)
         for (i,mat) in enumerate(matlist)
             stabnum = 0
             for j=1:K
-                if sysstab(mat.*randn(N,N)) < 0.0
+                if sysstab(mat.*randn(N,N)) < -1e-4
                     stabnum += 1
                 end
             end
@@ -179,12 +179,12 @@ function teststructstab(N::Integer,K::Integer)
                     end
 
                     candidate = pcN[k][l].*randn(N,N)
-                    if sysstab(candidate) < 0.0
+                    if sysstab(candidate) < -1e-4
                         stabnum += 1
                         nzinds = find(x->x>0,pcN[k][l])
                         ind = nzinds[rand(1:length(nzinds))]
                         candidate[ind] = randn()
-                        if sysstab(candidate) < 0.0
+                        if sysstab(candidate) < -1e-4
                             restabnum += 1
                         end
                     end
