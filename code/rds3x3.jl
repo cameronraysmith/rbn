@@ -31,7 +31,7 @@ function savelatex(pcN,sp,rsp)
                   pmatstr = pmatrix(pcN[i][j])
                   push!(rv,
                         string("\$", pmatstr, "\$", " & ",
-                               "$(i)", " & ",
+                               "$(i-1)", " & ",
                                "$(round(rsp[i][j],3))", " & ",
                                "$(round(sp[i][j],3))", "\\\\"))
             end
