@@ -108,9 +108,9 @@ $$
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t)), \; (i=1,\ldots,n)
 $$
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables. Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
-$$
+\begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
-$$
+\end{equation}
 where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$-matirx $A$ has components
 $$
 a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
@@ -119,7 +119,11 @@ The spectral abscissa of the matrix $A$ is defined as
 $$
 \eta(A) = \max_i \{\Re(\lambda_i)\}
 $$
-where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$.
+where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$. This is because the general solution to equation \ref{eq:lineardynsys} is
+$$
+y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
+$$
+for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$.
 
 To determine whether a randomly selected dynamical system evaluated at a random critical point, given by a matrix such as $A$, is stable, it is sufficient to check the above condition. Integrating over the region of the parameter space defining $A$ enables the determination of the probability of stability to perturbations in state $\vec{x}$ over an ensemble of dynamical systems.
 
