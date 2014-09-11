@@ -44,6 +44,11 @@
 % user added
 \usepackage{longtable}
 
+\def\tr{\mathrm{tr}}
+\def\Path{\mathrm{Path}}
+\def\hier{\mathrm{hier}}
+\def\Vertex{\mathrm{Vertex}}
+
 \begin{document}
 
 \title{Stability of Ensembles of Biological Networks}
@@ -132,6 +137,24 @@ $$
 P(A' \, \textrm{stable} | A \, \textrm{stable})
 $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
+
+\section{Decomposition of stability computations into strongly connected components}
+$${\chi(M)'(z) \over \chi(M)(z)} = \tr (zI - M)^{-1}$$
+where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of
+the matrix $M$ with $z$ a complex variable.  This formula is readily
+verified when $M$ is diagonal and has the nice property of being
+additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have
+$$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p
+\in \Path_n (G)(a,a)} F(p)$$
+where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
+paths of length $n$ from $a$ to $b$.  $(\Vertex(G), \Path(G), \cdot)$ is a category; $F$ is the functor from this category to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
+
+We now make use of the additivity.  Let $\hier$ be the functor which
+sends $G$ to a poset $P$.  Then every element $p$ of $\Path(a,a)$ lies
+in $\hier^{-1} (\hier(a))$.  Hence, our sum decomposes into partial sums
+for the fibers of the points in the hierarchy which corresponds to a
+factorization of the characteristic polynomial.
+
 
 \section{Arbitrary system size}
 We call a matrix $M$ stable if all its eigenvalues have negative real
