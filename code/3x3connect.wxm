@@ -2,23 +2,25 @@
 /* [ Created with wxMaxima version 13.04.2 ] */
 
 /* [wxMaxima: input   start ] */
-ind(m) := sum(sum(2^(i+3*j-4)*m[i,j], i, 1, 3), j, 1, 3);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
+fiducial_matrix : matrix([1,2,3],[4,5,6],[7,8,9])$
 perms : [matrix([0,1,0],[1,0,0],[0,0,1]),
          matrix([1,0,0],[0,0,1],[0,1,0]),
          matrix([0,0,1],[0,1,0],[1,0,0]),
          matrix([0,1,0],[0,0,1],[1,0,0]),
-         matrix([0,0,1],[1,0,0],[0,1,0])];
+         matrix([0,0,1],[1,0,0],[0,1,0])]$
+permlist: cons(
+  list_matrix_entries(transpose(fiducial_matrix)), append(
+  map(lambda([x], list_matrix_entries(x.fiducial_matrix.invert(x))), perms),
+  map(lambda([x], list_matrix_entries(transpose(x.fiducial_matrix.invert(x)))), perms)))$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+ind(m) := sum(sum(2^(i+3*j-4)*m[i,j], i, 1, 3), j, 1, 3)$
 keep(m) := block([p:1],
     if (ind(transpose(m)) < ind(m)) then p : 0,
     for i:1 thru 5 do if (ind(perms[i].m.invert(perms[i])) < ind(m)) then p:0,
     for i:1 thru 5 do if (ind(transpose(perms[i].m.invert(perms[i]))) < ind(m)) then p:0,
-    p);
+    p)$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -37,7 +39,43 @@ for a11 : 0 thru 1 do
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+filter(lambda([x],lreduce("+",list_matrix_entries(x))=4),keepers);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
 length(keepers);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+keepers[6];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lst2mat(m) := matrix([m[1],m[2],m[3]],[m[4],m[5],m[6]],[m[7],m[8],m[9]])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+filter(prd, lst) :=
+  block([ans : []],
+    for k : 1 thru length (lst) do
+      if (prd (lst[k])) then
+        ans : cons(lst[k], ans),
+    reverse (ans))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+findsyms(matlist) := 
+  filter(lambda([perm], 
+          matlist = makelist(matlist[perm[i]], i, 1, 9)),
+        permlist)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+findsyms(list_matrix_entries(keepers[6]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(lambda([m], [m,length(findsyms(list_matrix_entries(m)))+1]), keepers);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -57,14 +95,6 @@ map(length, keepn);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-save("3x3connectivities", keepn);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-keepn[5];
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
 charpoly : expand(determinant(matrix([x+a11,a12,a13],[a21,x+a22,a23],[a31,a32,x+a33])));
 /* [wxMaxima: input   end   ] */
 
@@ -75,34 +105,50 @@ s3 : subst(0,x,charpoly);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-Delta : factor(s1*s2-s3);
+varmat:matrix([a,b,c],[d,e,f],[g,h,i]);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-n1 : 0;
-n2 : 0;
-block([a11,a12,a13,a21,a22,a23,a31,a32,a33], 
-  for i : 1 thru 10000 do
-  block(
-    a11 : random(2.0)-1.0,
-    a12 : random(2.0)-1.0,
-    a13 : random(2.0)-1.0,
-    a21 : random(2.0)-1.0,
-    a22 : random(2.0)-1.0,
-    a23 : random(2.0)-1.0,
-    a31 : random(2.0)-1.0,
-    a32 : random(2.0)-1.0,
-    a33 : random(2.0)-1.0,
-    if ((Delta > 0) and (s3 > 0)) then block(
-       n1 : n1 + 1,
-       a11 : random(2.0)-1.0,
-       if ((Delta > 0) and (s3 > 0)) then n2 : n2 + 1)));
-n1;
-n2;
+keepers[6];
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-time(%o55);
+charpol(mat) :=
+ determinant(matrix([a*mat[1,1]+x, b*mat[1,2], c*mat[1,3]],
+                    [d*mat[2,1], e*mat[2,2]+x, f*mat[2,3]],
+                    [g*mat[3,1], h*mat[3,2], k*mat[3,3]+x]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+invts(mat) := block([p : expand(charpol(mat))],
+  [factor(coeff(p,x)*coeff(p,x,2) - subst(0,x,p)),
+   factor(subst(0,x,p)),
+   factor(coeff(p,x,2))])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+invts(matrix([0,1,1],[0,1,1],[1,0,0]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+keepinv : makelist(cons(keepers[i],invts(keepers[i])),i,1,74);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+trivial : map(first,filter(lambda([x],(x[2]=0) or (x[3]=0) or (x[2]+x[3]=0)),keepinv));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+nontrivial : filter(lambda([x], (x[2]#0) and (x[3]#0) and (x[2]+x[3]#0)),keepinv);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+filter(lambda([m], lreduce("+",list_matrix_entries(m[1])) = 4), nontrivial);
+filter(lambda([m], lreduce("+",list_matrix_entries(m[1])) = 5), nontrivial);
+filter(lambda([m], lreduce("+",list_matrix_entries(m[1])) = 6), nontrivial);
+filter(lambda([m], lreduce("+",list_matrix_entries(m[1])) = 7), nontrivial);
+filter(lambda([m], lreduce("+",list_matrix_entries(m[1])) = 8), nontrivial);
+filter(lambda([m], lreduce("+",list_matrix_entries(m[1])) = 9), nontrivial);
 /* [wxMaxima: input   end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */

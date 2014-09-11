@@ -1,0 +1,59 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+n : 0$
+for m : 1 thru 1000000 do block(
+  b : random(2.0)-1.0,
+  c : random(2.0)-1.0,
+  e : random(2.0)-1.0,
+  f : random(2.0)-1.0,
+  g : random(2.0)-1.0,
+  if ((b*f*g < 0.0) and (c*e*g < b*f*g) and (e > 0)) then n : n + 1)$
+n;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n : 0$
+for m : 1 thru 1000000 do block(
+  ranmat : matrix([x,random(2.0)-1.0,random(2.0)-1.0],
+                  [0.0,x+random(2.0)-1.0,random(2.0)-1.0],
+                  [random(2.0)-1.0,0,x]),
+  minroot : lmin(map(lambda([u], realpart(psubst(u,x))), 
+                     allroots(determinant(ranmat)))),
+  if (minroot > 0) then n : n + 1)$
+n;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n : 0$
+for m : 1 thru 1000000 do block([ranmat,s1,s2,s3,dp,dm],
+  ranmat : matrix([random(2.0)-1.0,random(2.0)-1.0,random(2.0)-1.0],
+                  [random(2.0)-1.0,random(2.0)-1.0,random(2.0)-1.0],
+                  [random(2.0)-1.0,random(2.0)-1.0,random(2.0)-1.0]),
+  s3 : determinant(ranmat),
+  dp : determinant(ranmat+ident(3)),
+  dm : determinant(ranmat-ident(3)),
+  s1 : (dp + dm)/2 - s3,
+  s2 : (dp - dm)/2 - 1,
+  if ((s1 > 0) and (s3 > 0) and (s1*s2 > s3)) then n : n + 1)$
+n;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+foomat : matrix([x,0,0],[0,y,0],[0,0,z]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+determinant(foomat);
+determinant(foomat + ident(3));
+determinant(foomat - ident(3));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+expand((%o16 + %o17)/2 - %o15);
+expand((%o16 - %o17)/2 - 1);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
