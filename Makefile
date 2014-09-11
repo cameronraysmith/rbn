@@ -45,6 +45,11 @@ copydownloadsbib:
 linkbib:
 	ln -s ~/Downloads/bib bib
 
+dropbox:
+	cp *.tex ~/Dropbox/sharelatex/rbn
+	cp fig/*.pdf ~/Dropbox/sharelatex/rbn/fig
+	cp bib/*.bib ~/Dropbox/sharelatex/rbn/bib
+
 $(BIBFILES):
 	copybib
 
