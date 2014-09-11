@@ -4,13 +4,30 @@ set output '../fig/connectcycle3D3x3.svg'
 set key off
 set autoscale
 set parametric
-set xrange [-1:6]
-set xtics (0,1,2,3,4,5)
-set xlabel "number of cycles" offset 0,-0.5
-set yrange [2:10]
-set ytics (3,4,5,6,7,8,9) offset 0.5,-0.2
-set ylabel "connectivity" offset 0,-0.5
-set zrange [0.3:0.9]
-set ztics (0.4,0.5,0.6,0.7,0.8) offset 2,0
-set zlabel "probability" rotate by 90 offset 0,-0.5
-splot './stab3x3.tsv' using 4:1:3 pt 7 ps 0.7 lc 0 title columnheader
+
+# x-axis
+set yrange [-1:6] reverse
+set ytics (0,1,2,3,4,5)
+set ylabel "number of cycles" offset 0,-0.5
+
+# y-axis
+set xrange [2:10] reverse
+set xtics (3,4,5,6,7,8,9) offset 0.5,-0.2
+set xlabel "connectivity" offset 0,-0.5
+
+# z-axis
+# set zrange [0.3:0.9]
+# set ztics (0.4,0.5,0.6,0.7,0.8) offset 2,0
+# set zlabel "probability" rotate by 90 offset 0,-0.5
+
+# colorbar
+set cbrange [0.4:0.8]
+set cbtics (0.4,0.5,0.6,0.7,0.8)
+set cblabel "probability"
+
+# set pm3d
+# set palette
+# unset pm3d
+load('RdBu.plt')
+set palette negative
+plot './stab3x3.tsv' using 1:4:3 with points palette pt 7 ps 0.7 title columnheader
