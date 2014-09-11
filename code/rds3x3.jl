@@ -41,6 +41,23 @@ function savelatex(pcN,sp,rsp)
     return join(rv,"\n")
 end
 
+function savedata(filename,sp,rsp)
+    rv = (String)[]
+    push!(rv,"connectivity\tstability\tresampling")
+    for (i,plist) in enumerate(sp)
+        for (j,p) in enumerate(plist)
+            if p > 1e-3
+                  line = "$(i-1)\t$(sp[i][j])\t$(rsp[i][j])"
+                  push!(rv,line)
+            end
+        end
+    end
+    rv = join(rv,"\n")
+    f = open(filename,"w")
+    write(f,rv)
+    close(f)
+    return rv
+end
 
 flatten{T}(a::Array{T,1}) = any(map(x->isa(x,Array),a))? flatten(vcat(map(flatten,a)...)): a
 flatten{T}(a::Array{T}) = reshape(a,prod(size(a)))
