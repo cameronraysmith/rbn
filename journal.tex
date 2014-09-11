@@ -337,166 +337,168 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 \label{fig:stab3x3}
 \end{figure}
 
+\pagebreak
+
 % \begin{table}[h]
-\begin{longtable}{ c || c | c | c }
+\begin{longtable}{ c || c | c | c | c }
 \hline
-matrix & connectivity & \specialcell{probability of stability\\to perturbation} & probability of stability\\
+matrix & connectivity & cycle number & \specialcell{probability of stability\\to perturbation} & probability of stability\\
 \hline
 $\begin{pmatrix}
 1 & 0 & 0\\
 0 & 1 & 0\\
 0 & 0 & 1\\
-\end{pmatrix}$ & 3 & 0.499 & 0.126\\
+\end{pmatrix}$ & 3 & 0 & 0.496 & 0.122\\
 $\begin{pmatrix}
 0 & 0 & 1\\
 0 & 1 & 0\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 4 & 0.505 & 0.121\\
+\end{pmatrix}$ & 4 & 1 & 0.496 & 0.13\\
 $\begin{pmatrix}
 1 & 0 & 0\\
 0 & 1 & 1\\
 0 & 0 & 1\\
-\end{pmatrix}$ & 4 & 0.622 & 0.127\\
+\end{pmatrix}$ & 4 & 0 & 0.626 & 0.128\\
 $\begin{pmatrix}
 0 & 0 & 1\\
 0 & 1 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 5 & 0.595 & 0.121\\
+\end{pmatrix}$ & 5 & 1 & 0.602 & 0.127\\
 $\begin{pmatrix}
 0 & 0 & 1\\
 0 & 1 & 1\\
 1 & 1 & 0\\
-\end{pmatrix}$ & 5 & 0.494 & 0.128\\
+\end{pmatrix}$ & 5 & 2 & 0.496 & 0.122\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 0 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 5 & 0.41 & 0.061\\
+\end{pmatrix}$ & 5 & 2 & 0.405 & 0.061\\
 $\begin{pmatrix}
 0 & 1 & 0\\
 0 & 1 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 5 & 0.43 & 0.078\\
+\end{pmatrix}$ & 5 & 1 & 0.429 & 0.081\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 1 & 0\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 5 & 0.605 & 0.12\\
+\end{pmatrix}$ & 5 & 1 & 0.597 & 0.129\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 1 & 1\\
 1 & 0 & 0\\
-\end{pmatrix}$ & 5 & 0.405 & 0.06\\
+\end{pmatrix}$ & 5 & 2 & 0.408 & 0.062\\
 $\begin{pmatrix}
 1 & 0 & 1\\
 0 & 1 & 1\\
 0 & 0 & 1\\
-\end{pmatrix}$ & 5 & 0.698 & 0.122\\
+\end{pmatrix}$ & 5 & 0 & 0.693 & 0.125\\
 $\begin{pmatrix}
 1 & 0 & 0\\
 0 & 1 & 1\\
 0 & 1 & 1\\
-\end{pmatrix}$ & 5 & 0.587 & 0.128\\
+\end{pmatrix}$ & 5 & 1 & 0.606 & 0.124\\
 $\begin{pmatrix}
 1 & 0 & 1\\
 0 & 1 & 0\\
 0 & 1 & 1\\
-\end{pmatrix}$ & 5 & 0.707 & 0.127\\
+\end{pmatrix}$ & 5 & 0 & 0.705 & 0.131\\
 $\begin{pmatrix}
 0 & 0 & 1\\
 0 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 6 & 0.578 & 0.121\\
+\end{pmatrix}$ & 6 & 2 & 0.578 & 0.115\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 0 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 6 & 0.487 & 0.081\\
+\end{pmatrix}$ & 6 & 3 & 0.489 & 0.085\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 1 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 6 & 0.543 & 0.098\\
+\end{pmatrix}$ & 6 & 2 & 0.548 & 0.091\\
 $\begin{pmatrix}
 0 & 1 & 0\\
 0 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 6 & 0.501 & 0.088\\
+\end{pmatrix}$ & 6 & 2 & 0.493 & 0.087\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 1 & 0\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 6 & 0.662 & 0.123\\
+\end{pmatrix}$ & 6 & 1 & 0.669 & 0.128\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 1 & 1\\
 1 & 1 & 0\\
-\end{pmatrix}$ & 6 & 0.467 & 0.079\\
+\end{pmatrix}$ & 6 & 3 & 0.474 & 0.086\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 1 & 1 & 0\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 6 & 0.583 & 0.13\\
+\end{pmatrix}$ & 6 & 2 & 0.587 & 0.12\\
 $\begin{pmatrix}
 1 & 0 & 1\\
 0 & 1 & 1\\
 0 & 1 & 1\\
-\end{pmatrix}$ & 6 & 0.659 & 0.124\\
+\end{pmatrix}$ & 6 & 1 & 0.656 & 0.121\\
 $\begin{pmatrix}
 1 & 1 & 1\\
 0 & 1 & 1\\
 0 & 0 & 1\\
-\end{pmatrix}$ & 6 & 0.751 & 0.124\\
+\end{pmatrix}$ & 6 & 0 & 0.741 & 0.125\\
 $\begin{pmatrix}
 1 & 1 & 0\\
 0 & 1 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 6 & 0.604 & 0.097\\
+\end{pmatrix}$ & 6 & 1 & 0.596 & 0.098\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 0 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 7 & 0.564 & 0.103\\
+\end{pmatrix}$ & 7 & 3 & 0.572 & 0.094\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 1 & 0 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 7 & 0.475 & 0.068\\
+\end{pmatrix}$ & 7 & 5 & 0.465 & 0.075\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 1 & 1 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 7 & 0.591 & 0.108\\
+\end{pmatrix}$ & 7 & 3 & 0.592 & 0.105\\
 $\begin{pmatrix}
 1 & 1 & 1\\
 0 & 1 & 1\\
 0 & 1 & 1\\
-\end{pmatrix}$ & 7 & 0.717 & 0.119\\
+\end{pmatrix}$ & 7 & 1 & 0.713 & 0.122\\
 $\begin{pmatrix}
 1 & 0 & 1\\
 0 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 7 & 0.648 & 0.122\\
+\end{pmatrix}$ & 7 & 2 & 0.642 & 0.125\\
 $\begin{pmatrix}
 1 & 1 & 1\\
 0 & 1 & 1\\
 1 & 0 & 1\\
-\end{pmatrix}$ & 7 & 0.627 & 0.105\\
+\end{pmatrix}$ & 7 & 2 & 0.628 & 0.11\\
 $\begin{pmatrix}
 0 & 1 & 1\\
 1 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 8 & 0.577 & 0.093\\
+\end{pmatrix}$ & 8 & 5 & 0.578 & 0.092\\
 $\begin{pmatrix}
 1 & 1 & 1\\
 0 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 8 & 0.639 & 0.109\\
+\end{pmatrix}$ & 8 & 3 & 0.647 & 0.115\\
 $\begin{pmatrix}
 1 & 1 & 1\\
 1 & 1 & 1\\
 1 & 1 & 1\\
-\end{pmatrix}$ & 9 & 0.638 & 0.106\\
+\end{pmatrix}$ & 9 & 5 & 0.635 & 0.11\\
 \caption{{\bf Probability of stability under resampling and \emph{a priori} stability for three component systems estimated via Monte Carlo sampling.} All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat3}
 \end{longtable}
 %

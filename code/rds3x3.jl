@@ -1,4 +1,7 @@
 using Permutations
+using PyCall
+# @pyimport numpy as np
+@pyimport networkx as nx
 
 function pmatrix(M::Array{Int64,2})
     lines = split(replace(replace(string(M),"[",""),"]",""),"\n")
@@ -22,7 +25,37 @@ function pmatrix(M::Array{Float64,2})
     return join(rv,"\n")
 end
 
+function cyclenumber(adjmatlistlist)
+
+    cyclecountlistlist = (Array{Int64,1})[]
+
+    for (i,adjmatlist) in enumerate(adjmatlistlist)
+
+        cyclecountlist = zeros(Int64,length(adjmatlist))
+
+        for (j,adjmat) in enumerate(adjmatlist)
+            g = nx.DiGraph(adjmat)
+            cc = nx.simple_cycles(g)
+            cc = pyeval("list(x)",x=cc)
+            if length(cc)>0
+                c = sum(map(x->length(x)>1,cc))
+            else
+                c = 0
+            end
+            cyclecountlist[j] = c
+        end
+
+        push!(cyclecountlistlist,cyclecountlist)
+
+    end
+
+    return cyclecountlistlist
+
+end
+
 function savelatex(pcN,sp,rsp)
+    cn = cyclenumber(pcN)
+    println(cn)
     rv = (String)[]
 
     for (i,plist) in enumerate(sp)
@@ -32,22 +65,25 @@ function savelatex(pcN,sp,rsp)
                   push!(rv,
                         string("\$", pmatstr, "\$", " & ",
                                "$(i-1)", " & ",
+                               "$(cn[i][j])", " & ",
                                "$(round(rsp[i][j],3))", " & ",
                                "$(round(sp[i][j],3))", "\\\\"))
             end
         end
     end
 
+    savedata("../data/stab3x3.tsv",sp,rsp,cn);
+
     return join(rv,"\n")
 end
 
-function savedata(filename,sp,rsp)
+function savedata(filename,sp,rsp,cn)
     rv = (String)[]
-    push!(rv,"connectivity\tstability\tresampling")
+    push!(rv,"connectivity\tstability\tresampling\tcycle")
     for (i,plist) in enumerate(sp)
         for (j,p) in enumerate(plist)
             if p > 1e-3
-                  line = "$(i-1)\t$(sp[i][j])\t$(rsp[i][j])"
+                  line = "$(i-1)\t$(sp[i][j])\t$(rsp[i][j])\t$(cn[i][j])"
                   push!(rv,line)
             end
         end
@@ -225,5 +261,4 @@ function teststructstab(N::Integer,K::Integer)
     return sp,restabprob
 
 end
-
 
