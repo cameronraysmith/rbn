@@ -3,6 +3,10 @@ using PyCall
 # @pyimport numpy as np
 @pyimport networkx as nx
 
+macro R_str(s)
+    s
+end
+
 function pmatrix(M::Array{Int64,2})
     lines = split(replace(replace(string(M),"[",""),"]",""),"\n")
     rv = (String)[]
@@ -22,6 +26,33 @@ function pmatrix(M::Array{Float64,2})
         push!(rv,string(join(split(l)," & "),"\\\\"))
     end
     push!(rv,"\\end{pmatrix}")
+    return join(rv,"\n")
+end
+
+
+function adjtograph(M::Array{Int64,2})
+    # lines = split(replace(replace(string(M),"[",""),"]",""),"\n")
+    rv = (String)[]
+    headstring = R"\begin{tikzpicture}[
+every state/.style={draw=red!50,very thick,fill=red!20}]
+\begin{dot2tex}[styleonly,codeonly,neato,mathmode]
+digraph G {
+d2ttikzedgelabels = true;
+node [style=\"state\"];
+edge [lblstyle=\"auto\",topath=\"bend left\",style=\"line width=1.5pt\"];"
+    tailstring = R"}
+\end{dot2tex}
+\end{tikzpicture}"
+
+    push!(rv,headstring)
+
+    for i in 1:size(M)[1], j in 1:size(M)[2]
+        if M[i,j] != 0
+            push!(rv,string("$j -> $i\;"))
+        end
+    end
+
+    push!(rv,tailstring)
     return join(rv,"\n")
 end
 
