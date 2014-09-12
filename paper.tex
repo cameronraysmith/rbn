@@ -1,5 +1,5 @@
 %------------------------------------------------------------------------------
-% Beginning of journal.tex
+% Beginning of paper.tex
 %------------------------------------------------------------------------------
 %
 % AMS-LaTeX version 2 sample file for journals, based on amsart.cls.
@@ -107,7 +107,7 @@ Indeed, investigating generic properties of a large class of dynamical systems w
 
 Here we build on work aimed at investigating the stability of randomly connected dynamical systems to state-based perturbations. We precisely compute the probability of stability as a distribution over system connectivity for all systems containing two interacting components. We then proceed to determine the probability of structural stability over the same domain. We find that while stability to perturbations in the state of this class of dynamical systems is independent of system connectivity, perturbations to the magnitude of connections is correlated with connectivity in a non-linear manner. This work reestablishes and clarifies a thread of research that is extremely important for the continuing development of systems biology.
 
-\section{Stability analysis of biological networks}
+\section{Stability analysis of biological networks}\label{sec:stabanalbn}
 
 Consider an n-dimensional vector
 $$
@@ -133,19 +133,7 @@ For example, given the system $X = \{\{x_1,x_2\},\{F_1,F_2\}\}$
 \end{align*}
 we have the graph
 \begin{center}
-\begin{tikzpicture}[
-every state/.style={draw=red!50,very thick,fill=red!20}]
-\begin{dot2tex}[styleonly,codeonly,neato,mathmode]
-digraph G {
-d2ttikzedgelabels = true;
-node [style="state"];
-edge [lblstyle="auto",topath="bend left",style="line width=1.5pt"];
-x_1 -> x_2;
-x_2 -> x_1;
-x_2 -> x_2 [topath="loop above"];
-}
-\end{dot2tex}
-\end{tikzpicture}
+\input{tex/examplehamdyngraph}
 \end{center}
 with adjacency matrix
 $$
@@ -193,7 +181,7 @@ $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
 \section{System graph and decomposition into strongly connected components}
-We will show how the stability of the dynamical system associated to Jacobian $A$ is characterized by properties of the associated graph $G_A$. The characteristic polynomial $\chi(A)$ associated to $A$ can be factored according to the strongly connected components of the graph $G$. $${\chi(M)'(z) \over \chi(M)(z)} = \tr (zI - M)^{-1}$$ where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the matrix $M$ with $z$ a complex variable.  This formula is readily verified when $M$ is diagonal and has the nice property of being additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have $$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)$$
+We will show how the stability of the dynamical system associated to Jacobian $A$ is characterized by properties of the associated graph $G_A$. The characteristic polynomial $\chi(A)$ associated to $A$ can be factored according to the strongly connected components of the graph $G$. $$\frac{\chi(M)'(z)}{\chi(M)(z)} = \tr (zI - M)^{-1}$$ where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the matrix $M$ with $z$ a complex variable.  This formula is readily verified when $M$ is diagonal and has the nice property of being additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have $$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)$$
 where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
 paths of length $n$ from $a$ to $b$.  $(\Vertex(G), \Path(G), \cdot)$ is a category; $F$ is the functor from this category to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
 
@@ -205,16 +193,19 @@ factorization of the characteristic polynomial.
 
 
 \section{Stability criteria}
-We call a matrix $M$ stable if all its eigenvalues have negative real
-part.  Define the polynomial $p(x) = \det(xI + M)$.  Then, since the
-roots of $p$ are minus the eigenvalues of $M$, asking that $M$ be
-stable is equivalent to asking that the roots of $p$ all have real
-part.  We will formulate conditions for this to happen in terms of the coefficients of $p$.
+Suppose that $M$ is an $n \times n$ matrix with real coefficients. Motivated by the discussion of Section \ref{sec:stabanalbn}, we will call the matrix $M$ stable if all its eigenvalues have negative real part.  Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.  Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that $M$ be stable is equivalent to asking that the roots of $\chi$ all have negative real part.  We will formulate conditions for this to happen in terms of the coefficients of $\chi$.
 
-Let us start by fixing some notation.  Suppose that $M$ is of size $n
-\times n$.  Denote the coefficients of $p$ as $s_j$ and its roots as
-$r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n
-(x-r_k)$.
+Assume that $M$ is stable and that it has $2m$ complex roots which come in complex conjugate pairs and $n-m$ real roots.  Let $r_1 \ldots, r_{2m}$ be the complex roots with $r_{2k+1}$ being the complex conjugate of $r_{2k}$ and let $r_{2m+1}, \ldots,  r_{n}$ be the real roots. Then we can write the factorization as follows:
+\[
+\chi(M)(z) = \prod_{k=1}^{m} (z^2 - (r_{2k} + r_{2k+1}) z + r_{2k} r_{2k+1})
+             \prod_{k=2m+1}^{n} (z - r_k)
+\]
+Since $r_{2k}$ and $r_{2k+1}$ are complex conjugates, $r_{2k} + r_{2k+1} =
+\Re r_{2k} = \Re r_{2k+1}$ and $r_{k} r_{2k+1} > 0$.   Since all the
+roots have negative real part, all the coefficients of the terms in
+the products above are positive so, when we multiply out the product,
+we will have all positive terms.  Hence, we conclude that a necessary
+condition for $M$ to be stable is that $s_k > 0$ for all $k$.
 
 Introduce $V$ as the parameter space of all polynomials of degree $n$
 with real coefficients.  In other words, $V$ is a real vector space of
@@ -318,7 +309,7 @@ The denominator of \ref{eq:condprob} is given by
 P\left(\begin{pmatrix}
 a & b \\
 d & c
-\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{ac>bd \atop a+c<0} \atop H^4} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
 \end{align*}
 Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprob}
 \begin{align*}
@@ -402,16 +393,16 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 \label{fig:cycle3x3}
 \end{figure}
 
-\newpage
-
-\input{tablenographs}
-
-\newpage
-
-\input{tablewithgraphs}
-
 \bibliographystyle{amsplain}
 \bibliography{bib/books,bib/papers}
+
+\newpage
+
+\input{tex/tablenographs}
+
+\newpage
+
+\input{tex/tablewithgraphs}
 
 \section{Appendix A}\label{sec:appA}
 Suppose that we have a family

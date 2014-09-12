@@ -1,0 +1,14 @@
+%!TEX root = ../paper.tex
+\begin{tikzpicture}[
+every state/.style={draw=red!50,very thick,fill=red!20}]
+\begin{dot2tex}[styleonly,codeonly,neato,mathmode]
+digraph G {
+d2ttikzedgelabels = true;
+node [style="state"];
+edge [lblstyle="auto",topath="bend left",style="line width=1.5pt"];
+x_1 -> x_2;
+x_2 -> x_1;
+x_2 -> x_2 [topath="loop above"];
+}
+\end{dot2tex}
+\end{tikzpicture}
