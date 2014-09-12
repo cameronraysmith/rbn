@@ -46,6 +46,20 @@
 \usepackage{dot2texi}
 \usepackage{tikz}
 \usetikzlibrary{automata,shapes,arrows}
+% todo notes see http://www.texample.net/tikz/examples/todo-notes/
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+linkcolor=[rgb]{.67 .27 .27},
+citecolor=[rgb]{.09 .29 .54},
+urlcolor=[rgb]{.09 .29 .54}}
+
+% Set autoref text
+% http://tex.stackexchange.com/a/36576/6784
+\renewcommand*{\figureautorefname}{Fig.}
+\renewcommand*{\equationautorefname}{Eq.}
+\renewcommand*{\tableautorefname}{Table}
+\renewcommand*{\sectionautorefname}{Section}
 
 
 \def\tr{\mathrm{tr}}
@@ -55,6 +69,10 @@
 \def\adj{\mathrm{adj}}
 
 \begin{document}
+
+% Add Figure, Table prefixes to references
+% http://tex.stackexchange.com/a/6063/6784
+\let\ref\autoref
 
 \title{Ensemble Stability of Biological Networks}
 
@@ -99,6 +117,9 @@ The analysis of dynamical systems that attempts to model chemical reaction, gene
 
 \maketitle
 
+% \section{Todo}
+% \listoftodos
+
 \section{Introduction}
 
 The traditional approach taken in the study of chemical reaction, gene-regulatory, population, and ecosystem networks is to consider a particular example, derive a system of differential equations to model that example, try to fit the model to data and adjust the modeling assumptions along with parameter values until a good fit is achieved. Recent work has demonstrated that as a result of sloppiness in the dependence of qualitative dynamic phenomena on the geometry of parameter space that this approach allows for a large variety of models to ``fit the data'' \cite{Brown2003,Gutenkunst2007,Daniels2008a,Machta2013,Hines2014,Prabakaran2014}. In the face of uncertainty about the structure of such biological networks, to model the components under consideration as randomly interlinked becomes a reasonable approximation. This approach enables one to gain insight into what dynamical phenomena are possible to observe within a given class of dynamical systems, which is necessary to understand in order to determine whether or not a particular dynamical phenomenon should be regarded as unique or generic in the development and investigation of models applied to particular systems \cite{Gunawardena2013,Gunawardena2014}.
@@ -108,7 +129,7 @@ Indeed, investigating generic properties of a large class of dynamical systems w
 Here we build on work aimed at investigating the stability of randomly connected dynamical systems to state-based perturbations. We precisely compute the probability of stability as a distribution over system connectivity for all systems containing two interacting components. We then proceed to determine the probability of structural stability over the same domain. We find that while stability to perturbations in the state of this class of dynamical systems is independent of system connectivity, perturbations to the magnitude of connections is correlated with connectivity in a non-linear manner. This work reestablishes and clarifies a thread of research that is extremely important for the continuing development of systems biology.
 
 \section{Stability analysis of biological networks}\label{sec:stabanalbn}
-
+\todo{Describe dynamical systems in terms of vector fields on Manifolds \cite{Deville}}
 Consider an n-dimensional vector
 $$
 x(t) = (x_1(t), \ldots x_n(t)) = \vec{x}(t)
@@ -142,6 +163,7 @@ $$
 1 & 1
 \end{pmatrix}
 $$
+\todo{Define strongly connected components and connect to operads \cite{Vagner2014}}
 
 Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
@@ -166,7 +188,7 @@ The spectral abscissa of the matrix $A$ is defined as
 $$
 \eta(A) = \max_i \{\Re(\lambda_i)\}
 $$
-where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$. This is because the general solution to equation \ref{eq:lineardynsys} is
+where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$. This is because the general solution to \ref{eq:lineardynsys} is
 $$
 y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
 $$
@@ -193,7 +215,7 @@ factorization of the characteristic polynomial.
 
 
 \section{Stability criteria}
-Suppose that $M$ is an $n \times n$ matrix with real coefficients. Motivated by the discussion of Section \ref{sec:stabanalbn}, we will call the matrix $M$ stable if all its eigenvalues have negative real part.  Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.  Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that $M$ be stable is equivalent to asking that the roots of $\chi$ all have negative real part.  We will formulate conditions for this to happen in terms of the coefficients of $\chi$.
+Suppose that $M$ is an $n \times n$ matrix with real coefficients. Motivated by the discussion of \ref{sec:stabanalbn}, we will call the matrix $M$ stable if all its eigenvalues have negative real part.  Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.  Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that $M$ be stable is equivalent to asking that the roots of $\chi$ all have negative real part.  We will formulate conditions for this to happen in terms of the coefficients of $\chi$.
 
 Assume that $M$ is stable and that it has $2m$ complex roots which come in complex conjugate pairs and $n-m$ real roots.  Let $r_1 \ldots, r_{2m}$ be the complex roots with $r_{2k+1}$ being the complex conjugate of $r_{2k}$ and let $r_{2m+1}, \ldots,  r_{n}$ be the real roots. Then we can write the factorization as follows:
 \[
@@ -243,7 +265,7 @@ R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0, \cr
 R_{0020} \qquad &\delta < 0, \Delta > 0, \cr
 R_{0002} \qquad &\delta < 0, \Delta < 0. \cr
 \end{align}
-These regions used for the classification of stability of two-component systems are show in Fig. \ref{fig:region2x2}. The stable regions are given by $R_{2000}$ and $R_{0020}$. All of the other regions represent unstable matrices.
+These regions used for the classification of stability of two-component systems are show in \ref{fig:region2x2}. The stable regions are given by $R_{2000}$ and $R_{0020}$. All of the other regions represent unstable matrices.
 
 \begin{figure}[!ht]
 \centering
@@ -259,7 +281,7 @@ signs to distinguish regions.  For instance, consider the regions
 $R_{3000}$ and $R_{1200}$.  These both have $D > 0$ and $\delta > 0$
 but to tell them apart, we need to note that the region $\delta > 0$
 has two connected components and use the auxiliary condition that $s_1 > 0$ to
-specify which of the components contains our region. The regions analogous to Fig. \ref{fig:region2x2} for three component systems where $D=1$ is given in Fig. \ref{fig:region3x3}.
+specify which of the components contains our region. The regions analogous to \ref{fig:region2x2} for three component systems where $D=1$ is given in \ref{fig:region3x3}.
 %(Looking at the sign of $\Delta$ will not help here because, while $\Delta > 0$ in the region $R_{3000}$, it is also positive for some elements of $R_{1200}$ as well.)
 
 \begin{figure}[!ht]
@@ -370,7 +392,7 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 
 \section{Three component systems}
 
-The probability of \emph{a priori} stability and of stability to perturbations for all three component systems is given in Table \ref{tab:structstabmat3}. Fig. \ref{fig:connectcycle3D3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity and number of cycles. Fig. \ref{fig:stab3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity. Fig. \ref{fig:cycle3x3} shows the probability of stability to perturbations for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}.
+The probability of \emph{a priori} stability and of stability to perturbations for all three component systems is given in Table \ref{tab:structstabmat3}. \ref{fig:connectcycle3D3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity and number of cycles. \ref{fig:stab3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity. \ref{fig:cycle3x3} shows the probability of stability to perturbations for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}.
 
 \begin{figure}[!ht]
 \centering
@@ -393,6 +415,8 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 \label{fig:cycle3x3}
 \end{figure}
 
+\newpage
+
 \bibliographystyle{amsplain}
 \bibliography{bib/books,bib/papers}
 
@@ -402,7 +426,7 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 
 \newpage
 
-\input{tex/tablewithgraphs}
+% \input{tex/tablewithgraphs}
 
 \section{Appendix A}\label{sec:appA}
 Suppose that we have a family
