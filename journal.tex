@@ -102,7 +102,7 @@ Indeed, investigating generic properties of a large class of dynamical systems w
 
 Here we build on work aimed at investigating the stability of randomly connected dynamical systems to state-based perturbations. We precisely compute the probability of stability as a distribution over system connectivity for all systems containing two interacting components. We then proceed to determine the probability of structural stability over the same domain. We find that while stability to perturbations in the state of this class of dynamical systems is independent of system connectivity, perturbations to the magnitude of connections is correlated with connectivity in a non-linear manner. This work reestablishes and clarifies a thread of research that is extremely important for the continuing development of systems biology.
 
-\section{Stability analysis of arbitrary systems}
+\section{Stability analysis of biological networks}
 
 Consider an n-dimensional vector
 $$
@@ -134,11 +134,11 @@ To determine whether a randomly selected dynamical system evaluated at a random 
 
 Another form of stability, referred to as structural stability \cite{Smale1967}, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
 $$
-P(A' \, \textrm{stable} | A \, \textrm{stable})
+P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
 $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
-\section{Decomposition of stability computations into strongly connected components}
+\section{System graph and decomposition into strongly connected components}
 $${\chi(M)'(z) \over \chi(M)(z)} = \tr (zI - M)^{-1}$$
 where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of
 the matrix $M$ with $z$ a complex variable.  This formula is readily
@@ -156,14 +156,12 @@ for the fibers of the points in the hierarchy which corresponds to a
 factorization of the characteristic polynomial.
 
 
-\section{Arbitrary system size}
+\section{Stability criteria}
 We call a matrix $M$ stable if all its eigenvalues have negative real
 part.  Define the polynomial $p(x) = \det(xI + M)$.  Then, since the
 roots of $p$ are minus the eigenvalues of $M$, asking that $M$ be
 stable is equivalent to asking that the roots of $p$ all have real
-part.  Using some good old fashioned invariant theory, we will
-formulate conditions for this to happen in terms of the coefficients of
-$p$.
+part.  We will formulate conditions for this to happen in terms of the coefficients of $p$.
 
 Let us start by fixing some notation.  Suppose that $M$ is of size $n
 \times n$.  Denote the coefficients of $p$ as $s_j$ and its roots as
@@ -175,7 +173,7 @@ with real coefficients.  In other words, $V$ is a real vector space of
 dimension $n$ whose coordinates we will identify with the coefficients
 $s_k$ of our polynomial.  We now partition this space into regions
 corresponding to specific types of polynomials.  Let $R_{abcd}$ be the
-subset of $V$ such that $x \in R_{abcd}$ iff the polynomial
+subset of $V$ such that $x \in R_{abcd}$ if and only if the polynomial
 corresponding to $x$ has $a$ positive real roots, $b$ negative real
 roots, $c$ complex roots with positive real part and $d$ complex roots
 with negative real part.  Once we characterize these regions using
@@ -193,43 +191,27 @@ D &= \prod_{k=1}^n r_n \cr
 Since these quantities are invariant under permutation of the roots
 $r_j$, they may be expressed as functions of the coefficients $s_j$.
 The explicit expressions may be obtained by such techniques as long
-division and determinants.
-
-These quantities are of interest because they describe the boundaries
-between the regions introduced above.  Suppose that we have a family
-of polynomials whose roots are of one type but turn into another type.
-There are three ways this could happen:
-\begin{itemize}
-\item{1.} A real root could go from being positive to being negative
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a zero root.  For that intermediate value,
-  we have $D = 0$.
-\item{2.} A pair of real roots could turn into a pair of complex roots
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a repeated root.  For that intermediate
-  value, we have $\delta = 0$.
-\item{3.} A conjugate pair of complex roots could go from having
-  positive real part to having negative real part or vice versa.  For
-  this to happen, we must pass through an intermediate value in which
-  the real part is zero.  For that intermediate value, the two roots
-  are imaginary so, bing conjugates, they sum to zero, hence we have
-  $\Delta = 0$.
-\end{itemize}
-\noindent  Thus, we conclude that the boundaries of our regions
-$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
-\Delta=0$ and we will characterize them by studying these surfaces.
+division and determinants. These quantities are of interest because they describe the boundaries between the regions introduced above.
 
 The simplest case is $n=2$.  There we have the regions $R_{2000},
 R_{1100}, R_{0200}, R_{0020}, R_{0002}$ and our invariants are $D =
 s_2, \delta = s_1^2 - 4s_2, \Delta = s_1$.  The relation between these
-is summarized in the following table:
+is summarized by the conditions
 \begin{align}
-R_{2000} \qquad &D > 0, \delta > 0, \Delta > 0 \cr
-R_{1100} \qquad &D < 0, \delta > 0 \cr
-R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0 \cr
-R_{0020} \qquad &\delta < 0, \Delta > 0 \cr
-R_{0002} \qquad &\delta < 0, \Delta < 0 \cr
+R_{2000} \qquad &D > 0, \delta > 0, \Delta > 0, \cr
+R_{1100} \qquad &D < 0, \delta > 0, \cr
+R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0, \cr
+R_{0020} \qquad &\delta < 0, \Delta > 0, \cr
+R_{0002} \qquad &\delta < 0, \Delta < 0. \cr
 \end{align}
+These regions used for the classification of stability of two-component systems are show in Fig. \ref{fig:region2x2}. The stable regions are given by $R_{2000}$ and $R_{0020}$. All of the other regions represent unstable matrices.
+
+\begin{figure}[!ht]
+\centering
+\noindent\includegraphics[width=0.5\columnwidth]{fig/region2x2.pdf}
+\caption{{\bf Stability conditions on coefficients of the characteristic polynomial for two component systems.} The regions correspond to all possible relationships between the invariants determined by the characteristic polynomial. Colors correspond to the regions given in the main text Green: $R_{2000}$, Red: $R_{1100}$, Yellow: $R_{0200}$, Magenta: $R_{0002}$, Blue: $R_{0020}$.}
+\label{fig:region2x2}
+\end{figure}
 
 Moving to $n=3$, our invariants now look as follows: $D = s_3, \delta
 = 18 s_1 s_2 s_2 + s_1^2 s_2^2 - 4 s_2^3 - 4 s_1^3 s_3 - 27 s_3,
@@ -237,14 +219,19 @@ Moving to $n=3$, our invariants now look as follows: $D = s_3, \delta
 signs to distinguish regions.  For instance, consider the regions
 $R_{3000}$ and $R_{1200}$.  These both have $D > 0$ and $\delta > 0$
 but to tell them apart, we need to note that the region $\delta > 0$
-has two connected components and use some auxiliary equalities to
-specify which of the components contains our region.  (Looking at the
-sign of $\Delta$ will not help here because, while $\Delta > 0$ in the
-region $R_{3000}$, it is also positive for some elements of $R_{1200}$
-as well.)
+has two connected components and use the auxiliary condition that $s_1 > 0$ to
+specify which of the components contains our region. The regions analogous to Fig. \ref{fig:region2x2} for three component systems where $D=1$ is given in Fig. \ref{fig:region3x3}.
+%(Looking at the sign of $\Delta$ will not help here because, while $\Delta > 0$ in the region $R_{3000}$, it is also positive for some elements of $R_{1200}$ as well.)
+
+\begin{figure}[!ht]
+\centering
+\noindent\includegraphics[width=0.5\columnwidth]{fig/region3x3.pdf}
+\caption{{\bf Stability conditions on coefficients of the characteristic polynomial for three component systems.} Colors correspond to the following regions Green: $R_{3000}$, Red: $R_{1200}$, Yellow: $R_{1002}$, Blue: $R_{1020}$. This is the plane $s_3=1$.}
+\label{fig:region3x3}
+\end{figure}
 
 \section{Two component systems}
-We call a matrix stable when the real part of all its eigenvalues is negative.  For a $2 \times 2$ matrix, this amounts to the conditions $T < 0$ and $D >
+For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant.
 
 Suppose we have a stable matrix
@@ -341,13 +328,6 @@ a & 0 \\
 \end{table}
 
 The probability of \emph{a priori} stability and of stability to perturbations for all two component systems is given in Table \ref{tab:structstabmat}.
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.5\columnwidth]{fig/region2x2.pdf}
-\caption{{\bf Stability conditions on coefficients of the characteristic polynomial for two component systems.} }
-\label{fig:region2x2}
-\end{figure}
 
 \section{Three component systems}
 
@@ -541,30 +521,32 @@ $\begin{pmatrix}
 %
 % \end{table}
 
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.5\columnwidth]{fig/region3x3.pdf}
-\caption{{\bf Stability conditions on coefficients of the characteristic polynomial for three component systems.} }
-\label{fig:region3x3}
-\end{figure}
-
-
 \bibliographystyle{amsplain}
-% \begin{thebibliography}{10}
 \bibliography{bib/books,bib/papers}
 
-% \bibitem {A} T. Aoki, \textit{Calcul exponentiel des op\'erateurs
-% microdifferentiels d'ordre infini.} I, Ann. Inst. Fourier (Grenoble)
-% \textbf{33} (1983), 227--250.
-
-% \bibitem {B} R. Brown, \textit{On a conjecture of Dirichlet},
-% Amer. Math. Soc., Providence, RI, 1993.
-
-% \bibitem {D} R. A. DeVore, \textit{Approximation of functions},
-% Proc. Sympos. Appl. Math., vol. 36,
-% Amer. Math. Soc., Providence, RI, 1986, pp. 34--56.
-
-% \end{thebibliography}
+\section{Appendix A}\label{sec:appA}
+Suppose that we have a family
+of polynomials whose roots are of one type but turn into another type.
+There are three ways this could happen:
+\begin{itemize}
+\item{1.} A real root could go from being positive to being negative
+  or vice versa.  For this to happen, we must pass through an
+  intermediate value with a zero root.  For that intermediate value,
+  we have $D = 0$.
+\item{2.} A pair of real roots could turn into a pair of complex roots
+  or vice versa.  For this to happen, we must pass through an
+  intermediate value with a repeated root.  For that intermediate
+  value, we have $\delta = 0$.
+\item{3.} A conjugate pair of complex roots could go from having
+  positive real part to having negative real part or vice versa.  For
+  this to happen, we must pass through an intermediate value in which
+  the real part is zero.  For that intermediate value, the two roots
+  are imaginary so, bing conjugates, they sum to zero, hence we have
+  $\Delta = 0$.
+\end{itemize}
+\noindent  Thus, we conclude that the boundaries of our regions
+$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
+\Delta=0$ and we will characterize them by studying these surfaces.
 
 \end{document}
 
