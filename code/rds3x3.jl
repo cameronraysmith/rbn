@@ -51,7 +51,7 @@ edge [lblstyle=\"auto\",topath=\"bend left\",style=\"line width=1.5pt\"];"
             if i != j
                 push!(rv,string("$j -> $i\;"))
             else
-                push!(rv,string("$j -> $i [topath=\"loop above\"];\;"))
+                push!(rv,string("$j -> $i [topath=\"loop above\"]\;"))
             end
         end
     end
