@@ -46,7 +46,8 @@ linkbib:
 	ln -s ~/Downloads/bib bib
 
 dropbox:
-	cp *.tex ~/Dropbox/sharelatex/rbn
+	cp paper.tex ~/Dropbox/sharelatex/rbn
+	cp tex/* ~/Dropbox/sharelatex/rbn/tex
 	cp fig/*.pdf ~/Dropbox/sharelatex/rbn/fig
 	cp bib/*.bib ~/Dropbox/sharelatex/rbn/bib
 
@@ -63,7 +64,7 @@ $(TOPPDFFILE): $(TOPTEX) $(BIBFILES) $(TEMPLATE)
 
 clean:
 	rm -f *.aux *.bbl *.blg *.brf *.dvi *.fdb_latexmk *.fls *.lof *.log \
-	      *.lot *.nav *.out *.pre *.snm *.synctex.gz *.toc *.dot
+	      *.lot *.nav *.out *.pre *.snm *.synctex.gz *.toc *.dot *-dot2tex-*
 
 cleanall: clean
 	rm -f $(TOPPDFFILE)
