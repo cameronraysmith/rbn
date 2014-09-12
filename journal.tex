@@ -43,15 +43,20 @@
 
 % user added
 \usepackage{longtable}
+\usepackage{dot2texi}
+\usepackage{tikz}
+\usetikzlibrary{automata,shapes,arrows}
+
 
 \def\tr{\mathrm{tr}}
 \def\Path{\mathrm{Path}}
-\def\hier{\mathrm{hier}}
+\def\hier{\mathrm{Hier}}
 \def\Vertex{\mathrm{Vertex}}
+\def\adj{\mathrm{adj}}
 
 \begin{document}
 
-\title{Stability of Ensembles of Biological Networks}
+\title{Ensemble Stability of Biological Networks}
 
 %    Information for first author
 \author{Aviv Bergman}
@@ -89,7 +94,7 @@
 % \keywords{Differential geometry, algebraic geometry}
 
 \begin{abstract}
-The analysis of dynamical systems that attempts to model chemical reaction, gene-regulatory, population, and ecosystem networks all rely on models having many parameters and thus many degrees of freedom. When the details of a system are unknown, one effective approach is to study the dynamical properties of a collection of models determined by constraints applying to all such systems. Here we analyze the stability of a large class of dynamical systems to perturbations in the underlying structure of the system: a property referred to as \emph{structural stability}. In particular, we precisely determine the probability distribution over system connectivity, a parameter which has significant implications from the study of gene-regulatory networks to ecosystem dynamics, of structural stability for systems with two and three interacting components. We show for these cases that structural stability has a non-monotonic relationship with system connectivity. These results support future work attempting to characterize the scaling relationship between structural stability and system connectivity. The latter investigation is necessary to evaluate several conjectured but ultimately untested hypotheses about biological networks.
+The analysis of dynamical systems that attempts to model chemical reaction, gene-regulatory, population, and ecosystem networks all rely on models having many parameters and thus many degrees of freedom. When the details of a system are unknown, one effective approach is to study the dynamical properties of a collection of models determined by constraints applying to all such systems. Here we analyze the stability of a large class of dynamical systems to perturbations in the underlying structure of the system: a property referred to as \emph{structural stability}. In particular, we precisely determine the probability distribution over system connectivity, a parameter which has significant implications from the study of gene-regulatory networks to ecosystem dynamics, of structural stability for systems with two and three interacting components. We show for these cases that structural stability has a non-monotonic relationship with system connectivity. We also demonstrate that networks with a hierarchical structure are more likely to be stable to perturbations than those with a more entangled heterarchical structure. These results support future work attempting to characterize the scaling relationship between structural stability and system connectivity. The latter investigation is necessary to evaluate several conjectured but ultimately untested hypotheses about biological networks.
 \end{abstract}
 
 \maketitle
@@ -112,14 +117,63 @@ whose components are solutions to the arbitrary first order system
 $$
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t)), \; (i=1,\ldots,n)
 $$
-where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables. Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
+where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables. We can associate a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
+ \begin{displaymath}
+   \adj(G_X)_{ij} = \left\{
+     \begin{array}{ll}
+       1, & F_i \hbox{ depends on } x_j\\
+       0, & F_i \hbox{ does not depend on } x_j
+     \end{array}
+   \right.
+\end{displaymath}
+For example, given the system $X = \{\{x_1,x_2\},\{F_1,F_2\}\}$
+\begin{align*}
+\frac{dx_1}{dt} & = F_1(x_2)\\
+\frac{dx_2}{dt} & = F_2(x_1,x_2)
+\end{align*}
+we have the graph
+\begin{center}
+\begin{tikzpicture}[
+every state/.style={draw=red!50,very thick,fill=red!20}]
+\begin{dot2tex}[styleonly,codeonly,neato,mathmode]
+digraph G {
+d2ttikzedgelabels = true;
+node [style="state"];
+edge [lblstyle="auto",topath="bend left",style="line width=1.5pt"];
+x_1 -> x_2;
+x_2 -> x_1;
+x_2 -> x_2 [topath="loop above"];
+}
+\end{dot2tex}
+\end{tikzpicture}
+\end{center}
+with adjacency matrix
+$$
+\adj(G_X) = \begin{pmatrix}
+0 & 1 \\
+1 & 1
+\end{pmatrix}
+$$
+
+Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
 \end{equation}
-where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$-matirx $A$ has components
+where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$-matrix $A$ has components
 $$
 a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 $$
+To each dynamical system having Jacobian matrix $A$ at some fixed point $\vec{x}^0$ we can associate a directed graph $G_A$ given by an adjacency matrix $\adj(G_A)$ where
+ \begin{displaymath}
+   \adj(G_A)_{ij} = \left\{
+     \begin{array}{lr}
+       1, & a_{ij} \neq 0\\
+       0, & a_{ij} = 0
+     \end{array}
+   \right.
+\end{displaymath}
+The graphs $G_X$ and $G_A$ are equivalent because the condition $F_i$ independent of $x_j$ definitive of $\adj(G_X)$ corresponds precisely to $\frac{\partial F_i}{\partial x_j}=0$.
+
 The spectral abscissa of the matrix $A$ is defined as
 $$
 \eta(A) = \max_i \{\Re(\lambda_i)\}
@@ -139,13 +193,7 @@ $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
 \section{System graph and decomposition into strongly connected components}
-$${\chi(M)'(z) \over \chi(M)(z)} = \tr (zI - M)^{-1}$$
-where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of
-the matrix $M$ with $z$ a complex variable.  This formula is readily
-verified when $M$ is diagonal and has the nice property of being
-additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have
-$$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p
-\in \Path_n (G)(a,a)} F(p)$$
+We will show how the stability of the dynamical system associated to Jacobian $A$ is characterized by properties of the associated graph $G_A$. The characteristic polynomial $\chi(A)$ associated to $A$ can be factored according to the strongly connected components of the graph $G$. $${\chi(M)'(z) \over \chi(M)(z)} = \tr (zI - M)^{-1}$$ where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the matrix $M$ with $z$ a complex variable.  This formula is readily verified when $M$ is diagonal and has the nice property of being additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have $$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)$$
 where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
 paths of length $n$ from $a$ to $b$.  $(\Vertex(G), \Path(G), \cdot)$ is a category; $F$ is the functor from this category to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
 
