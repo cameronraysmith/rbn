@@ -33,7 +33,7 @@ end
 function adjtograph(M::Array{Int64,2})
     # lines = split(replace(replace(string(M),"[",""),"]",""),"\n")
     rv = (String)[]
-    headstring = R"\begin{tikzpicture}[
+    headstring = R"\begin{tikzpicture}[scale=0.6,
 every state/.style={draw=red!50,very thick,fill=red!20}]
 \begin{dot2tex}[styleonly,codeonly,neato,mathmode]
 digraph G {
@@ -48,7 +48,11 @@ edge [lblstyle=\"auto\",topath=\"bend left\",style=\"line width=1.5pt\"];"
 
     for i in 1:size(M)[1], j in 1:size(M)[2]
         if M[i,j] != 0
-            push!(rv,string("$j -> $i\;"))
+            if i != j
+                push!(rv,string("$j -> $i\;"))
+            else
+                push!(rv,string("$j -> $i [topath=\"loop above\"];\;"))
+            end
         end
     end
 
@@ -92,9 +96,11 @@ function savelatex(pcN,sp,rsp)
     for (i,plist) in enumerate(sp)
         for (j,p) in enumerate(plist)
             if p > 1e-3
-                  pmatstr = pmatrix(pcN[i][j])
+                  # pmatstr = pmatrix(pcN[i][j])
+                  pmatstr = adjtograph(pcN[i][j])
+                  # string("\$", pmatstr, "\$", " & ",
                   push!(rv,
-                        string("\$", pmatstr, "\$", " & ",
+                        string(pmatstr, " & ",
                                "$(i-1)", " & ",
                                "$(cn[i][j])", " & ",
                                "$(round(rsp[i][j],3))", " & ",
