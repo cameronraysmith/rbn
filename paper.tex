@@ -129,30 +129,9 @@ Indeed, investigating generic properties of a large class of dynamical systems w
 Here we build on work aimed at investigating the stability of randomly connected dynamical systems to state-based perturbations. We precisely compute the probability of stability as a distribution over system connectivity for all systems containing two interacting components. We then proceed to determine the probability of structural stability over the same domain. We find that while stability to perturbations in the state of this class of dynamical systems is independent of system connectivity, perturbations to the magnitude of connections is correlated with connectivity in a non-linear manner. This work reestablishes and clarifies a thread of research that is extremely important for the continuing development of systems biology.
 
 \section{Stability analysis of biological networks}\label{sec:stabanalbn}
-\todo{Describe dynamical systems in terms of vector fields on Manifolds \cite{Deville}}
-Consider an n-dimensional vector
-$$
-x(t) = (x_1(t), \ldots x_n(t)) = \vec{x}(t)
-$$
-whose components are solutions to the arbitrary first order system
-$$
-\frac{dx_i(t)}{dt} = F_i(\vec{x}(t)), \; (i=1,\ldots,n)
-$$
-where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables. We can associate a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
- \begin{displaymath}
-   \adj(G_X)_{ij} = \left\{
-     \begin{array}{ll}
-       1, & F_i \hbox{ depends on } x_j\\
-       0, & F_i \hbox{ does not depend on } x_j
-     \end{array}
-   \right.
-\end{displaymath}
-For example, given the system $X = \{\{x_1,x_2\},\{F_1,F_2\}\}$
-\begin{align*}
-\frac{dx_1}{dt} & = F_1(x_2)\\
-\frac{dx_2}{dt} & = F_2(x_1,x_2)
-\end{align*}
-we have the graph
+In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
+
+For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold to each observable, a directed graph to the interdependencies, and a vector field satisfying these interdependencies for each observable over the space determined by taking the product of the manifolds associated to the collection of observables \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph
 \begin{center}
 \input{tex/examplehamdyngraph}
 \end{center}
@@ -163,6 +142,31 @@ $$
 1 & 1
 \end{pmatrix}
 $$
+then for the system $X = \{G_X, M_X, F_X\}$, where $M_X \equiv \{M_1,M_2\}$ and $F_X \equiv \{F_1,F_2\}$ such that $F_1$ is constrained to be a function of $x_2$ and $F_2$ is a function of both $x_1$ and $x_2$ yielding the flow equations
+\begin{align*}
+\frac{dx_1}{dt} & = F_1(x_2)\\
+\frac{dx_2}{dt} & = F_2(x_1,x_2)
+\end{align*}
+
+In the more general case of a system with $n$ components we would have an $n$-dimensional vector of observables
+$$
+x(t) = (x_1(t), \ldots x_n(t)) = \vec{x}(t)
+$$
+whose components are solutions to the arbitrary first order system
+$$
+\frac{dx_i(t)}{dt} = F_i(\vec{x}(t)), \; (i=1,\ldots,n)
+$$
+where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables.
+
+This description can be formalized as a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
+ \begin{displaymath}
+   \adj(G_X)_{ij} = \left\{
+     \begin{array}{ll}
+       1, & F_i \hbox{ depends on } x_j\\
+       0, & F_i \hbox{ does not depend on } x_j
+     \end{array}
+   \right.
+\end{displaymath}
 \todo{Define strongly connected components and connect to operads \cite{Vagner2014}}
 
 Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
