@@ -158,6 +158,31 @@ $$
 $$
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables.
 
+In order to accommodate the possibility of uncertainty in our modelling,
+we will generalize our notion of a system on a network to that of a
+system with random parameters.  Again, this will involve three
+steps. First, we provide a measure space $S$ which represents the
+values over which our parameters can vary. Next, instead of a single
+vector field, we consider a family of vector fields parameterized by
+this space. That is to say, we introduce a mapping $V$ from $S$ to
+sections of the tangent bundle of the product of manifolds. As before,
+for each point $p \in S$, the vector field $V(p)$ must be consistent with
+the system graph. Finally, we select a probability measure $\mu$ on
+$S$ which represents our understanding of which values of the parameters
+are likely. In accord with Bayesian statistics, we might revise this
+distribution as data comes in or use it to estimate parameters and error
+bars from experimental results.
+
+Having done this, we are now in a position to do a probabilistic analysis.
+Given some quantity $q$ characterizing our system (such as, for instance,
+the time it would take a particle to travel between two points), this
+quantity now becomes a random variable.  We may then study the average
+value, variance, and the like.  Another question one can ask is that of
+robustness, which is the conditional probability that, if some property
+holds for a set of parameters, it will still hold if we make some random
+perturbation about those parameter values.
+
+
 This description can be formalized as a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
  \begin{displaymath}
    \adj(G_X)_{ij} = \left\{
@@ -206,22 +231,28 @@ P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
 $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
-\section{System graph and decomposition into strongly connected components}
-We will show how the stability of the dynamical system associated to Jacobian $A$ is characterized by properties of the associated graph $G_A$. The characteristic polynomial $\chi(A)$ associated to $A$ can be factored according to the strongly connected components of the graph $G$. $$\frac{\chi(M)'(z)}{\chi(M)(z)} = \tr (zI - M)^{-1}$$ where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the matrix $M$ with $z$ a complex variable.  This formula is readily verified when $M$ is diagonal and has the nice property of being additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have $$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)$$
-where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
-paths of length $n$ from $a$ to $b$.  $(\Vertex(G), \Path(G), \cdot)$ is a category; $F$ is the functor from this category to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
-
-We now make use of the additivity.  Let $\hier$ be the functor which
-sends $G$ to a poset $P$.  Then every element $p$ of $\Path(a,a)$ lies
-in $\hier^{-1} (\hier(a))$.  Hence, our sum decomposes into partial sums
-for the fibers of the points in the hierarchy which corresponds to a
-factorization of the characteristic polynomial.
-
-
 \section{Stability criteria}
-Suppose that $M$ is an $n \times n$ matrix with real coefficients. Motivated by the discussion of \ref{sec:stabanalbn}, we will call the matrix $M$ stable if all its eigenvalues have negative real part.  Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.  Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that $M$ be stable is equivalent to asking that the roots of $\chi$ all have negative real part.  We will formulate conditions for this to happen in terms of the coefficients of $\chi$.
+Suppose that $M$ is an $n \times n$ matrix with real coefficients.
+Motivated by the discussion of \ref{sec:stabanalbn}, we will call
+the matrix $M$ stable if all its eigenvalues have negative real part.
+Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
+Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
+writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
+Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
+$M$ be stable is equivalent to asking that the roots of $\chi$ all have
+negative real part.  We will formulate conditions for this to happen in
+terms of the coefficients of $\chi$.
 
-Assume that $M$ is stable and that it has $2m$ complex roots which come in complex conjugate pairs and $n-m$ real roots.  Let $r_1 \ldots, r_{2m}$ be the complex roots with $r_{2k+1}$ being the complex conjugate of $r_{2k}$ and let $r_{2m+1}, \ldots,  r_{n}$ be the real roots. Then we can write the factorization as follows:
+\begin{lemma}
+If $M$ is stable, then $s_i > 0$ for all $i$ between $1$ and $n$.
+\end{lemma}
+
+\begin{proof}
+Assume that $M$ is stable and that it has $2m$ complex roots which come in
+complex conjugate pairs and $n-m$ real roots.  Let $r_1 \ldots, r_{2m}$ be
+the complex roots with $r_{2k+1}$ being the complex conjugate of $r_{2k}$
+and let $r_{2m+1}, \ldots,  r_{n}$ be the real roots. Then we can write the
+factorization as follows:
 \[
 \chi(M)(z) = \prod_{k=1}^{m} (z^2 - (r_{2k} + r_{2k+1}) z + r_{2k} r_{2k+1})
              \prod_{k=2m+1}^{n} (z - r_k)
@@ -232,6 +263,108 @@ roots have negative real part, all the coefficients of the terms in
 the products above are positive so, when we multiply out the product,
 we will have all positive terms.  Hence, we conclude that a necessary
 condition for $M$ to be stable is that $s_k > 0$ for all $k$.
+\end{proof}
+
+To state the next criterion, we will require the quantity $\Delta$, which
+is defined as $\prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 + r_j)$.  Since
+this expression is invariant under permuting the roots, it may be expressed
+as a function of the coefficients $s_i$; for small values of $n$, the
+resulting expression looks as follows:
+\begin{align*}
+n=2 \qquad &\Delta = s_1 \\
+n=3 \qquad &\Delta = s_3 - s_1 s_2 \\
+n=4 \qquad &\Delta = s_1 s_2 s_3 - s_3^2 - s_1^2 s_4 \\
+n=5 \qquad &\Delta = s_1 s_2 s_3 s_4 - s_3^2 s_4 - s_1^2 s_4^2 -
+                     s_1 s_2^2 s_5 + s_2 s_3 s_5 + 2 s_1 s_4 s_5 - s_5^2
+\end{align*}
+
+\begin{lemma}
+Given a polynomial $p(z) = z^n + \sum_{k=1}^{n-1} s_k z^{n-k}$ and a real number
+$\epsilon > 0$, there exists $\delta \in \mathbb{R}$ such that, if $p'(x) =
+x^n + \sum_{k=1}^{n-1} {s'}_i z^i$ is a polynomial for which $|s_i - {s'}_i|
+< \delta$ then to every root $r$ of $p$ there corresponds a root $r'$ of
+$p'$ such that $|r-r'| < \epsilon$.
+\end{lemma}
+
+\begin{proof}
+Without loss of generality, we may assume that $\epsilon < 1$.
+
+We first consider the case where $p = x^n$.
+
+If we make the rescaling $x = \epsilon y/2$ in the equation $p(x)  = 0$,
+we obtain the equation
+\[
+y^n + \sum_{k=1}^{n-1} \left(\frac{2}{\epsilon}\right)^k s_k y^{n-k} = 0 .
+\]
+Cauchy's bound on the roots of this equation is
+\[
+|y| < 1 + \max_j \left(\frac{2}{\epsilon}\right)^j |s_j| ,
+\]
+which becomes the bound
+\[
+|x| < \frac{\epsilon}{2} + \max_j \left(\frac{2}{\epsilon}\right)^{j-1} |s_j|
+< \frac{\epsilon}{2} + \left(\frac{2}{\epsilon}\right)^{n-1} \max_j |s_j|
+\]
+for the original equation.  Hence, if we choose $\delta = (\epsilon/2)^{n}$,
+we will have $|x| < \epsilon$.
+
+Next, we generalize to the case $p = (x-r)^n$.
+
+To extend this result of the general case, we note that, given two
+polynomials $p = x^m + \sum_{k=1}^n a_k x^{m-k}$ and
+$q = x^n + \sum_{k=1}^n b_k x^{n-k}$, the Jacobian of the map which
+sends the coefficients of the matrices to the coefficients of the
+product $pq$ is the Sylvester matrix, whose determinant is the resultant
+of $p$ and $q$.  Hence, is $p$ and $q$ have no common root, the map
+is locally invertible.
+\end{proof}
+
+\begin{lemma}
+If a point lies on the boundary of the set of stable polynomials, then
+either $s_n = 0$ and $\Delta = 0$.
+\end{lemma}
+
+\begin{proof}
+Since the mapping which sends the roots of a polynomial to its
+coefficients has non-singular Jacobian when the discriminant is not
+zero, if a stable polynomial has distinct roots, it does not lie on
+the boundary.
+
+Suppose that we have a family
+of polynomials whose roots are of one type but turn into another type.
+There are three ways this could happen:
+\begin{itemize}
+\item{1.} A real root could go from being positive to being negative
+  or vice versa.  For this to happen, we must pass through an
+  intermediate value with a zero root.  For that intermediate value,
+  we have $D = 0$.
+\item{2.} A pair of real roots could turn into a pair of complex roots
+  or vice versa.  For this to happen, we must pass through an
+  intermediate value with a repeated root.  For that intermediate
+  value, we have $\delta = 0$.
+\item{3.} A conjugate pair of complex roots could go from having
+  positive real part to having negative real part or vice versa.  For
+  this to happen, we must pass through an intermediate value in which
+  the real part is zero.  For that intermediate value, the two roots
+  are imaginary so, bing conjugates, they sum to zero, hence we have
+  $\Delta = 0$.
+\end{itemize}
+\noindent  Thus, we conclude that the boundaries of our regions
+$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
+\Delta=0$ and we will characterize them by studying these surfaces.
+
+To complete the proof, we show that the condition $\delta = 0$ is not
+needed to describe the boundary.  Suppose that $\delta = 0$.  Then there
+must exist a repeated root.  If the real part of any root, repeated or
+not, is positive, then the polynomial is not stable and, by continuity,
+if one allows the coefficients to vary within a sufficiently small
+ball about that solution, the root will remain negative, so the
+polynomial cannot lie on the boundary of the stable region.  If all
+the roots, including the repeated ones, are negative then, by a similar
+argument the point is in the interior of the stable region.  The only
+other possibility is that some root has zero real part, but then
+$\Delta = 0$ so the condition $\delta = 0$ is superfluous.
+\end{proof}
 
 Introduce $V$ as the parameter space of all polynomials of degree $n$
 with real coefficients.  In other words, $V$ is a real vector space of
@@ -294,6 +427,30 @@ specify which of the components contains our region. The regions analogous to \r
 \caption{{\bf Stability conditions on coefficients of the characteristic polynomial for three component systems.} Colors correspond to the following regions Green: $R_{3000}$, Red: $R_{1200}$, Yellow: $R_{1002}$, Blue: $R_{1020}$. This is the plane $s_3=1$.}
 \label{fig:region3x3}
 \end{figure}
+
+\section{System graph and decomposition into strongly connected components}
+Next, we will want to relate prpoperties of our matrix and its eigenvalues
+to  properties of the associated graph $G_A$.  To do this, we will first
+examine the category of paths on $G_A$, and derive a formula expressing
+the chararacteristic polynomial as a sum over cycles.
+
+Given a digraph $G$, let $\Path (a,b)$ denote the set of paths from the
+vertex $a$ to the vertex $b$.  Given a path $p_1$ from $a$ to $b$ and a path
+$p_2$ from $b$ to $c$, we may concatenate them to obtain a path $p_1 \circ
+p_2$ from $a$ to $c$.  Hence, $(\Vertex(G), \Path(G), \circ)$ forms a category.
+
+
+The characteristic polynomial $\chi(A)$ associated to $A$ can be factored according to the strongly connected components of the graph $G$. $$\frac{\chi(M)'(z)}{\chi(M)(z)} = \tr (zI - M)^{-1}$$ where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the matrix $M$ with $z$ a complex variable.  This formula is readily verified when $M$ is diagonal and has the nice property of being additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have $$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)$$
+where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
+paths of length $n$ from $a$ to $b$.  ; $F$ is the functor from this category to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
+
+We now make use of the additivity.  Let $\hier$ be the functor which
+sends $G$ to a poset $P$.  Then every element $p$ of $\Path(a,a)$ lies
+in $\hier^{-1} (\hier(a))$.  Hence, our sum decomposes into partial sums
+for the fibers of the points in the hierarchy which corresponds to a
+factorization of the characteristic polynomial.
+
+
 
 \section{Two component systems}
 For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
@@ -433,28 +590,7 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 % \input{tex/tablewithgraphs}
 
 \section{Appendix A}\label{sec:appA}
-Suppose that we have a family
-of polynomials whose roots are of one type but turn into another type.
-There are three ways this could happen:
-\begin{itemize}
-\item{1.} A real root could go from being positive to being negative
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a zero root.  For that intermediate value,
-  we have $D = 0$.
-\item{2.} A pair of real roots could turn into a pair of complex roots
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a repeated root.  For that intermediate
-  value, we have $\delta = 0$.
-\item{3.} A conjugate pair of complex roots could go from having
-  positive real part to having negative real part or vice versa.  For
-  this to happen, we must pass through an intermediate value in which
-  the real part is zero.  For that intermediate value, the two roots
-  are imaginary so, bing conjugates, they sum to zero, hence we have
-  $\Delta = 0$.
-\end{itemize}
-\noindent  Thus, we conclude that the boundaries of our regions
-$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
-\Delta=0$ and we will characterize them by studying these surfaces.
+
 
 \end{document}
 
