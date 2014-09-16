@@ -91,10 +91,10 @@ distribution as data comes in or use it to estimate parameters and error
 bars from experimental results.
 
 Having done this, we are now in a position to do a probabilistic analysis
-of our system and its properties.  Given some quantity $q$ characterizing 
-our system, this quantity becomes a random variable which may be discrete or 
-continuous depending on the quantity under consideration.  For example, if 
-the quantity is the time it takes for a particle to travel between two points, 
+of our system and its properties.  Given some quantity $q$ characterizing
+our system, this quantity becomes a random variable which may be discrete or
+continuous depending on the quantity under consideration.  For example, if
+the quantity is the time it takes for a particle to travel between two points,
 we have a real-valued random variable; if the quantity is the number of fixed
 points, we have an integer-valued random variable; and if the quantity is
 whether or not the system posesses a limit cycle, we have a binary random
@@ -222,11 +222,11 @@ of algebra, it is invertible and, by ???, its inverse is continuous.
 
 Suppose that $p$ is a stable polynomial.  By definition, this means that
 $\Re r > 0$ for every root $r$ of $p$.  Since the set $\{r \mid \Re r > 0\}$
-is an open subset of $\mathbb{C}^n/S_n$, the continuity of $f^{-1}$ implies 
+is an open subset of $\mathbb{C}^n/S_n$, the continuity of $f^{-1}$ implies
 that the set of stable polynomials is open.  Likewise, the set of unstable
 polynomials none of whose roots have real part equal to zero is open.
 
-Hence, if a point lies on the boundary of the stable region, it must 
+Hence, if a point lies on the boundary of the stable region, it must
 correspond to a polynomial with at least one root whose real part is zero.
 There are two ways this could happen.  If the root is real, then having
 zero real part is the same as the root being zero, hence $s_n = 0$.  If
@@ -241,25 +241,24 @@ examine the category of paths on $G_A$, and derive a formula expressing
 the chararacteristic polynomial as a sum over cycles.
 
 Given a digraph $G$, let $\Path (a,b)$ denote the set of paths from the
-vertex $a$ to the vertex $b$ and let $\Path(G) = \bigcup_{a,b \in G} \Path (a,b)$. 
-Given a path $p_1$ from $a$ to $b$ and a path $p_2$ from $b$ to $c$, we may 
-concatenate them to obtain a path $p_1 \circ p_2$ from $a$ to $c$.  Since 
-this operation is associative and has identity elements, 
-$(\Vertex(G), \Path(G), \circ)$ forms a category.  Define 
+vertex $a$ to the vertex $b$ and let $\Path(G) = \bigcup_{a,b \in G} \Path (a,b)$.
+Given a path $p_1$ from $a$ to $b$ and a path $p_2$ from $b$ to $c$, we may
+concatenate them to obtain a path $p_1 \circ p_2$ from $a$ to $c$.  Since
+this operation is associative and has identity elements,
+$(\Vertex(G), \Path(G), \circ)$ forms a category.  Define
 $\mathcal{A}(G)$ to be the set of all linear combinations of elements of
 $\Path(G)$ with coefficients in $\mathbb{R}$.  Then $\mathcal{A}(G)$ forms
 an associative algebra under the multiplication induced by $\circ$.
 
-% \def\wprod{\mathrm{wp}}
 Next, we introduce two basic functors from $\Path (G)$.  One of these is
 $\length \colon \Path(G) \to \mathbb{N}$ (regarding the natural numbers
 as a category with a single object) which sends each path to its length.
-The other functor is the weight product functor.  Given an assignement 
+The other functor is the weight product functor.  Given an assignement
 $w \colon \Path(G) \to \mathbb(R)$ of weights to the edges of our digraph,
 define $\wprod \colon \Path(G) \to \mathbb{R}$ to be the function which sends
 each path to the product of the weights associated to the edges which
 that path traverses.  Given the way that graphs are associated to matrices,
-weights on edges correspond to matrix entries and, given a path 
+weights on edges correspond to matrix entries and, given a path
 $v_1, v_2, v_3 \ldots$, we have $\wprod(v_1, v_2, v_3 \ldots) =
 m_{v_1 v_2} m_{v_2 v_3} \cdots$.  Going in the opposite direction, we
 note that any functor from $\Path(G)$ to $\mathbb{R}$ may be regarded as
@@ -269,7 +268,7 @@ $\mathcal{A}(G)$ by linearity; the result is an algebra homomorphism.
 \todo{Start talking about Abelianizing the category and the algebra, say
 more after decomposing into components.}
 
-\todo{Characterize strongly connected components in terms of 
+\todo{Characterize strongly connected components in terms of
 fibration over poset.}
 
 The characteristic polynomial $\chi(A)$ associated to $A$ can be factored
