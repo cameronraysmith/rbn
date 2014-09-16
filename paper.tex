@@ -199,7 +199,14 @@ This description can be formalized as a directed graph $G_X$ that describes the 
      \end{array}
    \right.
 \end{displaymath}
-\todo{Define strongly connected components and connect to operads \cite{Vagner2014}}
+A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc}.
+
+\begin{figure}[!ht]
+\centering
+\noindent\includegraphics[width=0.7\columnwidth]{fig/scc.pdf}
+\caption{{\bf Example of strongly connected components.} (A) - (D) show strongly connected components highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three component systems. Note that the most hierarchical system in (A) has the highest possible number of connected components, three, whereas the system containing a single cycle and therefore posessing no hierarchy contains only one connected component. Systems (B) and (D) represent examples of hierarchical modular systems that posess both modularity and hierarchy.}
+\label{fig:scc}
+\end{figure}
 
 Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
