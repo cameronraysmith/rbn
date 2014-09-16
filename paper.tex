@@ -82,7 +82,7 @@ steps. First, we provide a measure space $S, \mathcal{B}(S)$ which represents th
 values over which our parameters can vary. Next, instead of a single
 vector field, we consider a family of vector fields parameterized by
 this space. That is to say, we introduce a mapping $V \colon S \to \Gamma T(\prod_i M_m)$.
-(Here $\Gamma$ denoted the space of sections of the tangent bundle.)
+(Here $\Gamma$ denotes the space of sections of the tangent bundle.)
 As before, for each point $p \in S$, the vector field $V(p)$ must be consistent with
 the system graph. Finally, we select a probability measure $\mu \colon
 \mathcal{B}(S) \to [0,1]$ which represents our understanding of which values of the parameters
@@ -90,12 +90,12 @@ are likely. In accord with Bayesian statistics, we might revise this
 distribution as data comes in or use it to estimate parameters and error
 bars from experimental results.
 
-Having done this, we are now in a position to do a probabilistic analysis.
-Given some quantity $q$ characterizing our system, this quantity now
-becomes a random variable.  This variable may be discrete of continuous
-depending on the quantity under consideration.  For example, if the quantity
-is the time it takes for a particle to travel between two points, we have
-a real-valued random variable; if the quantity is the number of fixed
+Having done this, we are now in a position to do a probabilistic analysis
+of our system and its properties.  Given some quantity $q$ characterizing 
+our system, this quantity becomes a random variable which may be discrete or 
+continuous depending on the quantity under consideration.  For example, if 
+the quantity is the time it takes for a particle to travel between two points, 
+we have a real-valued random variable; if the quantity is the number of fixed
 points, we have an integer-valued random variable; and if the quantity is
 whether or not the system posesses a limit cycle, we have a binary random
 variable.
@@ -209,154 +209,68 @@ n=5 \qquad &\Delta = s_1 s_2 s_3 s_4 - s_3^2 s_4 - s_1^2 s_4^2 -
 \end{align*}
 
 \begin{lemma}
-Given a polynomial $p(x) = z^n + \sum_{k=1}^{n-1} s_k x^{n-k}$ and a real number
-$\epsilon > 0$, there exists $\delta > 0 \in \mathbb{R}$ such that, if $q(x) =
-x^n + \sum_{k=1}^{n-1} \sigma_i x^i$ is a polynomial for which $|s_i - \sigma_i|
-< \delta$ then one can order the roots of $p$ and $q$ such that $p(z) = \prod_{k=1}^n
-(z - r_i)$ and $q(z) = \prod_{k=1}^n (z - \rho_i)$ and $| r_k - \rho_k | < \epsilon$.
-\end{lemma}
-
-\begin{proof}
-Without loss of generality, we may assume that $\epsilon < 1$.
-
-We first consider the case where $p(x) = x^n$.
-
-If we make the rescaling $x = \epsilon y/2$ in the equation $p(x)  = 0$,
-we obtain the equation
-\[
-y^n + \sum_{k=1}^{n-1} \left(\frac{2}{\epsilon}\right)^k s_k y^{n-k} = 0 .
-\]
-Cauchy's bound on the roots of this equation is
-\[
-|y| < 1 + \max_j \left(\frac{2}{\epsilon}\right)^j |s_j| ,
-\]
-which becomes the bound
-\[
-|x| < \frac{\epsilon}{2} + \max_j \left(\frac{2}{\epsilon}\right)^{j-1} |s_j|
-< \frac{\epsilon}{2} + \left(\frac{2}{\epsilon}\right)^{n-1} \max_j |s_j|
-\]
-for the original equation.  Hence, if we choose $\delta = (\epsilon/2)^{n}$,
-we will have $|x| < \epsilon$.
-
-Next, we generalize to the case $p = (x-r)^n$.
-
-To extend this result of the general case, we note that, given two
-polynomials $p = x^m + \sum_{k=1}^n a_k x^{m-k}$ and
-$q = x^n + \sum_{k=1}^n b_k x^{n-k}$, the Jacobian of the map which
-sends the coefficients of the matrices to the coefficients of the
-product $pq$ is the Sylvester matrix, whose determinant is the resultant
-of $p$ and $q$.  Hence, is $p$ and $q$ have no common root, the map
-is locally invertible.
-\end{proof}
-
-\begin{lemma}
 If a point lies on the boundary of the set of stable polynomials, then
 either $s_n = 0$ and $\Delta = 0$.
 \end{lemma}
 
 \begin{proof}
-Suppose that none of the real parts of the roots of a polynomial $p$ equal
-zero.  Let $\epsilon$ be the minimum of the absolute values of the real
-parts of the roots of $p$.  Then, by continuity of the map which sends the
-roots of a polynomial to its coefficients, there exists a $\delta > 0$
-such that, if $q$ is any polynomial whose coefficients differ by less than
-$\delta$ from the
+Let $S_n$ denote the symmetric group on $n$ objects and let $f \colon
+\mathbb{C}^n/S_n \to \mathbb{C}^n$ be the map that sends a set of roots
+to the n-tuplet of coefficients of a polynomial.  This map is explicitly
+given by the elemetary symmetric polynomials.  By the fundamental theorem
+of algebra, it is invertible and, by ???, its inverse is continuous.
 
-Suppose that we have a family
-of polynomials whose roots are of one type but turn into another type.
-There are three ways this could happen:
-\begin{itemize}
-\item{1.} A real root could go from being positive to being negative
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a zero root.  For that intermediate value,
-  we have $D = 0$.
-\item{2.} A pair of real roots could turn into a pair of complex roots
-  or vice versa.  For this to happen, we must pass through an
-  intermediate value with a repeated root.  For that intermediate
-  value, we have $\delta = 0$.
-\item{3.} A conjugate pair of complex roots could go from having
-  positive real part to having negative real part or vice versa.  For
-  this to happen, we must pass through an intermediate value in which
-  the real part is zero.  For that intermediate value, the two roots
-  are imaginary so, bing conjugates, they sum to zero, hence we have
-  $\Delta = 0$.
-\end{itemize}
-\noindent  Thus, we conclude that the boundaries of our regions
-$R_{abcd}$ consist of portions of the surfaces $D=0, \delta=0,
-\Delta=0$ and we will characterize them by studying these surfaces.
+Suppose that $p$ is a stable polynomial.  By definition, this means that
+$\Re r > 0$ for every root $r$ of $p$.  Since the set $\{r \mid \Re r > 0\}$
+is an open subset of $\mathbb{C}^n/S_n$, the continuity of $f^{-1}$ implies 
+that the set of stable polynomials is open.  Likewise, the set of unstable
+polynomials none of whose roots have real part equal to zero is open.
 
-To complete the proof, we show that the condition $\delta = 0$ is not
-needed to describe the boundary.  Suppose that $\delta = 0$.  Then there
-must exist a repeated root.  If the real part of any root, repeated or
-not, is positive, then the polynomial is not stable and, by continuity,
-if one allows the coefficients to vary within a sufficiently small
-ball about that solution, the root will remain negative, so the
-polynomial cannot lie on the boundary of the stable region.  If all
-the roots, including the repeated ones, are negative then, by a similar
-argument the point is in the interior of the stable region.  The only
-other possibility is that some root has zero real part, but then
-$\Delta = 0$ so the condition $\delta = 0$ is superfluous.
+Hence, if a point lies on the boundary of the stable region, it must 
+correspond to a polynomial with at least one root whose real part is zero.
+There are two ways this could happen.  If the root is real, then having
+zero real part is the same as the root being zero, hence $s_n = 0$.  If
+the root is complex, then having zero real part means that the root and
+its complex conjugate are purely imaginary and sum to zero, hence $\Delta = 0$.
 \end{proof}
 
-Introduce $V$ as the parameter space of all polynomials of degree $n$
-with real coefficients.  In other words, $V$ is a real vector space of
-dimension $n$ whose coordinates we will identify with the coefficients
-$s_k$ of our polynomial.  We now partition this space into regions
-corresponding to specific types of polynomials.  Let $R_{abcd}$ be the
-subset of $V$ such that $x \in R_{abcd}$ if and only if the polynomial
-corresponding to $x$ has $a$ positive real roots, $b$ negative real
-roots, $c$ complex roots with positive real part and $d$ complex roots
-with negative real part.  Once we characterize these regions using
-invariants, we will have solved the original problem because a matrix
-is stable if the point of $V$ corresponding to it lies in a region of
-the form $R_{a0c0}$.
-
-Next, we introduce some products:
-\begin{align}
-D &= \prod_{k=1}^n r_n \cr
-\delta &= \prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 - r_j)^2 \cr
-\Delta &= \prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 + r_j) \cr
-\end{align}
-
-Since these quantities are invariant under permutation of the roots
-$r_j$, they may be expressed as functions of the coefficients $s_j$.
-The explicit expressions may be obtained by such techniques as long
-division and determinants. These quantities are of interest because they describe the boundaries between the regions introduced above.
-
-The simplest case is $n=2$.  There we have the regions $R_{2000},
-R_{1100}, R_{0200}, R_{0020}, R_{0002}$ and our invariants are $D =
-s_2, \delta = s_1^2 - 4s_2, \Delta = s_1$.  The relation between these
-is summarized by the conditions
-\begin{align}
-R_{2000} \qquad &D > 0, \delta > 0, \Delta > 0, \cr
-R_{1100} \qquad &D < 0, \delta > 0, \cr
-R_{0200} \qquad &D > 0, \delta > 0, \Delta < 0, \cr
-R_{0020} \qquad &\delta < 0, \Delta > 0, \cr
-R_{0002} \qquad &\delta < 0, \Delta < 0. \cr
-\end{align}
-These regions used for the classification of stability of two-component systems are show in \ref{fig:region2x2}. The stable regions are given by $R_{2000}$ and $R_{0020}$. All of the other regions represent unstable matrices.
-
-Moving to $n=3$, our invariants now look as follows: $D = s_3, \delta
-= 18 s_1 s_2 s_2 + s_1^2 s_2^2 - 4 s_2^3 - 4 s_1^3 s_3 - 27 s_3,
-\Delta = s_1 s_2 - s_3$.  However, now we can no longer simply use their
-signs to distinguish regions.  For instance, consider the regions
-$R_{3000}$ and $R_{1200}$.  These both have $D > 0$ and $\delta > 0$
-but to tell them apart, we need to note that the region $\delta > 0$
-has two connected components and use the auxiliary condition that $s_1 > 0$ to
-specify which of the components contains our region. The regions analogous to \ref{fig:region2x2} for three component systems where $D=1$ is given in \ref{fig:region3x3}.
-%(Looking at the sign of $\Delta$ will not help here because, while $\Delta > 0$ in the region $R_{3000}$, it is also positive for some elements of $R_{1200}$ as well.)
-
-\section{System graph and decomposition into strongly connected components}
+\section{Paths and eigenvalues}
 Next, we will want to relate prpoperties of our matrix and its eigenvalues
 to  properties of the associated graph $G_A$.  To do this, we will first
 examine the category of paths on $G_A$, and derive a formula expressing
 the chararacteristic polynomial as a sum over cycles.
 
 Given a digraph $G$, let $\Path (a,b)$ denote the set of paths from the
-vertex $a$ to the vertex $b$.  Given a path $p_1$ from $a$ to $b$ and a path
-$p_2$ from $b$ to $c$, we may concatenate them to obtain a path $p_1 \circ
-p_2$ from $a$ to $c$.  Hence, $(\Vertex(G), \Path(G), \circ)$ forms a category.
+vertex $a$ to the vertex $b$ and let $\Path(G) = \bigcup_{a,b \in G} \Path (a,b)$. 
+Given a path $p_1$ from $a$ to $b$ and a path $p_2$ from $b$ to $c$, we may 
+concatenate them to obtain a path $p_1 \circ p_2$ from $a$ to $c$.  Since 
+this operation is associative and has identity elements, 
+$(\Vertex(G), \Path(G), \circ)$ forms a category.  Define 
+$\mathcal{A}(G)$ to be the set of all linear combinations of elements of
+$\Path(G)$ with coefficients in $\mathbb{R}$.  Then $\mathcal{A}(G)$ forms
+an associative algebra under the multiplication induced by $\circ$.
 
+% \def\wprod{\mathrm{wp}}
+Next, we introduce two basic functors from $\Path (G)$.  One of these is
+$\length \colon \Path(G) \to \mathbb{N}$ (regarding the natural numbers
+as a category with a single object) which sends each path to its length.
+The other functor is the weight product functor.  Given an assignement 
+$w \colon \Path(G) \to \mathbb(R)$ of weights to the edges of our digraph,
+define $\wprod \colon \Path(G) \to \mathbb{R}$ to be the function which sends
+each path to the product of the weights associated to the edges which
+that path traverses.  Given the way that graphs are associated to matrices,
+weights on edges correspond to matrix entries and, given a path 
+$v_1, v_2, v_3 \ldots$, we have $\wprod(v_1, v_2, v_3 \ldots) =
+m_{v_1 v_2} m_{v_2 v_3} \cdots$.  Going in the opposite direction, we
+note that any functor from $\Path(G)$ to $\mathbb{R}$ may be regarded as
+a weighted product for a suitable choice of weights.  We extend $\wp$ to
+$\mathcal{A}(G)$ by linearity; the result is an algebra homomorphism.
+
+\todo{Start talking about Abelianizing the category and the algebra, say
+more after decomposing into components.}
+
+\todo{Characterize strongly connected components in terms of 
+fibration over poset.}
 
 The characteristic polynomial $\chi(A)$ associated to $A$ can be factored
 according to the strongly connected components of the graph $G$.
@@ -368,7 +282,8 @@ matrix $M$ with $z$ a complex variable.  This formula is readily verified when
 $M$ is diagonal and has the nice property of being additive over decompositions
 of the matrix. Making the change of variables $x=\frac{1}{z}$, we have
 \[
-\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)
+\tr (I - xM)^n =
+\sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} \wprod(p) x^{\length(p)}
 \]
 where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
 paths of length $n$ from $a$ to $b$.  ; $F$ is the functor from this category
@@ -491,6 +406,8 @@ d & c
 \end{align*}
 
 The probability of \emph{a priori} stability and of stability to perturbations for all two component systems is given in Table \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems is given in Table \ref{tab:structstabmat3}.
+
+\todo{Say a few words about Monte Carlo integration and error bars.}
 
 \section{Connectivity is correlated with robustness}
 \ref{fig:stab3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity.
