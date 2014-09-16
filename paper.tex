@@ -1,72 +1,4 @@
-%------------------------------------------------------------------------------
-% Beginning of paper.tex
-%------------------------------------------------------------------------------
-%
-% AMS-LaTeX version 2 sample file for journals, based on amsart.cls.
-%
-%        ***     DO NOT USE THIS FILE AS A STARTER.      ***
-%        ***  USE THE JOURNAL-SPECIFIC *.TEMPLATE FILE.  ***
-%
-% Replace amsart by the documentclass for the target journal, e.g., tran-l.
-%
-\documentclass{amsart}
-
-%     If your article includes graphics, uncomment this command.
-\usepackage{graphicx}
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{xca}[theorem]{Exercise}
-
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-
-\numberwithin{equation}{section}
-
-%    Absolute value notation
-\newcommand{\abs}[1]{\lvert#1\rvert}
-
-%    Blank box placeholder for figures (to avoid requiring any
-%    particular graphics capabilities for printing this document).
-\newcommand{\blankbox}[2]{%
-  \parbox{\columnwidth}{\centering
-%    Set fboxsep to 0 so that the actual size of the box will match the
-%    given measurements more closely.
-    \setlength{\fboxsep}{0pt}%
-    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
-  }%
-}
-
-% user added
-\usepackage{longtable}
-\usepackage{dot2texi}
-\usepackage{tikz}
-\usetikzlibrary{automata,shapes,arrows}
-% todo notes see http://www.texample.net/tikz/examples/todo-notes/
-\usepackage[colorinlistoftodos]{todonotes}
-\usepackage{hyperref}
-\hypersetup{colorlinks=true,
-linkcolor=[rgb]{.67 .27 .27},
-citecolor=[rgb]{.09 .29 .54},
-urlcolor=[rgb]{.09 .29 .54}}
-
-% Set autoref text
-% http://tex.stackexchange.com/a/36576/6784
-\renewcommand*{\figureautorefname}{Fig.}
-\renewcommand*{\equationautorefname}{Eq.}
-\renewcommand*{\tableautorefname}{Table}
-\renewcommand*{\sectionautorefname}{Section}
-
-
-\def\tr{\mathrm{tr}}
-\def\Path{\mathrm{Path}}
-\def\hier{\mathrm{Hier}}
-\def\Vertex{\mathrm{Vertex}}
-\def\adj{\mathrm{adj}}
+\input{ams_header.tex}
 
 \begin{document}
 
@@ -131,7 +63,7 @@ Here we build on work aimed at investigating the stability of randomly connected
 \section{Stability analysis of biological networks}\label{sec:stabanalbn}
 In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
-For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold to each observable, a directed graph to the interdependencies, and a vector field satisfying these interdependencies for each observable over the space determined by taking the product of the manifolds associated to the collection of observables \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph shown in \ref{fig:examplesystemmodules}A
+For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph $G$ to the interdependencies, and a vector field $V \in T(\prod_i M_i)$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \ref{fig:examplesystemmodules}A
 % \begin{center}
 % \input{tex/examplehamdyngraph}
 % \end{center}
@@ -148,13 +80,6 @@ then for the system $X = \{G_X, M_X, F_X\}$, where $M_X \equiv \{M_1,M_2\}$ and 
 \frac{dx_2}{dt} & = F_2(x_1,x_2)
 \end{align*}
 
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.6\columnwidth]{fig/examplesystemmodules.pdf}
-\caption{{\bf Example of the combination of open system modules to construct closed systems.} (A) Example of combining two open modules to construct a closed system of two components (B) Analogous example for combining three open modules to construct a closed system with three components}
-\label{fig:examplesystemmodules}
-\end{figure}
-
 In the more general case of a system with $n$ components we would have an $n$-dimensional vector of observables
 $$
 x(t) = (x_1(t), \ldots x_n(t)) = \vec{x}(t)
@@ -168,27 +93,40 @@ where $F_i$ represent, potentially nonlinear, functions of the given vector of s
 In order to accommodate the possibility of uncertainty in our modelling,
 we will generalize our notion of a system on a network to that of a
 system with random parameters.  Again, this will involve three
-steps. First, we provide a measure space $S$ which represents the
+steps. First, we provide a measure space $S, \mathcal{B}(S)$ which represents the
 values over which our parameters can vary. Next, instead of a single
 vector field, we consider a family of vector fields parameterized by
-this space. That is to say, we introduce a mapping $V$ from $S$ to
-sections of the tangent bundle of the product of manifolds. As before,
-for each point $p \in S$, the vector field $V(p)$ must be consistent with
-the system graph. Finally, we select a probability measure $\mu$ on
-$S$ which represents our understanding of which values of the parameters
+this space. That is to say, we introduce a mapping $V \colon S \to \Gamma T(\prod_i M_m)$.
+(Here $\Gamma$ denoted the space of sections of the tangent bundle.)
+As before, for each point $p \in S$, the vector field $V(p)$ must be consistent with
+the system graph. Finally, we select a probability measure $\mu \colon
+\mathcal{B}(S) \to [0,1]$ which represents our understanding of which values of the parameters
 are likely. In accord with Bayesian statistics, we might revise this
 distribution as data comes in or use it to estimate parameters and error
 bars from experimental results.
 
 Having done this, we are now in a position to do a probabilistic analysis.
-Given some quantity $q$ characterizing our system (such as, for instance,
-the time it would take a particle to travel between two points), this
-quantity now becomes a random variable.  We may then study the average
-value, variance, and the like.  Another question one can ask is that of
-robustness, which is the conditional probability that, if some property
-holds for a set of parameters, it will still hold if we make some random
-perturbation about those parameter values.
+Given some quantity $q$ characterizing our system, this quantity now
+becomes a random variable.  This variable may be discrete of continuous
+depending on the quantity under consideration.  For example, if the quantity
+is the time it takes for a particle to travel between two points, we have
+a real-valued random variable; if the quantity is the number of fixed
+points, we have an integer-valued random variable; and if the quantity is
+whether or not the system posesses a limit cycle, we have a binary random
+variable.
 
+Another question one can ask is that of robustness, which measures the
+probability that, if some property holds for a set of parameters, it will
+continue to hold if we make a random perturbation about those parameter values.
+To define robustness, we will introduce, in addition to the probability
+distribution $\mu$ described above, a family of probability distributions
+$\mu' \colon S \times \mathcal{B}(S) \to [0,1]$.  Then, given a binary random
+variable $q$, we we define its robustness as the following conditional proability:
+\[
+  \mathrm{Robust} (q) =
+  \frac{\int_S d\mu(x) \int_S d\mu'(y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
+  {\int_S d\mu(x) \mathbf{1}_q(x)}
+\]
 
 This description can be formalized as a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
  \begin{displaymath}
@@ -200,13 +138,6 @@ This description can be formalized as a directed graph $G_X$ that describes the 
    \right.
 \end{displaymath}
 A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc}.
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.7\columnwidth]{fig/scc.pdf}
-\caption{{\bf Example of strongly connected components.} (A) - (D) show strongly connected components highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three component systems. Note that the most hierarchical system in (A) has the highest possible number of connected components, three, whereas the system containing a single cycle and therefore posessing no hierarchy contains only one connected component. Systems (B) and (D) represent examples of hierarchical modular systems that posess both modularity and hierarchy.}
-\label{fig:scc}
-\end{figure}
 
 Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
@@ -293,17 +224,17 @@ n=5 \qquad &\Delta = s_1 s_2 s_3 s_4 - s_3^2 s_4 - s_1^2 s_4^2 -
 \end{align*}
 
 \begin{lemma}
-Given a polynomial $p(z) = z^n + \sum_{k=1}^{n-1} s_k z^{n-k}$ and a real number
-$\epsilon > 0$, there exists $\delta \in \mathbb{R}$ such that, if $p'(x) =
-x^n + \sum_{k=1}^{n-1} {s'}_i z^i$ is a polynomial for which $|s_i - {s'}_i|
-< \delta$ then to every root $r$ of $p$ there corresponds a root $r'$ of
-$p'$ such that $|r-r'| < \epsilon$.
+Given a polynomial $p(x) = z^n + \sum_{k=1}^{n-1} s_k x^{n-k}$ and a real number
+$\epsilon > 0$, there exists $\delta > 0 \in \mathbb{R}$ such that, if $q(x) =
+x^n + \sum_{k=1}^{n-1} \sigma_i x^i$ is a polynomial for which $|s_i - \sigma_i|
+< \delta$ then one can order the roots of $p$ and $q$ such that $p(z) = \prod_{k=1}^n
+(z - r_i)$ and $q(z) = \prod_{k=1}^n (z - \rho_i)$ and $| r_k - \rho_k | < \epsilon$.
 \end{lemma}
 
 \begin{proof}
 Without loss of generality, we may assume that $\epsilon < 1$.
 
-We first consider the case where $p = x^n$.
+We first consider the case where $p(x) = x^n$.
 
 If we make the rescaling $x = \epsilon y/2$ in the equation $p(x)  = 0$,
 we obtain the equation
@@ -339,10 +270,12 @@ either $s_n = 0$ and $\Delta = 0$.
 \end{lemma}
 
 \begin{proof}
-Since the mapping which sends the roots of a polynomial to its
-coefficients has non-singular Jacobian when the discriminant is not
-zero, if a stable polynomial has distinct roots, it does not lie on
-the boundary.
+Suppose that none of the real parts of the roots of a polynomial $p$ equal
+zero.  Let $\epsilon$ be the minimum of the absolute values of the real
+parts of the roots of $p$.  Then, by continuity of the map which sends the
+roots of a polynomial to its coefficients, there exists a $\delta > 0$
+such that, if $q$ is any polynomial whose coefficients differ by less than
+$\delta$ from the
 
 Suppose that we have a family
 of polynomials whose roots are of one type but turn into another type.
@@ -418,13 +351,6 @@ R_{0002} \qquad &\delta < 0, \Delta < 0. \cr
 \end{align}
 These regions used for the classification of stability of two-component systems are show in \ref{fig:region2x2}. The stable regions are given by $R_{2000}$ and $R_{0020}$. All of the other regions represent unstable matrices.
 
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.5\columnwidth]{fig/region2x2.pdf}
-\caption{{\bf Stability conditions on coefficients of the characteristic polynomial for two component systems.} The regions correspond to all possible relationships between the invariants determined by the characteristic polynomial. Colors correspond to the regions given in the main text Green: $R_{2000}$, Red: $R_{1100}$, Yellow: $R_{0200}$, Magenta: $R_{0002}$, Blue: $R_{0020}$.}
-\label{fig:region2x2}
-\end{figure}
-
 Moving to $n=3$, our invariants now look as follows: $D = s_3, \delta
 = 18 s_1 s_2 s_2 + s_1^2 s_2^2 - 4 s_2^3 - 4 s_1^3 s_3 - 27 s_3,
 \Delta = s_1 s_2 - s_3$.  However, now we can no longer simply use their
@@ -434,13 +360,6 @@ but to tell them apart, we need to note that the region $\delta > 0$
 has two connected components and use the auxiliary condition that $s_1 > 0$ to
 specify which of the components contains our region. The regions analogous to \ref{fig:region2x2} for three component systems where $D=1$ is given in \ref{fig:region3x3}.
 %(Looking at the sign of $\Delta$ will not help here because, while $\Delta > 0$ in the region $R_{3000}$, it is also positive for some elements of $R_{1200}$ as well.)
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.5\columnwidth]{fig/region3x3.pdf}
-\caption{{\bf Stability conditions on coefficients of the characteristic polynomial for three component systems.} Colors correspond to the following regions Green: $R_{3000}$, Red: $R_{1200}$, Yellow: $R_{1002}$, Blue: $R_{1020}$. This is the plane $s_3=1$.}
-\label{fig:region3x3}
-\end{figure}
 
 \section{System graph and decomposition into strongly connected components}
 Next, we will want to relate prpoperties of our matrix and its eigenvalues
@@ -454,9 +373,68 @@ $p_2$ from $b$ to $c$, we may concatenate them to obtain a path $p_1 \circ
 p_2$ from $a$ to $c$.  Hence, $(\Vertex(G), \Path(G), \circ)$ forms a category.
 
 
-The characteristic polynomial $\chi(A)$ associated to $A$ can be factored according to the strongly connected components of the graph $G$. $$\frac{\chi(M)'(z)}{\chi(M)(z)} = \tr (zI - M)^{-1}$$ where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the matrix $M$ with $z$ a complex variable.  This formula is readily verified when $M$ is diagonal and has the nice property of being additive over decompositions of the matrix. Making the change of variables $x=\frac{1}{z}$, we have $$\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)$$
+The characteristic polynomial $\chi(A)$ associated to $A$ can be factored
+according to the strongly connected components of the graph $G$.
+\[
+\frac{\chi(M)'(z)}{\chi(M)(z)} = \tr (zI - M)^{-1}
+\]
+where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the
+matrix $M$ with $z$ a complex variable.  This formula is readily verified when
+$M$ is diagonal and has the nice property of being additive over decompositions
+of the matrix. Making the change of variables $x=\frac{1}{z}$, we have
+\[
+\tr (I - xM)^n = \sum_{n=0}^\infty x^n \sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} F(p)
+\]
 where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
-paths of length $n$ from $a$ to $b$.  ; $F$ is the functor from this category to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
+paths of length $n$ from $a$ to $b$.  ; $F$ is the functor from this category
+to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
+
+As an illustration of this formula, we will use it to compute the characteristic
+polynomial of the matrix associated to the labelled graph in figure ??.  We begin
+by noting that the closed paths of this graph can be described by the following
+regular expressions:
+\begin{align*}
+\Path (1,1) &: (e + bd + bca)^* \\
+\Path (2,2) &: (ae^*(be^*d)^*bc)^* \\
+\Path (3,3) &: ((ca + d)e^*b)^* \\
+\end{align*}
+Since these regular expressions are non-redundant, we can obtain generating
+functions for the paths by considering $a,b,c,d,e$ as non-commutative
+variables and replacing the Kleene star $x^*$ by $(1 - x)^{-1}$:
+\begin{align*}
+\Path (1,1) &: (1 - e - bd - bca)^{-1} \\
+\Path (2,2) &: (1 - a(1-e)^{-1}(1 - b(1-e)^{-1}d)^{-1}bc)^{-1} \\
+\Path (3,3) &: (1 - (ca + d)(1 - e)^{-1}b)^{-1} \\
+\end{align*}
+To obtain the characteristic polynomial, we make the substitutions
+$a \mapsto m_{12}/z, b \mapsto m_{31}/z, c \mapsto m_{23}/z, d \mapsto m_{13}/z,
+e \mapsto m_{11}/z$ and simplify, using the fact that the matrix entries
+commute:
+\begin{align*}
+\Path (1,1) &: \frac{z^3}
+{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} } \\
+\Path (2,2) &: \frac{z(z^2 - m_{11} z - m_{13} m_{31})}
+{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} }  \\
+\Path (3,3) &: \frac{z^2(z^2 - m_{11})}
+{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} } \\
+\end{align*}
+Adding these three quantitites together, we obtain
+\[
+\frac{z(3 z^2 - 2 m_{11} z - m_{13} m_{31})}
+{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} },
+\]
+which we recognize as $\chi'(z)/\chi(z)$, where
+$\chi(z) = z^3−m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31}$.
+finally, we note that this polynomial is indeed the characteristic
+polynomial of the matrix
+\[
+ \begin{matrix}
+   m_{11} & m_{12} & m_{13} \\
+   0      & 0      & m_{23} \\
+   m_{31} & 0      & 0 \\
+ \end{matrix}
+\]
+corresponding to our digraph.
 
 We now make use of the additivity.  Let $\hier$ be the functor which
 sends $G$ to a poset $P$.  Then every element $p$ of $\Path(a,a)$ lies
@@ -529,66 +507,11 @@ d & c
 \end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
 
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-
-\begin{table}[h]
-\begin{tabular}{ c || c | c | c }
-\hline
-matrix & connectivity & \specialcell{probability of stability\\to perturbation} & probability of stability\\
-\hline
-  $\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix}$ & 4 & 0.62 & 0.25 \\
-  $\begin{pmatrix}
-a & b \\
-d & 0
-\end{pmatrix}$, $\begin{pmatrix}
-0 & b \\
-d & c
-\end{pmatrix}$ & 3 & 0.5 & 0.25 \\
-  $\begin{pmatrix}
-a & 0 \\
-d & c
-\end{pmatrix}$, $\begin{pmatrix}
-a & b \\
-0 & c
-\end{pmatrix}$ & 3 & 0.67 & 0.25 \\
-$\begin{pmatrix}
-a & 0 \\
-0 & c
-\end{pmatrix}$ & 2 & 0.5 & 0.25 \\
-\end{tabular}
-\caption{{\bf Probability of stability under resampling and \emph{a priori} stability for two component systems derived analytically}. All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat}
-\end{table}
-
 The probability of \emph{a priori} stability and of stability to perturbations for all two component systems is given in Table \ref{tab:structstabmat}.
 
 \section{Three component systems}
 
 The probability of \emph{a priori} stability and of stability to perturbations for all three component systems is given in Table \ref{tab:structstabmat3}. \ref{fig:connectcycle3D3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity and number of cycles. \ref{fig:stab3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity. \ref{fig:cycle3x3} shows the probability of stability to perturbations for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}.
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.8\columnwidth]{fig/connectcycle3D3x3.pdf}
-\caption{{\bf Plot of stability to perturbations versus number of cycles and connectivity for three component systems.} }
-\label{fig:connectcycle3D3x3}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.8\columnwidth]{fig/stab3x3.pdf}
-\caption{{\bf Plot of stability to perturbations versus connectivity for three component systems.} }
-\label{fig:stab3x3}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-\noindent\includegraphics[width=0.8\columnwidth]{fig/cycle3x3.pdf}
-\caption{{\bf Plot of stability to perturbations versus number of cycles for three component systems.} }
-\label{fig:cycle3x3}
-\end{figure}
 
 \newpage
 
@@ -596,15 +519,18 @@ The probability of \emph{a priori} stability and of stability to perturbations f
 \bibliography{bib/books,bib/papers}
 
 \newpage
+\FloatBarrier
 
-\input{tex/tablenographs}
+\section{Figure Legends}
+\input{tex/figures}
 
 \newpage
+\FloatBarrier
 
+\section{Tables}
+\input{tex/table2x2stab}
+\input{tex/tablenographs}
 % \input{tex/tablewithgraphs}
-
-\section{Appendix A}\label{sec:appA}
-
 
 \end{document}
 

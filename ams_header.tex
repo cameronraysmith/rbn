@@ -1,0 +1,71 @@
+%!TEX root = paper.tex
+%------------------------------------------------------------------------------
+% Beginning of paper.tex
+%------------------------------------------------------------------------------
+%
+% AMS-LaTeX version 2 sample file for journals, based on amsart.cls.
+%
+%        ***     DO NOT USE THIS FILE AS A STARTER.      ***
+%        ***  USE THE JOURNAL-SPECIFIC *.TEMPLATE FILE.  ***
+%
+% Replace amsart by the documentclass for the target journal, e.g., tran-l.
+%
+\documentclass{amsart}
+
+%     If your article includes graphics, uncomment this command.
+\usepackage{graphicx}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+% user added
+\usepackage{longtable}
+\usepackage{dot2texi}
+\usepackage{tikz}
+\usetikzlibrary{automata,shapes,arrows}
+% todo notes see http://www.texample.net/tikz/examples/todo-notes/
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+linkcolor=[rgb]{.67 .27 .27},
+citecolor=[rgb]{.09 .29 .54},
+urlcolor=[rgb]{.09 .29 .54}}
+\usepackage{placeins}
+
+% Set autoref text
+% http://tex.stackexchange.com/a/36576/6784
+\renewcommand*{\figureautorefname}{Fig.}
+\renewcommand*{\equationautorefname}{Eq.}
+\renewcommand*{\tableautorefname}{Table}
+\renewcommand*{\sectionautorefname}{Section}
+
+
+\def\tr{\mathrm{tr}}
+\def\Path{\mathrm{Path}}
+\def\hier{\mathrm{Hier}}
+\def\Vertex{\mathrm{Vertex}}
+\def\adj{\mathrm{adj}}
