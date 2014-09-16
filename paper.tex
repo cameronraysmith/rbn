@@ -1,4 +1,4 @@
-\input{ams_header.tex}
+\input{header.tex}
 
 \begin{document}
 
@@ -8,46 +8,31 @@
 
 \title{Ensemble Stability of Biological Networks}
 
-%    Information for first author
-\author{Aviv Bergman}
-%    Address of record for the research reported here
-\address{Department of Systems and Computational Biology, Albert Einstein College of Medicine, Bronx, New York 10461}
-%    Current address
-\curraddr{}
-\email{aviv@einstein.yu.edu}
-%    \thanks will become a 1st page footnote.
-% \thanks{The first author was supported in part by NSF Grant \#000000.}
+\pagenumbering{arabic}
 
-%    Information for second author
-\author{Raymond S. Puzio}
-\address{Department of Systems and Computational Biology, Albert Einstein College of Medicine, Bronx, New York 10461}
-%    Current address
-\curraddr{}
-\email{rsp@novres.org}
-% \thanks{Support information for the second author.}
+% Title must be 150 characters or less
+\begin{center}
+{\Large
+\textbf{Ensemble Stability of Biological Networks}
+}
+% Insert Author names, affiliations and corresponding author email.
+\\[.5cm]
+Aviv Bergman$^{1,2,3,4}$,
+Raymond S. Puzio$^{1}$,
+Cameron Smith$^{1}$,
+\\[.5cm]
+$^1$Department of Systems and Computational Biology,\\
+$^2$Dominick P. Purpura Department of Neuroscience,\\
+$^3$Department of Pathology, Albert Einstein College of Medicine,\\
+1301 Morris Park Ave, Bronx, NY 10461, USA\\
+$^4$Santa Fe Institute, 1399 Hyde Park Road, Santa Fe, NM 87501, USA
+\\[.5cm]
+% $\ast$To whom correspondence should be addressed; E-mail: aviv@einstein.yu.edu.
+\end{center}
 
-%    Information for third author
-\author{Cameron Smith}
-\address{Department of Systems and Computational Biology, Albert Einstein College of Medicine, Bronx, New York 10461}
-%    Current address
-\curraddr{}
-\email{cameron.smith@med.einstein.yu.edu}
-% \thanks{Support information for the second author.}
-
-%    General info
-% \subjclass[2000]{Primary 54C40, 14E20; Secondary 46E25, 20C20}
-
-% \date{January 1, 2001 and, in revised form, June 22, 2001.}
-
-% \dedicatory{This paper is dedicated to our advisors.}
-
-% \keywords{Differential geometry, algebraic geometry}
-
-\begin{abstract}
-The analysis of dynamical systems that attempts to model chemical reaction, gene-regulatory, population, and ecosystem networks all rely on models having many parameters and thus many degrees of freedom. When the details of a system are unknown, one effective approach is to study the dynamical properties of a collection of models determined by constraints applying to all such systems. Here we analyze the stability of a large class of dynamical systems to perturbations in the underlying structure of the system: a property referred to as \emph{structural stability}. In particular, we precisely determine the probability distribution over system connectivity, a parameter which has significant implications from the study of gene-regulatory networks to ecosystem dynamics, of structural stability for systems with two and three interacting components. We show for these cases that structural stability has a non-monotonic relationship with system connectivity. We also demonstrate that networks with a hierarchical structure are more likely to be stable to perturbations than those with a more entangled heterarchical structure. These results support future work attempting to characterize the scaling relationship between structural stability and system connectivity. The latter investigation is necessary to evaluate several conjectured but ultimately untested hypotheses about biological networks.
-\end{abstract}
-
-\maketitle
+{\begin{quote} \bf
+\input{tex/abstract}
+\end{quote}}
 
 % \section{Todo}
 % \listoftodos

@@ -1,0 +1,136 @@
+%!TEX root = plos_template.tex
+% Template for PLoS
+% Version 1.0 January 2009
+%
+% To compile to pdf, run:
+% latex plos.template
+% bibtex plos.template
+% latex plos.template
+% latex plos.template
+% dvipdf plos.template
+
+\documentclass[10pt]{article}
+%\documentclass[aps,twocolumn]{revtex4-1}
+%\documentclass[aps,twocolumn]{article}
+
+% amsmath package, useful for mathematical formulas
+\usepackage{amsmath}
+\setcounter{MaxMatrixCols}{50}
+% amssymb package, useful for mathematical symbols
+\usepackage{amssymb}
+
+% graphicx package, useful for including eps and pdf graphics
+% include graphics with the command \includegraphics
+\usepackage{graphicx}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+\usepackage{color}
+
+% Use doublespacing - comment out for single spacing
+%\usepackage{setspace}
+%\doublespacing
+
+% Text layout
+\topmargin 0.0cm
+\oddsidemargin 0.5cm
+\evensidemargin 0.5cm
+\textwidth 16cm
+\textheight 21cm
+
+% Bold the 'Figure #' in the caption and separate it with a period
+% Captions will be left justified
+\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
+
+% Use the Science provided bibtex style
+\bibliographystyle{naturemag}
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+% Leave date blank
+\date{}
+
+\pagestyle{myheadings}
+%% ** EDIT HERE **
+
+\usepackage{bussproofs}
+
+% xy-pic for diagrams
+\usepackage[all]{xy}
+% subcaption
+\usepackage{subcaption}
+% hyperref
+%\usepackage[linkbordercolor={.67 .27 .27},citebordercolor={.09 .29 .54},urlbordercolor={.09 .29 .54}]{hyperref}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+linkcolor=[rgb]{.67 .27 .27},
+citecolor=[rgb]{.09 .29 .54},
+urlcolor=[rgb]{.09 .29 .54}}
+
+% color table cells http://goo.gl/ZmpJv
+\usepackage[table]{xcolor}
+% rotate text in table http://goo.gl/Lb4Zd
+\usepackage{rotating}
+% listings for code highlighting in appendix
+\usepackage{listings}
+\usepackage{setspace}
+\input{tex/listingspython}
+\usepackage{placeins}
+\usepackage{longtable}
+\usepackage{dot2texi}
+\usepackage{tikz}
+\usetikzlibrary{automata,shapes,arrows}
+% todo notes see http://www.texample.net/tikz/examples/todo-notes/
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{amsthm}
+
+% define colors
+\definecolor{DeepRed}{rgb}{.82,.14,.16}
+\definecolor{DeepBlue}{rgb}{0,0.36,0.62}
+
+% set depth for table of contents
+% http://tex.stackexchange.com/a/17879/6784
+% http://tex.stackexchange.com/a/11669/6784
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{0}
+
+%% ** EDIT HERE **
+%% PLEASE INCLUDE ALL MACROS BELOW
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+% Set autoref text
+% http://tex.stackexchange.com/a/36576/6784
+\renewcommand*{\figureautorefname}{Fig.}
+\renewcommand*{\equationautorefname}{Eq.}
+\renewcommand*{\tableautorefname}{Table}
+
+\renewcommand{\refname}{References and Notes}
+
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+     }
+
+\def\tr{\mathrm{tr}}
+\def\Path{\mathrm{Path}}
+\def\hier{\mathrm{Hier}}
+\def\Vertex{\mathrm{Vertex}}
+\def\adj{\mathrm{adj}}
+%% END MACROS SECTION
