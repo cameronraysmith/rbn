@@ -191,6 +191,50 @@ function findpermclasses(N::Integer)
     return classbyconnect
 end
 
+function countorbitsize(M::Array{Int64,2})
+    N = size(M)[1]
+    # generate matrix representations of permutations
+    permmats = [matrix(Permutation(i)) for i in permutations([1:N])]
+    allbinmats = genbinmats(N)
+    count = 0
+
+    for (i,mat) in enumerate(allbinmats)
+
+        ind = false
+        if M' == mat
+            ind = true
+        end
+
+        for p in permmats
+            if p*M*inv(p) == mat
+                ind = true
+            end
+
+            if (p*M*inv(p))' == mat
+                ind = true
+            end
+        end
+
+        if ind
+            count += 1
+        end
+
+    end
+
+    return count
+end
+
+function weightedavg(VW)
+
+    # input is a tuple (vector, weights)
+    inds = find(x->x>0,VW[1])
+    relw = VW[2][inds]
+    tot = sum(relw)
+
+    return dot(relw/tot,VW[1][inds])
+
+end
+
 function sysstab(M::Array{Float64,2})
 
   # Continuous time system
@@ -299,3 +343,11 @@ function teststructstab(N::Integer,K::Integer)
 
 end
 
+# @elapsed sp,rsp = teststructstab(3,10000)
+# println(savelatex(pc3,sp,rsp))
+# pc3 = findpermclasses(3)
+# cn = cyclenumber(pc3)
+# println(savedata("../data/stab3x3.tsv",sp,rsp,cn))
+# os3 = map(x->map(countorbitsize,x),pc3)
+# rspwa = map(weightedavg,zip(rsp,os3))
+# spwa = map(weightedavg,zip(sp,os3))
