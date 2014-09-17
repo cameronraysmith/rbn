@@ -88,19 +88,22 @@ function cyclenumber(adjmatlistlist)
 
 end
 
-function savelatex(pcN,sp,rsp)
+function savelatex(pcN,osN,sp,rsp)
     cn = cyclenumber(pcN)
-    println(cn)
+    # osN = map(x->map(countorbitsize,x),pcN)
+
     rv = (String)[]
 
     for (i,plist) in enumerate(sp)
         for (j,p) in enumerate(plist)
             if p > 1e-3
-                  # pmatstr = pmatrix(pcN[i][j])
-                  pmatstr = adjtograph(pcN[i][j])
-                  # string("\$", pmatstr, "\$", " & ",
+                  pmatstr = pmatrix(pcN[i][j])
+                  # pmatstr = adjtograph(pcN[i][j])
+
                   push!(rv,
-                        string(pmatstr, " & ",
+                        string("\$", pmatstr, "\$", " & ",
+                        # string(pmatstr, " & ",
+                               "$(osN[i][j])", " & ",
                                "$(i-1)", " & ",
                                "$(cn[i][j])", " & ",
                                "$(round(rsp[i][j],3))", " & ",
@@ -110,7 +113,7 @@ function savelatex(pcN,sp,rsp)
     end
 
     savedata("../data/stab3x3.tsv",sp,rsp,cn);
-
+    clipboard(join(rv,"\n"))
     return join(rv,"\n")
 end
 
@@ -344,10 +347,10 @@ function teststructstab(N::Integer,K::Integer)
 end
 
 # @elapsed sp,rsp = teststructstab(3,10000)
-# println(savelatex(pc3,sp,rsp))
 # pc3 = findpermclasses(3)
+# os3 = map(x->map(countorbitsize,x),pc3)
+# println(savelatex(pc3,os3,sp,rsp))
 # cn = cyclenumber(pc3)
 # println(savedata("../data/stab3x3.tsv",sp,rsp,cn))
-# os3 = map(x->map(countorbitsize,x),pc3)
 # rspwa = map(weightedavg,zip(rsp,os3))
 # spwa = map(weightedavg,zip(sp,os3))

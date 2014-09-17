@@ -3,9 +3,10 @@
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \begin{table}[h]
+\begin{center}
 \begin{tabular}{ c || c | c | c }
 \hline
-matrix & connectivity & \specialcell{probability of stability\\to perturbation} & probability of stability\\
+matrix & connectivity & \specialcell{probability of stability\\to perturbation} & \specialcell{probability\\of stability}\\
 \hline
   $\begin{pmatrix}
 a & b \\
@@ -30,5 +31,6 @@ a & 0 \\
 0 & c
 \end{pmatrix}$ & 2 & 0.5 & 0.25 \\
 \end{tabular}
+\end{center}
 \caption{{\bf Probability of stability under resampling and \emph{a priori} stability for two component systems derived analytically}. All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat}
 \end{table}
