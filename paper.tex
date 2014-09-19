@@ -48,7 +48,7 @@ Here we build on work aimed at investigating the stability of randomly connected
 \section{Stability analysis of biological networks}\label{sec:stabanalbn}
 In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
-For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph $G$ to the interdependencies, and a vector field $V \in \Gamma T(\prod_i M_i)$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \ref{fig:examplesystemmodules}A
+For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph, $G$, to the interdependencies, and a vector field $V \in \Gamma T(\prod_i M_i)$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \ref{fig:examplesystemmodules}A
 % \begin{center}
 % \input{tex/examplehamdyngraph}
 % \end{center}
@@ -59,7 +59,7 @@ $$
 1 & 1
 \end{pmatrix}
 $$
-then for the system $X = \{G_X, M_X, F_X\}$, where $M_X \equiv \{M_1,M_2\}$ and $F_X \equiv \{F_1,F_2\}$ such that $F_1$ is constrained to be a function of $x_2$ and $F_2$ is a function of both $x_1$ and $x_2$ yielding the flow equations
+having connectivity $\connectivity$ equal to the number of edges of the graph, in this case $\connectivity = 3$. For the system $X = \{G_X, M_X, F_X\}$, where $M_X \equiv \{M_1,M_2\}$ and $F_X \equiv \{F_1,F_2\}$ such that $F_1$ is constrained to be a function of $x_2$ and $F_2$ is a function of both $x_1$ and $x_2$ yielding the flow equations
 \begin{align*}
 \frac{dx_1}{dt} & = F_1(x_2)\\
 \frac{dx_2}{dt} & = F_2(x_1,x_2)
@@ -106,12 +106,12 @@ continue to hold if we make a random perturbation about those parameter values.
 To define robustness, we will introduce, in addition to the probability
 distribution $\mu$ described above, a family of probability distributions
 $\mu' \colon S \times \mathcal{B}(S) \to [0,1]$.  Then, given a binary random
-variable $q$, we we define its robustness as the following conditional proability:
-\[
-  \mathrm{Robust} (q) =
+variable $q$, we define its robustness as the following conditional proability:
+\begin{align}\label{eq:robustness}
+  R (q) =
   \frac{\int_S d\mu(x) \int_S d\mu'(x,y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
   {\int_S d\mu(x) \mathbf{1}_q(x)}
-\]
+\end{align}
 
 This description can be formalized as a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
  \begin{displaymath}
@@ -161,36 +161,149 @@ P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
 $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
+\section{Stability and robustness analysis of multi-component systems}
+Suppose that $M$ is an $n \times n$ matrix with real coefficients. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^d$.  We want to know the probability that, if we resample the $k^{th}$ element of this matrix, the resulting matrix will correspond to a stable matrix which is given by a special case of \ref{eq:robustness}
+\begin{align}\label{eq:condprobgen}
+ R (stab) =
+  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{-1}^{1} dy \, \mathbf{1}_{stab}(x_1 \cdots x_k \cdots x_d) \mathbf{1}_{stab}(x_1 \cdots y \cdots x_d)}
+  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
+\end{align}
+
+As previously stated, we call the matrix $M$ stable if all its eigenvalues have negative real part. Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
+Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
+$M$ be stable is equivalent to asking that the roots of $\chi$ all have
+negative real part.  Hence, let us call a polynomial stable if all its
+roots have negative real part.  We will formulate conditions for this to
+happen in terms of the coefficients of $\chi$ \cite{Gantmacher1959}.
+
+\begin{lemma}
+If $M$ is stable, then $s_i > 0$ for all $i$ between $1$ and $n$.
+\end{lemma}
+\begin{lemma}
+If a point lies on the boundary of the set of stable polynomials, then
+either $s_n = 0$ and $\Delta = 0$.
+\end{lemma}
+\begin{lemma}
+If $n < 6$, then a polynomial $p$ is stable if and only
+if $\Delta > 0$ and $s_1 > 0$ for all $i$.
+\end{lemma}
+
+For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
+0$ where $T$ and $D$ denote the trace and the determinant. Suppose we have a stable matrix
+$$
+\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix}
+$$
+where $a + c < 0$ and $ac > bd$.  By symmetry, there are two cases to consider; resampling $a$ is equivalent to resampling $c$ and resampling $b$ is equivalent to resampling $d$. Suppose that we resample $b$.  We want to compute the probability that a random stable matrix will remain stable upon resampling $b$, which is a special case of \ref{eq:condprobgen}
+% \begin{strip}
+\begin{align}\label{eq:condprob}
+P\left(\begin{pmatrix}
+a & b' \\
+d & c
+\end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right)
+& = \frac{P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable and } \begin{pmatrix}
+a & b' \\
+d & c
+\end{pmatrix} \textrm{stable } \right)}{P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right)}.
+\end{align}
+The denominator of \ref{eq:condprob} is given by
+\begin{align*}
+P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
+\end{align*}
+Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprob}
+\begin{align*}
+P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable and } \begin{pmatrix}
+a & b' \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
+\end{align*}
+The analogous equation for resampling $a$ is
+\begin{align*}
+P\left(\begin{pmatrix}
+a & b \\
+d & c
+\end{pmatrix} \textrm{stable and } \begin{pmatrix}
+a' & b \\
+d & c
+\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
+\end{align*}
+
+Using this approach the probability of \emph{a priori} stability and of robustness for all two component systems is given in Table \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:stab3x3}.
+
+\todo{Say a few words about Monte Carlo integration and error bars.}
+
+\section{Dependency of robustness upon connectivity and cycle number}
+It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:apstab3x3}.
+The relationship between connectivity and robustness for two component systems is shown in \ref{tab:structstabmat} and likewise for three component systems in \ref{tab:structstabmat3} and \ref{fig:stab3x3}. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red dots in \ref{fig:stab3x3}.
+% \section{Cycle number is inversely correlated with robustness}
+\ref{fig:cycle3x3} shows the robustness for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
+
+% \section{Cycle number and connectivity classify robust systems}
+The combination of connectivity and cycle number as shown in \ref{fig:connectcycle3D3x3} provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
+
 \section{Component decomposition and robustness}
 
-The decomposition of a digraph into strongly connected components 
-corresponds to a block triangular decomposition of matrices
-describle by that digraph.  Say that the graph $G$ has strongly
-connected components $C_1, C_2, \ldots C_n$, which have been
-labelled in such a way that there are no links from vertices in
-component $C_i$ to component $C_j$ when $i < j$.  Label the
-vertices in such a way that $v_1, v_{n_1}$ belong to $C_1$,
-$v_1, v_{n_1}$ belong to $C_2$, etc.  Then if $M$ is a matrix
-consistent with $G$, it must be block triangular.  [explain better]
+The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of matrices whose connectivity is given by that digraph.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$. A simple example of this is given by the graph in \ref{fig:scc}C which has two strongly connected components.
 
-An important consequence of this is that edges which go between
-different strongly connected components do not contribute to
-determining stability.  Hence, if we resample a matrix entry
-corresponding to such an edge, the conditional probability 
-of the matrix remaining stable upon resampling is 1.  Hence, if
-our graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$
-where $C_i$ has $v_i$ vertices and connectivity $c_1$ and there
-are $\ell_{ij}$ links between components $i$ and $j$, then the
-total robustness to resampling a random entry is
-\[
+Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
+
+An important consequence of this is that stability is invariant to perturbations to the edges that go between different strongly connected components.  Hence, if we resample a matrix entry corresponding to such an edge, the conditional probability of the matrix remaining stable upon resampling is 1.  If our graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$ where $C_i$ has $v_i$ vertices and connectivity $c_1$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is
+\begin{align}
 R(G) = \frac{\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i R_i}
-            {\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i}
-\]
-            
-\[
-R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i R_i}
-            {\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i}
-\]
+            {\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i}, \label{eq:sccrobustness}
+\end{align}
+where $R_i$ refers to the independent robustness of component $i$.
+\begin{align}
+R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i R_i}{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i}, \label{eq:sccmaxrobustness}
+\end{align}
+
+
+\section{Strongly connected components, robustness, and hierarchy}
+The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness. Inspection of \ref{eq:sccrobustness} demonstrates that robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies.
+% \section{Hierarchical systems are the most robust}
+% \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
+
+\section{Discussion}
+
+\newpage
+
+\bibliographystyle{amsplain}
+\bibliography{bib/books,bib/papers}
+
+\newpage
+\FloatBarrier
+
+\section{Figure Legends}
+\input{tex/figures}
+
+\newpage
+\FloatBarrier
+
+\section{Tables}
+\input{tex/tablenotation}
+\input{tex/table2x2stab}
+\input{tex/tablenographs}
+
+% \newpage
+
+% \input{tex/tablewithgraphs}
 
 \section{Stability criteria}
 \todo{Since there is no point in publishing proofs of results contemporary
@@ -205,7 +318,7 @@ writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
 Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
 $M$ be stable is equivalent to asking that the roots of $\chi$ all have
 negative real part.  Hence, let us call a polynomial stable if all its
-roots have negative real part.  We will formulate conditions for this to 
+roots have negative real part.  We will formulate conditions for this to
 happen in terms of the coefficients of $\chi$.
 
 \begin{lemma}
@@ -269,7 +382,7 @@ the root is complex, then having zero real part means that the root and
 its complex conjugate are purely imaginary and sum to zero, hence $\Delta = 0$.
 \end{proof}
 
-\begin{lemma} 
+\begin{lemma}
 If $n < 6$, then a polynomial $p$ is stable if and only
 if $\Delta > 0$ and $s_1 > 0$ for all $i$.
 \end{lemma}
@@ -281,8 +394,8 @@ Consider a straight line connecting this polynomial to a stable polynomial,
 say $(x - 1)^n$.
 
 Suppose that $p$ is a polynomial for which $\Delta = 0$ and $s_i > 0$ but
-which is not on the boundary of the stable region.  In order to have 
-$\Delta = 0$, we must either have a pair of real roots which sum to zero 
+which is not on the boundary of the stable region.  In order to have
+$\Delta = 0$, we must either have a pair of real roots which sum to zero
 or a pair of complex conjugate roots with zero real part.  In the former
 case, we would have $x^2 - r^2$ as a factor of our polynomial and in the
 latter, we would have $x^2 + r^2$ as a factor.
@@ -290,7 +403,7 @@ latter, we would have $x^2 + r^2$ as a factor.
 Suppose that $x^2 - r^2$ is a factor.  Then we have
 \[
 p = (x^2 - r^2) \left(x^{n-2} + \sum_{k=1}^{n-3} c_k x^{n-k-2} \right) =
-x^n + \sum_{k=3}^{n-3} (c_k - r^2 c_{k-2}) x^{n-k} + 
+x^n + \sum_{k=3}^{n-3} (c_k - r^2 c_{k-2}) x^{n-k} +
 \]
 
 Suppose that $x^2 + r^2$ is a factor. Then we have one of the following
@@ -324,7 +437,7 @@ of size less than $6$.
 \section{Paths and eigenvalues}
 \todo{I am thinking that we might want to jettison this section from
 the published version and leave it as private notes for future work.
-As a substitute for the published version, I made a section in front 
+As a substitute for the published version, I made a section in front
 of it which takes a more direct route to proving what is needed for
 the purposes of showing that the characteristic polynomial factors and
 making our arguments about total orders being the most stable.  We
@@ -436,108 +549,6 @@ in $\hier^{-1} (\hier(a))$.  Hence, our sum decomposes into partial sums
 for the fibers of the points in the hierarchy which corresponds to a
 factorization of the characteristic polynomial.
 
-\section{Stability and robustness analysis of multi-component systems}
-For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
-0$ where $T$ and $D$ denote the trace and the determinant.
-
-Suppose we have a stable matrix
-$$
-\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix}
-$$
-where $a + c < 0$ and $ac > bd$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $d$-dimensional hypercube, $H^d$, of edge length $r=2$, centered about the origin, and having volume $r^d$.  We want to know the probability that, if we resample an element of this matrix, the result will be stable.  By symmetry, there are two cases to consider; resampling $a$ is equivalent to resampling $c$ and resampling $b$ is equivalent
-to resampling $d$.
-
-Suppose that we resample $b$.  We want to compute the probability that a random stable matrix will remain stable upon resampling $b$, which is
-% \begin{strip}
-\begin{align}\label{eq:condprob}
-P\left(\begin{pmatrix}
-a & b' \\
-d & c
-\end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable } \right)
-& = \frac{P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable and } \begin{pmatrix}
-a & b' \\
-d & c
-\end{pmatrix} \textrm{stable } \right)}{P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable } \right)}.
-\end{align}
-The denominator of \ref{eq:condprob} is given by
-\begin{align*}
-P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable } \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
-\end{align*}
-Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprob}
-\begin{align*}
-P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable and } \begin{pmatrix}
-a & b' \\
-d & c
-\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
-\end{align*}
-The analogous equation for resampling $a$ is
-\begin{align*}
-P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable and } \begin{pmatrix}
-a' & b \\
-d & c
-\end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
-\end{align*}
-
-The probability of \emph{a priori} stability and of stability to perturbations for all two component systems is given in Table \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems is given in \ref{tab:structstabmat3} and \ref{fig:stab3x3}. It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend is unclear as shown in \ref{fig:apstab3x3}.
-
-\todo{Say a few words about Monte Carlo integration and error bars.}
-
-\section{Connectivity is correlated with robustness}
-The relationship between connectivity and probability of stability to perturbations for two component systems is shown in \ref{tab:structstabmat}. Likewise, \ref{fig:stab3x3} and \ref{tab:structstabmat3} show the probability of stability to perturbations for all three component systems as a function of connectivity.
-
-\section{Cycle number is inversely correlated with robustness}
-\ref{fig:cycle3x3} shows the probability of stability to perturbations for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}.
-
-\section{Cycle number and connectivity classify robust systems}
-\ref{fig:connectcycle3D3x3} shows the probability of stability to perturbations for all three component systems as a function of connectivity and number of cycles.
-
-\section{Hierarchical systems are the most robust}
-\ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
-
-\section{Discussion}
-
-\newpage
-
-\bibliographystyle{amsplain}
-\bibliography{bib/books,bib/papers}
-
-\newpage
-\FloatBarrier
-
-\section{Figure Legends}
-\input{tex/figures}
-
-\newpage
-\FloatBarrier
-
-\section{Tables}
-\input{tex/table2x2stab}
-\input{tex/tablenographs}
-
-% \newpage
-
-% \input{tex/tablewithgraphs}
 
 \end{document}
 
