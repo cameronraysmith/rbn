@@ -88,8 +88,9 @@ function cyclenumber(adjmatlistlist)
 
 end
 
-function savelatex(pcN,osN,sp,rsp)
+function savelatex(pcN,osN,sp,rsp,ged)
     cn = cyclenumber(pcN)
+    # ged = [map(y->grapheditdistance(pcN[7][11],y),z) for z in pcN]
     # osN = map(x->map(countorbitsize,x),pcN)
 
     rv = (String)[]
@@ -105,6 +106,7 @@ function savelatex(pcN,osN,sp,rsp)
                         # string(pmatstr, " & ",
                                "$(osN[i][j])", " & ",
                                "$(i-1)", " & ",
+                               "$(ged[i][j])", " & ",
                                "$(cn[i][j])", " & ",
                                "$(round(rsp[i][j],3))", " & ",
                                "$(round(sp[i][j],3))", "\\\\"))
@@ -112,18 +114,18 @@ function savelatex(pcN,osN,sp,rsp)
         end
     end
 
-    savedata("../data/stab3x3.tsv",sp,rsp,cn);
+    savedata("../data/stab3x3.tsv",sp,rsp,cn,ged);
     clipboard(join(rv,"\n"))
     return join(rv,"\n")
 end
 
-function savedata(filename,sp,rsp,cn)
+function savedata(filename,sp,rsp,cn,ged)
     rv = (String)[]
-    push!(rv,"connectivity\tstability\tresampling\tcycle")
+    push!(rv,"connectivity\tstability\tresampling\tcycle\tdistance")
     for (i,plist) in enumerate(sp)
         for (j,p) in enumerate(plist)
             if p > 1e-3
-                  line = "$(i-1)\t$(sp[i][j])\t$(rsp[i][j])\t$(cn[i][j])"
+                  line = "$(i-1)\t$(sp[i][j])\t$(rsp[i][j])\t$(cn[i][j])\t$(ged[i][j])"
                   push!(rv,line)
             end
         end
@@ -225,6 +227,47 @@ function countorbitsize(M::Array{Int64,2})
     end
 
     return count
+end
+
+function genperms(M1::Array{Int64,2})
+    N = size(M1)[1]
+
+    # generate matrix representations of permutations
+    permmats = [matrix(Permutation(i)) for i in permutations([1:N])]
+    allbinmats = genbinmats(N)
+    permM1 = (Array{Int64,2})[]
+
+    for (i,mat) in enumerate(allbinmats)
+
+        ind = false
+        if M1' == mat
+            ind = true
+        end
+
+        for p in permmats
+            if p*M1*inv(p) == mat
+                ind = true
+            end
+
+            if (p*M1*inv(p))' == mat
+                ind = true
+            end
+        end
+
+        if ind
+            push!(permM1,mat)
+        end
+
+    end
+
+    return permM1
+
+end
+
+function grapheditdistance(M1::Array{Int64,2},M2::Array{Int64,2})
+    perms = genperms(M1)
+
+    return minimum([length(find(x->x!=0,p-M2)) for p in perms])
 end
 
 function weightedavg(VW)
@@ -346,11 +389,49 @@ function teststructstab(N::Integer,K::Integer)
 
 end
 
+function combinegnuplot()
+
+    filelist = ["apstab3x3.p",
+                "stab3x3.p",
+                "cycle3x3.p",
+                "dist3x3.p",
+                "connectcycle3D3x3.p",
+                "connectdist3D3x3.p",]
+    horiz = 2
+    vert = 3
+    rv = (String)[]
+    headstring = "set terminal svg size $(600*horiz),$(400*vert) dynamic enhanced fname 'HelveticaNeue'  fsize 16\n
+set output '../fig/combinedfigs.svg'\n
+set multiplot layout $(vert),$(horiz)\n
+"
+    push!(rv,headstring)
+
+    for file in filelist
+        # f = open(joinpath("../data",file),"r")
+        lines = readlines(`grep -v -P 'output|terminal' ../data/$(file)`)
+        # close(f)
+        for l in lines
+            push!(rv,l)
+        end
+    end
+
+    tailstring = "unset multiplot\n"
+    push!(rv,tailstring)
+
+    f = open("../data/combinedfigs.p","w")
+    write(f,join(rv,""))
+    close(f)
+
+    return rv
+end
+
 # @elapsed sp,rsp = teststructstab(3,10000)
 # pc3 = findpermclasses(3)
 # os3 = map(x->map(countorbitsize,x),pc3)
-# println(savelatex(pc3,os3,sp,rsp))
+# ged = [map(y->grapheditdistance(pc3[7][11],y),z) for z in pc3]
+# println(savelatex(pc3,os3,sp,rsp,ged))
 # cn = cyclenumber(pc3)
-# println(savedata("../data/stab3x3.tsv",sp,rsp,cn))
+# println(savedata("../data/stab3x3.tsv",sp,rsp,cn,ged))
 # rspwa = map(weightedavg,zip(rsp,os3))
 # spwa = map(weightedavg,zip(sp,os3))
+
