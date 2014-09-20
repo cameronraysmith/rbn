@@ -7,5 +7,5 @@ set xtics (3,4,5,6,7,8,9)
 set xlabel "connectivity"
 set yrange [0.3:0.9]
 set ytics (0.4,0.5,0.6,0.7,0.8)
-set ylabel "probability of stability to perturbation"
+set ylabel "robustness"
 plot './stab3x3.tsv' using 1:3 pt 7 ps 0.7 lc 0 title columnheader, './avgstab3x3.tsv' using 1:2 pt 7 ps 0.7 lc 1

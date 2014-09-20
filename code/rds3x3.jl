@@ -400,19 +400,27 @@ function combinegnuplot()
     horiz = 2
     vert = 3
     rv = (String)[]
-    headstring = "set terminal svg size $(600*horiz),$(400*vert) dynamic enhanced fname 'HelveticaNeue'  fsize 16\n
-set output '../fig/combinedfigs.svg'\n
-set multiplot layout $(vert),$(horiz)\n
-"
+    headstring = "set terminal svg size $(600*horiz),$(400*vert) dynamic enhanced fname 'HelveticaNeue'  fsize 16
+set output '../fig/combinedfigs.svg'
+set multiplot layout $(vert),$(horiz)
+set tmargin 3
+set bmargin 3
+set lmargin 10
+set rmargin 5\n"
     push!(rv,headstring)
 
-    for file in filelist
+    for (i,file) in enumerate(filelist)
         # f = open(joinpath("../data",file),"r")
+        push!(rv,"\n############# plot $(i) ##############\n\n")
         lines = readlines(`grep -v -P 'output|terminal' ../data/$(file)`)
         # close(f)
-        for l in lines
+        for (j,l) in enumerate(lines)
+            if j==length(lines)-1
+                push!(rv,"set label 1 \"$(string(char(64+i)))\" font \"HelveticaNeue, 23\" at graph -0.25, graph 1.20\n")
+            end
             push!(rv,l)
         end
+
     end
 
     tailstring = "unset multiplot\n"
@@ -421,6 +429,10 @@ set multiplot layout $(vert),$(horiz)\n
     f = open("../data/combinedfigs.p","w")
     write(f,join(rv,""))
     close(f)
+
+    cd("../data")
+    spawn(`./plot.sh combinedfigs`)
+    cd("../code")
 
     return rv
 end
