@@ -303,6 +303,8 @@ The combination of connectivity and cycle number as shown in \ref{fig:combined}E
 
 \section{Component decomposition, hierarchy, and the symmetries of robustness}
 
+The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness.
+
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
 Using these observations, we may express the robustness of a graph in terms of the robustnesses of its strongly connected components.
@@ -318,8 +320,12 @@ R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_
 \end{align}
 \todo{explain how robustness in \ref{eq:sccrobustness} is symmetric under transformations on the the SCCs}
 
+Inspection of \ref{eq:sccrobustness} demonstrates that robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies.
+
+\todo{write down analogs of \ref{eq:sccrobustness} and \ref{eq:sccmaxrobustness} for resampling a fixed proportion or an arbitrary number of components}
+
 % \section{Strongly connected components, robustness, and hierarchy}
-The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness. Inspection of \ref{eq:sccrobustness} demonstrates that robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies.
+
 % \section{Hierarchical systems are the most robust}
 % \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
 
