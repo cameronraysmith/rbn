@@ -172,23 +172,23 @@ where $A'$ represents a matrix derived from some perturbation applied to the mat
 Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix which is given by a special case of \ref{eq:robustness}
 \begin{align}\label{eq:condprobgen}
  R (stab, k_1, \ldots k_m) =
-  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\, 
-    \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity) 
+  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
+    \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity)
     \mathbf{1}_{stab}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d)}
   {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
 \end{align}
 
 \todo{Generalize to resampling a random link and to resampling multiple edges.}
 
-In order to evaluate these integrals, one needs to describe the stable region.  
-The theory of how to do so in terms of conditions on the coefficients of the 
-characteristic polynomials was developed by various mathematicians during the 
-second half of the nineteenth century and is summarized in chapter XV of 
-\cite{Gantmacher1959}.  We now summarize some of these results which are 
+In order to evaluate these integrals, one needs to describe the stable region.
+The theory of how to do so in terms of conditions on the coefficients of the
+characteristic polynomials was developed by various mathematicians during the
+second half of the nineteenth century and is summarized in chapter XV of
+\cite{Gantmacher1959}.  We now summarize some of these results which are
 relevant to our calculations.
 
-Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. 
-Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, 
+Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
+Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
 writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
 Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
 $M$ be stable is equivalent to asking that the roots of $\chi$ all have
@@ -265,18 +265,18 @@ d & c
 \end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
 
-Using this approach the probability of \emph{a priori} stability and of robustness for all two component systems is given in Table \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:stab3x3}.
+Using this approach the probability of \emph{a priori} stability and of robustness for all two component systems is given in Table \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:combined}B.
 
 \todo{Say a few words about Monte Carlo integration and error bars.}
 
 \section{Dependency of robustness upon connectivity and cycle number}
-It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:apstab3x3}.
-The relationship between connectivity and robustness for two component systems is shown in \ref{tab:structstabmat} and likewise for three component systems in \ref{tab:structstabmat3} and \ref{fig:stab3x3}. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red dots in \ref{fig:stab3x3}.
+It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:combined}A.
+The relationship between connectivity and robustness for two component systems is shown in \ref{tab:structstabmat} and likewise for three component systems in \ref{tab:structstabmat3} and \ref{fig:combined}B. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red dots in \ref{fig:combined}B.
 % \section{Cycle number is inversely correlated with robustness}
-\ref{fig:cycle3x3} shows the robustness for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
+\ref{fig:combined}C shows the robustness for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
 
 % \section{Cycle number and connectivity classify robust systems}
-The combination of connectivity and cycle number as shown in \ref{fig:connectcycle3D3x3} provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
+The combination of connectivity and cycle number as shown in \ref{fig:combined}E provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
 
 \section{Component decomposition and robustness}
 
@@ -285,13 +285,13 @@ The decomposition of a digraph into strongly connected components corresponds to
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
 Using these observations, we may express the robustness of a graph in terms of the robustnesses of its strongly connected components.
-If the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity $\connectivity_i$, and robustness $R_i$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is 
+If the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity $\connectivity_i$, and robustness $R_i$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is
 \begin{align}
 R(G) = \frac{\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i R(C_i)}
             {\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i}. \label{eq:sccrobustness}
 \end{align}
 
-Next, we ask what is the maximally robust graph that has a given set of connected components. 
+Next, we ask what is the maximally robust graph that has a given set of connected components.
 \begin{align}
 R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i R_i}{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i}, \label{eq:sccmaxrobustness}
 \end{align}
@@ -315,9 +315,9 @@ R &= \frac{\int_0^1 dx \int_0^1 dy \int_0^1 dx'\, \mathbf{1}_{S} (x,y) \mathbf{1
 \end{align*}
 We will show that $R \le \int_{H^2} dx\,dy\, \mathbf{1}_{S} (x,y)$ with equality occurring when $S$ is rearrangement equivalent to either the rectangle of height 1 or a rectangle of width 1.
 
-First, we start with the special case when $S$ is a rectangle with one vertex at the origin and sides parallel to the coordinate axes.  If $a$ is the height of our rectangle and $b$ is its width, we have 
+First, we start with the special case when $S$ is a rectangle with one vertex at the origin and sides parallel to the coordinate axes.  If $a$ is the height of our rectangle and $b$ is its width, we have
 
-Next, consider the case where $R$ consists of a union of squares of a rectangular grid obtained by subdividing the $x$ and $y$ axes of our bounding square into $2N$ portions of equal length.  Given two integers $i$ and $j$ 
+Next, consider the case where $R$ consists of a union of squares of a rectangular grid obtained by subdividing the $x$ and $y$ axes of our bounding square into $2N$ portions of equal length.  Given two integers $i$ and $j$
 
 Suppose we restrict to rectangular regions in an $n$-dimensional hypercube and resample $m$ variables.  Then we have $R = s_m (a_1, \ldots a_n)$ where $s_m$ is the $m$-th elementary symmetric polynomial.  As before, we have the constraint that $\prod_i a_i = s_n (a_1, \ldots a_n)$ is constant.  Using Lagrange multipliers, we obtain the equation
 \[
@@ -333,7 +333,7 @@ s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \la
 \]
 or, eliminating $\lambda$, we have
 \[
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots \frac{1}{a_n}\right) = 
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots \frac{1}{a_n}\right) =
 s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
 \]
 for all $j,k$.  Suppose that $j < k$.  Then, we may expaand both sides,
