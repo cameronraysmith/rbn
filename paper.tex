@@ -124,7 +124,9 @@ This description can be formalized as a directed graph $G_X$ that describes the 
      \end{array}
    \right.
 \end{displaymath}
-A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc}.
+A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
+
+The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
 
 Corresponding to this decomposition we can construct a graph $\hier (G)$.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ iff there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
 
@@ -169,16 +171,27 @@ $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
 \section{Stability and robustness analysis of multi-component systems}
-Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix which is given by a special case of \ref{eq:robustness}
-\begin{align}\label{eq:condprobgen}
- R (stab, k_1, \ldots k_m) =
+Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix.  This is a special case of \ref{eq:robustness}:
+\begin{equation}\label{eq:condprobgen}
+ R (\mathrm{stab}, k_1, \ldots k_m) =
   \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
-    \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity)
-    \mathbf{1}_{stab}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d)}
+    \mathbf{1}_{stab} \mathbf{1}_{stab'}}
   {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
-\end{align}
+\end{equation}
+where we made the abbreviations
+\begin{align*}
+\mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity) \\
+\mathbf{1}_{stab'} &= \mathbf{1}_{stab'}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d)
+\end{align*}
+i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ with their primed counterparts.
 
-\todo{Generalize to resampling a random link and to resampling multiple edges.}
+While one can resample a fixed subset of the links, more typically we will be randomly selecting which links to resample with a uniform distribution on the links.  The result of this operation corresponds to averaging our quantity over subsets of links:
+\begin{equation}
+R (\hbox{avg stab}, m) =
+\frac{1}{\binom{\connectivity}{m}}
+\sum_{\{k_1, k_2, \ldots k_m\} \subset \{1, 2,, \ldots \connectivity\}}
+R (\mathrm{stab}, k_1, \ldots k_m)
+\end{equation}
 
 In order to evaluate these integrals, one needs to describe the stable region.
 The theory of how to do so in terms of conditions on the coefficients of the
@@ -279,8 +292,6 @@ The relationship between connectivity and robustness for two component systems i
 The combination of connectivity and cycle number as shown in \ref{fig:combined}E provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
 
 \section{Component decomposition and robustness}
-
-The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of matrices whose connectivity is given by that digraph.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.  Some simple examples of this are given by the graphs in \ref{fig:scc}.
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
