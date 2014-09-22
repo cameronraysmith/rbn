@@ -156,11 +156,39 @@ for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay 
 
 To determine whether a randomly selected dynamical system evaluated at a random critical point, given by a matrix such as $A$, is stable, it is sufficient to check the above condition. Integrating over the region of the parameter space defining $A$ enables the determination of the probability of stability to perturbations in state $\vec{x}$ over an ensemble of dynamical systems.
 
-Another form of stability, referred to as structural stability \cite{Smale1967}, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
-$$
-P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
-$$
-where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
+% Another form of stability, referred to as structural stability \cite{Smale1967}, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
+% $$
+% P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
+% $$
+% where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
+Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix.  This is a special case of \ref{eq:robustness}:
+\begin{equation}\label{eq:condprobgen}
+ R (\mathrm{stab}, k_1, \ldots k_m) =
+  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
+    \mathbf{1}_{stab} \mathbf{1}_{stab'}}
+  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
+\end{equation}
+where we made the abbreviations
+\begin{align*}
+\mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity) \\
+\mathbf{1}_{stab'} &= \mathbf{1}_{stab'}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d)
+\end{align*}
+i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ with their primed counterparts.
+
+While one can resample a fixed subset of the links, more typically we will be randomly selecting which links to resample with a uniform distribution on the links.  The result of this operation corresponds to averaging our quantity over subsets of links:
+\begin{equation}
+R (\hbox{avg stab}, m) =
+\frac{1}{\binom{\connectivity}{m}}
+\sum_{\{k_1, k_2, \ldots k_m\} \subset \{1, 2,, \ldots \connectivity\}}
+R (\mathrm{stab}, k_1, \ldots k_m)
+\end{equation}
+
+In order to evaluate these integrals, one needs to describe the stable region.
+The theory of how to do so in terms of conditions on the coefficients of the
+characteristic polynomials was developed by various mathematicians during the
+second half of the nineteenth century and is summarized in chapter XV of
+\cite{Gantmacher1959}.  We now summarize some of these results which are
+relevant to our calculations.
 
 \todo{Finish writing these criteria with reference to Gantmacher}
 Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
@@ -201,36 +229,7 @@ a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-e
 
 
 \section{Stability and robustness analysis of particular system ensembles}
-Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix.  This is a special case of \ref{eq:robustness}:
-\begin{equation}\label{eq:condprobgen}
- R (\mathrm{stab}, k_1, \ldots k_m) =
-  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
-    \mathbf{1}_{stab} \mathbf{1}_{stab'}}
-  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
-\end{equation}
-where we made the abbreviations
-\begin{align*}
-\mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity) \\
-\mathbf{1}_{stab'} &= \mathbf{1}_{stab'}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d)
-\end{align*}
-i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ with their primed counterparts.
-
-While one can resample a fixed subset of the links, more typically we will be randomly selecting which links to resample with a uniform distribution on the links.  The result of this operation corresponds to averaging our quantity over subsets of links:
-\begin{equation}
-R (\hbox{avg stab}, m) =
-\frac{1}{\binom{\connectivity}{m}}
-\sum_{\{k_1, k_2, \ldots k_m\} \subset \{1, 2,, \ldots \connectivity\}}
-R (\mathrm{stab}, k_1, \ldots k_m)
-\end{equation}
-
-In order to evaluate these integrals, one needs to describe the stable region.
-The theory of how to do so in terms of conditions on the coefficients of the
-characteristic polynomials was developed by various mathematicians during the
-second half of the nineteenth century and is summarized in chapter XV of
-\cite{Gantmacher1959}.  We now summarize some of these results which are
-relevant to our calculations.
-
-For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
+For systems having two components, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three components, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant. Suppose we have a stable matrix
 $$
 \begin{pmatrix}
@@ -238,35 +237,35 @@ a & b \\
 d & c
 \end{pmatrix}
 $$
-where $a + c < 0$ and $ac > bd$.  By symmetry, there are two cases to consider; resampling $a$ is equivalent to resampling $c$ and resampling $b$ is equivalent to resampling $d$. Suppose that we resample $b$.  We want to compute the probability that a random stable matrix will remain stable upon resampling $b$, which is a special case of \ref{eq:condprobgen}
+where $a + c < 0$ and $ac > bd$.  For the case in which $x_1=a,\,x_2=b,\,x_3=c,\,x_4=d$ we need to compute what corresponds to $R(\mathrm{stab},k)$ where $k=1 \ldots 4$. By symmetry, there are two cases to consider; resampling $a$ is equivalent to resampling $c$ and resampling $b$ is equivalent to resampling $d$ so we only need to explicitly compute $R(\mathrm{stab},1)$ and $R(\mathrm{stab},2)$. Suppose that we resample $b$ to compute $R(\mathrm{stab},2)$.
 % \begin{strip}
-\begin{align}\label{eq:condprob}
-P\left(\begin{pmatrix}
-a & b' \\
-d & c
-\end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable } \right)
-& = \frac{P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable and } \begin{pmatrix}
-a & b' \\
-d & c
-\end{pmatrix} \textrm{stable } \right)}{P\left(\begin{pmatrix}
-a & b \\
-d & c
-\end{pmatrix} \textrm{stable } \right)}.
-\end{align}
-The denominator of \ref{eq:condprob} is given by
+% \begin{align}\label{eq:condprob}
+% P\left(\begin{pmatrix}
+% a & b' \\
+% d & c
+% \end{pmatrix} \textrm{stable } \bigg| \begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right)
+% & = \frac{P\left(\begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable and } \begin{pmatrix}
+% a & b' \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right)}{P\left(\begin{pmatrix}
+% a & b \\
+% d & c
+% \end{pmatrix} \textrm{stable } \right)}.
+% \end{align}
+The denominator of \ref{eq:condprobgen} in this case is given by
 \begin{align*}
 P\left(\begin{pmatrix}
 a & b \\
 d & c
 \end{pmatrix} \textrm{stable } \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
 \end{align*}
-Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprob}
+Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprobgen}
 \begin{align*}
 P\left(\begin{pmatrix}
 a & b \\
