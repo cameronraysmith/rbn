@@ -75,6 +75,8 @@ $$
 $$
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables.
 
+\todo{Generalize to open systems and say how we combine them.}
+
 In order to accommodate the possibility of uncertainty in our modelling,
 we will generalize our notion of a system on a network to that of a
 system with random parameters.  Again, this will involve three
@@ -124,6 +126,11 @@ This description can be formalized as a directed graph $G_X$ that describes the 
 \end{displaymath}
 A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc}.
 
+Corresponding to this decomposition we can construct a graph $\hier (G)$.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ iff there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
+
+One can also perform this construction in the oppsite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
+a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = A$ and furthermore, every graph $G$ such that $\hier(G) = A$ can be obtained in this manner.
+
 Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
@@ -162,14 +169,27 @@ $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
 \section{Stability and robustness analysis of multi-component systems}
-Suppose that $M$ is an $n \times n$ matrix with real coefficients. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^d$.  We want to know the probability that, if we resample the $k^{th}$ element of this matrix, the resulting matrix will correspond to a stable matrix which is given by a special case of \ref{eq:robustness}
+Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix which is given by a special case of \ref{eq:robustness}
 \begin{align}\label{eq:condprobgen}
- R (stab) =
-  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{-1}^{1} dy \, \mathbf{1}_{stab}(x_1 \cdots x_k \cdots x_d) \mathbf{1}_{stab}(x_1 \cdots y \cdots x_d)}
+ R (stab, k_1, \ldots k_m) =
+  \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\, 
+    \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity) 
+    \mathbf{1}_{stab}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d)}
   {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
 \end{align}
 
-As previously stated, we call the matrix $M$ stable if all its eigenvalues have negative real part. Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
+\todo{Generalize to resampling a random link and to resampling multiple edges.}
+
+In order to evaluate these integrals, one needs to describe the stable region.  
+The theory of how to do so in terms of conditions on the coefficients of the 
+characteristic polynomials was developed by various mathematicians during the 
+second half of the nineteenth century and is summarized in chapter XV of 
+\cite{Gantmacher1959}.  We now summarize some of these results which are 
+relevant to our calculations.
+
+Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$. 
+Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$, 
+writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
 Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
 $M$ be stable is equivalent to asking that the roots of $\chi$ all have
 negative real part.  Hence, let us call a polynomial stable if all its
@@ -260,16 +280,18 @@ The combination of connectivity and cycle number as shown in \ref{fig:connectcyc
 
 \section{Component decomposition and robustness}
 
-The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of matrices whose connectivity is given by that digraph.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$. A simple example of this is given by the graph in \ref{fig:scc}C which has two strongly connected components.
+The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of matrices whose connectivity is given by that digraph.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.  Some simple examples of this are given by the graphs in \ref{fig:scc}.
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
-An important consequence of this is that stability is invariant to perturbations to the edges that go between different strongly connected components.  Hence, if we resample a matrix entry corresponding to such an edge, the conditional probability of the matrix remaining stable upon resampling is 1.  If our graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$ where $C_i$ has $v_i$ vertices and connectivity $c_1$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is
+Using these observations, we may express the robustness of a graph in terms of the robustnesses of its strongly connected components.
+If the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity $\connectivity_i$, and robustness $R_i$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is 
 \begin{align}
-R(G) = \frac{\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i R_i}
-            {\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i}, \label{eq:sccrobustness}
+R(G) = \frac{\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i R(C_i)}
+            {\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i}. \label{eq:sccrobustness}
 \end{align}
-where $R_i$ refers to the independent robustness of component $i$.
+
+Next, we ask what is the maximally robust graph that has a given set of connected components. 
 \begin{align}
 R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i R_i}{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i}, \label{eq:sccmaxrobustness}
 \end{align}
@@ -280,7 +302,52 @@ The fact that the most hierarchical of networks is the most robust in the case o
 % \section{Hierarchical systems are the most robust}
 % \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
 
+\section{Bounds on robustness}
+
+Suppose that $S$ is a region in $[0,1]^2$.  Then, the robustness of $S$ under resampling is given as
+\begin{align*}
+R &= \frac{\int_0^1 dx \int_0^1 dy \int_0^1 dx'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x',y) +
+           \int_0^1 dx \int_0^1 dy \int_0^1 dx\,dy\,dy'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x,y')}
+          {2 \int_0^1 dx \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)} \\
+  &= \frac{\int_0^1 dy\, (\int_0^1 dx\, \mathbf{1}_{S} (x,y))^2 +
+           \int_0^1 dx\, (\int_0^1 dy\, \mathbf{1}_{S} (x,y))^2}
+          {2 \int_0^1 dx\, \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)}
+\end{align*}
+We will show that $R \le \int_{H^2} dx\,dy\, \mathbf{1}_{S} (x,y)$ with equality occurring when $S$ is rearrangement equivalent to either the rectangle of height 1 or a rectangle of width 1.
+
+First, we start with the special case when $S$ is a rectangle with one vertex at the origin and sides parallel to the coordinate axes.  If $a$ is the height of our rectangle and $b$ is its width, we have 
+
+Next, consider the case where $R$ consists of a union of squares of a rectangular grid obtained by subdividing the $x$ and $y$ axes of our bounding square into $2N$ portions of equal length.  Given two integers $i$ and $j$ 
+
+Suppose we restrict to rectangular regions in an $n$-dimensional hypercube and resample $m$ variables.  Then we have $R = s_m (a_1, \ldots a_n)$ where $s_m$ is the $m$-th elementary symmetric polynomial.  As before, we have the constraint that $\prod_i a_i = s_n (a_1, \ldots a_n)$ is constant.  Using Lagrange multipliers, we obtain the equation
+\[
+\frac{\partial s_m (a_1, \ldots a_n)}{a_k} = \lambda \frac{\partial s_n (a_1, \ldots a_n)}{a_k} .
+\]
+Since the elementary symmetic polynomial is linear in each of its variables, this reduces to
+\[
+s_{m-1} (a_1, \ldots {\hat a}_k \ldots a_n) = \lambda \partial s_{n-1} (a_1, \ldots {\hat a}_k \ldots a_n) .
+\]
+Dividing through, this becomes
+\[
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \lambda
+\]
+or, eliminating $\lambda$, we have
+\[
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots \frac{1}{a_n}\right) = 
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
+\]
+for all $j,k$.  Suppose that $j < k$.  Then, we may expaand both sides,
+\begin{align*}
+&\frac{1}{a_k} s_{m-2} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \\ \qquad
+&\frac{1}{a_j} s_{m-2} s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
+\end{align*}
+and conclude that $a_j = a_k$.  Hence, the only critical point lies at the point $a_1 = a_2 = \cdots = a_n$.  By the second derivative test, that point is a minimum, so the maximum must lie on the boundary.
+
 \section{Discussion}
+
+\section{Acknowlegements}  The authors would like to thank Jay Sulzberger and Ximo Pechuan for useful suggestions and discussions.
 
 \newpage
 
