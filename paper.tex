@@ -46,7 +46,7 @@ Indeed, investigating generic properties of a large class of dynamical systems w
 
 Here we build on work aimed at investigating the stability of randomly connected dynamical systems to structural perturbations. We precisely compute the probability of stability as a distribution over system connectivity for all systems containing two or three interacting components. We then proceed to determine the probability of \emph{robustness} or \emph{structural stability} which is the distribution of stability to perturbation in the system structure for systems which are determined to be stable \cite{Smale1967}. This quantity is of interest at all scales of the biological hierarchy, and has been previously addressed in the study of the robustness of gene-regulatory networks \cite{WADDINGTON1942a,VanNimwegen1999,Siegal2002,Ciliberti2007b,Ciliberti2007,Wagner2013}. We find that stability to structural perturbations of this class of dynamical systems is correlated with connectivity, number of cycles, and the number of links between strongly connected components of the underlying interdependency graph. The latter derives from the fact that the permutation of strongly connected components is a symmetry of system robustness. This work clarifies a thread of research that is extremely important for the continuing development of systems biology.
 
-\section{Stability analysis of biological networks}\label{sec:stabanalbn}
+\section{Dynamical systems on biological networks}
 In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
 For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph, $G$, to the interdependencies, and a vector field $V \in \Gamma T(\prod_i M_i)$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \ref{fig:examplesystemmodules}A
@@ -60,7 +60,15 @@ $$
 1 & 1
 \end{pmatrix}
 $$
-having connectivity $\connectivity$ equal to the number of edges of the graph, in this case $\connectivity = 3$. For the system $X = \{G_X, M_X, F_X\}$, where $M_X \equiv \{M_1,M_2\}$ and $F_X \equiv \{F_1,F_2\}$ such that $F_1$ is constrained to be a function of $x_2$ and $F_2$ is a function of both $x_1$ and $x_2$ yielding the flow equations
+having connectivity $\connectivity$ equal to the number of edges of the graph, in this case $\connectivity = 3$. For a general system the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where
+ \begin{displaymath}
+   \adj(G_X)_{ij} = \left\{
+     \begin{array}{ll}
+       1, & F_i \hbox{ depends on } x_j\\
+       0, & F_i \hbox{ does not depend on } x_j
+     \end{array}.
+   \right.
+\end{displaymath} For the system $X = \{G_X, M_X, F_X\}$, where $M_X \equiv \{M_1,M_2\}$ and $F_X \equiv \{F_1,F_2\}$ such that $F_1$ is constrained to be a function of $x_2$ and $F_2$ is a function of both $x_1$ and $x_2$ yielding the flow equations
 \begin{align*}
 \frac{dx_1}{dt} & = F_1(x_2)\\
 \frac{dx_2}{dt} & = F_2(x_1,x_2)
@@ -116,25 +124,8 @@ variable $q$, we define its robustness as the following conditional proability:
   {\int_S d\mu(x) \mathbf{1}_q(x)}
 \end{align}
 
-This description can be formalized as a directed graph $G_X$ that describes the manner in which each of the variables depends upon one another given by an adjacency matrix $\adj(G_X)$ where
- \begin{displaymath}
-   \adj(G_X)_{ij} = \left\{
-     \begin{array}{ll}
-       1, & F_i \hbox{ depends on } x_j\\
-       0, & F_i \hbox{ does not depend on } x_j
-     \end{array}
-   \right.
-\end{displaymath}
-A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
-
-The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
-
-Corresponding to this decomposition we can construct a graph $\hier (G)$.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ iff there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
-
-One can also perform this construction in the oppsite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
-a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = A$ and furthermore, every graph $G$ such that $\hier(G) = A$ can be obtained in this manner.
-
-Linearization of the $F_i$ about any equilibrium solution $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
+\section{Stability analysis of biological networks}
+Linearization of the $F_i$ about any fixed point $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
 \end{equation}
@@ -171,7 +162,45 @@ P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
 $$
 where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
 
-\section{Stability and robustness analysis of multi-component systems}
+\todo{Finish writing these criteria with reference to Gantmacher}
+Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
+Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
+writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
+Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
+$M$ be stable is equivalent to asking that the roots of $\chi$ all have
+negative real part.  Hence, let us call a polynomial stable if all its
+roots have negative real part.  We will formulate conditions for this to
+happen in terms of the coefficients of $\chi$ \cite{Gantmacher1959}.
+
+\begin{lemma}
+If $M$ is stable, then $s_i > 0$ for all $i$ between $1$ and $n$.
+\end{lemma}
+\begin{lemma}
+If a point lies on the boundary of the set of stable polynomials, then
+either $s_n = 0$ and $\Delta = 0$.
+\end{lemma}
+\begin{lemma}
+If $n < 6$, then a polynomial $p$ is stable if and only
+if $\Delta > 0$ and $s_1 > 0$ for all $i$.
+\end{lemma}
+
+\section{Network hierarchy and strongly connected components}
+
+A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
+\todo{add hierarchy diagrams to \ref{fig:scc}}
+
+The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
+
+Corresponding to this decomposition we can construct a directed acyclic graph $\hier (G)$.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
+
+One can also perform this construction in the oppsite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
+a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = A$ and furthermore, every graph $G$ such that $\hier(G) = A$ can be obtained in this manner.
+\todo{explain how robustness in \ref{eq:robustness} is symmetric under permutations of the SCCs in $G$ or equivalently of the nodes of $\hier{G}$.}
+
+\todo{add panel to \ref{fig:scc} showing that many graphs get mapped to the same SCC DAG}
+
+
+\section{Stability and robustness analysis of particular system ensembles}
 Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix.  This is a special case of \ref{eq:robustness}:
 \begin{equation}\label{eq:condprobgen}
  R (\mathrm{stab}, k_1, \ldots k_m) =
@@ -200,27 +229,6 @@ characteristic polynomials was developed by various mathematicians during the
 second half of the nineteenth century and is summarized in chapter XV of
 \cite{Gantmacher1959}.  We now summarize some of these results which are
 relevant to our calculations.
-
-Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
-Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
-writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
-Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
-$M$ be stable is equivalent to asking that the roots of $\chi$ all have
-negative real part.  Hence, let us call a polynomial stable if all its
-roots have negative real part.  We will formulate conditions for this to
-happen in terms of the coefficients of $\chi$ \cite{Gantmacher1959}.
-
-\begin{lemma}
-If $M$ is stable, then $s_i > 0$ for all $i$ between $1$ and $n$.
-\end{lemma}
-\begin{lemma}
-If a point lies on the boundary of the set of stable polynomials, then
-either $s_n = 0$ and $\Delta = 0$.
-\end{lemma}
-\begin{lemma}
-If $n < 6$, then a polynomial $p$ is stable if and only
-if $\Delta > 0$ and $s_1 > 0$ for all $i$.
-\end{lemma}
 
 For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant. Suppose we have a stable matrix
@@ -283,7 +291,6 @@ Using this approach the probability of \emph{a priori} stability and of robustne
 
 \todo{Say a few words about Monte Carlo integration and error bars.}
 
-\section{Dependency of robustness upon connectivity and cycle number}
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:combined}A.
 The relationship between connectivity and robustness for two component systems is shown in \ref{tab:structstabmat} and likewise for three component systems in \ref{tab:structstabmat3} and \ref{fig:combined}B. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red dots in \ref{fig:combined}B.
 % \section{Cycle number is inversely correlated with robustness}
@@ -292,7 +299,7 @@ The relationship between connectivity and robustness for two component systems i
 % \section{Cycle number and connectivity classify robust systems}
 The combination of connectivity and cycle number as shown in \ref{fig:combined}E provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
 
-\section{Component decomposition and robustness}
+\section{Component decomposition, hierarchy, and the symmetries of robustness}
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
@@ -307,9 +314,9 @@ Next, we ask what is the maximally robust graph that has a given set of connecte
 \begin{align}
 R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i R_i}{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i}, \label{eq:sccmaxrobustness}
 \end{align}
+\todo{explain how robustness in \ref{eq:sccrobustness} is symmetric under transformations on the the SCCs}
 
-
-\section{Strongly connected components, robustness, and hierarchy}
+% \section{Strongly connected components, robustness, and hierarchy}
 The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness. Inspection of \ref{eq:sccrobustness} demonstrates that robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies.
 % \section{Hierarchical systems are the most robust}
 % \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
@@ -342,11 +349,9 @@ The fact that the most hierarchical of networks is the most robust in the case o
 % \input{tex/tablewithgraphs}
 
 \section{Stability criteria}
-\todo{Since there is no point in publishing proofs of results contemporary
-with Darwin's Origin of Species, this section will be replaced with a
-reference to Gantmacher.}
+% \todo{Since there is no point in publishing proofs of results contemporary with Darwin's Origin of Species, this section will be replaced with a reference to Gantmacher.}
 Suppose that $M$ is an $n \times n$ matrix with real coefficients.
-As described in \ref{sec:stabanalbn}, we call
+As previously described, we call
 the matrix $M$ stable if all its eigenvalues have negative real part.
 Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
 Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
@@ -471,13 +476,13 @@ in this work because we will only be making computations with matrices
 of size less than $6$.
 
 \section{Paths and eigenvalues}
-\todo{I am thinking that we might want to jettison this section from
-the published version and leave it as private notes for future work.
-As a substitute for the published version, I made a section in front
-of it which takes a more direct route to proving what is needed for
-the purposes of showing that the characteristic polynomial factors and
-making our arguments about total orders being the most stable.  We
-should discuss this point tomorrow.}
+% \todo{I am thinking that we might want to jettison this section from
+% the published version and leave it as private notes for future work.
+% As a substitute for the published version, I made a section in front
+% of it which takes a more direct route to proving what is needed for
+% the purposes of showing that the characteristic polynomial factors and
+% making our arguments about total orders being the most stable.  We
+% should discuss this point tomorrow.}
 
 Next, we will want to relate prpoperties of our matrix and its eigenvalues
 to  properties of the associated graph $G_A$.  To do this, we will first
@@ -509,11 +514,11 @@ note that any functor from $\Path(G)$ to $\mathbb{R}$ may be regarded as
 a weighted product for a suitable choice of weights.  We extend $\wprod$ to
 $\mathcal{A}(G)$ by linearity; the result is an algebra homomorphism.
 
-\todo{Start talking about Abelianizing the category and the algebra, say
-more after decomposing into components.}
+% \todo{Start talking about Abelianizing the category and the algebra, say
+% more after decomposing into components.}
 
-\todo{Characterize strongly connected components in terms of
-fibration over poset.}
+% \todo{Characterize strongly connected components in terms of
+% fibration over poset.}
 
 The characteristic polynomial $\chi(A)$ associated to $A$ can be factored
 according to the strongly connected components of the graph $G$.
