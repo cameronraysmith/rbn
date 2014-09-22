@@ -35,7 +35,8 @@ $^4$Santa Fe Institute, 1399 Hyde Park Road, Santa Fe, NM 87501, USA
 \end{quote}}
 
 % \section{Todo}
-% \listoftodos
+\listoftodos
+\tableofcontents
 
 \section{Introduction}
 
@@ -313,49 +314,6 @@ The fact that the most hierarchical of networks is the most robust in the case o
 % \section{Hierarchical systems are the most robust}
 % \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
 
-\section{Bounds on robustness}
-
-Suppose that $S$ is a region in $[0,1]^2$.  Then, the robustness of $S$ under resampling is given as
-\begin{align*}
-R &= \frac{\int_0^1 dx \int_0^1 dy \int_0^1 dx'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x',y) +
-           \int_0^1 dx \int_0^1 dy \int_0^1 dx\,dy\,dy'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x,y')}
-          {2 \int_0^1 dx \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)} \\
-  &= \frac{\int_0^1 dy\, (\int_0^1 dx\, \mathbf{1}_{S} (x,y))^2 +
-           \int_0^1 dx\, (\int_0^1 dy\, \mathbf{1}_{S} (x,y))^2}
-          {2 \int_0^1 dx\, \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)}
-\end{align*}
-We will show that $R \le \int_{H^2} dx\,dy\, \mathbf{1}_{S} (x,y)$ with equality occurring when $S$ is rearrangement equivalent to either the rectangle of height 1 or a rectangle of width 1.
-
-First, we start with the special case when $S$ is a rectangle with one vertex at the origin and sides parallel to the coordinate axes.  If $a$ is the height of our rectangle and $b$ is its width, we have
-
-Next, consider the case where $R$ consists of a union of squares of a rectangular grid obtained by subdividing the $x$ and $y$ axes of our bounding square into $2N$ portions of equal length.  Given two integers $i$ and $j$
-
-Suppose we restrict to rectangular regions in an $n$-dimensional hypercube and resample $m$ variables.  Then we have $R = s_m (a_1, \ldots a_n)$ where $s_m$ is the $m$-th elementary symmetric polynomial.  As before, we have the constraint that $\prod_i a_i = s_n (a_1, \ldots a_n)$ is constant.  Using Lagrange multipliers, we obtain the equation
-\[
-\frac{\partial s_m (a_1, \ldots a_n)}{a_k} = \lambda \frac{\partial s_n (a_1, \ldots a_n)}{a_k} .
-\]
-Since the elementary symmetic polynomial is linear in each of its variables, this reduces to
-\[
-s_{m-1} (a_1, \ldots {\hat a}_k \ldots a_n) = \lambda \partial s_{n-1} (a_1, \ldots {\hat a}_k \ldots a_n) .
-\]
-Dividing through, this becomes
-\[
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \lambda
-\]
-or, eliminating $\lambda$, we have
-\[
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots \frac{1}{a_n}\right) =
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
-\]
-for all $j,k$.  Suppose that $j < k$.  Then, we may expaand both sides,
-\begin{align*}
-&\frac{1}{a_k} s_{m-2} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \\ \qquad
-&\frac{1}{a_j} s_{m-2} s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
-\end{align*}
-and conclude that $a_j = a_k$.  Hence, the only critical point lies at the point $a_1 = a_2 = \cdots = a_n$.  By the second derivative test, that point is a minimum, so the maximum must lie on the boundary.
-
 \section{Discussion}
 
 \section{Acknowlegements}  The authors would like to thank Jay Sulzberger and Ximo Pechuan for useful suggestions and discussions.
@@ -626,6 +584,49 @@ sends $G$ to a poset $P$.  Then every element $p$ of $\Path(a,a)$ lies
 in $\hier^{-1} (\hier(a))$.  Hence, our sum decomposes into partial sums
 for the fibers of the points in the hierarchy which corresponds to a
 factorization of the characteristic polynomial.
+
+\section{Bounds on robustness}
+
+Suppose that $S$ is a region in $[0,1]^2$.  Then, the robustness of $S$ under resampling is given as
+\begin{align*}
+R &= \frac{\int_0^1 dx \int_0^1 dy \int_0^1 dx'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x',y) +
+           \int_0^1 dx \int_0^1 dy \int_0^1 dx\,dy\,dy'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x,y')}
+          {2 \int_0^1 dx \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)} \\
+  &= \frac{\int_0^1 dy\, (\int_0^1 dx\, \mathbf{1}_{S} (x,y))^2 +
+           \int_0^1 dx\, (\int_0^1 dy\, \mathbf{1}_{S} (x,y))^2}
+          {2 \int_0^1 dx\, \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)}
+\end{align*}
+We will show that $R \le \int_{H^2} dx\,dy\, \mathbf{1}_{S} (x,y)$ with equality occurring when $S$ is rearrangement equivalent to either the rectangle of height 1 or a rectangle of width 1.
+
+First, we start with the special case when $S$ is a rectangle with one vertex at the origin and sides parallel to the coordinate axes.  If $a$ is the height of our rectangle and $b$ is its width, we have
+
+Next, consider the case where $R$ consists of a union of squares of a rectangular grid obtained by subdividing the $x$ and $y$ axes of our bounding square into $2N$ portions of equal length.  Given two integers $i$ and $j$
+
+Suppose we restrict to rectangular regions in an $n$-dimensional hypercube and resample $m$ variables.  Then we have $R = s_m (a_1, \ldots a_n)$ where $s_m$ is the $m$-th elementary symmetric polynomial.  As before, we have the constraint that $\prod_i a_i = s_n (a_1, \ldots a_n)$ is constant.  Using Lagrange multipliers, we obtain the equation
+\[
+\frac{\partial s_m (a_1, \ldots a_n)}{a_k} = \lambda \frac{\partial s_n (a_1, \ldots a_n)}{a_k} .
+\]
+Since the elementary symmetic polynomial is linear in each of its variables, this reduces to
+\[
+s_{m-1} (a_1, \ldots {\hat a}_k \ldots a_n) = \lambda \partial s_{n-1} (a_1, \ldots {\hat a}_k \ldots a_n) .
+\]
+Dividing through, this becomes
+\[
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \lambda
+\]
+or, eliminating $\lambda$, we have
+\[
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots \frac{1}{a_n}\right) =
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
+\]
+for all $j,k$.  Suppose that $j < k$.  Then, we may expaand both sides,
+\begin{align*}
+&\frac{1}{a_k} s_{m-2} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \\ \qquad
+&\frac{1}{a_j} s_{m-2} s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
+s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
+\end{align*}
+and conclude that $a_j = a_k$.  Hence, the only critical point lies at the point $a_1 = a_2 = \cdots = a_n$.  By the second derivative test, that point is a minimum, so the maximum must lie on the boundary.
 
 \input{tex/figuressupp}
 
