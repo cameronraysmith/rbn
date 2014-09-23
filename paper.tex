@@ -226,8 +226,7 @@ a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-e
 We note from the definition that the mapping from $G$ to $\hier(G)$ is many-to-one as exemplified in \ref{fig:scc}B and C.
 \todo{explain how robustness in \ref{eq:robustness} is symmetric under permutations of the SCCs in $G$ or equivalently of the nodes of $\hier(G)$.}
 
-\todo{add reference for graph edit distance}
-The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \ref{fig:scc}A. This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take this distance to be the definition of hierarchy.
+The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \ref{fig:scc}A. This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take this distance to be the definition of hierarchy.
 
 \section{Stability and robustness analysis of particular system ensembles}
 For systems having two components, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three components, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
@@ -330,7 +329,7 @@ we arrive at the following upper bound on robustness in terms of the connected c
 \begin{align}
 R_{\mathrm{max}}(C_1, \ldots C_n) =
 \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i \connectivity_i R(C_i)}
-{\frac{1}{2} ((\sum_i v_i)^2 - \sum_i v_i^2) + \sum_i \connectivity_i}, \label{eq:sccmaxrobustness}
+{\frac{1}{2} ((\sum_i v_i)^2 - \sum_i v_i^2) + \sum_i \connectivity_i}, \label{eq:exsccmaxrobustness}
 \end{align}
 Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$ is the graph on $n$ nodes with a link from node $i$ to node $j$ whenever $i < j$.  Then, by the construction described in the previous section on network hierachy, we have a graph $G_{\mathrm{max}}$ such that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula, $R(G_{\mathrm{max}}) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 
