@@ -444,7 +444,7 @@ R(G) \le \frac{\sum_{i,j \in \hier(G)} v_i v_j + \sum_i \connectivity_i R(C_i)}
 \end{align}
 
 Since every acyclic digraph can be embedded into a totally ordered set, we may assume without loss of generality that our components have been ordered in a way such that, if $(i,j) \in \hier(G)$, then $i < j$.  Hence, after substituting into our expression and simplifying using the identity
-$$\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} \right)^2-\frac{1}{2} \sum_{i=1}^{n} v_i^2,$$
+$$\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n} v_i^2,$$
 we arrive at the following upper bound on robustness in terms of the connected components:
 \begin{align}
 R_{\mathrm{max}}(C_1, \ldots C_n) =
@@ -454,16 +454,21 @@ R_{\mathrm{max}}(C_1, \ldots C_n) =
 Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$ is the graph on $n$ nodes with a link from node $i$ to node $j$ whenever $i < j$.  Then, by the construction described in the previous section on network hierachy, we have a graph $G_{\mathrm{max}}$ such that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula, $R(G_{\mathrm{max}}) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 
 This argument also works when we resample more than one entry,
-although the notation becomes more complicated.  Suppose that we
-resample $m$ nodes.  Then, given a partition $m = \sum_{i=0}^n m_i$,
+although the notation becomes more complicated.  Suppose that, as
+before, we have a graph $G$ with strongly connected components $C_i$,
+but that now we
+resample $m$ nodes.  Then, given a partition $m = \sum_{i=0}^n m_i$
+such that $m_0 \le \sum_{i=1}^{n-1}\sum_{j=i}^n \ell_{ij}$ and $m_i 
+\le \connectivity_i$ when $1 \le i \le n$,
 there are ${m \choose m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$
 links from $C_i$ and $m_0$ links between strongly connected
-components.  Hence, our weighted average becomes
+components.  Hence, if we denote the set of partitions which satisfy
+our inequalities as $M$, our weighted average becomes
 \begin{equation}
-R(\hbox{avg stab} C_i, m) =
-\frac{sum_{m_0, m_1, \ldots m_n} {m \choose m_0, m_1, \ldots. m_n}
-      m_0 + \sum_{i=1}^n m_i C_i}
-     {}
+R(\hbox{avg stab} (G), m) =
+\frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M} {m \choose m_0, m_1, \ldots. m_n}
+      \left(m_0 + \sum_{i=1}^n m_i R(\hbox{avg stab} (C_i), m_i)\right)}
+     {m \sum\limits_{(m_0, m_1, \ldots m_n) \in M} {m \choose m_0, m_1, \ldots. m_n}}
 \end{equation}
 
 The preceding argument demonstrates the manner in which robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies. And, the graph that has the latter property is that associated to the total ordering, $G_{\mathrm{tot}}$, which aslo possess the highest degree of hierarchy. The fact that robustness is equivalent for any configuration of strongly connected components with an equivalent number of links between them demonstrates that it is invariant to permutations of strongly connected components. This result does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled because the arguments presented here are purely topological in nature. The result that dynamical robustness is correlated with system hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles primarily studied here.
