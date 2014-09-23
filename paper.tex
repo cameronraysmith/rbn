@@ -201,8 +201,7 @@ linearized equations of motion, it is worth noting that knowing the
 stability of a fixed point can yield information about the non-linear
 dynamics of a system.  For instance, in two dimensions,
 Poincare-Bendixson theory implies that every limit cycle must encircle
-at least one fixed point.  Furthermore, in the case where the cycle
-contains a single fixed point (such as in the Volterra-Lotke model of
+at least one fixed point \cite{Davis1962}.  Furthermore, in the case where the cycle contains a single fixed point (such as in the Lotka-Volterra model of
 conflicting populations), the stability of the fixed point will be
 determined by whether the limit cycle is attractive or repulsive.
 
@@ -375,7 +374,25 @@ d & c
 
 Using this approach the probability of stability and of robustness for all two component systems is given in \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:combined}B.
 
-\todo{Say a few words about Monte Carlo integration and error bars.}
+If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
+$$
+\mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
+$$
+where $a$ and $b$ are the hyperparameters of the Beta prior and we consider the uninformative uniform prior corresponding to $a=b=1$. We consider the maximum a posteriori estimate
+$$\hat{\theta}_{MAP} = \frac{a + N_{\mathrm{stab}} - 1}{a + b + N - 2}$$
+which corresponds in this case to the maximum likelihood estimate
+$$
+\hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
+$$
+This estimate is characterized by the variance of the posterior Beta distribution
+$$
+\mathrm{var}(\theta | \mathcal{D}) = \frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
+$$
+Since for the chosen prior $a=b=1 \ll N$ this simplifies to
+$$
+\mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
+$$
+yielding the error estimate given by the associated standard deviation. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$.
 
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:combined}A.
 
