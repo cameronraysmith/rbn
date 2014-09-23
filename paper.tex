@@ -84,7 +84,7 @@ $$
 $$
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables.
 
-\todo{Generalize to open systems and say how we combine them.}
+In order to discuss how different parts of the system influence each other, we shall generalize our definition to include open systems.  We do this by having some of our variables be control variables whose values are given as specified functions of time rather than determined by the dynamics.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  For details and formalization in terms of operads see \cite{Vagner2014}.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, for most purposes, such a decomposition would be uninteresting and what we instead want is a decomposition into relatively self-contained modules.  In the section on connected components, we shall propose a way of accomplishing this based upon the topology of the system graph.
 
 In order to accommodate the possibility of uncertainty in our modelling,
 we will generalize our notion of a system on a network to that of a
@@ -125,7 +125,7 @@ variable $q$, we define its robustness as the following conditional proability:
 \end{align}
 
 \section{Stability analysis of biological networks}
-Linearization of the $F_i$ about any fixed point $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
+The class of dynamical quantities on which we shall focus in this investigation involve stability of equilibria.  Suppose that $\vec x$ is a point on our phase space which depends upon the parameters.  Linearization of the $F_i$ about any fixed point $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
 \begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
 \end{equation}
@@ -303,24 +303,38 @@ The combination of connectivity and cycle number as shown in \ref{fig:combined}E
 
 \section{Component decomposition, hierarchy, and the symmetries of robustness}
 
-The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness.
+The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness.  By combining our decomposition of the graph with our analysis of matrices, we will deduce a general result which relates robustness to hierarchy.
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
 Using these observations, we may express the robustness of a graph in terms of the robustnesses of its strongly connected components.
-If the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity $\connectivity_i$, and robustness $R_i$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is
+If the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity $\connectivity_i$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is
+\begin{align}\label{eq:sccrobustness}
+R(G) = \frac{\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i R(C_i)}{\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i}.
+\end{align}
+For instance, if our graph is the one in \ref{fig:scc}B or C, then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is
+\[
+R(G) = \frac{2 + 0.5 + 4 \times 0.62}{2 + 1 + 4} = 0.714,
+\]
+which agrees with the value computed in \ref{tab:structstabmat}.
+
+Next, we derive an upper bound on the robustness of any graph constructed from a given set of connected components.  Since $R(C_i) \le 1$ for all $i$, it follws that increasing $\ell_{ij}$ will increase $R(G)$.  Given two connected components $C_i$ and $C_j$ with $v_i$ and $v_j$ nodes respectively, we have a maximum of $n_i n_j$ links going from $C_i$ to $C_j$.  Hence, $\ell_{ij} \le v_i v_j$, so, we conclude that
 \begin{align}
-R(G) = \frac{\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i R(C_i)}
-            {\sum_{i=1}^n \sum_{j=1}^n \ell_{ij} + \sum_{i=1}^n c_i}. \label{eq:sccrobustness}
+R(G) \le \frac{\sum_{i,j \in \hier(G)} v_i v_j + \sum_i \connectivity_i R(C_i)}
+{\sum_{i,j \in \hier(G)} v_i v_j + \sum_i \connectivity_i}, \label{eq:sccmaxrobustness}
 \end{align}
 
-Next, we ask what is the maximally robust graph that has a given set of connected components.
+Since every acyclic digraph can be embedded into a totally ordered set, we may assume without loss of generality that our components have been ordered in a way such that, if $(i,j) \in \hier(G)$, then $i < j$.  Hence, after substituting into our expression and simplifying using the identity
+$$\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} \right)^2-\frac{1}{2} \sum_{i=1}^{n} v_i^2,$$
+we arrive at the following upper bound on robustness in terms of the connected components:
 \begin{align}
-R_{\mathrm{max}} = \frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i R_i}{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i c_i}, \label{eq:sccmaxrobustness}
+R_{\mathrm{max}}(C_1, \ldots C_n) =
+\frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i \connectivity_i R(C_i)}
+{\frac{1}{2} ((\sum_i v_i)^2 - \sum_i v_i^2) + \sum_i \connectivity_i}, \label{eq:sccmaxrobustness}
 \end{align}
-\todo{explain how robustness in \ref{eq:sccrobustness} is symmetric under transformations on the the SCCs}
+Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$ is the graph on $n$ nodes with a link from node $i$ to node $j$ whenever $i < j$.  Then, by the construction described in the previous section on network hierachy, we have a graph $G_{\mathrm{max}}$ such that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula, $R(G_{\mathrm{max}}) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 
-Inspection of \ref{eq:sccrobustness} demonstrates that robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies.
+The preceding argument demonstrates the manner in which robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies. And, the graph that has the latter property is that associated to the total ordering, $G_{\mathrm{tot}}$, which aslo possess the highest degree of hierarchy. The fact that robustness is equivalent for any configuration of strongly connected components with an equivalent number of links between them demonstrates that it is invariant to permutations of strongly connected components. This result does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled because the arguments presented here are purely topological in nature. The result that dynamical robustness is correlated with system hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles primarily studied here.
 
 \todo{write down analogs of \ref{eq:sccrobustness} and \ref{eq:sccmaxrobustness} for resampling a fixed proportion or an arbitrary number of components}
 
@@ -330,6 +344,7 @@ Inspection of \ref{eq:sccrobustness} demonstrates that robustness is maximized b
 % \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
 
 \section{Discussion}
+\todo{write Discussion}
 
 \section{Acknowlegements}  The authors would like to thank Jay Sulzberger and Ximo Pechuan for useful suggestions and discussions.
 
