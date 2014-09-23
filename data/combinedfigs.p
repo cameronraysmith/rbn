@@ -46,9 +46,9 @@ plot './stab3x3.tsv' using 4:3 pt 7 ps 0.7 lc 0 title columnheader
 ############# plot 4 ##############
 
 set key off
-set xrange [-1:7]
-set xtics (0,1,2,3,4,5,6)
-set xlabel "graph edit distance"
+set xrange [-1:6]
+set xtics (0,1,2,3,4,5)
+set xlabel "hierarchy"
 set yrange [0.3:0.9]
 set ytics (0.4,0.5,0.6,0.7,0.8)
 set label 1 "D" font "HelveticaNeue, 23" at graph -0.25, graph 1.20
@@ -64,12 +64,12 @@ set parametric
 # x-axis
 set yrange [-1:6] reverse
 set ytics (0,1,2,3,4,5)
-set ylabel "number of cycles" offset 0,-0.5
+set ylabel "number of cycles" # offset 0,-0.5
 
 # y-axis
 set xrange [2:10]
-set xtics (3,4,5,6,7,8,9) offset 0.5,-0.2
-set xlabel "connectivity" offset 0,-0.5
+set xtics (3,4,5,6,7,8,9) # offset 0.5,-0.2
+set xlabel "connectivity" # offset 0,-0.5
 
 # z-axis
 # set zrange [0.3:0.9]
@@ -79,7 +79,7 @@ set xlabel "connectivity" offset 0,-0.5
 # colorbar
 set cbrange [0.4:0.8]
 set cbtics (0.4,0.5,0.6,0.7,0.8)
-set cblabel "probability"
+set cblabel "robustness"
 
 # set pm3d
 # set palette
@@ -96,14 +96,14 @@ set autoscale
 set parametric
 
 # x-axis
-set yrange [-1:7] reverse
-set ytics (0,1,2,3,4,5,6)
-set ylabel "graph edit distance" offset 0,-0.5
+set yrange [-1:6] reverse
+set ytics (0,1,2,3,4,5)
+set ylabel "hierarchy" # offset 0,-0.5
 
 # y-axis
 set xrange [2:10]
-set xtics (3,4,5,6,7,8,9) offset 0.5,-0.2
-set xlabel "connectivity" offset 0,-0.5
+set xtics (3,4,5,6,7,8,9) # offset 0.5,-0.2
+set xlabel "connectivity" # offset 0,-0.5
 
 # z-axis
 # set zrange [0.3:0.9]
@@ -113,7 +113,7 @@ set xlabel "connectivity" offset 0,-0.5
 # colorbar
 set cbrange [0.4:0.8]
 set cbtics (0.4,0.5,0.6,0.7,0.8)
-set cblabel "probability"
+set cblabel "robustness"
 
 # set pm3d
 # set palette
