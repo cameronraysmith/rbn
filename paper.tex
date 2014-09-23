@@ -215,19 +215,19 @@ if $\Delta > 0$ and $s_1 > 0$ for all $i$.
 \section{Network hierarchy and strongly connected components}
 
 A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
-\todo{add hierarchy diagrams to \ref{fig:scc}}
 
 The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
 
 Corresponding to this decomposition we can construct a directed acyclic graph $\hier (G)$.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
 
-One can also perform this construction in the oppsite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
+One can also perform this construction in the opposite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
 a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = A$ and furthermore, every graph $G$ such that $\hier(G) = A$ can be obtained in this manner.
-\todo{explain how robustness in \ref{eq:robustness} is symmetric under permutations of the SCCs in $G$ or equivalently of the nodes of $\hier{G}$.}
 
-\todo{add panel to \ref{fig:scc} showing that many graphs get mapped to the same SCC DAG}
+We note from the definition that the mapping from $G$ to $\hier(G)$ is many-to-one as exemplified in \ref{fig:scc}B and C.
+\todo{explain how robustness in \ref{eq:robustness} is symmetric under permutations of the SCCs in $G$ or equivalently of the nodes of $\hier(G)$.}
 
-\todo{add definition of graph edit distance to the most hierarchical network and define this as our measure of hierarchy}
+\todo{add reference for graph edit distance}
+The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \ref{fig:scc}A. This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take this distance to be the definition of hierarchy.
 
 \section{Stability and robustness analysis of particular system ensembles}
 For systems having two components, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three components, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. For two-component systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
