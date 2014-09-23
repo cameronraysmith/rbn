@@ -286,11 +286,12 @@ d & c
 \end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
 
-Using this approach the probability of \emph{a priori} stability and of robustness for all two component systems is given in \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:combined}B.
+Using this approach the probability of stability and of robustness for all two component systems is given in \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:combined}B.
 
 \todo{Say a few words about Monte Carlo integration and error bars.}
 
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three component systems, studied here the situation is not so clear cut. For two component systems, system stability is constant across the entire range of connectivities. For three component systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:combined}A.
+
 The relationship between connectivity and robustness for two component systems is shown in \ref{tab:structstabmat} and likewise for three component systems in \ref{tab:structstabmat3} and \ref{fig:combined}B. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red dots in \ref{fig:combined}B.
 % \section{Cycle number is inversely correlated with robustness}
 \ref{fig:combined}C shows the robustness for all three component systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
@@ -298,7 +299,7 @@ The relationship between connectivity and robustness for two component systems i
 % \section{Cycle number and connectivity classify robust systems}
 The combination of connectivity and cycle number as shown in \ref{fig:combined}E provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
 
-\todo{add description of \ref{fig:scc}D and \ref{fig:scc}F referring to the monotonic correlation between the upper bound of robustness and degree of hierarchy as defined by graph edit distance in a preceeding section}
+This observation suggested that graph edit distance from \ref{fig:scc}A, hierarchy, might provide a better characterization of system robustness. \ref{fig:scc}D shows system robustness as a function of hierarchy, where the most hierarchical system has a hierarchy of 0. There is a monotonic correlation between the upper bound of robustness and hierarchy. \ref{fig:scc}F shows system robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \ref{fig:combined}E.
 
 \section{Component decomposition, hierarchy, and the symmetries of robustness}
 
