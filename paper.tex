@@ -84,17 +84,32 @@ $$
 $$
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables.
 
-In order to discuss how different parts of the system influence each other, we shall generalize our definition to include open systems.  We do this by having some of our variables be control variables whose values are given as specified functions of time rather than determined by the dynamics.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  For details and formalization in terms of operads see \cite{Vagner2014}.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, for most purposes, such a decomposition would be uninteresting and what we instead want is a decomposition into relatively self-contained modules.  In the section on connected components, we shall propose a way of accomplishing this based upon the topology of the system graph.
+In order to discuss how different parts of the system influence each
+other, we shall generalize our definition to include open systems.  We
+do this by having some of our variables be control variables whose
+values are given as specified functions of time rather than determined
+by the dynamics.  Given several such open systems, we may combine them
+to produce a larger system by setting the control variables of a
+subsystem equal to the dynamical variables of another system.  For
+details and a discussion of the operad structure of composition of
+open systems see \cite{Vagner2014}.  Taking this notion to its logical
+extreme, one can dissect a system into a collection of one open system
+for each dynamical variable.  However, for most purposes, such a
+decomposition would be uninteresting and what we instead want is a
+decomposition into relatively self-contained modules.  In the section
+on connected components, we shall propose a way of accomplishing this
+based upon the topology of the system graph.
 
-In order to accommodate the possibility of uncertainty in our modelling,
-we will generalize our notion of a system on a network to that of a
-system with random parameters.  Again, this will involve three
-steps. First, we provide a measure space $S, \mathcal{B}(S)$ which represents the
-values over which our parameters can vary. Next, instead of a single
-vector field, we consider a family of vector fields parameterized by
-this space. That is to say, we introduce a mapping $V \colon S \to \Gamma T(\prod_i M_m)$.
-(Here $\Gamma$ denotes the space of sections of the tangent bundle.)
-As before, for each point $p \in S$, the vector field $V(p)$ must be consistent with
+In order to accommodate the possibility of uncertainty in our
+modelling, we will generalize our notion of a system on a network to
+that of a system with random parameters.  Again, this will involve
+three steps. First, we provide a measure space $S, \mathcal{B}(S)$
+which represents the values over which our parameters can vary. Next,
+instead of a single vector field, we consider a family of vector
+fields parameterized by this space. That is to say, we introduce a
+mapping $V \colon S \to \Gamma T(\prod_i M_m)$.  (Here $\Gamma$
+denotes the space of sections of the tangent bundle.)  As before, for
+each point $p \in S$, the vector field $V(p)$ must be consistent with
 the system graph. Finally, we select a probability measure $\mu \colon
 \mathcal{B}(S) \to [0,1]$ which represents our understanding of which values of the parameters
 are likely. In accord with Bayesian statistics, we might revise this
@@ -111,13 +126,23 @@ points, we have an integer-valued random variable; and if the quantity is
 whether or not the system posesses a limit cycle, we have a binary random
 variable.
 
-Another question one can ask is that of robustness, which measures the
-probability that, if some property holds for a set of parameters, it will
-continue to hold if we make a random perturbation about those parameter values.
-To define robustness, we will introduce, in addition to the probability
-distribution $\mu$ described above, a family of probability distributions
-$\mu' \colon S \times \mathcal{B}(S) \to [0,1]$.  Then, given a binary random
-variable $q$, we define its robustness as the following conditional proability:
+A quality which is of interest to us is robustness or structural
+stability \cite{Smale1967}, which requires the determination of
+whether or not a given dynamical system that is determined to be
+stable remains stable under a perturbation to one or more of its
+defining parameters.  We will quantify this as the probability that,
+if some property holds for a set of parameters, it will continue to
+hold if we make a random perturbation about those parameter values.
+To do so, we will introduce, in addition to the probability
+distribution $\mu$ described above, a family of probability
+distributions $\mu' \colon S \times \mathcal{B}(S) \to [0,1]$ such
+that $\mu'(x,y)$ encodes the conditional probability that a system
+with a parameter value $x$ will have its parameter values changed to
+$y$ under a perturbation.  For our biological models, we will be
+interested in large perturbations rather than the small or
+infinitessimal perturbations usually considered in the theory of
+dynamical systems.  Then, given a binary random variable $q$,
+we define its robustness as the following conditional proability:
 \begin{align}\label{eq:robustness}
   R (q) =
   \frac{\int_S d\mu(x) \int_S d\mu'(x,y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
@@ -125,7 +150,24 @@ variable $q$, we define its robustness as the following conditional proability:
 \end{align}
 
 \section{Stability analysis of biological networks}
-The class of dynamical quantities on which we shall focus in this investigation involve stability of equilibria.  Suppose that $\vec x$ is a point on our phase space which depends upon the parameters.  Linearization of the $F_i$ about any fixed point $\vec{x}^0$ such that $F_i(\vec{x}^0)=0$ leads to the system
+The class of dynamical quantities on which we shall focus in this
+investigation involve stability of equilibria.  Suppose that $\vec x$
+is a point on our phase space which depends upon the parameters.  Then
+we may take $q$ to be a binary random variable which describes whether
+or not $\vec x$ is a fixed point of the system (i.e. $q$ is true if and only if
+$F_i(\vec{x}^0)=0$ for all $i$) and perform a probabilistic analysis
+of the sort discussed above.
+
+Furthermore, if it turns out that $\vec x$ is indeed a fixed point, we
+may proceed to ask whether it is a dynamically stable fixed point.
+Intuitively, dynamic stability means that, if one chooses the initial
+conditions sufficiently close to the fixeed point, the solution will
+stay close to the fixed point.  Physically, this is important because,
+if a fixed point ${\vec x}_0$ is unstable, we have zero proability of
+observing the solution ${\vec x}(t) = {\vec x}_0$.
+
+To determine stability, we linearize the equations of motion about the
+fixed point $\vec{x}^0$:
 \begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
 \end{equation}
@@ -154,19 +196,57 @@ y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
 $$
 for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$.
 
-To determine whether a randomly selected dynamical system evaluated at a random critical point, given by a matrix such as $A$, is stable, it is sufficient to check the above condition. Integrating over the region of the parameter space defining $A$ enables the determination of the probability of stability to perturbations in state $\vec{x}$ over an ensemble of dynamical systems.
+Even though the determination of stability only requires examining
+linearized equations of motion, it is worth noting that knowing the
+stability of a fixed point can yield information about the non-linear
+dynamics of a system.  For instance, in two dimensions,
+Poincare-Bendixson theory implies that every limit cycle must encircle
+at least one fixed point.  Furthermore, in the case where the cycle
+contains a single fixed point (such as in the Volterra-Lotke model of
+conflicting populations), the stability of the fixed point will be
+determined by whether the limit cycle is attractive or repulsive.
 
-% Another form of stability, referred to as structural stability \cite{Smale1967}, requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one of its defining parameters. This can be formalized as the conditional probability distribution
+%% To determine whether a randomly selected dynamical system evaluated at
+%% a random critical point, given by a matrix such as $A$, is stable, it
+%% is sufficient to check the above condition. Integrating over the
+%% region of the parameter space defining $A$ enables the determination
+%% of the probability of stability to perturbations in state $\vec{x}$
+%% over an ensemble of dynamical systems.
+
+% Another form of stability, referred to as structural
+% stability \cite{Smale1967}, requires the determination of whether or
+% not a given dynamical system that is determined to be stable remains
+% stable under a perturbation to one of its defining parameters. This
+% can be formalized as the conditional probability distribution
 % $$
 % P(A' \, \textrm{stable}\, \big| \, A \, \textrm{stable})
 % $$
-% where $A'$ represents a matrix derived from some perturbation applied to the matrix $A$ given above. In the simple case where $A \in \mathbb{R}^{n \times n}$ the perturbation which involves sampling uniformly over the $a_{ij}$ defining $A$ the value of a particular $a_{ij}$ from a given probability distribution.
-Suppose that $M$ is an $n \times n$ matrix with real coefficients and connectivity $\connectivity$. We will consider the case in which each of the parameters defining the matrix is sampled from the uniform distribution $\mathcal{U}(-1,1)$ so that the parameter space corresponds to the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin, and having volume $r^\connectivity$.  We want to know the probability that, if we resample the elements $k_1, k_2, \ldots k_m$ of this matrix, the resulting matrix will correspond to a stable matrix.  This is a special case of \ref{eq:robustness}:
+% where $A'$ represents a matrix derived from some perturbation
+% applied to the matrix $A$ given above. In the simple case where
+% $A \in \mathbb{R}^{n \times n}$ the perturbation which involves
+% sampling uniformly over the $a_{ij}$ defining $A$ the value of a
+% particular $a_{ij}$ from a given probability distribution.
+
+Suppose that our Jacobian $A$ is an $n \times n$ matrix with real
+coefficients and connectivity $\connectivity$ and denote the
+proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may
+compute the robustness of this proposition using \ref{eq:robustness}
+once we have specified the proability densities $\mu$ and $\mu'$.  In
+general, these will depend upon the parameters of the non-linear
+system.  For the puprpose of the current investigation, we shall make
+the ansatz that these are such that the distribution of entries of $A$
+is (at least approximately) the uniform distribution
+$\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube,
+$H^\connectivity$, of edge length $r=2$, centered about the origin.
+To model the perturbations, we shall resample the elements $k_1,
+k_2, \ldots k_m$ of this matrix from the same uniform distribution.
+Under these assumptions, the expression for robustness becomes
+of \ref{eq:robustness}:
 \begin{equation}\label{eq:condprobgen}
  R (\mathrm{stab}, k_1, \ldots k_m) =
   \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
     \mathbf{1}_{stab} \mathbf{1}_{stab'}}
-  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)}
+  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)},
 \end{equation}
 where we made the abbreviations
 \begin{align*}
@@ -223,8 +303,15 @@ Corresponding to this decomposition we can construct a directed acyclic graph $\
 One can also perform this construction in the opposite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
 a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = A$ and furthermore, every graph $G$ such that $\hier(G) = A$ can be obtained in this manner.
 
-We note from the definition that the mapping from $G$ to $\hier(G)$ is many-to-one as exemplified in \ref{fig:scc}B and C.
-\todo{explain how robustness in \ref{eq:robustness} is symmetric under permutations of the SCCs in $G$ or equivalently of the nodes of $\hier(G)$.}
+This map $\hier$ is many-to-one and so there is a large class of
+operations which leaves $\hier(G)$ invariant for a given graph $G$.
+For instance, we may interchange the positions of the strongly
+connected components relative to each other.  Leaving the components
+fixed, we may move links between nodes in a component or betwwen
+components, or even add or delete links.  Some examples of these
+operations are illustrated in \ref{fig:scc}B and C.  As we shall see
+later, these operations leave invariant key dynamical quantities, so
+we may regard them as a symmetry groupoid of our system.
 
 The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \ref{fig:scc}A. This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take this distance to be the definition of hierarchy.
 
@@ -307,10 +394,25 @@ The fact that the most hierarchical of networks is the most robust in the case o
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
-Using these observations, we may express the robustness of a graph in terms of the robustnesses of its strongly connected components.
-If the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity $\connectivity_i$ and there are $\ell_{ij}$ links between components $i$ and $j$, then the total robustness to resampling a random entry is
+Using these observations, we may express the robustness of a graph in
+terms of the robustnesses of its strongly connected components.  If
+the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity
+$\connectivity_i$ and there are $\ell_{ij}$ links between components
+$i$ and $j$, then there are a total of
+$\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i$
+links in $G$.  If we resample a randomly chosen link in a component
+$C_i$, the probability that the system will remain stable after
+resamling is $R(\hbox{avg stab} C_i, 1)$.  If we resample a link
+between components $C_i$ and $C_j$, the system will remain stable with
+probability 1.  Hence, the probability that the system will remain
+stable upon resampling a random link is the weighted average of these
+probabilities:
 \begin{align}\label{eq:sccrobustness}
-R(G) = \frac{\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i R(C_i)}{\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i}.
+R(\hbox{avg stab} G, 1) =
+\frac{\sum_{i,j \in \hier(G)} \ell_{ij} +
+      \sum_{i=1}^n \connectivity_i R(C_i)}
+     {\sum_{i,j \in \hier(G)} \ell_{ij} +
+      \sum_{i=1}^n \connectivity_i}.
 \end{align}
 For instance, if our graph is the one in \ref{fig:scc}B or C, then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is
 \[
@@ -333,6 +435,19 @@ R_{\mathrm{max}}(C_1, \ldots C_n) =
 {\frac{1}{2} ((\sum_i v_i)^2 - \sum_i v_i^2) + \sum_i \connectivity_i}, \label{eq:exsccmaxrobustness}
 \end{align}
 Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$ is the graph on $n$ nodes with a link from node $i$ to node $j$ whenever $i < j$.  Then, by the construction described in the previous section on network hierachy, we have a graph $G_{\mathrm{max}}$ such that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula, $R(G_{\mathrm{max}}) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
+
+This argument also works when we resample more than one entry,
+although the notation becomes more complicated.  Suppose that we
+resample $m$ nodes.  Then, given a partition $m = \sum_{i=0}^n m_i$,
+there are ${m \choose m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$
+links from $C_i$ and $m_0$ links between strongly connected
+components.  Hence, our weighted average becomes
+\begin{equation}
+R(\hbox{avg stab} C_i, m) =
+\frac{sum_{m_0, m_1, \ldots m_n} {m \choose m_0, m_1, \ldots. m_n}
+      m_0 + \sum_{i=1}^n m_i C_i}
+     {}
+\end{equation}
 
 The preceding argument demonstrates the manner in which robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies. And, the graph that has the latter property is that associated to the total ordering, $G_{\mathrm{tot}}$, which aslo possess the highest degree of hierarchy. The fact that robustness is equivalent for any configuration of strongly connected components with an equivalent number of links between them demonstrates that it is invariant to permutations of strongly connected components. This result does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled because the arguments presented here are purely topological in nature. The result that dynamical robustness is correlated with system hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles primarily studied here.
 
