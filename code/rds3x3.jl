@@ -397,10 +397,10 @@ function combinegnuplot()
                 "dist3x3.p",
                 "connectcycle3D3x3.p",
                 "connectdist3D3x3.p",]
-    horiz = 2
-    vert = 3
+    horiz = 3
+    vert = 2
     rv = (String)[]
-    headstring = "set terminal svg size $(600*horiz),$(400*vert) dynamic enhanced fname 'HelveticaNeue'  fsize 16
+    headstring = "set terminal svg size $(600*horiz),$(400*vert) dynamic enhanced fname 'HelveticaNeue'  fsize 20
 set output '../fig/combinedfigs.svg'
 set multiplot layout $(vert),$(horiz)
 set tmargin 3
@@ -416,7 +416,7 @@ set rmargin 5\n"
         # close(f)
         for (j,l) in enumerate(lines)
             if j==length(lines)-1
-                push!(rv,"set label 1 \"$(string(char(64+i)))\" font \"HelveticaNeue, 23\" at graph -0.25, graph 1.20\n")
+                push!(rv,"set label 1 \"$(string(char(64+i)))\" font \"HelveticaNeue, 25\" at graph -0.25, graph 1.20\n")
             end
             push!(rv,l)
         end
