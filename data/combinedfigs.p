@@ -87,7 +87,7 @@ set cblabel "robustness"
 load('RdBu.plt')
 set label 1 "E" font "HelveticaNeue, 25" at graph -0.25, graph 1.20
 set palette negative
-plot './stab3x3.tsv' using 1:4:3 with points palette pt 7 ps 0.7 title columnheader
+plot './avgconnectcycle.tsv' using 1:4:3 with points palette pt 7 ps 0.7 title columnheader
 
 ############# plot 6 ##############
 
@@ -121,5 +121,5 @@ set cblabel "robustness"
 load('RdBu.plt')
 set label 1 "F" font "HelveticaNeue, 25" at graph -0.25, graph 1.20
 set palette negative
-plot './stab3x3.tsv' using 1:5:3 with points palette pt 7 ps 0.7 title columnheader
+plot './avgconnectdist.tsv' using 1:5:3 with points palette pt 7 ps 0.7 title columnheader
 unset multiplot

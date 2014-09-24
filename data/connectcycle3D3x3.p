@@ -30,4 +30,4 @@ set cblabel "robustness"
 # unset pm3d
 load('RdBu.plt')
 set palette negative
-plot './stab3x3.tsv' using 1:4:3 with points palette pt 7 ps 0.7 title columnheader
+plot './avgconnectcycle.tsv' using 1:4:3 with points palette pt 7 ps 0.7 title columnheader
