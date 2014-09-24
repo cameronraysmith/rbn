@@ -418,62 +418,112 @@ $\connectivity_i$ and there are $\ell_{ij}$ links between components
 $i$ and $j$, then there are a total of
 $\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i$
 links in $G$.  If we resample a randomly chosen link in a component
-$C_i$, the probability that the system will remain stable after
-resamling is $R(\hbox{avg stab} C_i, 1)$.  If we resample a link
+$C_i$, then the probability that the system will remain stable after
+resampling is $R(\hbox{avg stab} (C_i), 1)$.  If we resample a link
 between components $C_i$ and $C_j$, the system will remain stable with
 probability 1.  Hence, the probability that the system will remain
 stable upon resampling a random link is the weighted average of these
 probabilities:
 \begin{align}\label{eq:sccrobustness}
-R(\hbox{avg stab} G, 1) =
-\frac{\sum_{i,j \in \hier(G)} \ell_{ij} +
-      \sum_{i=1}^n \connectivity_i R(C_i)}
-     {\sum_{i,j \in \hier(G)} \ell_{ij} +
-      \sum_{i=1}^n \connectivity_i}.
+R(\hbox{avg stab} (G), 1) =
+\frac{\sum\limits_{(i,j) \in \hier(G)} \ell_{ij} +
+      \sum\limits_{i=1}^n \connectivity_i R(C_i)}
+     {\sum\limits_{(i,j) \in \hier(G)} \ell_{ij} +
+      \sum\limits_{i=1}^n \connectivity_i}.
 \end{align}
 For instance, if our graph is the one in \ref{fig:scc}B or C, then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is
 \[
 R(G) = \frac{2 + 0.5 + 4 \times 0.62}{2 + 1 + 4} = 0.714,
 \]
-which agrees with the value computed in \ref{tab:structstabmat}.
+which agrees with the value computed in \ref{tab:structstabmat} up to
+sampling error.
 
-Next, we derive an upper bound on the robustness of any graph constructed from a given set of connected components.  Since $R(C_i) \le 1$ for all $i$, it follws that increasing $\ell_{ij}$ will increase $R(G)$.  Given two connected components $C_i$ and $C_j$ with $v_i$ and $v_j$ nodes respectively, we have a maximum of $n_i n_j$ links going from $C_i$ to $C_j$.  Hence, $\ell_{ij} \le v_i v_j$, so, we conclude that
+Next, we derive an upper bound on the robustness of any graph
+constructed from a given set of connected components.  Since
+$R(C_i) \le 1$ for all $i$, it follows that increasing $\ell_{ij}$ will
+increase $R(G)$.  Given two connected components $C_i$ and $C_j$ with
+$v_i$ and $v_j$ nodes respectively, we have a maximum of $n_i n_j$
+links going from $C_i$ to $C_j$.  Hence, $\ell_{ij} \le v_i v_j$, so,
+we conclude that
 \begin{align}
-R(G) \le \frac{\sum_{i,j \in \hier(G)} v_i v_j + \sum_i \connectivity_i R(C_i)}
-{\sum_{i,j \in \hier(G)} v_i v_j + \sum_i \connectivity_i}, \label{eq:sccmaxrobustness}
+R(G) \le \frac{\sum\limits_{(i,j) \in \hier(G)} v_i v_j +
+               \sum\limits_{i=1}^n \connectivity_i R(C_i)}
+              {\sum\limits_{(i,j) \in \hier(G)} v_i v_j +
+               \sum\limits_{i=1}^n \connectivity_i},
 \end{align}
 
-Since every acyclic digraph can be embedded into a totally ordered set, we may assume without loss of generality that our components have been ordered in a way such that, if $(i,j) \in \hier(G)$, then $i < j$.  Hence, after substituting into our expression and simplifying using the identity
-$$\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n} v_i^2,$$
-we arrive at the following upper bound on robustness in terms of the connected components:
-\begin{align}
+Since every acyclic digraph can be embedded into a totally ordered
+set, we may assume without loss of generality that our components have
+been ordered in a way such that, if $(i,j) \in \hier(G)$, then $i <
+j$.  Hence, after substituting into our expression and simplifying
+using the identity
+$$\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i
+v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n}
+v_i^2,$$
+we arrive at the following upper bound on robustness in terms
+of the connected components:
+\begin{align} \label{eq:sccmaxrobustness}
 R_{\mathrm{max}}(C_1, \ldots C_n) =
-\frac{\frac{1}{2} ((\sum_i n_i)^2 - \sum_i n_i^2) + \sum_i \connectivity_i R(C_i)}
-{\frac{1}{2} ((\sum_i v_i)^2 - \sum_i v_i^2) + \sum_i \connectivity_i}, \label{eq:exsccmaxrobustness}
+\frac{\frac{1}{2} ((\sum_{i=1}^n v_i)^2 - \sum_{i=1}^n v_i^2) +
+                    \sum_{i=1}^n \connectivity_i R(\hbox{avg stab}(C_i),1)}
+     {\frac{1}{2} ((\sum_{i=1}^n v_i)^2 - \sum_{i=1}^n v_i^2) +
+                    \sum_{i=1}^n \connectivity_i}.
 \end{align}
-Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$ is the graph on $n$ nodes with a link from node $i$ to node $j$ whenever $i < j$.  Then, by the construction described in the previous section on network hierachy, we have a graph $G_{\mathrm{max}}$ such that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula, $R(G_{\mathrm{max}}) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
+Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$
+is the graph on $n$ nodes with a link from node $i$ to node $j$
+whenever $i < j$.  Then, by the construction described in the previous
+section on network hierachy, we have a graph $G_{\mathrm{max}}$ such
+that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and
+$\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula,
+$R(\hbox{avg stab} (G_{\mathrm{max}}), 1) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 
 This argument also works when we resample more than one entry,
-although the notation becomes more complicated.  Suppose that, as
-before, we have a graph $G$ with strongly connected components $C_i$,
-but that now we
-resample $m$ nodes.  Then, given a partition $m = \sum_{i=0}^n m_i$
-such that $m_0 \le \sum_{i=1}^{n-1}\sum_{j=i}^n \ell_{ij}$ and $m_i 
-\le \connectivity_i$ when $1 \le i \le n$,
-there are ${m \choose m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$
-links from $C_i$ and $m_0$ links between strongly connected
-components.  Hence, if we denote the set of partitions which satisfy
-our inequalities as $M$, our weighted average becomes
+although the notation becomes more complicated.  Suppose that we
+resample $m$ nodes.  Define
+\begin{equation*}
+M = \left\{(m_0, m_1, \ldots, m_n) \,\bigg|\,
+m = \sum_{i=0}^n m_i \quad\&\quad
+m_0 \le \sum_{i=1}^{n-1} \sum_{j=i+1}^n \ell_{ij} \quad\&\quad
+\forall i \in \{1, \ldots, n\} \, m_i < \connectivity_i \right\}.
+\end{equation*}
+Then, given $(m_0, m_1, \ldots, m_n) \in M$, there are ${m \choose
+m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
+$m_0$ links between strongly connected components.  Hence, our
+weighted average becomes
 \begin{equation}
 R(\hbox{avg stab} (G), m) =
-\frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M} {m \choose m_0, m_1, \ldots. m_n}
-      \left(m_0 + \sum_{i=1}^n m_i R(\hbox{avg stab} (C_i), m_i)\right)}
-     {m \sum\limits_{(m_0, m_1, \ldots m_n) \in M} {m \choose m_0, m_1, \ldots. m_n}}
+\frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
+      {m \choose m_0, m_1, \ldots. m_n}
+      \left(m_0 + \sum\limits_{i=1}^n m_i R(\hbox{avg stab} (C_i), m_i) \right)}
+     {\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
+      {m \choose m_0, m_1, \ldots. m_n} m}
 \end{equation}
 
-The preceding argument demonstrates the manner in which robustness is maximized by maximizing the number of edges \emph{between} the strongly connected components of the graph underlying system interdependencies. And, the graph that has the latter property is that associated to the total ordering, $G_{\mathrm{tot}}$, which aslo possess the highest degree of hierarchy. The fact that robustness is equivalent for any configuration of strongly connected components with an equivalent number of links between them demonstrates that it is invariant to permutations of strongly connected components. This result does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled because the arguments presented here are purely topological in nature. The result that dynamical robustness is correlated with system hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles primarily studied here.
+As before, since $R(\hbox{avg stab} (C_i), m_i) \le 1$, we may
+increase $R(\hbox{avg stab} (G), m)$ by increasing the maximum
+possible value of $m_0$ while keeping the strongly connected
+components the same.  Again, if we fix $\hier(G)$, the maximum
+possible value of $m_0$ is $\sum_{(i,j) \in \hier(G)} v_i v_j$
+whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{i=1}^n
+v_i)^2 - \sum_{i=1}^n v_i^2)$, which is attained when $\hier(G_{max}) =
+G_{tot}$.  Hence, we conclude that $R(\hbox{avg stab} (G), m) \le
+R(\hbox{avg stab} (G_{\mathrm{max}}), m)$.
 
-\todo{write down analogs of \ref{eq:sccrobustness} and \ref{eq:sccmaxrobustness} for resampling a fixed proportion or an arbitrary number of components}
+The preceding argument demonstrates the manner in which robustness is
+maximized by maximizing the number of edges \emph{between} the strongly
+connected components of the graph underlying system interdependencies.
+And, the graph that has the latter property is that associated to the
+ordering, $G_{\mathrm{tot}}$, which aslo possess the highest degree of
+hierarchy. The fact that robustness is equivalent for any configuration
+of strongly connected components with an equivalent number of links
+between them demonstrates that it is invariant to permutations of
+strongly connected components. This result does not depend at all upon
+any particular details such as the probability distribution from which
+the component interaction strengths are sampled because the arguments
+presented here are purely topological in nature. The result that
+dynamical robustness is correlated with system hierarchy therefore
+applies to an even broader class of dynamical systems than the particular
+random ensembles primarily studied here.
 
 % \section{Strongly connected components, robustness, and hierarchy}
 
