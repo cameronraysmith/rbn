@@ -35,8 +35,8 @@ $^4$Santa Fe Institute, 1399 Hyde Park Road, Santa Fe, NM 87501, USA
 \end{quote}}
 
 % \section{Todo}
-\listoftodos
-\tableofcontents
+% \listoftodos
+% \tableofcontents
 
 \section{Introduction}
 
@@ -537,7 +537,7 @@ random ensembles primarily studied here.
 
 \newpage
 
-\bibliographystyle{amsplain}
+\bibliographystyle{pnas}
 \bibliography{bib/books,bib/papers}
 
 \newpage
@@ -549,9 +549,13 @@ random ensembles primarily studied here.
 \newpage
 \FloatBarrier
 
+\beginsupplement
+\setcounter{secnumdepth}{4}
+\section{Supplementary Material}
+
 \section{Tables}
-\todo{Fill out notation table}
-\input{tex/tablenotation}
+% \todo{Fill out notation table}
+% \input{tex/tablenotation}
 \input{tex/table2x2stab}
 \input{tex/tablenographs}
 
@@ -559,290 +563,7 @@ random ensembles primarily studied here.
 
 % \input{tex/tablewithgraphs}
 
-\section{Stability criteria}
-% \todo{Since there is no point in publishing proofs of results contemporary with Darwin's Origin of Species, this section will be replaced with a reference to Gantmacher.}
-Suppose that $M$ is an $n \times n$ matrix with real coefficients.
-As previously described, we call
-the matrix $M$ stable if all its eigenvalues have negative real part.
-Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
-Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
-writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
-Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
-$M$ be stable is equivalent to asking that the roots of $\chi$ all have
-negative real part.  Hence, let us call a polynomial stable if all its
-roots have negative real part.  We will formulate conditions for this to
-happen in terms of the coefficients of $\chi$.
-
-\begin{lemma}
-If $M$ is stable, then $s_i > 0$ for all $i$ between $1$ and $n$.
-\end{lemma}
-
-\begin{proof}
-Assume that $M$ is stable and that it has $2m$ complex roots which come in
-complex conjugate pairs and $n-m$ real roots.  Let $r_1 \ldots, r_{2m}$ be
-the complex roots with $r_{2k+1}$ being the complex conjugate of $r_{2k}$
-and let $r_{2m+1}, \ldots,  r_{n}$ be the real roots. Then we can write the
-factorization as follows:
-\[
-\chi(M)(z) = \prod_{k=1}^{m} (z^2 - (r_{2k} + r_{2k+1}) z + r_{2k} r_{2k+1})
-             \prod_{k=2m+1}^{n} (z - r_k)
-\]
-Since $r_{2k}$ and $r_{2k+1}$ are complex conjugates, $r_{2k} + r_{2k+1} =
-\Re r_{2k} = \Re r_{2k+1}$ and $r_{k} r_{2k+1} > 0$.   Since all the
-roots have negative real part, all the coefficients of the terms in
-the products above are positive so, when we multiply out the product,
-we will have all positive terms.  Hence, we conclude that a necessary
-condition for $M$ to be stable is that $s_k > 0$ for all $k$.
-\end{proof}
-
-To state the next criterion, we will require the quantity $\Delta$, which
-is defined as $\prod_{j=1}^{n-1} \prod_{k=j+1}^n (r_1 + r_j)$.  Since
-this expression is invariant under permuting the roots, it may be expressed
-as a function of the coefficients $s_i$; for small values of $n$, the
-resulting expression looks as follows:
-\begin{align*}
-n=2 \qquad &\Delta = s_1 \\
-n=3 \qquad &\Delta = s_3 - s_1 s_2 \\
-n=4 \qquad &\Delta = s_1 s_2 s_3 - s_3^2 - s_1^2 s_4 \\
-n=5 \qquad &\Delta = s_1 s_2 s_3 s_4 - s_3^2 s_4 - s_1^2 s_4^2 -
-                     s_1 s_2^2 s_5 + s_2 s_3 s_5 + 2 s_1 s_4 s_5 - s_5^2
-\end{align*}
-
-\begin{lemma}
-If a point lies on the boundary of the set of stable polynomials, then
-either $s_n = 0$ and $\Delta = 0$.
-\end{lemma}
-
-\begin{proof}
-Let $S_n$ denote the symmetric group on $n$ objects and let $f \colon
-\mathbb{C}^n/S_n \to \mathbb{C}^n$ be the map that sends a set of roots
-to the n-tuplet of coefficients of a polynomial.  This map is explicitly
-given by the elemetary symmetric polynomials.  By the fundamental theorem
-of algebra, it is invertible and, by ???, its inverse is continuous.
-
-Suppose that $p$ is a stable polynomial.  By definition, this means that
-$\Re r > 0$ for every root $r$ of $p$.  Since the set $\{r \mid \Re r > 0\}$
-is an open subset of $\mathbb{C}^n/S_n$, the continuity of $f^{-1}$ implies
-that the set of stable polynomials is open.  Likewise, the set of unstable
-polynomials none of whose roots have real part equal to zero is open.
-
-Hence, if a point lies on the boundary of the stable region, it must
-correspond to a polynomial with at least one root whose real part is zero.
-There are two ways this could happen.  If the root is real, then having
-zero real part is the same as the root being zero, hence $s_n = 0$.  If
-the root is complex, then having zero real part means that the root and
-its complex conjugate are purely imaginary and sum to zero, hence $\Delta = 0$.
-\end{proof}
-
-\begin{lemma}
-If $n < 6$, then a polynomial $p$ is stable if and only
-if $\Delta > 0$ and $s_1 > 0$ for all $i$.
-\end{lemma}
-
-\begin{proof}
-Suppose that, to the contrary, there exists a polynomial which satisfies
-the inequalities $\Delta > 0$ and $s_1 > 0$ but which is not stable.
-Consider a straight line connecting this polynomial to a stable polynomial,
-say $(x - 1)^n$.
-
-Suppose that $p$ is a polynomial for which $\Delta = 0$ and $s_i > 0$ but
-which is not on the boundary of the stable region.  In order to have
-$\Delta = 0$, we must either have a pair of real roots which sum to zero
-or a pair of complex conjugate roots with zero real part.  In the former
-case, we would have $x^2 - r^2$ as a factor of our polynomial and in the
-latter, we would have $x^2 + r^2$ as a factor.
-
-Suppose that $x^2 - r^2$ is a factor.  Then we have
-\[
-p = (x^2 - r^2) \left(x^{n-2} + \sum_{k=1}^{n-3} c_k x^{n-k-2} \right) =
-x^n + \sum_{k=3}^{n-3} (c_k - r^2 c_{k-2}) x^{n-k} +
-\]
-
-Suppose that $x^2 + r^2$ is a factor. Then we have one of the following
-when $2 < n < 6$
-\begin{align*}
-(x^2 + r^2)(x + a_1) &=
-x^3 + a_1 x^3 + r^2 x^2 + a_1 r^2 \\
-(x^2 + r^2)(x^2 + a_1 x + a_2) &=
-x^4 + a_1 x^3 + (a_2 + r^2) x^2 + a_1 r^2 x + a_2 r^2 \\
-(x^2 + r^2)(x^3 + a_1 x^2 + a_2 x + a_3) &=
-x^5 + a_1 x^4 + (a_2 + r^2) x^3 + (a_3 + a_1 r^2) x^2 + a_2 r^2 x + a_3 r^2
-\end{align*}
-Inspecting these, we see that, if the coefficients of $p$ are positive,
-then $a_i > 0$ for all $i$.
-
-$\ldots$
-\end{proof}
-
-For $n = 6$, this argument breaks down because, for instance, we have
-the polynomial $x^6 + x^5 +\frac{1}{2} x^4 + 2x^3 + \frac{1}{2} x^2 +
-x + 1$  which factors as  $(x^2 + 1)(x^4 + x^3 - \frac{1}{2} x^2 + x + 1)$.
-This polynomial has positive cofficients and $\Delta = 0$ but does not
-lie on the boundary of the stable region because the second factor has
-a negative coefficient, hence has a root with positive real part.  Thus,
-for $n = 6$ and higher, we need to supplement our conditions with
-additional inequalities (which may be taken to be linear) to exclude
-such possibilitiies.  However, we will not pursue this topic further
-in this work because we will only be making computations with matrices
-of size less than $6$.
-
-\section{Paths and eigenvalues}
-% \todo{I am thinking that we might want to jettison this section from
-% the published version and leave it as private notes for future work.
-% As a substitute for the published version, I made a section in front
-% of it which takes a more direct route to proving what is needed for
-% the purposes of showing that the characteristic polynomial factors and
-% making our arguments about total orders being the most stable.  We
-% should discuss this point tomorrow.}
-
-Next, we will want to relate prpoperties of our matrix and its eigenvalues
-to  properties of the associated graph $G_A$.  To do this, we will first
-examine the category of paths on $G_A$, and derive a formula expressing
-the chararacteristic polynomial as a sum over cycles.
-
-Given a digraph $G$, let $\Path (a,b)$ denote the set of paths from the
-vertex $a$ to the vertex $b$ and let $\Path(G) = \bigcup_{a,b \in G} \Path (a,b)$.
-Given a path $p_1$ from $a$ to $b$ and a path $p_2$ from $b$ to $c$, we may
-concatenate them to obtain a path $p_1 \circ p_2$ from $a$ to $c$.  Since
-this operation is associative and has identity elements,
-$(\Vertex(G), \Path(G), \circ)$ forms a category.  Define
-$\mathcal{A}(G)$ to be the set of all linear combinations of elements of
-$\Path(G)$ with coefficients in $\mathbb{R}$.  Then $\mathcal{A}(G)$ forms
-an associative algebra under the multiplication induced by $\circ$.
-
-Next, we introduce two basic functors from $\Path (G)$.  One of these is
-$\length \colon \Path(G) \to \mathbb{N}$ (regarding the natural numbers
-as a category with a single object) which sends each path to its length.
-The other functor is the weight product functor.  Given an assignement
-$w \colon \Path(G) \to \mathbb(R)$ of weights to the edges of our digraph,
-define $\wprod \colon \Path(G) \to \mathbb{R}$ to be the function which sends
-each path to the product of the weights associated to the edges which
-that path traverses.  Given the way that graphs are associated to matrices,
-weights on edges correspond to matrix entries and, given a path
-$v_1, v_2, v_3 \ldots$, we have $\wprod(v_1, v_2, v_3 \ldots) =
-m_{v_1 v_2} m_{v_2 v_3} \cdots$.  Going in the opposite direction, we
-note that any functor from $\Path(G)$ to $\mathbb{R}$ may be regarded as
-a weighted product for a suitable choice of weights.  We extend $\wprod$ to
-$\mathcal{A}(G)$ by linearity; the result is an algebra homomorphism.
-
-% \todo{Start talking about Abelianizing the category and the algebra, say
-% more after decomposing into components.}
-
-% \todo{Characterize strongly connected components in terms of
-% fibration over poset.}
-
-The characteristic polynomial $\chi(A)$ associated to $A$ can be factored
-according to the strongly connected components of the graph $G$.
-\[
-\frac{\chi(M)'(z)}{\chi(M)(z)} = \tr (zI - M)^{-1}
-\]
-where, $\chi(M)(z) = \det (zI - M)$ is the chararacteristic polynomial of the
-matrix $M$ with $z$ a complex variable.  This formula is readily verified when
-$M$ is diagonal and has the nice property of being additive over decompositions
-of the matrix. Making the change of variables $x=\frac{1}{z}$, we have
-\[
-\tr (I - xM)^n =
-\sum_{a \in \Vertex(G)} \sum_{p \in \Path_n (G)(a,a)} \wprod(p) x^{\length(p)}
-\]
-where $G$ is the graph of the matrix and $\Path_n (G;a,b)$ is the set of
-paths of length $n$ from $a$ to $b$.  ; $F$ is the functor from this category
-to the multiplicative semigroup of the real numbers which corresponds to the matrix $M$.
-
-As an illustration of this formula, we will use it to compute the characteristic
-polynomial of the matrix associated to the labelled graph in figure ??.  We begin
-by noting that the closed paths of this graph can be described by the following
-regular expressions:
-\begin{align*}
-\Path (1,1) &: (e + bd + bca)^* \\
-\Path (2,2) &: (ae^*(be^*d)^*bc)^* \\
-\Path (3,3) &: ((ca + d)e^*b)^* \\
-\end{align*}
-Since these regular expressions are non-redundant, we can obtain generating
-functions for the paths by considering $a,b,c,d,e$ as non-commutative
-variables and replacing the Kleene star $x^*$ by $(1 - x)^{-1}$:
-\begin{align*}
-\Path (1,1) &: (1 - e - bd - bca)^{-1} \\
-\Path (2,2) &: (1 - a(1-e)^{-1}(1 - b(1-e)^{-1}d)^{-1}bc)^{-1} \\
-\Path (3,3) &: (1 - (ca + d)(1 - e)^{-1}b)^{-1} \\
-\end{align*}
-To obtain the characteristic polynomial, we make the substitutions
-$a \mapsto m_{12}/z, b \mapsto m_{31}/z, c \mapsto m_{23}/z, d \mapsto m_{13}/z,
-e \mapsto m_{11}/z$ and simplify, using the fact that the matrix entries
-commute:
-\begin{align*}
-\Path (1,1) &: \frac{z^3}
-{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} } \\
-\Path (2,2) &: \frac{z(z^2 - m_{11} z - m_{13} m_{31})}
-{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} }  \\
-\Path (3,3) &: \frac{z^2(z^2 - m_{11})}
-{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} } \\
-\end{align*}
-Adding these three quantitites together, we obtain
-\[
-\frac{z(3 z^2 - 2 m_{11} z - m_{13} m_{31})}
-{z^3 - m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31} },
-\]
-which we recognize as $\chi'(z)/\chi(z)$, where
-$\chi(z) = z^3−m_{11} z^2 - m_{13} m_{31} z - m_{12} m_{23} m_{31}$.
-finally, we note that this polynomial is indeed the characteristic
-polynomial of the matrix
-\[
- \begin{pmatrix}
-   m_{11} & m_{12} & m_{13} \\
-   0      & 0      & m_{23} \\
-   m_{31} & 0      & 0 \\
- \end{pmatrix}
-\]
-corresponding to our digraph.
-
-We now make use of the additivity.  Let $\hier$ be the functor which
-sends $G$ to a poset $P$.  Then every element $p$ of $\Path(a,a)$ lies
-in $\hier^{-1} (\hier(a))$.  Hence, our sum decomposes into partial sums
-for the fibers of the points in the hierarchy which corresponds to a
-factorization of the characteristic polynomial.
-
-\section{Bounds on robustness}
-
-Suppose that $S$ is a region in $[0,1]^2$.  Then, the robustness of $S$ under resampling is given as
-\begin{align*}
-R &= \frac{\int_0^1 dx \int_0^1 dy \int_0^1 dx'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x',y) +
-           \int_0^1 dx \int_0^1 dy \int_0^1 dx\,dy\,dy'\, \mathbf{1}_{S} (x,y) \mathbf{1}_{S} (x,y')}
-          {2 \int_0^1 dx \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)} \\
-  &= \frac{\int_0^1 dy\, (\int_0^1 dx\, \mathbf{1}_{S} (x,y))^2 +
-           \int_0^1 dx\, (\int_0^1 dy\, \mathbf{1}_{S} (x,y))^2}
-          {2 \int_0^1 dx\, \int_0^1 dx\,dy\, \mathbf{1}_{S} (x,y)}
-\end{align*}
-We will show that $R \le \int_{H^2} dx\,dy\, \mathbf{1}_{S} (x,y)$ with equality occurring when $S$ is rearrangement equivalent to either the rectangle of height 1 or a rectangle of width 1.
-
-First, we start with the special case when $S$ is a rectangle with one vertex at the origin and sides parallel to the coordinate axes.  If $a$ is the height of our rectangle and $b$ is its width, we have
-
-Next, consider the case where $R$ consists of a union of squares of a rectangular grid obtained by subdividing the $x$ and $y$ axes of our bounding square into $2N$ portions of equal length.  Given two integers $i$ and $j$
-
-Suppose we restrict to rectangular regions in an $n$-dimensional hypercube and resample $m$ variables.  Then we have $R = s_m (a_1, \ldots a_n)$ where $s_m$ is the $m$-th elementary symmetric polynomial.  As before, we have the constraint that $\prod_i a_i = s_n (a_1, \ldots a_n)$ is constant.  Using Lagrange multipliers, we obtain the equation
-\[
-\frac{\partial s_m (a_1, \ldots a_n)}{a_k} = \lambda \frac{\partial s_n (a_1, \ldots a_n)}{a_k} .
-\]
-Since the elementary symmetic polynomial is linear in each of its variables, this reduces to
-\[
-s_{m-1} (a_1, \ldots {\hat a}_k \ldots a_n) = \lambda \partial s_{n-1} (a_1, \ldots {\hat a}_k \ldots a_n) .
-\]
-Dividing through, this becomes
-\[
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \lambda
-\]
-or, eliminating $\lambda$, we have
-\[
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots \frac{1}{a_n}\right) =
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
-\]
-for all $j,k$.  Suppose that $j < k$.  Then, we may expaand both sides,
-\begin{align*}
-&\frac{1}{a_k} s_{m-2} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) = \\ \qquad
-&\frac{1}{a_j} s_{m-2} s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right) +
-s_{m-1} \left(\frac{1}{a_1}, \ldots {\hat a}_j \ldots {\hat a}_k \ldots \frac{1}{a_n}\right)
-\end{align*}
-and conclude that $a_j = a_k$.  Hence, the only critical point lies at the point $a_1 = a_2 = \cdots = a_n$.  By the second derivative test, that point is a minimum, so the maximum must lie on the boundary.
+\input{tex/extra}
 
 \input{tex/figuressupp}
 

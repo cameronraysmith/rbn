@@ -48,6 +48,7 @@ linkbib:
 dropbox:
 	cp paper.tex ~/Dropbox/sharelatex/rbn
 	cp *header.tex ~/Dropbox/sharelatex/rbn
+	cp *.bst ~/Dropbox/sharelatex/rbn
 	cp tex/* ~/Dropbox/sharelatex/rbn/tex
 	cp fig/*.pdf ~/Dropbox/sharelatex/rbn/fig
 	cp bib/*.bib ~/Dropbox/sharelatex/rbn/bib
