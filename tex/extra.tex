@@ -1,3 +1,28 @@
+\section{Stable region}
+We now summarize some of these results which are
+relevant to our calculations.
+
+Define the characteristic polynomial as $\chi(M)(z) = \det(zI - M)$.
+Denote the coefficients of $\chi(M)$ as $s_j$ and its roots as $r_j$,
+writing $p(x) = x^n + \sum_{k=1}^n s_k x^{n-k} = \prod_{k=1}^n (x-r_k)$.
+Then, since the roots of $\chi$ are the eigenvalues of $M$, asking that
+$M$ be stable is equivalent to asking that the roots of $\chi$ all have
+negative real part.  Hence, let us call a polynomial stable if all its
+roots have negative real part.  We will formulate conditions for this to
+happen in terms of the coefficients of $\chi$ \cite{Gantmacher1959}.
+
+\begin{lemma}
+If $M$ is stable, then $s_i > 0$ for all $i$ between $1$ and $n$.
+\end{lemma}
+\begin{lemma}
+If a point lies on the boundary of the set of stable polynomials, then
+either $s_n = 0$ and $\Delta = 0$.
+\end{lemma}
+\begin{lemma}
+If $n < 6$, then a polynomial $p$ is stable if and only
+if $\Delta > 0$ and $s_1 > 0$ for all $i$.
+\end{lemma}
+
 \section{Stability criteria}
 % \todo{Since there is no point in publishing proofs of results contemporary with Darwin's Origin of Species, this section will be replaced with a reference to Gantmacher.}
 Suppose that $M$ is an $n \times n$ matrix with real coefficients.
