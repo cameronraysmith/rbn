@@ -128,7 +128,7 @@ may proceed to ask whether it is a dynamically stable fixed point.
 Intuitively, dynamic stability means that, if one chooses the initial
 conditions sufficiently close to the fixeed point, the solution will
 stay close to the fixed point.  Physically, this is important because,
-if a fixed point ${\vec x}_0$ is unstable, we have zero proability of
+if a fixed point ${\vec x}_0$ is unstable, we have zero probability of
 observing the solution ${\vec x}(t) = {\vec x}_0$.
 
 To determine stability, we linearize the equations of motion about the
@@ -159,7 +159,7 @@ where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\
 $$
 y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
 $$
-for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$.
+for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$. This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$ \cite{Gantmacher1959}.
 
 Even though the determination of stability only requires examining
 linearized equations of motion, it is worth noting that knowing the
@@ -167,8 +167,7 @@ stability of a fixed point can yield information about the non-linear
 dynamics of a system.  For instance, in two dimensions,
 Poincare-Bendixson theory implies that every limit cycle must encircle
 at least one fixed point \cite{Davis1962}.  Furthermore, in the case where the cycle contains a single fixed point (such as in the Lotka-Volterra model of
-conflicting populations), the stability of the fixed point will be
-determined by whether the limit cycle is attractive or repulsive.
+conflicting populations), the stability of the fixed point will determine whether the limit cycle is attractive or repulsive.
 
 %% To determine whether a randomly selected dynamical system evaluated at
 %% a random critical point, given by a matrix such as $A$, is stable, it
@@ -191,21 +190,8 @@ determined by whether the limit cycle is attractive or repulsive.
 % sampling uniformly over the $a_{ij}$ defining $A$ the value of a
 % particular $a_{ij}$ from a given probability distribution.
 
-Suppose that our Jacobian $A$ is an $n \times n$ matrix with real
-coefficients and connectivity $\connectivity$ and denote the
-proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may
-compute the robustness of this proposition using \ref{eq:robustness}
-once we have specified the proability densities $\mu$ and $\mu'$.  In
-general, these will depend upon the parameters of the non-linear
-system.  For the puprpose of the current investigation, we shall make
-the ansatz that these are such that the distribution of entries of $A$
-is (at least approximately) the uniform distribution
-$\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube,
-$H^\connectivity$, of edge length $r=2$, centered about the origin.
-To model the perturbations, we shall resample the elements $k_1,
-k_2, \ldots k_m$ of this matrix from the same uniform distribution.
-Under these assumptions, the expression for robustness becomes
-of \ref{eq:robustness}:
+Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the puprpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution.
+Under these assumptions, the expression for robustness becomes a special case of \ref{eq:robustness}:
 \begin{equation}\label{eq:condprobgen}
  R (\mathrm{stab}, k_1, \ldots k_m) =
   \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
@@ -220,23 +206,19 @@ where we made the abbreviations
 i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ with their primed counterparts.
 
 While one can resample a fixed subset of the links, more typically we will be randomly selecting which links to resample with a uniform distribution on the links.  The result of this operation corresponds to averaging our quantity over subsets of links:
-\begin{equation}
+\begin{equation}\label{eq:robavgoverlinks}
 R (\hbox{avg stab}, m) =
 \frac{1}{\binom{\connectivity}{m}}
 \sum_{\{k_1, k_2, \ldots k_m\} \subset \{1, 2,, \ldots \connectivity\}}
 R (\mathrm{stab}, k_1, \ldots k_m)
 \end{equation}
-
-In order to evaluate these integrals, one needs to describe the stable region.
-This can be done in terms of conditions on the coefficients of the
-characteristic polynomials associated to the systems described by matrices $A$ above \cite{Gantmacher1959}.
+We are fundamentally interested in the relationship between \ref{eq:condprobgen} and \ref{eq:robavgoverlinks} and topological properties of systems that derive from their associated graphs. In order to investigate this further, we must characterize properties of system graphs in order to evaluate correlations of those properties with dynamical robustness.
 
 \section{Network hierarchy and strongly connected components}
 
-Open systems are distinguished by having some of the variables be control variables whose values are given as specified functions of time rather than determined by the dynamics.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  The composition and decomposition of open systems has algebraic structure equivalent to certain a kind of operad \cite{Vagner2014}.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, for most purposes, such a decomposition would be uninteresting and what we instead want is a decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
+Dynamical networks of the kind described above can be viewed at the level of their interdependency graphs as being composed of more fundamental interacting subsystems. One such kind of system composition and decomposition is given by the notion of open systems, which are distinguished by having some of the variables specified as control variables whose values are given as autonomous functions of time rather than determined by the dynamics via intrinsic interactions \cite{Vagner2014}.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, this decomposition is trivial since it is equivalent to the underlying system graph and what we instead want is an intermediate decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
 
 A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
-
 The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
 
 Corresponding to this decomposition we can construct a directed acyclic graph $\hier (G)$.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
@@ -244,14 +226,15 @@ Corresponding to this decomposition we can construct a directed acyclic graph $\
 One can also perform this construction in the opposite direction.  Start with a directed acyclic graph $A$.  To each node $n$ of $A$ associate
 a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = A$ and furthermore, every graph $G$ such that $\hier(G) = A$ can be obtained in this manner.
 
+\todo{add figure showing all symmetries under $\hier$}
 This map $\hier$ is many-to-one and so there is a large class of
 operations which leaves $\hier(G)$ invariant for a given graph $G$.
 For instance, we may interchange the positions of the strongly
 connected components relative to each other.  Leaving the components
-fixed, we may move links between nodes in a component or betwwen
+fixed, we may move links between nodes in a component or between
 components, or even add or delete links.  Some examples of these
 operations are illustrated in \ref{fig:scc}B and C.  As we shall see
-later, these operations leave invariant key dynamical quantities, so
+later, some of these operations leave invariant key dynamical quantities, so
 we may regard them as a symmetry groupoid of our system.
 
 The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \ref{fig:scc}A. This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take this distance to be the definition of hierarchy.
@@ -314,9 +297,9 @@ d & c
 \end{pmatrix} \textrm{stable } \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
 
-Using this approach the probability of stability and of robustness for all two component systems is given in \ref{tab:structstabmat}. Similarly, the analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:combined}B.
+Using this approach the probability of stability and of robustness for all two component systems is given in \ref{tab:structstabmat}.
 
-If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
+The analogous results for all three component systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \ref{fig:combined}B. This process is associated with some error relative to the exact integration described above. If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
 $$
 \mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
 $$
@@ -345,18 +328,18 @@ The relationship between connectivity and robustness for two component systems i
 % \section{Cycle number and connectivity classify robust systems}
 The combination of connectivity and cycle number as shown in \ref{fig:combined}E provides a better classification of the dependence of robustness upon network topology. Here the robustness of three component systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three component systems is that of \ref{fig:scc}A. This network is the most hierarchical of all three component systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \ref{fig:scc}A has a block triangular structure.
 
-This observation suggested that graph edit distance from \ref{fig:scc}A, hierarchy, might provide a better characterization of system robustness. \ref{fig:scc}D shows system robustness as a function of hierarchy, where the most hierarchical system has a hierarchy of 0. There is a monotonic correlation between the upper bound of robustness and hierarchy. \ref{fig:scc}F shows system robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \ref{fig:combined}E.
+This observation suggested that graph edit distance from \ref{fig:scc}A, hierarchy, might provide a better characterization of system robustness. \ref{fig:combined}D shows system robustness as a function of hierarchy, where the most hierarchical system has a hierarchy of 0. There is a monotonic correlation between the upper bound of robustness and hierarchy. \ref{fig:combined}F shows system robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \ref{fig:combined}E.
 
 \section{Component decomposition, hierarchy, and the symmetries of robustness}
 
-The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness.  By combining our decomposition of the graph with our analysis of matrices, we will deduce a general result which relates robustness to hierarchy.
+The fact that the most hierarchical of networks is the most robust in the case of three component systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness.  By combining our decomposition of the graph with our analysis of the robustness of random ensembles of dynamical systems, we will deduce a general result which relates robustness to hierarchy.
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomials factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between strongly connected components) and does not depend upon what order the components appear.
 
 Using these observations, we may express the robustness of a graph in
 terms of the robustnesses of its strongly connected components.  If
-the components $C_i$ of our graph $G$ has $v_i$ vertices connectivity
-$\connectivity_i$ and there are $\ell_{ij}$ links between components
+the components $C_i$ of our graph $G$ has $v_i$ vertices, connectivity
+$\connectivity_i$, and there are $\ell_{ij}$ links between components
 $i$ and $j$, then there are a total of
 $\sum_{i,j \in \hier(G)} \ell_{ij} + \sum_{i=1}^n \connectivity_i$
 links in $G$.  If we resample a randomly chosen link in a component
@@ -455,7 +438,7 @@ The preceding argument demonstrates the manner in which robustness is
 maximized by maximizing the number of edges \emph{between} the strongly
 connected components of the graph underlying system interdependencies.
 And, the graph that has the latter property is that associated to the
-ordering, $G_{\mathrm{tot}}$, which aslo possess the highest degree of
+ordering, $G_{\mathrm{tot}}$, which also possess the highest degree of
 hierarchy. The fact that robustness is equivalent for any configuration
 of strongly connected components with an equivalent number of links
 between them demonstrates that it is invariant to permutations of
