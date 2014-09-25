@@ -49,7 +49,7 @@ Here we build on work aimed at investigating the stability of randomly connected
 \section{Dynamical systems on biological networks}
 In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
-For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph, $G$, to the interdependencies, and a vector field $V \in \Gamma T(\prod_i M_i)$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \ref{fig:examplesystemmodules}A
+For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph, $G$, to the interdependencies, and a vector field $V$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \ref{fig:examplesystemmodules}A
 % \begin{center}
 % \input{tex/examplehamdyngraph}
 % \end{center}
@@ -84,34 +84,15 @@ $$
 $$
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables.
 
-In order to discuss how different parts of the system influence each
-other, we shall generalize our definition to include open systems.  We
-do this by having some of our variables be control variables whose
-values are given as specified functions of time rather than determined
-by the dynamics.  Given several such open systems, we may combine them
-to produce a larger system by setting the control variables of a
-subsystem equal to the dynamical variables of another system.  For
-details and a discussion of the operad structure of composition of
-open systems see \cite{Vagner2014}.  Taking this notion to its logical
-extreme, one can dissect a system into a collection of one open system
-for each dynamical variable.  However, for most purposes, such a
-decomposition would be uninteresting and what we instead want is a
-decomposition into relatively self-contained modules.  In the section
-on connected components, we shall propose a way of accomplishing this
-based upon the topology of the system graph.
-
 In order to accommodate the possibility of uncertainty in our
-modelling, we will generalize our notion of a system on a network to
+modeling, we will generalize our notion of a system on a network to
 that of a system with random parameters.  Again, this will involve
-three steps. First, we provide a measure space $S, \mathcal{B}(S)$
+three steps. First, we provide a measure space $S$
 which represents the values over which our parameters can vary. Next,
 instead of a single vector field, we consider a family of vector
-fields parameterized by this space. That is to say, we introduce a
-mapping $V \colon S \to \Gamma T(\prod_i M_m)$.  (Here $\Gamma$
-denotes the space of sections of the tangent bundle.)  As before, for
+fields parameterized by this space.  As before, for
 each point $p \in S$, the vector field $V(p)$ must be consistent with
-the system graph. Finally, we select a probability measure $\mu \colon
-\mathcal{B}(S) \to [0,1]$ which represents our understanding of which values of the parameters
+the system graph. Finally, we select a probability measure, $\mu$, which represents our understanding of which values of the parameters
 are likely. In accord with Bayesian statistics, we might revise this
 distribution as data comes in or use it to estimate parameters and error
 bars from experimental results.
@@ -126,23 +107,7 @@ points, we have an integer-valued random variable; and if the quantity is
 whether or not the system posesses a limit cycle, we have a binary random
 variable.
 
-A quality which is of interest to us is robustness or structural
-stability \cite{Smale1967}, which requires the determination of
-whether or not a given dynamical system that is determined to be
-stable remains stable under a perturbation to one or more of its
-defining parameters.  We will quantify this as the probability that,
-if some property holds for a set of parameters, it will continue to
-hold if we make a random perturbation about those parameter values.
-To do so, we will introduce, in addition to the probability
-distribution $\mu$ described above, a family of probability
-distributions $\mu' \colon S \times \mathcal{B}(S) \to [0,1]$ such
-that $\mu'(x,y)$ encodes the conditional probability that a system
-with a parameter value $x$ will have its parameter values changed to
-$y$ under a perturbation.  For our biological models, we will be
-interested in large perturbations rather than the small or
-infinitessimal perturbations usually considered in the theory of
-dynamical systems.  Then, given a binary random variable $q$,
-we define its robustness as the following conditional proability:
+A quality which is of interest to us is robustness or structural stability \cite{Smale1967}, which requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one or more of its defining parameters.  We will quantify this as the probability that, if some property holds for a set of parameters, it will continue to hold if we make a random perturbation about those parameter values. To do so, we will introduce, in addition to the probability distribution $\mu$ described above, a family of probability distributions $\mu'$ such that $\mu'(x,y)$ encodes the conditional probability that a system with a parameter value $x$ will have its parameter values changed to $y$ under a perturbation.  For our biological models, we will be interested in large perturbations rather than the small or infinitesimal perturbations usually considered in the theory of dynamical systems.  Then, given a binary random variable $q$, we define its robustness as the following conditional probability:
 \begin{align}\label{eq:robustness}
   R (q) =
   \frac{\int_S d\mu(x) \int_S d\mu'(x,y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
@@ -268,7 +233,9 @@ characteristic polynomials associated to the systems described by matrices $A$ a
 
 \section{Network hierarchy and strongly connected components}
 
-A graph can be decomposed into a natural collection of \emph{modules} called strongly connected components. A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
+Open systems are distinguished by having some of the variables be control variables whose values are given as specified functions of time rather than determined by the dynamics.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  The composition and decomposition of open systems has algebraic structure equivalent to certain a kind of operad \cite{Vagner2014}.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, for most purposes, such a decomposition would be uninteresting and what we instead want is a decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
+
+A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
 
 The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
 
