@@ -216,7 +216,7 @@ We are fundamentally interested in the relationship between \ref{eq:condprobgen}
 
 \section{Network hierarchy and strongly connected components}
 
-Dynamical networks of the kind described above can be viewed at the level of their interdependency graphs as being composed of more fundamental interacting subsystems. One such kind of system composition and decomposition is given by the notion of open systems, which are distinguished by having some of the variables specified as control variables whose values are given as autonomous functions of time rather than determined by the dynamics via intrinsic interactions \cite{Vagner2014}.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, this decomposition is trivial since it is equivalent to the underlying system graph and what we instead want is an intermediate decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
+Dynamical networks of the kind described above can be viewed at the level of their interdependency graphs as being composed of more fundamental interacting subsystems \ref{fig:examplesystemmodules}. One such kind of system composition and decomposition is given by the notion of open systems, which are distinguished by having some of the variables specified as control variables whose values are given as autonomous functions of time rather than determined by the dynamics via intrinsic interactions \cite{Vagner2014}.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, this decomposition is trivial since it is equivalent to the underlying system graph and what we instead want is an intermediate decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
 
 A strongly connected component of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three component systems are outlined in \ref{fig:scc} along with their adjacency matrices and hierarchy diagrams (to be defined below).
 The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
@@ -456,12 +456,11 @@ random ensembles primarily studied here.
 % \ref{fig:scc} shows systems with varying levels of hierarchy and modularity.
 
 \section{Discussion}
-\todo{write Discussion}
-The relationship between structure and function is fundamental to biology. Structure-function relationships exist at every level of the biological hierarchy. In all such networks, the ability of systems to persist over long periods of time, is dependent upon their dynamical stability. Here we have demonstrated a structure-function relationship wherein biological networks that are more hierarchical are more stable and thus more likely to persist in the evolutionary process. This relationship transcends levels of the biological hierarchy in the sense that it is formulated mathematically and at a level of abstraction that allows its conclusions to apply independently to each of these levels.
+The relationship between structure and function is fundamental to biology. Structure-function relationships exist at every level of the biological hierarchy. In all such networks, the ability of systems to persist over long periods of time, is dependent upon their dynamical stability. Here we have demonstrated a structure-function relationship wherein biological networks that are more hierarchical are more robust and thus more likely to persist in the evolutionary process. This relationship transcends levels of the biological hierarchy in the sense that it is formulated mathematically and at a level of abstraction that allows its conclusions to apply independently to each of these levels.
 
-The fact that such a relationship exists has the potential to unify our understanding of biological networks. Our development suggests two predictions having empirical impact capable of testing this theory. One is that, if this theory is correct, any ensemble of systems where robustness has been selected for over a sufficiently long period of time, should exhibit a bias toward more hierarchical network topologies. In the short term, this prediction may be checked by looking at both metabolic and transcription factor networks, which have already been shown to display hierarchical structure, but whose dynamics have not been sufficiently well characterized to ascertain their robustness \cite{Zhao2006,Bhardwaj2010,Colm}. The other prediction of the theory outlined here that may be able to be checked is the converse statement that an ensemble of systems demonstrating a positive or negative bias in their network topology toward hierarchy may have been under selection for, or respectively against, robustness.
+The fact that such a relationship exists has the potential to unify our understanding of biological networks. Our development suggests two predictions that could be used to test the theory described here. One is that, if this theory is correct, any ensemble of systems where robustness has been selected for over a sufficiently long period of time, should exhibit a bias toward more hierarchical network topologies. In the short term, this prediction may be checked by looking at both metabolic and transcription factor networks, which have already been shown to display hierarchical structure, but whose dynamics have not been sufficiently well characterized to ascertain their robustness \cite{Zhao2006,Bhardwaj2010,Colm}. The other prediction of the theory outlined here that may be able to be checked is the converse statement that an ensemble of systems demonstrating a positive or negative bias in their network topology toward hierarchy may have been under selection for, or respectively against, robustness. In the long term, each of these predictions may be evaluated using experimental evolution by tracking the evolution of gene regulatory network topology in the context of environmental perturbations \cite{Leroi1994}.
 
-
+Future work may be able to deepen our understanding of the relationship between dynamical robustness and the strongly connected components of the underlying network topology. One approach is to attempt to compute robustness for systems of larger size. Using existing methods, this will require large-scale Monte Carlo simulations. The conservation of robustness with respect to nontrivial symmetries including the interchange of strongly connected components and permutation within strongly connected components suggests the existence of an evolutionary neutral space. In addition to experimental investigation, a deeper mathematical characterization of the full symmetry groupoid of dynamical robustness may help to characterize a fundamental evolutionary constraint \cite{Golubitsky2006}.
 
 \section{Acknowlegements}  The authors would like to thank Jay Sulzberger and Ximo Pechuan for useful suggestions and discussions.
 
@@ -483,19 +482,17 @@ The fact that such a relationship exists has the potential to unify our understa
 \setcounter{secnumdepth}{4}
 \section{Supplementary Material}
 
-\section{Tables}
+% \section{Tables}
 % \todo{Fill out notation table}
 % \input{tex/tablenotation}
 \input{tex/table2x2stab}
+\pagebreak
 \input{tex/tablenographs}
-
-% \newpage
+\pagebreak
+\input{tex/figuressupp}
 
 % \input{tex/tablewithgraphs}
-
 % \input{tex/extra}
-
-% \input{tex/figuressupp}
 
 \end{document}
 
