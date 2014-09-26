@@ -357,6 +357,8 @@ R(G) = \frac{2 + 0.5 + 4 \times 0.62}{2 + 1 + 4} = 0.714,
 which agrees with the value computed in \ref{tab:structstabmat} up to
 sampling error.
 
+As can be seen from \ref{eq:sccrobustness}, all that is required to fix robustenss is a set of SCC sizes and the number of links between them. This demonstrates that robustness is symmetric under the transformations shown in \ref{fig:hiertransformations}A and B. Since transformations of the type \ref{fig:hiertransformations}C change the number of links between connected components, this symmetry of $\hier$ is broken by \ref{eq:sccrobustness}. Nevertheless, a considerable degree of symmetry remains. For example, \ref{fig:robustnesssymmetries} shows the symmetry groupoid of robustness for the case in which we fix connected component sizes $\{2,1,1\}$ with a total of $3$ links between them.
+
 Next, we derive an upper bound on the robustness of any graph
 constructed from a given set of connected components.  Since
 $R(C_i) \le 1$ for all $i$, it follows that increasing $\ell_{ij}$ will
