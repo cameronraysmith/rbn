@@ -109,7 +109,7 @@ variable.
 
 A quality which is of interest to us is robustness or structural stability \cite{Smale1967}, which requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one or more of its defining parameters.  We will quantify this as the probability that, if some property holds for a set of parameters, it will continue to hold if we make a random perturbation about those parameter values. To do so, we will introduce, in addition to the probability distribution $\mu$ described above, a family of probability distributions $\mu'$ such that $\mu'(x,y)$ encodes the conditional probability that a system with a parameter value $x$ will have its parameter values changed to $y$ under a perturbation.  For our biological models, we will be interested in large perturbations rather than the small or infinitesimal perturbations usually considered in the theory of dynamical systems.  Then, given a binary random variable $q$, we define its robustness as the following conditional probability where $\mathbf{1}_q(x)$ is the standard indicator function equal to $1$ when $x$ satisfies $q$ and $0$ otherwise:
 \begin{align}\label{eq:robustness}
-  R (q) =
+  R (q,\mu') =
   \frac{\int_S d\mu(x) \int_S d\mu'(x,y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
   {\int_S d\mu(x) \mathbf{1}_q(x)}
 \end{align}
@@ -120,7 +120,7 @@ investigation involve stability of equilibria.  Suppose that $\vec x$
 is a point on our phase space which depends upon the parameters.  Then
 we may take $q$ to be a binary random variable which describes whether
 or not $\vec x$ is a fixed point of the system (i.e. $q$ is true if and only if
-$F_i(\vec{x}^0)=0$ for all $i$) and perform a probabilistic analysis
+$F_i(\vec{x})=0$ for all $i$) and perform a probabilistic analysis
 of the sort discussed above.
 
 Furthermore, if it turns out that $\vec x$ is indeed a fixed point, we
@@ -128,8 +128,8 @@ may proceed to ask whether it is a dynamically stable fixed point.
 Intuitively, dynamic stability means that, if one chooses the initial
 conditions sufficiently close to the fixeed point, the solution will
 stay close to the fixed point.  Physically, this is important because,
-if a fixed point ${\vec x}_0$ is unstable, we have zero probability of
-observing the solution ${\vec x}(t) = {\vec x}_0$.
+if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
+observing the solution ${\vec x}(t) = {\vec x}^0$.
 
 To determine stability, we linearize the equations of motion about the
 fixed point $\vec{x}^0$:
@@ -190,10 +190,13 @@ conflicting populations), the stability of the fixed point will determine whethe
 % sampling uniformly over the $a_{ij}$ defining $A$ the value of a
 % particular $a_{ij}$ from a given probability distribution.
 
-Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the puprpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution.
+Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the puprpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution yielding
+$$
+\mu_{k_1,\ldots,k_m}(x,y) = \prod_{y \notin \{x_1, \ldots, x_m\} } \delta(x_j-y_j) \prod_{y \notin \{x_1,\cdots,x_m\}} \mathbf{1}_{[-1,1]} (y_j) \mathbf{1}_{[-1,1]} (x_j)
+$$
 Under these assumptions, the expression for robustness becomes a special case of \ref{eq:robustness}:
 \begin{equation}\label{eq:condprobgen}
- R (\mathrm{stab}, k_1, \ldots k_m) =
+ R (\mathrm{stab}, \mu'_{k_1, \ldots, k_m}) =
   \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
     \mathbf{1}_{stab} \mathbf{1}_{stab'}}
   {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)},
@@ -207,10 +210,10 @@ i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ wit
 
 While one can resample a fixed subset of the links, more typically we will be randomly selecting which links to resample with a uniform distribution on the links.  The result of this operation corresponds to averaging our quantity over subsets of links:
 \begin{equation}\label{eq:robavgoverlinks}
-R (\hbox{avg stab}, m) =
+\langle R (\hbox{stab}, \mu'_{k_1, \ldots, k_m}) \rangle_m =
 \frac{1}{\binom{\connectivity}{m}}
 \sum_{\{k_1, k_2, \ldots k_m\} \subset \{1, 2,, \ldots \connectivity\}}
-R (\mathrm{stab}, k_1, \ldots k_m)
+R (\hbox{stab}, \mu'_{k_1, \ldots, k_m})
 \end{equation}
 We are fundamentally interested in the relationship between \ref{eq:condprobgen} and \ref{eq:robavgoverlinks} and topological properties of systems that derive from their associated graphs. In order to investigate this further, we must characterize properties of system graphs in order to evaluate correlations of those properties with dynamical robustness.
 
@@ -454,11 +457,9 @@ random ensembles primarily studied here.
 \section{Discussion}
 The relationship between structure and function is fundamental to biology. Structure-function relationships exist at every level of the biological hierarchy. In all such networks, the ability of systems to persist over long periods of time, is dependent upon their dynamical stability. Here we have demonstrated a structure-function relationship wherein biological networks that are more hierarchical are more robust and thus more likely to persist in the evolutionary process. This relationship transcends levels of the biological hierarchy in the sense that it is formulated mathematically and at a level of abstraction that allows its conclusions to apply independently to each of these levels.
 
-The fact that such a relationship exists has the potential to unify our understanding of biological networks. In order to pursue this, it will be necessary to deepen our understanding of the relationship between dynamical robustness and the strongly connected components of the underlying network topology. One approach is to attempt to compute robustness for systems of larger size. Using existing methods, this would require large-scale Monte Carlo simulations. However, it may be possible to prove a bound on the robustness of individual strongly connected components, which could provide more definite knowledge and help to circumvent such expensive simulations. Nevertheless, the conservation of robustness with respect to nontrivial symmetries including the interchange of strongly connected components and permutation within strongly connected components suggests the existence of an evolutionary neutral space. A deeper mathematical characterization of the full symmetry groupoid of dynamical robustness may help to characterize a fundamental evolutionary constraint \cite{Golubitsky2006}.
-
 Our development suggests two predictions that could be used to test the theory described here. One is that, if this theory is correct, any ensemble of systems where robustness has been selected for over a sufficiently long period of time, should exhibit a bias toward more hierarchical network topologies. In the short term, this prediction may be checked by looking at both metabolic and transcription factor networks, which have already been shown to display hierarchical structure, but whose dynamics have not been sufficiently well characterized to ascertain their robustness \cite{Zhao2006,Bhardwaj2010,Colm}. The other prediction of the theory outlined here that may be able to be checked is the converse statement that an ensemble of systems demonstrating a positive or negative bias in their network topology toward hierarchy may have been under selection for, or respectively against, robustness. Of course, in this case, factors other than selection for robustness would not be ruled out by this analysis alone.  In the long term, each of these predictions may be evaluated using experimental evolution by tracking the evolution of gene regulatory network topology in the context of environmental perturbations \cite{Leroi1994}.
 
-
+The fact that such a relationship exists has the potential to unify our understanding of biological networks. In order to pursue this, it will be necessary to deepen our understanding of the relationship between dynamical robustness and the strongly connected components of the underlying network topology. One approach is to attempt to compute robustness for systems of larger size. Using existing methods, this would require large-scale Monte Carlo simulations. However, it may be possible to prove a bound on the robustness of individual strongly connected components, which could provide more definite knowledge and help to circumvent such expensive simulations. Nevertheless, the conservation of robustness with respect to nontrivial symmetries including the interchange of strongly connected components and permutation within strongly connected components suggests the existence of an evolutionary neutral space. A deeper mathematical characterization of the full symmetry groupoid of dynamical robustness may help to characterize a fundamental evolutionary constraint \cite{Golubitsky2006}.
 
 \section{Acknowlegements}  The authors would like to thank Jay Sulzberger and Ximo Pechuan for useful suggestions and discussions.
 
