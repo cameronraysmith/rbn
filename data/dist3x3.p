@@ -1,7 +1,7 @@
 set terminal svg size 600,400 dynamic enhanced fname 'HelveticaNeue'  fsize 16
 set output '../fig/dist3x3.svg'
 set key off
-set xrange [-1:6]
+set xrange [-1:6] reverse
 set xtics (0,1,2,3,4,5)
 set xlabel "hierarchy"
 set yrange [0.3:0.9]

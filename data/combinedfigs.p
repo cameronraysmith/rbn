@@ -46,7 +46,7 @@ plot './stab3x3.tsv' using 4:3 pt 7 ps 0.7 lc 0 title columnheader
 ############# plot 4 ##############
 
 set key off
-set xrange [-1:6]
+set xrange [-1:6] reverse
 set xtics (0,1,2,3,4,5)
 set xlabel "hierarchy"
 set yrange [0.3:0.9]
