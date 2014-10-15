@@ -6,12 +6,12 @@ set autoscale
 set parametric
 
 # x-axis
-set yrange [-1:6] reverse
+set yrange [-1:6] noreverse
 set ytics (0,1,2,3,4,5)
 set ylabel "hierarchy" # offset 0,-0.5
 
 # y-axis
-set xrange [2:10]
+set xrange [2:10] noreverse
 set xtics (3,4,5,6,7,8,9) # offset 0.5,-0.2
 set xlabel "connectivity" # offset 0,-0.5
 
@@ -30,4 +30,4 @@ set cblabel "robustness"
 # unset pm3d
 load('RdBu.plt')
 set palette negative
-plot './avgconnectdist.tsv' using 1:5:3 with points palette pt 7 ps 0.7 title columnheader
+plot './avgconnectdist.tsv' using 1:(5-$5):3 with points palette pt 7 ps 0.7 title columnheader

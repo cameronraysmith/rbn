@@ -11,7 +11,7 @@ set ytics (0,1,2,3,4,5)
 set ylabel "number of cycles" # offset 0,-0.5
 
 # y-axis
-set xrange [2:10]
+set xrange [2:10] noreverse
 set xtics (3,4,5,6,7,8,9) # offset 0.5,-0.2
 set xlabel "connectivity" # offset 0,-0.5
 

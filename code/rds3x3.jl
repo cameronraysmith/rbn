@@ -391,12 +391,12 @@ end
 
 function combinegnuplot()
 
-    filelist = ["apstab3x3.p",
+    filelist = [#"apstab3x3.p",
                 "stab3x3.p",
-                "cycle3x3.p",
-                "dist3x3.p",]
-                # "connectcycle3D3x3.p",
-                # "connectdist3D3x3.p",]
+                #"cycle3x3.p",
+                "dist3x3.p",
+                "connectcycle3D3x3.p",
+                "connectdist3D3x3.p",]
     horiz = 2
     vert = 2
     rv = (String)[]
