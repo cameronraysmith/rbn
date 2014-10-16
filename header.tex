@@ -85,6 +85,94 @@ urlcolor=[rgb]{.09 .29 .54}}
 % todo notes see http://www.texample.net/tikz/examples/todo-notes/
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{amsthm}
+\usepackage{bibunits}
+
+% hyperref with bibunits
+% http://tex.stackexchange.com/a/101495/6784
+% \makeatletter
+% \def\hyper@natlinkstart#1{%
+%   \Hy@backout{#1}%
+%   \hyper@linkstart{cite}{cite.\@bibunitname.#1}%
+% %                             ^^^^^^^^^^^^^^
+%   \def\hyper@nat@current{#1}%
+% }
+
+% \def\hyper@natlinkbreak#1#2{%
+%   \hyper@linkend#1\hyper@linkstart{cite}{cite.\@bibunitname.#2}%
+% %                                             ^^^^^^^^^^^^^^
+% }
+
+% \def\hyper@natanchorstart#1{%
+%   \hyper@anchorstart{cite.\@bibunitname.#1}%
+% %                         ^^^^^^^^^^^^^^
+% }
+
+% \def\bibcite#1#2{%
+%   \@newl@bel{b}{#1}{\hyper@@link[cite]{}{cite.\@bibunitname.#1}{#2}}%
+% %                                             ^^^^^^^^^^^^^^
+% }%
+
+% \def\@lbibitem[#1]#2{%
+%   \@skiphyperreftrue
+%   \H@item[\hyper@anchorstart{cite.\@bibunitname.#2}%
+% %                                 ^^^^^^^^^^^^^^
+%   \@BIBLABEL{#1}\hyper@anchorend\hfill]%
+%   \@skiphyperreffalse
+%   \if@filesw
+%     \begingroup
+%       \let\protect\noexpand
+%       \immediate\write\@auxout{%
+%         \string\bibcite{#2}{#1}%
+%       }%
+%     \endgroup
+%   \fi
+%   \ignorespaces
+% }%
+
+% \def\@bibitem#1{%
+%   \@skiphyperreftrue\H@item\@skiphyperreffalse
+%   \hyper@anchorstart{cite.\@bibunitname.#1}\relax\hyper@anchorend
+% %                         ^^^^^^^^^^^^^^
+%   \if@filesw
+%     \begingroup
+%       \let\protect\noexpand
+%       \immediate\write\@auxout{%
+%         \string\bibcite{#1}{\the\value{\@listctr}}%
+%       }%
+%     \endgroup
+%   \fi
+%   \ignorespaces
+% }%
+
+% \def\@citex[#1]#2{%
+%   \let\@citea\@empty
+%   \@cite{%
+%     \@for\@citeb:=#2\do{%
+%       \@citea
+%       \def\@citea{,\penalty\@m\ }%
+%       \edef\@citeb{\expandafter\@firstofone\@citeb}%
+%       \if@filesw
+%         \immediate\write\@auxout{\string\citation{\@citeb}}%
+%       \fi
+%       \@ifundefined{b@\@citeb}{%
+%         \mbox{\reset@font\bfseries ?}%
+%         \G@refundefinedtrue
+%         \@latex@warning{%
+%           Citation `\@citeb' on page \thepage \space undefined%
+%         }%
+%       }{%
+%         \hyper@natlinkstart{#2}%
+% %       ^^^^^^^^^^^^^^^^^^^^^^^^
+%             \hbox{\csname b@\@citeb\endcsname}%
+%         \hyper@natlinkend%
+% %       ^^^^^^^^^^^^^^^^^^
+%       }%
+%     }%
+%   }{#1}%
+% }%
+
+% \makeatother
+% end - hyperref with bibunits
 
 % define colors
 \definecolor{DeepRed}{rgb}{.82,.14,.16}
