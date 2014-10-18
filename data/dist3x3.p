@@ -7,4 +7,7 @@ set xlabel "hierarchy"
 set yrange [0.3:0.9]
 set ytics (0.4,0.5,0.6,0.7,0.8)
 set ylabel "robustness"
-plot './stab3x3.tsv' using (5-$5):3 pt 7 ps 0.7 lc 0 title columnheader
+f(x) = m*x + b
+fit f(x) './stab3x3.tsv' using (5-$5):3 via m,b
+plot './stab3x3.tsv' using (5-$5):3 pt 7 ps 0.7 lc 0 title columnheader, f(x) lt rgb "red" lw 3
+stats "./stab3x3.tsv" using (5-$5):3 name "AB"

@@ -15,9 +15,13 @@ set xtics (3,4,5,6,7,8,9)
 set xlabel "connectivity"
 set yrange [0.3:0.9]
 set ytics (0.4,0.5,0.6,0.7,0.8)
-set label 1 "A" font "HelveticaNeue, 25" at graph -0.25, graph 1.20
 set ylabel "robustness"
-plot './stab3x3.tsv' using 1:3 pt 7 ps 0.7 lc 0 title columnheader, './avgstab3x3.tsv' using 1:2 pt 7 ps 0.7 lc 1
+f(x) = m*x + b
+fit f(x) './stab3x3.tsv' using 1:3 via m,b
+# plot './stab3x3.tsv' using 1:3 pt 7 ps 0.7 lc 0 title columnheader, './avgstab3x3.tsv' using 1:2 pt 7 ps 0.7 lc 1, f(x) lt rgb "red" lw 3
+set label 1 "A" font "HelveticaNeue, 25" at graph -0.25, graph 1.20
+plot './stab3x3.tsv' using 1:3 pt 7 ps 0.7 lc 0 title columnheader, f(x) lt rgb "red" lw 3
+stats "./stab3x3.tsv" using 1:3 name "AB"
 
 ############# plot 2 ##############
 
@@ -27,9 +31,12 @@ set xtics (0,1,2,3,4,5)
 set xlabel "hierarchy"
 set yrange [0.3:0.9]
 set ytics (0.4,0.5,0.6,0.7,0.8)
-set label 1 "B" font "HelveticaNeue, 25" at graph -0.25, graph 1.20
 set ylabel "robustness"
-plot './stab3x3.tsv' using (5-$5):3 pt 7 ps 0.7 lc 0 title columnheader
+f(x) = m*x + b
+fit f(x) './stab3x3.tsv' using (5-$5):3 via m,b
+set label 1 "B" font "HelveticaNeue, 25" at graph -0.25, graph 1.20
+plot './stab3x3.tsv' using (5-$5):3 pt 7 ps 0.7 lc 0 title columnheader, f(x) lt rgb "red" lw 3
+stats "./stab3x3.tsv" using (5-$5):3 name "AB"
 
 ############# plot 3 ##############
 
