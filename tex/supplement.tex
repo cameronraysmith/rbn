@@ -144,16 +144,20 @@ conflicting populations), the stability of the fixed point will determine whethe
 % particular $a_{ij}$ from a given probability distribution.
 
 Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the purpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution yielding
+\begin{widetext}
 $$
 \mu_{k_1,\ldots,k_m}(x,y) = \prod_{y \notin \{x_1, \ldots, x_m\} } \delta(x_j-y_j) \prod_{y \notin \{x_1,\cdots,x_m\}} \mathbf{1}_{[-1,1]} (y_j) \mathbf{1}_{[-1,1]} (x_j)
 $$
+\end{widetext}
 Under these assumptions, the expression for robustness becomes a special case of \ref{eq:robustness}:
+\begin{widetext}
 \begin{equation}\label{eq:condprobgen}
  R (\mathrm{stab}, \mu'_{k_1, \ldots, k_m}) =
   \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
     \mathbf{1}_{stab} \mathbf{1}_{stab'}}
   {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)},
 \end{equation}
+\end{widetext}
 where we made the abbreviations
 \begin{align*}
 \mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity), \\
@@ -162,17 +166,26 @@ where we made the abbreviations
 i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ with their primed counterparts.
 
 While one can resample a fixed subset of the links, more typically we will be randomly selecting which links to resample with a uniform distribution on the links.  The result of this operation corresponds to averaging our quantity over subsets of links:
+\begin{widetext}
 \begin{equation}\label{eq:robavgoverlinks}
 \langle R (\hbox{stab}, \mu') \rangle_m =
 \frac{1}{\binom{\connectivity}{m}}
 \sum_{\{k_1, k_2, \ldots k_m\} \subset \{1, 2,, \ldots \connectivity\}}
 R (\hbox{stab}, \mu'_{k_1, \ldots, k_m})
 \end{equation}
+\end{widetext}
 We are fundamentally interested in the relationship between \ref{eq:condprobgen} and \ref{eq:robavgoverlinks} and topological properties of systems that derive from their associated graphs. In order to investigate this further, we must characterize properties of system graphs in order to evaluate correlations of those properties with dynamical robustness.
 
 \subsection{Network hierarchy and strongly connected components}
 
 Dynamical networks of the kind described above can be viewed at the level of their interdependency graphs as being composed of more fundamental interacting subsystems \reffigexamplesystemmodules. One such kind of system composition and decomposition is given by the notion of open systems, which are distinguished by having some of the variables specified as control variables whose values are given as autonomous functions of time rather than determined by the dynamics via intrinsic interactions \cite{Vagner2014}.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, this decomposition is trivial since it is equivalent to the underlying system graph and what we instead want is an intermediate decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
+
+\begin{figure*}[!ht]
+\centering
+\noindent\includegraphics[width=0.8\textwidth]{fig/modsccsym.pdf}
+\caption{{\bf Open systems, strongly connected components and symmetries of robustness.} (A) Example of the combination of open system modules to construct closed systems. (B) SCCs highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three variable systems. The most hierarchical network, top panel, is the one that maximizes the number of SCCs and the number of links between them. We therefore define hierarchy as $max(\hbox{ED}) - \hbox{ED}$ where ED is the edit distance representing the number of link addition/deletion operations necessary to transform a given graph into the most hierarchical one. The two panels in the middle represent examples of hierarchical modular systems that posess both modularity (i.e. SCCs with more than one variable) and hierarchy. (C) Symmetries of the $\hier$ transformation between graphs and SCCs. The transformation $a$ represents an interchange of SCCs, $b$ moving a link between nodes in a component and $c$ adding a link. All three transformations represent symmetries of the $\hier$ transformation from graphs to SCCs while only $a$ and $b$ are symmetries of robustness.}
+\label{fig:modsccsym}
+\end{figure*}
 
 A strongly connected component (SCC) of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three variable systems are outlined in \reffigscc$\,$ along with their adjacency matrices and hierarchy diagrams (to be defined below).
 The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
@@ -227,6 +240,7 @@ d & c
 \end{bmatrix} \right) \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
 \end{align*}
 Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprobgen}
+\begin{widetext}
 \begin{align*}
 P\left(\textrm{stab} \left( \begin{bmatrix}
 a & b \\
@@ -236,7 +250,9 @@ a & b' \\
 d & c
 \end{bmatrix} \right) \right) = \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
 \end{align*}
+\end{widetext}
 The analogous equation for resampling $a$ is
+\begin{widetext}
 \begin{align*}
 P\left(\textrm{stab} \left( \begin{bmatrix}
 a & b \\
@@ -246,6 +262,7 @@ a' & b \\
 d & c
 \end{bmatrix} \right) \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
+\end{widetext}
 Using this approach the probability of stability and of robustness for all two variable systems is given in \ref{tab:structstabmat}.
 
 The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
@@ -259,9 +276,11 @@ $$
 \hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
 $$
 This estimate is characterized by the variance of the posterior Beta distribution
+\begin{widetext}
 $$
 \mathrm{var}(\theta | \mathcal{D}) = \frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
 $$
+\end{widetext}
 Since for the chosen prior $a=b=1 \ll N$ this simplifies to
 $$
 \mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
@@ -278,6 +297,14 @@ The relationship between connectivity and robustness for two variable systems is
 The combination of connectivity and cycle number as shown in \reffigconnectcycle3D3x3 provides a better classification of the dependence of robustness upon network topology. Here the robustness of three variable systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three variable systems is that of \reffigscc (top panel). This network is the most hierarchical of all three variable systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \reffigscc (top panel) has a block triangular structure.
 
 This observation suggested that graph edit distance from \reffigscc (top panel), hierarchy, might provide a better characterization of dynamical robustness. \reffigrobusthierarchy$\,$ shows dynamical robustness as a function of hierarchy. There is a monotonic correlation between the upper bound of robustness and hierarchy. \reffigconnectdist3D3x3$\,$ shows dynamical robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \reffigconnectcycle3D3x3.
+
+\begin{figure*}[!ht]
+\centering
+\noindent\includegraphics[width=0.8\textwidth]{fig/combinedfigs.pdf}
+\caption{{\bf Characterization of stability and robustness according to properties of system structure for three variable systems} (A) Robustness versus connectivity. The red line represents a best fit in the least-squares sense with Pearson product-moment correlation coefficient $r=0.29$. The lowest and highest robustness network architectures are labelled. Other network architectures are shown in \ref{tab:structstabmat3}. (B) Robustness versus hierarchy. Correlation coefficient $r=0.67$. (C) Number of cycles and (D) hierarchy vs connectivity and robustness. The color of each point represents the average robustness of all graphs having the parameters specified on the $x$ and $y$ axes.
+}
+\label{fig:combined}
+\end{figure*}
 
 \subsection{Component decomposition, hierarchy, and the symmetries of robustness}
 
@@ -298,6 +325,7 @@ between components $C_i$ and $C_j$, the system will remain stable with
 probability 1.  Hence, the probability that the system will remain
 stable upon resampling a random link is the weighted average of these
 probabilities:
+\begin{widetext}
 \begin{align}\label{eq:sccrobustness}
 \langle R(\hbox{stab} (G), \mu') \rangle_1 =
 \frac{\sum\limits_{(i,j) \in \hier(G)} \ell_{ij} +
@@ -305,6 +333,7 @@ probabilities:
      {\sum\limits_{(i,j) \in \hier(G)} \ell_{ij} +
       \sum\limits_{i=1}^n \connectivity_i}.
 \end{align}
+\end{widetext}
 For instance, if our graph is the one in \reffigscc (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is
 \[
 \langle R(\textrm{stab}(G),\mu') \rangle_1 = \frac{2 + 0.5 + 4 \times 0.62}{2 + 1 + 4} = 0.714,
@@ -338,6 +367,7 @@ v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n}
 v_i^2,$$
 we arrive at the following upper bound on robustness in terms
 of the connected components:
+\begin{widetext}
 \begin{align} \label{eq:sccmaxrobustness}
 R_{\mathrm{max}}(C_1, \ldots C_n) =
 \frac{\frac{1}{2} ((\sum_{i=1}^n v_i)^2 - \sum_{i=1}^n v_i^2) +
@@ -345,6 +375,7 @@ R_{\mathrm{max}}(C_1, \ldots C_n) =
      {\frac{1}{2} ((\sum_{i=1}^n v_i)^2 - \sum_{i=1}^n v_i^2) +
                     \sum_{i=1}^n \connectivity_i}.
 \end{align}
+\end{widetext}
 Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$
 is the graph on $n$ nodes with a link from node $i$ to node $j$
 whenever $i < j$.  Then, by the construction described in the previous
@@ -356,16 +387,19 @@ $\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_1 = R_{\mathrm{max}}(C_
 This argument also works when we resample more than one entry,
 although the notation becomes more complicated.  Suppose that we
 resample $m$ nodes.  Define
+\begin{widetext}
 \begin{equation*}
 M = \left\{(m_0, m_1, \ldots, m_n) \,\bigg|\,
 m = \sum_{i=0}^n m_i \quad\&\quad
 m_0 \le \sum_{i=1}^{n-1} \sum_{j=i+1}^n \ell_{ij} \quad\&\quad
 (\forall i \in \{1, \ldots, n\}) \; m_i < \connectivity_i \right\}.
 \end{equation*}
+\end{widetext}
 Then, given $(m_0, m_1, \ldots, m_n) \in M$, there are ${m \choose
 m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
 $m_0$ links between strongly connected components.  Hence, our
 weighted average becomes
+\begin{widetext}
 \begin{equation}
 \langle R(\hbox{stab} (G), \mu') \rangle_m =
 \frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
@@ -374,6 +408,7 @@ weighted average becomes
      {\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
       {m \choose m_0, m_1, \ldots. m_n} m}
 \end{equation}
+\end{widetext}
 
 As before, since $\langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \le 1$, we may
 increase $\langle R(\hbox{stab} (G), \mu') \rangle_m$ by increasing the maximum

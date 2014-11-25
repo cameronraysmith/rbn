@@ -54,7 +54,7 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 
 % \begin{multicols}{2}
 
-\begin{bibunit}[naturemag]
+% \begin{bibunit}[naturemag]
 
 % {\begin{quote} \bf
 % \input{tex/abstract-cited}
@@ -69,7 +69,7 @@ The analysis of dynamical systems that attempts to model chemical reaction, gene
 
 \maketitle
 
-\tableofcontents
+% \tableofcontents
 
 
 % \section{Todo}
@@ -91,37 +91,40 @@ The analysis of dynamical systems that attempts to model chemical reaction, gene
 \section{Acknowlegements}
 \input{tex/acknowledgements}
 % \pagebreak
-{\footnotesize
-% \bibliographystyle{naturemag}
-% \bibliography{bib/books,bib/papers}
-\putbib[bib/books,bib/papers]
-}
+% {\footnotesize
+\bibliographystyle{plainnat}
+\bibliography{bib/books,bib/papers}
+% \putbib[bib/books,bib/papers]
+% }
 
 % \end{multicols}
 
-\pagebreak
-\FloatBarrier
-\section{Figure Legends}
-\input{tex/figures}
-\end{bibunit}
+\onecolumngrid
+
+% \pagebreak
+% \FloatBarrier
+% \section{Figure Legends}
+% \input{tex/figures}
+
+% \end{bibunit}
 
 \pagebreak
 \FloatBarrier
 
-\begin{bibunit}[naturemag]
+% \begin{bibunit}[naturemag]
 
 \beginsupplement
 \setcounter{secnumdepth}{4}
-% \section{Supplementary Material}
+\section{Supplementary Material}
 
 % \input{tex/supplement}
 
-{\footnotesize
-% \bibliographystyle{naturemag}
-% \bibliography{bib/books,bib/papers}
-\putbib[bib/books,bib/papers]
-}
-\pagebreak
+% {\footnotesize
+% % \bibliographystyle{naturemag}
+% % \bibliography{bib/books,bib/papers}
+% \putbib[bib/books,bib/papers]
+% }
+% \pagebreak
 
 \input{tex/figuressupp}
 \pagebreak
@@ -135,7 +138,7 @@ The analysis of dynamical systems that attempts to model chemical reaction, gene
 
 % \input{tex/tablewithgraphs}
 % \input{tex/extra}
-\end{bibunit}
+% \end{bibunit}
 \end{document}
 
 %------------------------------------------------------------------------------
