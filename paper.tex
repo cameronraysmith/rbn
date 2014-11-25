@@ -10,28 +10,45 @@
 
 % \twocolumn[
 % \begin{@twocolumnfalse}
-\title{Ensemble Stability of Biological Networks}
+% \title{Ensemble Stability of Biological Networks}
 
-% Title must be 150 characters or less
-\begin{center}
-{\Large
-\textbf{Hierarchical Network Structure Promotes Dynamical Robustness}
-}
-% Insert Author names, affiliations and corresponding author email.
-\\[.5cm]
-Cameron Smith$^{1}$,
+
+\title{\bf Hierarchical Network Structure Promotes Dynamical Robustness}
+
+\author{Cameron Smith$^{1}$,
 Raymond S. Puzio$^{1}$,
-Aviv Bergman$^{1,2,3,4,*}$,
-\\[.5cm]
-$^1$Department of Systems and Computational Biology,\\
+Aviv Bergman$^{1,2,3,4,*}$}
+
+\affiliation{$^1$Department of Systems and Computational Biology,\\
 $^2$Dominick P. Purpura Department of Neuroscience,\\
 $^3$Department of Pathology, Albert Einstein College of Medicine,\\
 1301 Morris Park Ave, Bronx, NY 10461, USA\\
 $^4$Santa Fe Institute, 1399 Hyde Park Road, Santa Fe, NM 87501, USA
 \\
-$*$to whom correspondence should be addressed: aviv@einstein.yu.edu\\[.5cm]
-% $\ast$To whom correspondence should be addressed; E-mail: aviv@einstein.yu.edu.
-\end{center}
+$*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
+
+\date{\today}
+
+% Title must be 150 characters or less
+% \begin{center}
+% {\Large
+% \textbf{Hierarchical Network Structure Promotes Dynamical Robustness}
+% }
+% % Insert Author names, affiliations and corresponding author email.
+% \\[.5cm]
+% Cameron Smith$^{1}$,
+% Raymond S. Puzio$^{1}$,
+% Aviv Bergman$^{1,2,3,4,*}$,
+% \\[.5cm]
+% $^1$Department of Systems and Computational Biology,\\
+% $^2$Dominick P. Purpura Department of Neuroscience,\\
+% $^3$Department of Pathology, Albert Einstein College of Medicine,\\
+% 1301 Morris Park Ave, Bronx, NY 10461, USA\\
+% $^4$Santa Fe Institute, 1399 Hyde Park Road, Santa Fe, NM 87501, USA
+% \\
+% $*$to whom correspondence should be addressed: aviv@einstein.yu.edu\\[.5cm]
+% % $\ast$To whom correspondence should be addressed; E-mail: aviv@einstein.yu.edu.
+% \end{center}
 % \end{@twocolumnfalse}
 % ]
 
@@ -42,9 +59,17 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu\\[.5cm]
 % {\begin{quote} \bf
 % \input{tex/abstract-cited}
 % \end{quote}}
-{\bf
-\input{tex/abstract-cited}
-}
+% {\bf
+% \input{tex/abstract-cited}
+% }
+
+\begin{abstract}
+The analysis of dynamical systems that attempts to model chemical reaction, gene-regulatory, population, and ecosystem networks all rely on models having interacting components~\cite{RossCr2003,Alon2006,Palsson2006,HamidBolouri2008,Palsson2011a,Voit2012,Sauro2012}. When the details of these interactions are unknown for biological systems of interest, one effective approach is to study the dynamical properties of an ensemble of models determined by evolutionary constraints that may apply to all such systems~\cite{Gardner1970,May1972,Cohen1984,May1972a,Radius2014}. One such constraint is that of dynamical robustness, the probability of a stable system to remain stable under perturbation~\cite{WADDINGTON1942a,Wagner1997,Rutherford1998,VanNimwegen1999,Siegal2002,Bergman2003,Ciliberti2007b,Ciliberti2007,Draghi2010,Wagner2013}. Despite previous investigations, the relationship between dynamical robustness---an important functional characteristic of many biological systems---and network structure is poorly understood. Here we analyze the stability and robustness of a large class of dynamical systems and demonstrate that the most hierarchical network structures are the most robust. In particular, we determine the probability distribution of robustness over system connectivity and show that robustness is maximized by maximizing the number of links between strongly connected components of the graph representing the underlying system connectivity. We also demonstrate that permutation of strongly connected components is a fundamental symmetry of dynamical robustness, which applies to networks of any number of components.  The classification of dynamical robustness based upon a purely topological property provides a fundamental organizing principle that can be used in the context of experimental validation to select among models that break or preserve network hierarchy. This result contributes to an explanation for the observation of hierarchical modularity in biological networks at all scales~\cite{Zhao2006,Ravasz2002,Bhardwaj2010,Colm,Corominas-Murtra2013}.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
 
 
 % \section{Todo}

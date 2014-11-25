@@ -1,5 +1,9 @@
 %!TEX root = ../paper.tex
-\begin{longtable}{ c | c || c | c | c | c | c }
+% \onecolumn
+\begin{longtable*}{ c | c || c | c | c | c | c }
+% \begin{table}[H]
+% \begin{center}
+% \begin{tabular}{ c | c || c | c | c | c | c }
 \hline
 matrix & \specialcell{orbit\\size} & connectivity & \specialcell{edit\\distance} & \specialcell{cycle\\number} & \specialcell{probability of stability\\to perturbation} & \specialcell{probability\\of stability}\\
 \hline
@@ -158,5 +162,9 @@ $\begin{pmatrix}
 1 & 1 & 1\\
 1 & 1 & 1\\
 \end{pmatrix}$ & 1 & 9 & 3 & 5 & 0.638 & 0.106\\
+% \end{tabular}
+% \end{center}
 \caption{{\bf Robustness and stability for three variable systems estimated via Monte Carlo sampling.} All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat3}
-\end{longtable}
+% \end{table}
+\end{longtable*}
+% \twocolumn

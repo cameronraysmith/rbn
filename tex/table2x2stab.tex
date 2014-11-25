@@ -1,8 +1,9 @@
 %!TEX root = ../paper.tex
+% \onecolumn
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
-\begin{table}[h]
+\begin{table*}[h]
 \begin{center}
 \begin{tabular}{ c || c | c | c }
 \hline
@@ -33,4 +34,5 @@ a & 0 \\
 \end{tabular}
 \end{center}
 \caption{{\bf Probability of stability under resampling and \emph{a priori} stability for two variable systems derived analytically}. All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat}
-\end{table}
+\end{table*}
+% \twocolumn

@@ -1,5 +1,6 @@
 %!TEX root = ../paper.tex
-\begin{longtable}{ c || c | c | c | c }
+% \onecolumn
+\begin{longtable*}{ c || c | c | c | c }
 \hline
 matrix & connectivity & cycle number & \specialcell{probability of stability\\to perturbation} & probability of stability\\
 \hline
@@ -497,4 +498,5 @@ edge [lblstyle="auto",topath="bend left",style="line width=1.5pt"];
 \end{dot2tex}
 \end{tikzpicture} & 9 & 5 & 0.638 & 0.106\\
 \caption{{\bf Probability of stability under resampling and \emph{a priori} stability for three variable systems estimated via Monte Carlo sampling.} All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat3graph}
-\end{longtable}
+\end{longtable*}
+% \twocolumn
