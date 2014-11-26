@@ -1,4 +1,18 @@
 %!TEX root = ../paper.tex
+\subsection{Overview}
+The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row). These interaction graphs can be viewed as deriving from the combination of system modules that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules). Symmetries are characterized by the ability to interchange these modules or their connectivity without changing some property of the system.
+
+The network architecture can be represented in terms of an adjacency matrix and further abstracted by mapping the interaction graph to the network of strongly connected components (SCCs, see Supplementary Information) (\reffigscc). This map from the interaction graph of a biological network, referred to as $\hier$, has a collection of symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Two of these three are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these symmetries applied to a specific interaction graph.
+
+We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a biological network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. This expression is fully developed in \ref{eq:sccrobustness}, but can be schematized as in \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
+\begin{equation}\label{eq:robschematic}
+R_{tot} = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
+\end{equation}
+Examining this expression noting that $R_i$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R_{tot}$.
+This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any biological network whose associated dynamical system has the interaction graph \reffigscc $\,$ top will be more robust than those associated to any of the other interaction graphs in \reffigscc. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
+
+To test this prediction, we computed the probability distribution of stability and dynamical robustness relative to biological network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
+
 \subsection{Dynamical systems on biological networks}
 In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
@@ -60,7 +74,7 @@ points, we have an integer-valued random variable; and if the quantity is
 whether or not the system posesses a limit cycle, we have a binary random
 variable.
 
-A quality which is of interest to us is robustness or structural stability \cite{Smale1967}, which requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one or more of its defining parameters.  We will quantify this as the probability that, if some property holds for a set of parameters, it will continue to hold if we make a random perturbation about those parameter values. To do so, we will introduce, in addition to the probability distribution $\mu$ described above, a family of probability distributions $\mu'$ such that $\mu'(x,y)$ encodes the conditional probability that a system with a parameter value $x$ will have its parameter values changed to $y$ under a perturbation.  For our biological models, we will be interested in large perturbations rather than the small or infinitesimal perturbations usually considered in the theory of dynamical systems.  Then, given a binary random variable $q$, we define its robustness as the following conditional probability where $\mathbf{1}_q(x)$ is the standard indicator function equal to $1$ when $x$ satisfies $q$ and $0$ otherwise:
+A quality which is of interest to us is robustness whose evaluation requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one or more of its defining parameters \footnote{We mean to refer to perturbations to the structure of the system itself as determined by the strengths of the couplings between the components as determined by the parameters and not only to perturbations of the state vector at a given point in time. For example, when the network of components and interactions corresponds to a gene-regulatory network, then mutation is one mechanism by which such perturbations may arise}.  We will quantify this as the probability that, if some property holds for a set of parameters, it will continue to hold if we make a random perturbation about those parameter values. To do so, we will introduce, in addition to the probability distribution $\mu$ described above, a family of probability distributions $\mu'$ such that $\mu'(x,y)$ encodes the conditional probability that a system with a parameter value $x$ will have its parameter values changed to $y$ under a perturbation.  For our biological models, we will be interested in large perturbations rather than the small or infinitesimal perturbations usually considered in the theory of dynamical systems.  Then, given a binary random variable $q$, we define its robustness as the following conditional probability where $\mathbf{1}_q(x)$ is the standard indicator function equal to $1$ when $x$ satisfies $q$ and $0$ otherwise:
 \begin{align}\label{eq:robustness}
   R (q,\mu') =
   \frac{\int_S d\mu(x) \int_S d\mu'(x,y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
@@ -158,7 +172,7 @@ Under these assumptions, the expression for robustness becomes a special case of
   {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)},
 \end{equation}
 \end{widetext}
-where we made the abbreviations
+where we use the abbreviations
 \begin{align*}
 \mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity), \\
 \mathbf{1}_{stab'} &= \mathbf{1}_{stab'}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d),
@@ -198,7 +212,7 @@ a strongly connected graph $C_n$.  To each link $(i,j)$ of $A$ associate a non-e
 This map $\hier$ is many-to-one and so there is a large class of
 operations which leaves $\hier(G)$ invariant for a given graph $G$.
 For instance, we may interchange the positions of the strongly
-connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.  As we shall see later, some of these operations leave invariant key dynamical quantities, so we may regard them as a symmetry groupoid of our system.
+connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.  As we shall see later, some of these operations leave invariant key dynamical quantities, in our case dynamical robustness, so we may regard them as a symmetry groupoid of our system with respect to the robustness property.
 
 The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \reffigscc (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
 
@@ -265,27 +279,7 @@ d & c
 \end{widetext}
 Using this approach the probability of stability and of robustness for all two variable systems is given in \ref{tab:structstabmat}.
 
-The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
-$$
-\mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
-$$
-where $a$ and $b$ are the hyperparameters of the Beta prior and we consider the uninformative uniform prior corresponding to $a=b=1$. We consider the maximum a posteriori estimate
-$$\hat{\theta}_{MAP} = \frac{a + N_{\mathrm{stab}} - 1}{a + b + N - 2}$$
-which corresponds in this case to the maximum likelihood estimate
-$$
-\hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
-$$
-This estimate is characterized by the variance of the posterior Beta distribution
-\begin{widetext}
-$$
-\mathrm{var}(\theta | \mathcal{D}) = \frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
-$$
-\end{widetext}
-Since for the chosen prior $a=b=1 \ll N$ this simplifies to
-$$
-\mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
-$$
-yielding the error estimate given by the associated standard deviation. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$.
+The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$ (see \emph{Methods}).
 
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three variable systems, studied here the situation is not so clear cut. For two variable systems, system stability is constant across the entire range of connectivities. For three variable systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:apstab3x3}.
 

@@ -1,0 +1,23 @@
+%!TEX root = ../paper.tex
+\subsection{Monte carlo integration}
+If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
+$$
+\mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
+$$
+where $a$ and $b$ are the hyperparameters of the Beta prior and we consider the uninformative uniform prior corresponding to $a=b=1$. We consider the maximum a posteriori estimate
+$$\hat{\theta}_{MAP} = \frac{a + N_{\mathrm{stab}} - 1}{a + b + N - 2}$$
+which corresponds in this case to the maximum likelihood estimate
+$$
+\hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
+$$
+This estimate is characterized by the variance of the posterior Beta distribution
+\begin{widetext}
+$$
+\mathrm{var}(\theta | \mathcal{D}) = \frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
+$$
+\end{widetext}
+Since for the chosen prior $a=b=1 \ll N$ this simplifies to
+$$
+\mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
+$$
+yielding the error estimate given by the associated standard deviation.
