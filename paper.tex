@@ -6,6 +6,11 @@
 % http://tex.stackexchange.com/a/6063/6784
 \let\ref\autoref
 
+% Remove prefix of footnote
+\makeatletter
+\renewcommand{\thempfn}{}
+\makeatother
+
 \pagenumbering{arabic}
 
 \title{\bf Hierarchical Network Structure Promotes Dynamical Robustness}
