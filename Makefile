@@ -53,6 +53,11 @@ dropbox:
 	cp fig/*.pdf ~/Dropbox/sharelatex/rbn/fig
 	cp bib/*.bib ~/Dropbox/sharelatex/rbn/bib
 
+arxiv:
+	latexpand paper.tex > combined.tex
+	sed -i 's/\\makeatletter{}//g' combined.tex
+	tar --transform='flags=r;s|combined.tex|paper.tex|' -cvzf arxiv`date +"%m%d%Y"`.tar.gz combined.tex paper.bbl fig/*.pdf
+
 $(BIBFILES):
 	copybib
 
