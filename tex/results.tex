@@ -157,10 +157,10 @@ conflicting populations), the stability of the fixed point will determine whethe
 % sampling uniformly over the $a_{ij}$ defining $A$ the value of a
 % particular $a_{ij}$ from a given probability distribution.
 
-Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the purpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. Our conclusion relating network hierarchy to robustness is independent of the form of this distribution. There is therefore no loss of generality in using such a distribution for the purpose of elaborating examples. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution yielding
+Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the purpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. Note that our conclusion relating network hierarchy to robustness is independent of the form of this distribution. There is therefore no loss of generality in using such a distribution for the purpose of elaborating examples. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution yielding
 \begin{widetext}
 $$
-\mu_{k_1,\ldots,k_m}(x,y) = \prod_{y \notin \{x_1, \ldots, x_m\} } \delta(x_j-y_j) \prod_{y \notin \{x_1,\cdots,x_m\}} \mathbf{1}_{[-1,1]} (y_j) \mathbf{1}_{[-1,1]} (x_j)
+\mu_{k_1,\ldots,k_m}(x,y) = \prod_{j \notin \{k_1, \ldots, k_m\} } \delta(x_j-y_j) \prod_{j \in \{k_1,\ldots,k_m\}} \mathbf{1}_{[-1,1]} (y_j) \mathbf{1}_{[-1,1]} (x_j)
 $$
 \end{widetext}
 Under these assumptions, the expression for robustness becomes a special case of \ref{eq:robustness}:
@@ -169,13 +169,13 @@ Under these assumptions, the expression for robustness becomes a special case of
  R (\mathrm{stab}, \mu'_{k_1, \ldots, k_m}) =
   \frac{\int_{H^\connectivity} dx_1 \cdots dx_d \int_{H^m} {dx'}_{k_1} \cdots {dx'}_{k_m}\,
     \mathbf{1}_{stab} \mathbf{1}_{stab'}}
-  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}(x_1 \cdots x_d)},
+  {\int_{H^\connectivity} dx_1 \cdots dx_d  \, \mathbf{1}_{stab}},
 \end{equation}
 \end{widetext}
 where we use the abbreviations
 \begin{align*}
-\mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1 \cdots x_{k_1} \cdots x_{k_m} \cdots x_\connectivity), \\
-\mathbf{1}_{stab'} &= \mathbf{1}_{stab'}(x_1 \cdots {x'}_{k_1} \cdots {x'}_{k_m}  \cdots x_d),
+\mathbf{1}_{stab} &= \mathbf{1}_{stab}(x_1, \ldots, x_{k_1}, \ldots, x_{k_m}, \ldots, x_\connectivity), \\
+\mathbf{1}_{stab'} &= \mathbf{1}_{stab'}(x_1, \ldots, {x'}_{k_1}, \ldots, {x'}_{k_m},  \ldots, x_d),
 \end{align*}
 i.e. $\mathbf{1}_{stab'}$ corresponds to replacing $x_{k_1}, \ldots x_{k_m}$ with their primed counterparts.
 
@@ -214,10 +214,10 @@ operations which leaves $\hier(G)$ invariant for a given graph $G$.
 For instance, we may interchange the positions of the strongly
 connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.  As we shall see later, some of these operations leave invariant key dynamical quantities, in our case dynamical robustness, so we may regard them as a symmetry groupoid of our system with respect to the robustness property.
 
-The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \reffigscc (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being perfectly hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
+The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \reffigscc (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being maximally hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
 
 \subsection{Stability and robustness analysis of particular system ensembles}
-For systems having two variables, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three variables, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. For two-variable systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
+For systems having two variables, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three variables, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. We note again that while we use the uniform distribution for the purposes of illustration, the analysis could be performed for other distributions and our result relating network hierarchy to robustness is independent of the form of the distribution. For two-variable systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant. Suppose we have a stable matrix
 $$
 \begin{bmatrix}
@@ -279,11 +279,11 @@ d & c
 \end{widetext}
 Using this approach the probability of stability and of robustness for all two variable systems is given in \ref{tab:structstabmat}.
 
-The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$ (see \emph{Methods}).
+The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. In all simulations we use $N~=~10000$ so that the maximum error is $0.005$ (see \emph{Methods}).
 
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three variable systems, the situation is not so clear cut. For two variable systems, system stability is constant across the entire range of connectivities. For three variable systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:apstab3x3}.
 
-The relationship between connectivity and robustness for two variable systems is shown in \ref{tab:structstabmat} and likewise for three variable systems in \ref{tab:structstabmat3} and \reffigrobustconnect. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red dots in \reffigrobustconnect.
+The relationship between connectivity and robustness for two variable systems is shown in \ref{tab:structstabmat} and likewise for three variable systems in \ref{tab:structstabmat3} and \reffigrobustconnect. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red lines in \reffigrobustconnect.
 % \subsection{Cycle number is inversely correlated with robustness}
 \ref{fig:cycle3x3} shows the robustness for all three variable systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
 
@@ -335,7 +335,7 @@ For instance, if our graph is the one in \reffigscc (middle panels), then we hav
 which agrees with the value computed in \ref{tab:structstabmat} up to
 sampling error.
 
-As can be seen from \ref{eq:sccrobustness}, all that is required to fix robustenss is a set of SCC sizes and the number of links between them. This demonstrates that robustness is symmetric under the transformations shown in \reffighiertransformations $a$ and $b$. Since transformations of the type \reffighiertransformations $c$ change the number of links between connected components, this symmetry of $\hier$ is broken by \ref{eq:sccrobustness}. Nevertheless, a considerable degree of symmetry remains. For example, \ref{fig:robustnesssymmetries} shows the symmetry groupoid of robustness for the case in which we fix connected component sizes $\{2,1,1\}$ with a total of $3$ links between them.
+As can be seen from \ref{eq:sccrobustness}, all that is required to determine robustenss is a set of SCC sizes and the number of links between them. This demonstrates that robustness is symmetric under the transformations shown in \reffighiertransformations $a$ and $b$. Since transformations of the type \reffighiertransformations $c$ change the number of links between connected components, this symmetry of $\hier$ is broken by \ref{eq:sccrobustness}. Nevertheless, a considerable degree of symmetry remains. For example, \ref{fig:robustnesssymmetries} shows the symmetry groupoid of robustness for the case in which we fix connected component sizes $\{2,1,1\}$ with a total of $3$ links between them.
 
 Next, we derive an upper bound on the robustness of any graph
 constructed from a given set of connected components.  Since
