@@ -1,0 +1,33 @@
+%!TEX root = ../paper.tex
+
+% \subsection{Overview}
+The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row). These interaction graphs can be viewed as deriving from the combination of system modules that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules). Symmetries are characterized by the ability to interchange these modules or their connectivity without changing some property of the system.
+
+The network architecture can be represented in terms of an adjacency matrix and further abstracted by mapping the interaction graph to the network of strongly connected components (SCCs, see Supplementary Information) (\reffigscc). This map from the interaction graph of a network, referred to as $\hier$, has a collection of symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Two of these three are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these symmetries applied to a specific interaction graph.
+
+We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. This expression is fully developed in \ref{eq:sccrobustness}, but can be schematized as in \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
+\begin{equation}\label{eq:robschematic}
+R_{tot} = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
+\end{equation}
+For instance, if our graph is the one in \reffigscc (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc, which agrees with the value computed in \ref{tab:structstabmat} up to sampling error.
+
+Examining this expression noting that $R_i$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R_{tot}$.  Given two connected components $C_i$ and $C_j$ with $v_i$ and $v_j$ nodes respectively, we have a maximum of $v_i v_j$ links going from $C_i$ to $C_j$.  Hence, $l \le \sum_{(ij) \in \hier(G)} v_i v_j$.  Since every acyclic digraph can be embedded into a totally ordered
+set, we may assume without loss of generality that our components have
+been ordered in a way such that, if $(i,j) \in \hier(G)$, then $i <
+j$.  Hence, $l \le l_{max}$ where
+$$l_{max} = \sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i
+v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n}
+v_i^2,$$
+Hence, we conclude that $R_{tot} \le R_{max}$ where $R_{max}$ is equivalent to \ref{eq:robschematic} with $l_{max}$ substituted for $l$.
+
+Furthermore, this bound is attained.  Suppose that $G_{\mathrm{tot}}$
+is the graph on $n$ nodes with a link from node $i$ to node $j$
+whenever $i < j$.  Then, by the construction described in the previous
+section on network hierachy, we have a graph $G_{\mathrm{max}}$ such
+that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and
+$\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula,
+$\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_1 = R_{\mathrm{max}}(C_1, \ldots C_n)$.
+
+This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any network whose associated dynamical system has the interaction graph \reffigscc $\,$ top will be more robust than those associated to any of the other interaction graphs in \reffigscc. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
+
+To test this prediction, we computed the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.

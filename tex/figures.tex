@@ -1,5 +1,31 @@
 %!TEX root = ../paper.tex
 
+\begin{figure*}[!ht]
+\centering
+\noindent\includegraphics[width=0.8\textwidth]{fig/biomodelexamples.pdf}
+\caption{{\bf Dynamical models in systems biology.} The top row represents a chemical reaction network (CRN) \cite{Shinar2010}, a gene regulatory network (GRN) \cite{Karlebach2008}, and an ecological regulatory network (ERN) \cite{Rohr2014} in terms of the graphical methods specific to each field mapped into the interaction graph, which provides a unified representation for networks across these fields. The second row represents a particular example of a system of differential equations that are used to model a biological network within each of the domains of application considered here. The third row shows the general form of a system of differential equations that can be used to model any network architecture within each domain.}
+\label{fig:biomodelexamples}
+\end{figure*}
+
+\pagebreak
+
+\begin{figure*}[!ht]
+\centering
+\noindent\includegraphics[width=0.8\textwidth]{fig/modsccsym.pdf}
+\caption{{\bf Open systems, strongly connected components and symmetries of robustness.} (A) Example of the combination of open system modules to construct closed systems. (B) SCCs highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three variable systems. The most hierarchical network, top panel, is the one that maximizes the number of SCCs and the number of links between them. We therefore define hierarchy as $max(\hbox{ED}) - \hbox{ED}$ where ED is the edit distance representing the number of link addition/deletion operations necessary to transform a given graph into the most hierarchical one. The two panels in the middle represent examples of hierarchical modular systems that posess both modularity (i.e. SCCs with more than one variable) and hierarchy. (C) Symmetries of the $\hier$ transformation between graphs and SCCs. The transformation $a$ represents an interchange of SCCs, $b$ moving a link between nodes in a component and $c$ adding a link. All three transformations represent symmetries of the $\hier$ transformation from graphs to SCCs while only $a$ and $b$ are symmetries of robustness.}
+\label{fig:modsccsym}
+\end{figure*}
+
+\pagebreak
+
+\begin{figure*}[!ht]
+\centering
+\noindent\includegraphics[width=0.8\textwidth]{fig/combinedfigs.pdf}
+\caption{{\bf Characterization of stability and robustness according to properties of system structure for three variable systems} (A) Robustness versus connectivity. The red line represents a best fit in the least-squares sense with Pearson product-moment correlation coefficient $r=0.29$. The lowest and highest robustness network architectures are labelled. Other network architectures are shown in \ref{tab:structstabmat3}. (B) Robustness versus hierarchy. Correlation coefficient $r=0.67$. (C) Number of cycles and (D) hierarchy vs connectivity and robustness. The color of each point represents the average robustness of all graphs having the parameters specified on the $x$ and $y$ axes.
+}
+\label{fig:combined}
+\end{figure*}
+
 % \begin{figure}[!ht]
 % \centering
 % \noindent\includegraphics[width=0.9\columnwidth]{fig/biomodelexamples.pdf}

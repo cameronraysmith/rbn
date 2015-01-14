@@ -37,19 +37,20 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 % \listoftodos
 % \tableofcontents
 
-\section{Introduction}
+% \section{Introduction}
 \input{tex/introduction}
 
-\section{Results}
-\input{tex/results}
+% \section{Results}
+% \input{tex/results}
+\input{tex/overview}
 
-\section{Discussion}
+% \section{Discussion}
 \input{tex/discussion}
 
-\section{Methods}
-{\footnotesize
-\input{tex/methods}
-}
+% \section{Methods}
+% {\footnotesize
+% \input{tex/methods}
+% }
 
 \section{Acknowlegements}
 \input{tex/acknowledgements}
@@ -57,17 +58,33 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \bibliographystyle{Science}
 \bibliography{bib/books,bib/papers}
 
+\pagebreak
+\FloatBarrier
+
 \onecolumngrid
+\pagebreak
+% \section{Figures}
+\input{tex/figures}
+\pagebreak
+\twocolumngrid
 
 \pagebreak
 \FloatBarrier
 
 \beginsupplement
 \setcounter{secnumdepth}{4}
-\section{Supporting Information}
+\section{\refsupp{}}
+
+\input{tex/results}
+\input{tex/methods}
+
+\newpage
+
+\onecolumngrid
 
 \input{tex/figuressupp}
 \pagebreak
+\FloatBarrier
 
 % \section{Tables}
 \input{tex/table2x2stab}
