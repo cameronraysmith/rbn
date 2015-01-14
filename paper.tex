@@ -37,6 +37,8 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 % \listoftodos
 % \tableofcontents
 
+\begin{bibunit}[Science]
+
 % \section{Introduction}
 \input{tex/introduction}
 
@@ -55,8 +57,10 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \section{Acknowlegements}
 \input{tex/acknowledgements}
 
-\bibliographystyle{Science}
-\bibliography{bib/books,bib/papers}
+% \bibliographystyle{Science}
+% \bibliography{bib/books,bib/papers}
+
+\putbib[bib/books,bib/papers]
 
 \pagebreak
 \FloatBarrier
@@ -65,6 +69,8 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \pagebreak
 % \section{Figures}
 \input{tex/figures}
+
+\end{bibunit}
 \pagebreak
 \twocolumngrid
 
@@ -75,9 +81,14 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \setcounter{secnumdepth}{4}
 \section{\refsupp{}}
 
+\begin{bibunit}[Science]
+
 \input{tex/results}
 \input{tex/methods}
 
+\putbib[bib/books,bib/papers]
+
+\end{bibunit}
 \newpage
 
 \onecolumngrid
