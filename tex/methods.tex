@@ -11,11 +11,12 @@ $$
 \hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
 $$
 This estimate is characterized by the variance of the posterior Beta distribution
-\begin{widetext}
-$$
-\mathrm{var}(\theta | \mathcal{D}) = \frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
-$$
-\end{widetext}
+% \begin{widetext}
+\begin{align*}
+&\mathrm{var}(\theta | \mathcal{D}) =\\
+&\frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
+\end{align*}
+% \end{widetext}
 Since for the chosen prior $a=b=1 \ll N$ this simplifies to
 $$
 \mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}

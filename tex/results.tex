@@ -1,11 +1,11 @@
 %!TEX root = ../paper.tex
 
-\subsection{}
-.
+% \subsection{}
+% .
 
 % The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row). These interaction graphs can be viewed as deriving from the combination of system modules that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules). Symmetries are characterized by the ability to interchange these modules or their connectivity without changing some property of the system.
 
-% The network architecture can be represented in terms of an adjacency matrix and further abstracted by mapping the interaction graph to the network of strongly connected components (SCCs, see Supplementary Information) (\reffigscc). This map from the interaction graph of a network, referred to as $\hier$, has a collection of symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Two of these three are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these symmetries applied to a specific interaction graph.
+% The network architecture can be represented in terms of an adjacency matrix and further abstracted by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{}) (\reffigscc). This map from the interaction graph of a network, referred to as $\hier$, has a collection of symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Two of these three are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these symmetries applied to a specific interaction graph.
 
 % We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. This expression is fully developed in \ref{eq:sccrobustness}, but can be schematized as in \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
 % \begin{equation}\label{eq:robschematic}
@@ -257,29 +257,32 @@ d & c
 \end{bmatrix} \right) \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
 \end{align*}
 Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprobgen}
-\begin{widetext}
+% \begin{widetext}
 \begin{align*}
-P\left(\textrm{stab} \left( \begin{bmatrix}
+& P\left(\textrm{stab} \left( \begin{bmatrix}
 a & b \\
 d & c
 \end{bmatrix} \right) \textrm{ and stab} \left( \begin{bmatrix}
 a & b' \\
 d & c
-\end{bmatrix} \right) \right) = \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
+\end{bmatrix} \right) \right) = \\
+& \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
 \end{align*}
-\end{widetext}
+% \end{widetext}
 The analogous equation for resampling $a$ is
-\begin{widetext}
+% \begin{widetext}
 \begin{align*}
-P\left(\textrm{stab} \left( \begin{bmatrix}
+& P\left(\textrm{stab} \left( \begin{bmatrix}
 a & b \\
 d & c
-\end{bmatrix} \right) \textrm{ and stab} \left( \begin{bmatrix}
+\end{bmatrix} \right) \textrm{ and stab}
+\left( \begin{bmatrix}
 a' & b \\
 d & c
-\end{bmatrix} \right) \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
+\end{bmatrix} \right) \right) = \\
+& \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
-\end{widetext}
+% \end{widetext}
 Using this approach the probability of stability and of robustness for all two variable systems is given in \ref{tab:structstabmat}.
 
 The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. In all simulations we use $N~=~10000$ so that the maximum error is $0.005$ (see \emph{Methods}).
