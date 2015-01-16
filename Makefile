@@ -6,18 +6,22 @@
 # list of automatic variables
 # http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html#Automatic-Variables
 
-TOPTEX = plos_template.tex
+PROJECTNAME = rbn
+
+TOPTEX = paper.tex
+
+TOPPDFFILE = $(TOPTEX:.tex=.pdf)
+
+TOPBBLFILE = $(TOPTEX:.tex=.bbl)
 
 BIBFILES = bib/books.bib \
 	   bib/papers.bib
 
 TEMPLATE = plost2009.bst
 
-FIGFILES =
+FIGFILES = $(shell grep -v '^%' tex/*.tex | grep -ohP 'fig/.*(?=\})')
 
-TEXFILES =
-
-TOPPDFFILE = $(TOPTEX:.tex=.pdf)
+TEXFILES = $(shell ls tex/*.tex)
 
 #---------------------------------------------
 # Default target
@@ -46,17 +50,18 @@ linkbib:
 	ln -s ~/Downloads/bib bib
 
 dropbox:
-	cp paper.tex ~/Dropbox/sharelatex/rbn
-	cp *header.tex ~/Dropbox/sharelatex/rbn
-	cp *.bst ~/Dropbox/sharelatex/rbn
-	cp tex/* ~/Dropbox/sharelatex/rbn/tex
-	cp fig/*.pdf ~/Dropbox/sharelatex/rbn/fig
-	cp bib/*.bib ~/Dropbox/sharelatex/rbn/bib
+	cp $(TOPTEX) ~/Dropbox/sharelatex/$(PROJECTNAME)
+	cp *header.tex ~/Dropbox/sharelatex/$(PROJECTNAME)
+	cp *.bst ~/Dropbox/sharelatex/$(PROJECTNAME)
+	cp $(TEXFILES) ~/Dropbox/sharelatex/$(PROJECTNAME)/tex
+	cp $(FIGFILES) ~/Dropbox/sharelatex/$(PROJECTNAME)/fig
+	cp bib/*.bib ~/Dropbox/sharelatex/$(PROJECTNAME)/bib
 
 arxiv:
-	latexpand paper.tex > combined.tex
+	latexpand $(TOPTEX) > combined.tex
 	sed -i 's/\\makeatletter{}//g' combined.tex
-	tar --transform='flags=r;s|combined.tex|paper.tex|' -cvzf arxiv`date +"%m%d%Y"`.tar.gz combined.tex paper.bbl fig/*.pdf
+	cp $(TOPBBLFILE) combined.bbl
+	tar --transform='flags=r;s|combined.tex|paper.tex|' -cvzf arxiv`date +"%m%d%Y"`.tar.gz combined.tex combined.bbl $(FIGFILES)
 
 $(BIBFILES):
 	copybib
