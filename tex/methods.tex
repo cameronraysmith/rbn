@@ -22,3 +22,57 @@ $$
 \mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
 $$
 yielding the error estimate given by the associated standard deviation. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$.
+
+\subsection{Reaction Networks with Prescribed Connecctivity and Jacobians}\label{sec:reactionnetjacobian}
+
+To justify our consideration of arbitrary Jacobian matrices, we determine a simple ensemble of reaction networks for which arbitrary Jacobian matrices are realizable. This condition holds if one can solve for the parameter values of the system of equations corresponding to that ensemble in terms of the elements of an arbitrary Jacobian matrix. More precisely, we will show that, given an arbitrary directed graph $G$ where $G_{ii} = 1$ for all $i$, there exists a system of reactions having $G$ as its interaction graph and satisfying the following property: For any point $\vec{x}^0$ in the positive orthant and an arbitrary matrix $M$ whose interaction graph is $G$, there exists a choice of non-negative rates such that $\vec{x}^0$ is a fixed point of the network and the Jacobian equals $M$ at $\vec{x}^0$.
+
+We begin by noting that, since the form of the rate equations for reaction networks are invariant under rescaling the concentrations and rate constants, we can make the coordinates of the point $\vec{x}^0$ be $(1,1,\ldots,1)$.  This will simplify the computation.
+
+Let $N$ be the number of nodes of $G$.  Our reaction net will consist of $N$ species of reactants, $A_1, \ldots, A_N$, whose concentrations are $c_1, \ldots, c_N$.  The reactions are defined as follows:
+% \begin{enumerate}
+% \item For every integer $1 \le i \le N$, we have the reactions $\emptyset \to A_i$, $A_i \to \emptyset$ and $2A_i \to 3A_i$.
+% \item For every pair of integers $1 \le i,j \le N$ such that $G_{ij} = 1$, we have the reactions $A_i + A_j \leftrightarrow A_j$.
+% \end{enumerate}
+\begin{equation}\label{eq:arbitraryjacobianreactionnetwork}
+\begin{aligned}
+\emptyset &\to A_i, & 1 \le i \le N,\\
+A_i &\to \emptyset, & 1 \le i \le N,\\
+2A_i &\to 3A_i, & 1 \le i \le N,\\
+A_i + A_j &\leftrightarrow A_j, & i \neq j,\, 1 \le i,j \le N,\, G_{ij} = 1.
+\end{aligned}
+\end{equation}
+
+The rate equations for such a system are:
+% \begin{widetext}
+\begin{equation}\label{eq:crnarbitraryjacobian}
+\begin{aligned}
+\frac{dc_i}{dt} = &F_i = k_{\emptyset \to A_i} - k_{A_i \to \emptyset} c_i + k_{2A_i \to 3A_i} c_i^2 \\
+&+ \sum_{\substack{1 \le j \le N \\ j \neq i \\ G_{ij} = 1}} k_{A_j \to A_i + A_j} c_j - k_{A_i + A_j \to A_j} c_i c_j
+\end{aligned}
+\end{equation}
+% \end{widetext}
+The Jacobian at $\vec{x}^0$ is given as
+% \begin{widetext}
+\begin{align*}
+\left. \frac{\partial F_i}{\partial c_i}\right|_{\vec{x}^0} &= - k_{A_i \to \emptyset} + 2 k_{2A_i \to 3A_i} - \sum_{\substack{1 \le j \le N \\ j \neq i \\ G_{ij} = 1}} k_{A_i + A_j \rightarrow A_j}, & \\
+\left. \frac{\partial F_i}{\partial c_j}\right|_{\vec{x}^0} &= k_{A_j \to A_i + A_j} - k_{A_i + A_j \to A_j}, &
+\end{align*}
+where $i \neq j$.
+% \end{widetext}
+By combining the equations $F_i(\vec{x}^0) = 0$ from \ref{eq:crnarbitraryjacobian} and $\frac{\partial F_i}{c_j}|_{\vec{x}^0} = M_{ij}$ we obtain the equivalent system of equations
+\begin{align}
+& k_{2A_i \to 3A_i} - k_{\emptyset \to A_i} = M_{ii} + \sum_{\substack{1 \le j \le N \\ j \neq i \\ G_{ij} = 1}} k_{A_j \to A_i + A_j} \label{eq:jacobianconstraint1}  \\
+& 2k_{2A_i \to 3A_i} - k_{A_i \to \emptyset} = M_{ii} + \sum_{\substack{1 \le j \le N \\ j \neq i \\ G_{ij} = 1}} k_{A_i + A_j \to A_j} \label{eq:jacobianconstraint2}\\
+& k_{A_j \to A_i + A_j} - k_{A_i + A_j \to A_j} = M_{ij} \label{eq:jacobianconstraint3}
+\end{align}
+We may solve these equations for the rate constants as follows.  We begin by solving \ref{eq:jacobianconstraint3} by either choosing $k_{A_i + A_j \to A_j} \ge 0$ and setting $k_{A_j \to A_i + A_j} = M_{ij} + k_{A_i + A_j \to A_j}$ when $M_{ij} \ge 0$ or choosing $k_{A_j \to A_i + A_j} \ge 0$ and setting $k_{A_i + A_j \to A_j} = k_{A_j \to A_i + A_j} - M_{ij}$ when $M_{ij} < 0$.  Pick
+% \begin{widetext}
+\begin{equation}
+\begin{aligned}
+k_{2A_i \to 3A_i} \ge \max \bigg(&0, M_{ii} + \sum_{\substack{1 \le j \le N \\ j \neq i \\ G_{ij} = 1}} k_{A_j \to A_i + A_j}, \\
+&M_{ii} + \sum_{\substack{1 \le j \le N \\ j \neq i \\ G_{ij} = 1}} k_{A_i + A_j \to A_j} \bigg).
+\end{aligned}
+\end{equation}
+% \end{widetext}
+Then we may solve \ref{eq:jacobianconstraint1} for $k_{\emptyset \to A_i}$ and \ref{eq:jacobianconstraint2} for $k_{A_i \to \emptyset}$ and obtain non-negative answers. This demonstrates that arbitrary Jacobian matrices can arise from reaction network ensembles that allow for the possibility of at least those reactions in \ref{eq:arbitraryjacobianreactionnetwork}. Note that \ref{eq:crnarbitraryjacobian}, \ref{eq:jacobianconstraint1}, \ref{eq:jacobianconstraint2}, and \ref{eq:jacobianconstraint3} are linear in the parameter values. Therefore, any probability distribution on the elements of the Jacobian can be obtained from a probability distribution on the parameter values.
