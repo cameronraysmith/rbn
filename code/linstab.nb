@@ -1,0 +1,476 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     16697,        467]
+NotebookOptionsPosition[     15977,        442]
+NotebookOutlinePosition[     16411,        459]
+CellTagsIndexPosition[     16368,        456]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Define functions to compute the Jacobian matrix\
+\>", "Text",
+ CellChangeTimes->{{3.631384188418531*^9, 3.631384218083233*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"JacobianMatrix", "[", 
+    RowBox[{
+     RowBox[{"f_List", "?", "VectorQ"}], ",", "x_List"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Outer", "[", 
+     RowBox[{"D", ",", "f", ",", "x"}], "]"}], "/;", 
+    RowBox[{"Equal", "@@", 
+     RowBox[{"(", 
+      RowBox[{"Dimensions", "/@", 
+       RowBox[{"{", 
+        RowBox[{"f", ",", "x"}], "}"}]}], ")"}]}]}]}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"JacobianDeterminant", "[", 
+   RowBox[{
+    RowBox[{"f_List", "?", "VectorQ"}], ",", "x_List"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Det", "[", 
+    RowBox[{"JacobianMatrix", "[", 
+     RowBox[{"f", ",", "x"}], "]"}], "]"}], "/;", 
+   RowBox[{"Equal", "@@", 
+    RowBox[{"(", 
+     RowBox[{"Dimensions", "/@", 
+      RowBox[{"{", 
+       RowBox[{"f", ",", "x"}], "}"}]}], ")"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.631381676302362*^9, 3.631381678678701*^9}}],
+
+Cell["\<\
+Define rate functions and variables\
+\>", "Text",
+ CellChangeTimes->{{3.631384188418531*^9, 3.631384239073976*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"eom", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"sx", " ", "+", " ", "bx", " ", "+", " ", "cx"}], ",", " ", 
+      RowBox[{"sy", " ", "+", " ", "by", " ", "+", " ", "cy"}]}], "}"}]}], 
+   ";"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.631384949213112*^9, 3.631384971071876*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eom", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"sx", " ", "-", 
+      RowBox[{"dx", "*", "x"}], "+", " ", 
+      RowBox[{"bx", "*", 
+       SuperscriptBox["x", "2"]}], " ", "-", " ", 
+      RowBox[{"cx", "*", "x", "*", "y"}], " ", "+", 
+      RowBox[{"ex", "*", "y"}]}], ",", " ", 
+     RowBox[{"sy", " ", "-", 
+      RowBox[{"dy", "*", "y"}], "+", " ", 
+      RowBox[{"by", "*", 
+       SuperscriptBox["y", "2"]}], " ", "-", " ", 
+      RowBox[{"cy", "*", "x", "*", "y"}], "+", 
+      RowBox[{"ey", "*", "x"}]}]}], " ", "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"var", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"JacobianMatrix", "[", 
+    RowBox[{"eom", ",", "var"}], "]"}], "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "\[Rule]", "1"}], ",", 
+     RowBox[{"y", "\[Rule]", "1"}]}], "}"}]}], "//", 
+  "MatrixForm"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"JacobianDeterminant", "[", 
+   RowBox[{"eom", ",", "var"}], "]"}], "/.", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"x", "\[Rule]", "1"}], ",", 
+    RowBox[{"y", "\[Rule]", "1"}]}], "}"}]}]}], "Input",
+ CellChangeTimes->{{3.631384249634985*^9, 3.6313842516143837`*^9}, {
+  3.631384827719161*^9, 3.631384845481225*^9}, {3.631403322168468*^9, 
+  3.6314033292787447`*^9}, {3.63140348715742*^9, 3.631403547007964*^9}, {
+  3.631403753419154*^9, 3.6314037582246733`*^9}, {3.631404494790007*^9, 
+  3.631404510406983*^9}, {3.631404758159113*^9, 3.631404802661469*^9}, {
+  3.63140495377332*^9, 3.631404953868469*^9}, {3.6314050386937923`*^9, 
+  3.631405039049342*^9}}],
+
+Cell["\<\
+Compute stability for random parameters\
+\>", "Text",
+ CellChangeTimes->{{3.631384188418531*^9, 3.631384239073976*^9}, {
+  3.6313843700346746`*^9, 3.631384377945931*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"presamp", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"sxx", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"bxx", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"cxx", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"dxx", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"exx", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", " ", 
+     RowBox[{"syy", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"byy", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"cyy", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"dyy", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"eyy", "\[Rule]", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"constr", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"sx", "\[Rule]", "sxx"}], ",", 
+      RowBox[{"bx", "\[Rule]", "bxx"}], ",", 
+      RowBox[{"cx", "\[Rule]", "cxx"}], ",", 
+      RowBox[{"dx", "\[Rule]", "dxx"}], ",", 
+      RowBox[{"ex", "\[Rule]", " ", 
+       RowBox[{"dxx", "+", "cxx", "-", "sxx", "-", "bxx"}]}], ",", 
+      RowBox[{"sy", "\[Rule]", "syy"}], ",", 
+      RowBox[{"by", "\[Rule]", "byy"}], ",", 
+      RowBox[{"cy", "\[Rule]", "cyy"}], ",", 
+      RowBox[{"dy", "\[Rule]", "dyy"}], ",", 
+      RowBox[{"ey", "\[Rule]", 
+       RowBox[{"dyy", "+", "cyy", "-", "syy", "-", "byy"}]}]}], "}"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"pars", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"sx", "\[Rule]", 
+        RowBox[{"-", "2"}]}], ",", 
+       RowBox[{"bx", "\[Rule]", "1"}], ",", 
+       RowBox[{"cx", "\[Rule]", "1"}], ",", 
+       RowBox[{"sy", "\[Rule]", 
+        RowBox[{"-", "2"}]}], ",", 
+       RowBox[{"by", "\[Rule]", "1"}], ",", 
+       RowBox[{"cy", "\[Rule]", "0"}]}], "}"}]}], ";"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pars", " ", "=", " ", 
+    RowBox[{"constr", "/.", "presamp"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fps", " ", "=", " ", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"#", "\[Equal]", "0"}], ")"}], "&"}], "/@", "eom"}], ",", 
+     "var"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nfp1", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"fps", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "/.", "pars"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"nfp2", "=", 
+    RowBox[{"N", "[", 
+     RowBox[{
+      RowBox[{"fps", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "/.", "pars"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"J", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"JacobianMatrix", "[", 
+      RowBox[{"eom", ",", "var"}], "]"}], "/.", 
+     RowBox[{"fps", "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], "/.", "pars"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"J", "//", "MatrixForm"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"eigs", "=", 
+    RowBox[{"Eigenvalues", "[", 
+     RowBox[{"N", "[", "J", "]"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"stabflag", " ", "=", " ", 
+   RowBox[{"Apply", "[", 
+    RowBox[{"And", ",", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Re", "[", "#", "]"}], "<", "0"}], ")"}], "&"}], ",", 
+       "eigs"}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"posflag", " ", "=", " ", 
+    RowBox[{"Apply", "[", 
+     RowBox[{"And", ",", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Re", "[", "#", "]"}], "\[GreaterEqual]", "0"}], ")"}], 
+         "&"}], ",", 
+        RowBox[{"var", "/.", "nfp2"}]}], "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Text", "[", "\"\<stable: \>\"", 
+  "]"}], "\[IndentingNewLine]", "stabflag", "\[IndentingNewLine]", 
+ RowBox[{"Text", "[", "\"\<positive: \>\"", 
+  "]"}], "\[IndentingNewLine]", "posflag", "\[IndentingNewLine]", 
+ RowBox[{"Text", "[", "\"\<parameter values: \>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"pars", "//", "TableForm"}], "\[IndentingNewLine]", 
+ RowBox[{"Text", "[", "\"\<fixed points: \>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"nfp2", "//", "TableForm"}], "\[IndentingNewLine]", 
+ RowBox[{"nfp1", "//", "TableForm"}], "\[IndentingNewLine]", 
+ RowBox[{"Text", "[", "\"\<Eigenvalues\>\"", 
+  "]"}], "\[IndentingNewLine]", "eigs", "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.63137979051287*^9, 3.6313798436088037`*^9}, {
+   3.631379894121724*^9, 3.631379921945752*^9}, {3.631380047344026*^9, 
+   3.6313800555845633`*^9}, {3.6313800920949574`*^9, 3.631380110679212*^9}, {
+   3.631380194497118*^9, 3.631380201145796*^9}, {3.631380240447083*^9, 
+   3.631380348624473*^9}, {3.6313803814585533`*^9, 3.631380411849497*^9}, {
+   3.6313804762330627`*^9, 3.631380523141429*^9}, {3.6313808536695023`*^9, 
+   3.631380874649913*^9}, {3.631381104251575*^9, 3.6313811075226717`*^9}, {
+   3.6313815695313883`*^9, 3.6313816071796494`*^9}, {3.631381798975163*^9, 
+   3.631381809847251*^9}, {3.631382085982984*^9, 3.631382087585314*^9}, 
+   3.6313821648615522`*^9, {3.631382232625925*^9, 3.63138229826654*^9}, {
+   3.631382461789281*^9, 3.631382529360228*^9}, {3.6313830652200327`*^9, 
+   3.631383093454752*^9}, {3.631383313286022*^9, 3.631383333670515*^9}, {
+   3.631383400496657*^9, 3.631383401666442*^9}, {3.631383480309442*^9, 
+   3.631383521187593*^9}, {3.631383561905661*^9, 3.6313835767988443`*^9}, {
+   3.631383700222159*^9, 3.63138370762748*^9}, {3.6313838788443203`*^9, 
+   3.631383895415942*^9}, 3.631384045674025*^9, {3.631384166914715*^9, 
+   3.6313841720295477`*^9}, {3.6313842477725687`*^9, 
+   3.6313844072217827`*^9}, {3.6313846389913673`*^9, 
+   3.6313846508118353`*^9}, {3.6313851061720123`*^9, 3.63138515516924*^9}, {
+   3.631385215366527*^9, 3.631385285924528*^9}, {3.6313856538385677`*^9, 
+   3.631385655262609*^9}, {3.6313856875651608`*^9, 3.631385693378501*^9}, {
+   3.631385726221857*^9, 3.631385760776094*^9}, {3.631386001831604*^9, 
+   3.6313860664444027`*^9}, 3.631386144433428*^9, {3.631386451968213*^9, 
+   3.631386511507213*^9}, {3.63138654172812*^9, 3.6313865490385447`*^9}, {
+   3.6314051791661167`*^9, 3.631405190517088*^9}, {3.6314052634246883`*^9, 
+   3.631405372384802*^9}}],
+
+Cell[BoxData[
+ RowBox[{"StreamPlot", "[", 
+  RowBox[{
+   RowBox[{"eom", "/.", "pars"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"PlotLabel", "\[Rule]", 
+    RowBox[{"pars", "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ",", 
+   RowBox[{"StreamColorFunction", "\[Rule]", "\"\<RedBlueTones\>\""}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.631405744752995*^9, 3.631405752215454*^9}, {
+   3.63140585474137*^9, 3.631405943535795*^9}, {3.6314060659743843`*^9, 
+   3.631406137719891*^9}, 3.631406869594139*^9, {3.631408339991749*^9, 
+   3.631408370679769*^9}, {3.631408431024867*^9, 3.6314084648248*^9}, {
+   3.631408498782922*^9, 3.631408501224358*^9}, {3.6314086356171703`*^9, 
+   3.631408643543282*^9}, {3.631408675194672*^9, 3.631408693306057*^9}, {
+   3.631408841103945*^9, 3.631408852537467*^9}, {3.631408884714122*^9, 
+   3.631408936913369*^9}, 3.631409500304475*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"scalefp", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ex", "\[Rule]", " ", 
+      RowBox[{"dx", "+", "cx", "-", "sx", "-", "bx"}]}], ",", 
+     RowBox[{"ey", "\[Rule]", " ", 
+      RowBox[{"dy", "+", "cy", "-", "sy", "-", "by"}]}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lr", " ", "=", " ", "1"}], ";", " ", 
+  RowBox[{"hr", " ", "=", " ", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"StreamPlot", "[", 
+    RowBox[{
+     RowBox[{"eom", "/.", "scalefp"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "0", ",", "5"}], "}"}], ",", 
+     RowBox[{"StreamScale", "\[Rule]", "Large"}], ",", 
+     RowBox[{"PlotLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "sx", ",", "bx", ",", "cx", ",", "dx", ",", "sy", ",", "by", ",", "cy",
+         ",", "dy"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"sx", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"bx", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"cx", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"dx", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"sy", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"by", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"cy", ",", "lr", ",", "hr"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"dy", ",", "lr", ",", "hr"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.63140691970938*^9, 3.631407049049662*^9}, {
+   3.6314071080640087`*^9, 3.6314071913545713`*^9}, {3.631407229972116*^9, 
+   3.631407272827414*^9}, {3.631407304014255*^9, 3.6314073255788927`*^9}, 
+   3.6314073931887827`*^9, {3.631407494774053*^9, 3.631407506191647*^9}, {
+   3.631407735141973*^9, 3.6314077391245747`*^9}}],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.631411292360036*^9, 3.631411292360631*^9}}],
+
+Cell[BoxData[
+ RowBox[{"StreamPlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "1"}], "+", 
+      RowBox[{"9", 
+       RowBox[{"(", 
+        RowBox[{"x", "-", "3"}], ")"}]}], "-", 
+      RowBox[{"2", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "3"}], ")"}], "^", "3"}]}], "+", 
+      RowBox[{"9", 
+       RowBox[{"(", 
+        RowBox[{"y", "-", "3"}], ")"}]}], "-", 
+      RowBox[{"2", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "3"}], ")"}], "^", "3"}]}]}], ",", "\n", 
+     RowBox[{"1", "-", 
+      RowBox[{"11", 
+       RowBox[{"(", 
+        RowBox[{"x", "-", "3"}], ")"}]}], "+", 
+      RowBox[{"2", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "3"}], ")"}], "^", "3"}]}], "+", 
+      RowBox[{"11", 
+       RowBox[{"(", 
+        RowBox[{"y", "-", "3"}], ")"}]}], "-", 
+      RowBox[{"2", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "3"}], ")"}], "^", "3"}]}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", "0", ",", "6"}], "}"}], ",", 
+   RowBox[{"StreamColorFunction", "\[Rule]", "\"\<RedBlueTones\>\""}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.631411292360036*^9, 3.6314113607188883`*^9}}]
+},
+WindowSize->{960, 1028},
+WindowMargins->{{Automatic, 947}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Article"}, "Preprint.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 137, 3, 37, "Text"],
+Cell[697, 25, 925, 28, 129, "Input"],
+Cell[1625, 55, 125, 3, 37, "Text"],
+Cell[1753, 60, 352, 9, 60, "Input"],
+Cell[2108, 71, 1686, 44, 113, "Input"],
+Cell[3797, 117, 180, 4, 37, "Text"],
+Cell[3980, 123, 7672, 197, 773, "Input"],
+Cell[11655, 322, 1013, 21, 60, "Input"],
+Cell[12671, 345, 1909, 48, 152, "Input"],
+Cell[14583, 395, 82, 1, 37, "Text"],
+Cell[14668, 398, 1305, 42, 83, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
