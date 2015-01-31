@@ -6,7 +6,7 @@
 # list of automatic variables
 # http://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html#Automatic-Variables
 
-PROJECTNAME = rbn
+PROJECTNAME = rbn2
 
 TOPTEX = paper.tex
 
@@ -50,6 +50,9 @@ linkbib:
 	ln -s ~/Downloads/bib bib
 
 dropbox:
+	mkdir -p ~/Dropbox/sharelatex/$(PROJECTNAME)/tex
+	mkdir -p ~/Dropbox/sharelatex/$(PROJECTNAME)/fig
+	mkdir -p ~/Dropbox/sharelatex/$(PROJECTNAME)/bib
 	cp $(TOPTEX) ~/Dropbox/sharelatex/$(PROJECTNAME)
 	cp *header.tex ~/Dropbox/sharelatex/$(PROJECTNAME)
 	cp *.bst ~/Dropbox/sharelatex/$(PROJECTNAME)
