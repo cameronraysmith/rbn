@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     28011,        719]
-NotebookOptionsPosition[     27164,        691]
-NotebookOutlinePosition[     27596,        708]
-CellTagsIndexPosition[     27553,        705]
+NotebookDataLength[     32942,        854]
+NotebookOptionsPosition[     31935,        822]
+NotebookOutlinePosition[     32369,        839]
+CellTagsIndexPosition[     32326,        836]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -442,79 +442,169 @@ Cell[BoxData[{
   3.631634559482325*^9}, {3.631634914132112*^9, 3.631634931185855*^9}}],
 
 Cell[BoxData[
- RowBox[{"GraphicsGrid", "[", 
-  RowBox[{"{", 
+ RowBox[{"Grid", "[", 
+  RowBox[{"Partition", "[", 
    RowBox[{
     RowBox[{"{", 
      RowBox[{
       RowBox[{"ListPlot", "[", 
-       RowBox[{"Map", "[", 
-        RowBox[{"Re", ",", 
-         RowBox[{"randparjacs", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Re", ",", 
+          RowBox[{"randparjacs", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "1", ",", "1", ",", 
+             RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", " ", 
+         RowBox[{
+          RowBox[{"Correlation", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Re", ",", 
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", "1", ",", 
+                RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], "]"}], "[", 
           RowBox[{"[", 
-           RowBox[{"All", ",", "1", ",", "1", ",", 
-            RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], "]"}], ",", 
+           RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "]"}], ",", 
       "\[IndentingNewLine]", 
       RowBox[{"ListPlot", "[", 
-       RowBox[{"Map", "[", 
-        RowBox[{"Re", ",", 
-         RowBox[{"randparjacs", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Re", ",", 
+          RowBox[{"randparjacs", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "1", ",", "2", ",", 
+             RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", " ", 
+         RowBox[{
+          RowBox[{"Correlation", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Re", ",", 
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", "2", ",", 
+                RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], "]"}], "[", 
           RowBox[{"[", 
-           RowBox[{"All", ",", "1", ",", "2", ",", 
-            RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], "]"}], ",", 
+           RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "]"}], ",", 
       "\[IndentingNewLine]", 
       RowBox[{"ListPlot", "[", 
-       RowBox[{"Map", "[", 
-        RowBox[{"Re", ",", 
-         RowBox[{"randparjacs", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Re", ",", 
+          RowBox[{"randparjacs", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "1", ",", 
+             RowBox[{"1", ";;", "2"}], ",", "1"}], "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", " ", 
+         RowBox[{
+          RowBox[{"Correlation", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Re", ",", 
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", 
+                RowBox[{"1", ";;", "2"}], ",", "1"}], "]"}], "]"}]}], "]"}], 
+           "]"}], "[", 
           RowBox[{"[", 
-           RowBox[{"All", ",", "1", ",", 
-            RowBox[{"1", ";;", "2"}], ",", "1"}], "]"}], "]"}]}], "]"}], 
-       "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{"{", 
-     RowBox[{
+           RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
       RowBox[{"ListPlot", "[", 
-       RowBox[{"Map", "[", 
-        RowBox[{"Re", ",", 
-         RowBox[{"randparjacs", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Re", ",", 
+          RowBox[{"randparjacs", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "1", ",", 
+             RowBox[{"1", ";;", "2"}], ",", "2"}], "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", " ", 
+         RowBox[{
+          RowBox[{"Correlation", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Re", ",", 
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", 
+                RowBox[{"1", ";;", "2"}], ",", "2"}], "]"}], "]"}]}], "]"}], 
+           "]"}], "[", 
           RowBox[{"[", 
-           RowBox[{"All", ",", "1", ",", 
-            RowBox[{"1", ";;", "2"}], ",", "2"}], "]"}], "]"}]}], "]"}], 
-       "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
       RowBox[{"ListPlot", "[", 
-       RowBox[{"Map", "[", 
-        RowBox[{"Re", ",", 
-         RowBox[{"Transpose", "[", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"randparjacs", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], 
-            ",", 
-            RowBox[{"randparjacs", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}]}], 
-           "}"}], "]"}]}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Re", ",", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}], 
+             ",", 
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", "2", ",", "2"}], "]"}], "]"}]}], 
+            "}"}], "]"}]}], "]"}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", " ", 
+         RowBox[{
+          RowBox[{"Correlation", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Re", ",", 
+             RowBox[{"Transpose", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"randparjacs", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}],
+                 ",", 
+                RowBox[{"randparjacs", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "1", ",", "2", ",", "2"}], "]"}], 
+                 "]"}]}], "}"}], "]"}]}], "]"}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
       RowBox[{"ListPlot", "[", 
-       RowBox[{"Map", "[", 
-        RowBox[{"Re", ",", 
-         RowBox[{"Transpose", "[", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"randparjacs", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}], 
-            ",", 
-            RowBox[{"randparjacs", "[", 
-             RowBox[{"[", 
-              RowBox[{"All", ",", "1", ",", "2", ",", "1"}], "]"}], "]"}]}], 
-           "}"}], "]"}]}], "]"}], "]"}]}], "}"}]}], "}"}], "]"}]], "Input",
- CellChangeTimes->{{3.631637371989848*^9, 3.631637387938712*^9}, {
-  3.631637631860878*^9, 3.6316376387716923`*^9}, {3.6316376934144297`*^9, 
-  3.631637794368805*^9}, {3.631637835444086*^9, 3.63163785372267*^9}, {
-  3.631643243134572*^9, 3.631643261626862*^9}, {3.631643413680607*^9, 
-  3.6316434192873297`*^9}, {3.631643469243374*^9, 3.6316434879078503`*^9}, {
-  3.6316545614447117`*^9, 3.631654628704851*^9}}],
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Re", ",", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}], 
+             ",", 
+             RowBox[{"randparjacs", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1", ",", "2", ",", "1"}], "]"}], "]"}]}], 
+            "}"}], "]"}]}], "]"}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", " ", 
+         RowBox[{
+          RowBox[{"Correlation", "[", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Re", ",", 
+             RowBox[{"Transpose", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"randparjacs", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "1", ",", "1", ",", "2"}], "]"}], "]"}],
+                 ",", 
+                RowBox[{"randparjacs", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "1", ",", "2", ",", "1"}], "]"}], 
+                 "]"}]}], "}"}], "]"}]}], "]"}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "2"}], "]"}], "]"}]}]}], "]"}]}], "}"}], ",", 
+    "3"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.631896745154811*^9, 3.6318968005387907`*^9}, {
+   3.631898196776711*^9, 3.631898239675531*^9}, {3.63189827323039*^9, 
+   3.631898319168098*^9}, {3.631898382561616*^9, 3.6318984171774483`*^9}, {
+   3.6318984603623323`*^9, 3.6318984703624153`*^9}, {3.631898531160687*^9, 
+   3.631898548555595*^9}, 3.631898589148581*^9, 3.631898625376829*^9}],
+
+Cell["", "Text",
+ CellChangeTimes->{3.631896745154811*^9}],
 
 Cell[BoxData[
  RowBox[{"Map", "[", 
@@ -687,10 +777,51 @@ Cell[BoxData[
     RowBox[{"y", ",", "0", ",", "6"}], "}"}], ",", 
    RowBox[{"StreamColorFunction", "\[Rule]", "\"\<RedBlueTones\>\""}]}], 
   "]"}]], "Input",
- CellChangeTimes->{{3.631411292360036*^9, 3.6314113607188883`*^9}}]
+ CellChangeTimes->{{3.631411292360036*^9, 3.6314113607188883`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Correlation", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{"Re", ",", 
+     RowBox[{"randparjacs", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1", ",", "2", ",", 
+        RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}], "]"}], "[", 
+  RowBox[{"[", 
+   RowBox[{"1", ",", "2"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.631896592890031*^9, {3.631896644673809*^9, 3.631896650063294*^9}, {
+   3.631898167409308*^9, 3.631898171569474*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"Re", ",", 
+   RowBox[{"randparjacs", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"1", ";;", "3"}], ",", "1", ",", "2", ",", 
+      RowBox[{"1", ";;", "2"}]}], "]"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6318966989241257`*^9, 3.631896698924616*^9}, {
+  3.6318968913312073`*^9, 3.6318969113513536`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Correlation", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", 
+       RowBox[{"-", "3"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1"}], "}"}]}], "}"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6318969157028503`*^9, 3.631896922405985*^9}, {
+  3.6318980613549347`*^9, 3.631898140863331*^9}}]
 },
-WindowSize->{1366, 744},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{960, 1148},
+WindowMargins->{{Automatic, 952}, {Automatic, 0}},
 Magnification:>1.25 Inherited,
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
 StyleDefinitions->FrontEnd`FileName[{"Article"}, "Preprint.nb", 
@@ -708,19 +839,23 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[557, 20, 137, 3, 37, "Text"],
-Cell[697, 25, 1818, 51, 175, "Input"],
+Cell[697, 25, 1818, 51, 221, "Input"],
 Cell[2518, 78, 125, 3, 37, "Text"],
-Cell[2646, 83, 2944, 77, 205, "Input"],
+Cell[2646, 83, 2944, 77, 234, "Input"],
 Cell[5593, 162, 180, 4, 37, "Text"],
-Cell[5776, 168, 10081, 218, 566, "Input"],
+Cell[5776, 168, 10081, 218, 658, "Input"],
 Cell[15860, 388, 2131, 53, 129, "Input"],
-Cell[17994, 443, 2889, 73, 152, "Input"],
-Cell[20886, 518, 342, 8, 36, "Input"],
-Cell[21231, 528, 1052, 28, 60, "Input"],
-Cell[22286, 558, 1460, 33, 60, "Input"],
-Cell[23749, 593, 2018, 49, 106, "Input"],
-Cell[25770, 644, 82, 1, 37, "Text"],
-Cell[25855, 647, 1305, 42, 60, "Input"]
+Cell[17994, 443, 6286, 160, 520, "Input"],
+Cell[24283, 605, 58, 1, 37, "Text"],
+Cell[24344, 608, 342, 8, 36, "Input"],
+Cell[24689, 618, 1052, 28, 129, "Input"],
+Cell[25744, 648, 1460, 33, 83, "Input"],
+Cell[27207, 683, 2018, 49, 129, "Input"],
+Cell[29228, 734, 82, 1, 37, "Text"],
+Cell[29313, 737, 1305, 42, 83, "Input"],
+Cell[30621, 781, 485, 13, 36, "Input"],
+Cell[31109, 796, 367, 9, 36, "Input"],
+Cell[31479, 807, 452, 13, 36, "Input"]
 }
 ]
 *)
