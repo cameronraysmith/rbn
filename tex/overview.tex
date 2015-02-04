@@ -3,9 +3,9 @@
 In the general case of a dynamical system with $n$ components, where the components may be concentrations of chemical species, genes, or biological species, we have an $n$-dimensional vector of state variables or observables $(x_1(t), \ldots x_n(t)) = \vec{x}(t)
 $
 whose components are solutions to the arbitrary first order system
-$$
+\begin{equation}\label{eq:eom}
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t), \vec{p}), \; (i=1,\ldots,n)
-$$
+\end{equation}
 where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p}$ is the vector of parameters of the $F_i$. These parameters typically represent reaction rates in chemical and gene-regulatory networks, interaction strengths in ecological networks, or cooperativity exponents. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$.
 
 Fixed points are the simplest class of solutions to the dynamical system characterizing its long-term behavior. If $\vec x$ is a fixed point (i.e. $F_i(\vec{x})=0$ for all $i$), we
