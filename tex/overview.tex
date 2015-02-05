@@ -36,8 +36,8 @@ The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenva
 \end{equation}
 
 % \subsection{Overview}
-The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row).
-For a general system the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ for $F_i \hbox{ depends on } x_j$ and $0$ for $F_i \hbox{ does not depend on } x_j$.
+The dynamical model given in terms of a system of differential equations for any network can be represented in terms of a global interaction graph (\ref{fig:biomodelexamples} top row).
+For a general system the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ for $F_i \hbox{ depends on } x_j$ and $0$ for $F_i \hbox{ does not depend on } x_j$. These two conditions on global system interactions are expressed respectively in terms of elements of the Jacobian matrix as $\frac{\partial F_i}{\partial x_j}(\vec{x}) \neq 0$ for all $\vec{x}$ and $\frac{\partial F_i}{\partial x_j}(\vec{x}) = 0$ for all $\vec{x}$.
 %  \begin{displaymath}
 %    \adj(G_X)_{ij} = \left\{
 %      \begin{array}{ll}
@@ -46,8 +46,8 @@ For a general system the directed graph $G_X$ that describes the manner in which
 %      \end{array}.
 %    \right.
 % \end{displaymath}
-For large systems, since any given component is only likely to interact with a relatively small proportion of the other components, these matrices may be quite sparse.
-We can also associate a linearized interdependency graph $G_A$ given by an adjacency matrix $\adj(G_A)$ to each dynamical system having Jacobian matrix $A$ at some fixed point $\vec{x}^0$ where
+For large systems, since any given component is only likely to interact with a relatively small proportion of the other components, these matrices may be sparse.
+We can also associate a local interaction graph $G_A$ given by an adjacency matrix $\adj(G_A)$ to each dynamical system having Jacobian matrix $A$ at some fixed point $\vec{x}^0$ where
  \begin{equation}\label{eq:lininterdepadj}
    \adj(G_A)_{ij} = \left\{
      \begin{array}{lr}
@@ -56,7 +56,7 @@ We can also associate a linearized interdependency graph $G_A$ given by an adjac
      \end{array}.
    \right.
 \end{equation}
-In general, the graph $G_A$ is a subgraph of $G_X$, however, for nearly all systems, $G_A$ is equivalent to $G_X$. We define the connectivity to be equal to the number of edges in $G_A$, which is equivalent to summing up the number of non-zero entries of $\adj(G_A)$.
+In general, the graph $G_A$ is a subgraph of $G_X$, however, for nearly all systems, $G_A$ is equivalent to $G_X$ (\refsupp{}). We define the connectivity to be equal to the number of edges in $G_A$, which is equivalent to summing up the number of non-zero entries of $\adj(G_A)$.
 These interaction graphs can be viewed as deriving from the combination of system components that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules).
 
 The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{} and \reffigscc). This map from the interaction graph of a network, referred to as $\hier$, has a collection of intrinsic symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
