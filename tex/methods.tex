@@ -1,5 +1,5 @@
 %!TEX root = ../paper.tex
-\subsection{Monte carlo integration}
+\subsection{Monte carlo integration}\label{suppsec:montecarlo}
 If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
 $$
 \mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
@@ -25,7 +25,7 @@ yielding the error estimate given by the associated standard deviation. In all s
 
 \subsection{Reaction Networks with Prescribed Connecctivity and Jacobians}\label{sec:reactionnetjacobian}
 
-To justify our consideration of arbitrary Jacobian matrices, we determine a simple ensemble of reaction networks for which arbitrary Jacobian matrices are realizable. This condition holds if one can solve for the parameter values of the system of equations corresponding to that ensemble in terms of the elements of an arbitrary Jacobian matrix. More precisely, we will show that, given an arbitrary directed graph $G$ where $G_{ii} = 1$ for all $i$, there exists a system of reactions having $G$ as its interaction graph and satisfying the following property: For any point $\vec{x}^0$ in the positive orthant and an arbitrary matrix $M$ whose interaction graph is $G$, there exists a choice of non-negative rates such that $\vec{x}^0$ is a fixed point of the network and the Jacobian equals $M$ at $\vec{x}^0$.
+To justify our consideration of arbitrary Jacobian matrices in the case of reaction networks, we determine a simple ensemble for which arbitrary Jacobian matrices are realizable. This condition holds if one can solve for the parameter values of the system of equations corresponding to that ensemble in terms of the elements of an arbitrary Jacobian matrix. More precisely, we will show that, given an arbitrary directed graph $G$ where $G_{ii} = 1$ for all $i$, there exists a system of reactions having $G$ as its interaction graph and satisfying the following property: For any point $\vec{x}^0$ in the positive orthant and an arbitrary matrix $M$ whose interaction graph is $G$, there exists a choice of non-negative rates such that $\vec{x}^0$ is a fixed point of the network and the Jacobian equals $M$ at $\vec{x}^0$.
 
 We begin by noting that, since the form of the rate equations for reaction networks are invariant under rescaling the concentrations and rate constants, we can make the coordinates of the point $\vec{x}^0$ be $(1,1,\ldots,1)$.  This will simplify the computation.
 
