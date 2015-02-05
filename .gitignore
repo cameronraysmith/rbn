@@ -1,0 +1,10 @@
+*.pyc
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.lof
+*.log
+*.lot
+*.out
+*.toc
