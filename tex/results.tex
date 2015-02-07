@@ -1,20 +1,23 @@
 %!TEX root = ../paper.tex
-\subsection{Overview}
-The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row). These interaction graphs can be viewed as deriving from the combination of system modules that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules). Symmetries are characterized by the ability to interchange these modules or their connectivity without changing some property of the system.
 
-The network architecture can be represented in terms of an adjacency matrix and further abstracted by mapping the interaction graph to the network of strongly connected components (SCCs, see Supplementary Information) (\reffigscc). This map from the interaction graph of a network, referred to as $\hier$, has a collection of symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Two of these three are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these symmetries applied to a specific interaction graph.
+% \subsection{}
+% .
 
-We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. This expression is fully developed in \ref{eq:sccrobustness}, but can be schematized as in \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
-\begin{equation}\label{eq:robschematic}
-R_{tot} = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
-\end{equation}
-Examining this expression noting that $R_i$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R_{tot}$.
-This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any network whose associated dynamical system has the interaction graph \reffigscc $\,$ top will be more robust than those associated to any of the other interaction graphs in \reffigscc. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
+% The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row). These interaction graphs can be viewed as deriving from the combination of system modules that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules). Symmetries are characterized by the ability to interchange these modules or their connectivity without changing some property of the system.
 
-To test this prediction, we computed the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
+% The network architecture can be represented in terms of an adjacency matrix and further abstracted by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{}) (\reffigscc). This map from the interaction graph of a network, referred to as $\hier$, has a collection of symmetries shown in \reffighiertransformations. These three symmetries represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated \reffigscc. Two of these three are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these symmetries applied to a specific interaction graph.
 
-\subsection{Dynamical systems on biological networks}
-In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish the interdependencies among system components. The specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
+% We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. This expression is fully developed in \ref{eq:sccrobustness}, but can be schematized as in \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
+% \begin{equation}\label{eq:robschematic}
+% R_{tot} = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
+% \end{equation}
+% Examining this expression noting that $R_i$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R_{tot}$.
+% This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any network whose associated dynamical system has the interaction graph \reffigscc{} $\,$ top will be more robust than those associated to any of the other interaction graphs in \reffigscc. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
+
+% To test this prediction, we computed the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
+
+\subsection{Dynamical systems on biological networks}\label{suppsec:dynsysbionet}
+In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish which interdependencies among system components are possible. Finally, the specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
 For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph, $G$, to the interdependencies, and a vector field $V$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \reffigexamplesystemmodules$\,$
 % \begin{center}
@@ -74,7 +77,13 @@ points, we have an integer-valued random variable; and if the quantity is
 whether or not the system posesses a limit cycle, we have a binary random
 variable.
 
-A quality of interest to us is robustness, which is related to the concept of structural stability \cite{Smale1967}, whose evaluation requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one or more of its defining parameters. We mean to refer to perturbations to the structure of the system itself as determined by the strengths of the couplings between the components as determined by the parameters and not only to perturbations of the state vector at a given point in time. For example, when the network of components and interactions corresponds to a gene-regulatory network, then mutation is one mechanism by which such perturbations may arise.  We will quantify this as the probability that, if some property holds for a set of parameters, it will continue to hold if we make a random perturbation about those parameter values. To do so, we will introduce, in addition to the probability distribution $\mu$ described above, a family of probability distributions $\mu'$ such that $\mu'(x,y)$ encodes the conditional probability that a system with a parameter value $x$ will have its parameter values changed to $y$ under a perturbation.  For our biological models, we will be interested in large perturbations rather than the small or infinitesimal perturbations usually considered in the theory of dynamical systems.  Then, given a binary random variable $q$, we define its robustness as the following conditional probability where $\mathbf{1}_q(x)$ is the standard indicator function equal to $1$ when $x$ satisfies $q$ and $0$ otherwise:
+A quality of interest to us is robustness, which is related to the concept of structural stability \cite{Smale1967}, whose evaluation requires the determination of whether or not a given dynamical system that is determined to be stable remains stable under a perturbation to one or more of its defining parameters. We mean to refer to perturbations to the structure of the system itself as determined by the strengths of the couplings between the components and not only to perturbations of the state vector at a given point in time. It is justified to consider resampling elements of $A$ to generate $A'$ as a proxy for resampling elements of $\vec{p}$ to produce $\vec{p}\,'$ if any matrix $A$ can be obtained for some $F_i$, $\vec{p}$ and $\vec{x}^0$. This holds for the $F_i$ defining the Lotka-Volterra model. This is due to the fact that for a specification of non-zero real numbers for the components of $\vec{n}^0$ and any real numbers for the components of $a_{ij}$, there is a choice of parameters $\vec{p}$ given by $b_{ij} = \frac{a_{ij}}{n_i^0}$ and $r_i = - \sum_{j=1}^N \frac{n_j^0}{n_i^0} a_{ij}$ that generates those particular $a_{ij}$ as the Jacobian matrix of the dynamical system. Checking this property of the domain of realizability of the Jacobian can be done for ensembles of systems other than the Lotka-Volterra ensemble. For arbitrary biochemical reaction and gene regulatory networks, this property is likely to hold so long as not too many types of transformations are constrained from possibility. For example, a simplified version of the general form of the gene regulatory network model presented in \ref{fig:biomodelexamples} center panel is given by the system
+\begin{equation}
+\frac{dg_i}{dt} = \sum_{j=1}^N k_{ij} g_j,
+\end{equation}
+with one parameter $k_{ij} \in \mathbb{R}$ for every pair $(g_i,g_j)$ of genes. The Jacobian of this system is $J_{ij} = k_{ij}$, and, therefore, sampling parameters of the model is precisely equivalent to sampling elements of the Jacobian. For reaction networks, we demonstrate an ensemble from which arbitrary Jacobians can arise in \ref{sec:reactionnetjacobian}.
+
+When the network of components and interactions corresponds to a gene-regulatory network, then mutation is one mechanism by which perturbations may arise.  We will quantify this as the probability that, if some property holds for a set of parameters, it will continue to hold if we make a random perturbation about those parameter values. To do so, we will introduce, in addition to the probability distribution $\mu$ described above, a family of probability distributions $\mu'$ such that $\mu'(x,y)$ encodes the conditional probability that a system with a parameter value $x$ will have its parameter values changed to $y$ under a perturbation.  For our biological models, we will be interested in large perturbations rather than the small or infinitesimal perturbations usually considered in the theory of dynamical systems.  Then, given a binary random variable $q$, we define its robustness as the following conditional probability where $\mathbf{1}_q(x)$ is the standard indicator function equal to $1$ when $x$ satisfies $q$ and $0$ otherwise:
 \begin{align}\label{eq:robustness}
   R (q,\mu') =
   \frac{\int_S d\mu(x) \int_S d\mu'(x,y) \mathbf{1}_q(x) \mathbf{1}_q(y)}
@@ -98,12 +107,19 @@ stay close to the fixed point.  Physically, this is important because,
 if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
 observing the solution ${\vec x}(t) = {\vec x}^0$.
 
-To determine stability, we linearize the equations of motion about the
-fixed point $\vec{x}^0$:
-\begin{equation}\label{eq:lineardynsys}
-\frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
+To determine stability, we use the Taylor series expansion of the equations of motion \ref{eq:eom} about the fixed point $\vec{x}^0$ where $\vec{y} = \vec{x} - \vec{x}^0$ by
+\begin{equation}\label{eq:taylorseries}
+\begin{aligned}
+\frac{dx_i(t)}{dt} \approx & F_i(\vec{x}^0)
++ \sum_{j=1}^{N} \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0} y_j\\
+& + \frac{1}{2}\sum_{j,k=1}^{N} \left. \frac{\partial^2 F_i}{\partial x_j \partial x_k} \right|_{\vec{x} = \vec{x}^0} y_j y_k + \cdots
+\end{aligned}
 \end{equation}
-where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$-matrix $A$ has components
+The zeroth order term vanishes since $F_i(\vec{x}^0)=0$ by definition and thus neglecting terms higher than first order from \ref{eq:taylorseries} results in what is equivalent to \ref{eq:lineardynsys}:
+\begin{equation*}
+\frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
+\end{equation*}
+where the $n \times n$-matrix $A$ has components
 $$
 a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 $$
@@ -157,12 +173,20 @@ conflicting populations), the stability of the fixed point will determine whethe
 % sampling uniformly over the $a_{ij}$ defining $A$ the value of a
 % particular $a_{ij}$ from a given probability distribution.
 
-Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system.  For the purpose of the current investigation, we shall make the ansatz that these are such that the distribution of entries of $A$ is (at least approximately) the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. Note that our conclusion relating network hierarchy to robustness is independent of the form of this distribution. There is therefore no loss of generality in using such a distribution for the purpose of elaborating examples. To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from the same uniform distribution yielding
+Suppose that our Jacobian $A$ is an $n \times n$ matrix with real coefficients, connectivity $\connectivity$, and denote the proposition ``$A$ is stable'' as $\mathrm{stab}(A)$.  Then we may compute the robustness of this proposition using \ref{eq:robustness} once we have specified the probability densities $\mu$ and $\mu'$.  In general, these will depend upon the parameters of the non-linear system. We note again that it is justified to consider resampling elements of $A$ to generate $A'$ as a proxy for resampling elements of $\vec{p}$ to produce $\vec{p}\,'$ if any matrix $A$ can be obtained for some $F_i$, $\vec{p}$ and $\vec{x}^0$. This holds for the $F_i$ defining chemical reaction networks, gene regulatory networks and the Lotka-Volterra model as shown in \ref{suppsec:dynsysbionet} and \ref{sec:reactionnetjacobian}.
+%This is due to the fact that for a specification of non-zero real numbers for the components of $\vec{n}^0$ and any real numbers for the components of $a_{ij}$, there is a choice of parameters $\vec{p}$ given by $b_{ij} = \frac{a_{ij}}{n_i^0}$ and $r_i = - \sum_{j=1}^N \frac{n_j^0}{n_i^0} a_{ij}$ that generates those particular $a_{ij}$ as the Jacobian matrix of the dynamical system.
+In general, resampling elements of $A$ independently to produce $A'$ corresponds to transformations acting on multiple elements of $\vec{p}$ to produce $\vec{p}'$. The most fundamental assumption is that the mutational process may act on the relationships between individual system components, which are given precisely by the $\frac{\partial F_i}{\partial x_j}$ elements of $A$ and not merely the elements of $\vec{p}$.
+%For the purpose of the current investigation, we assume these are such that the distribution of entries of $A$ can be approximated by the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin. Our conclusion relating network hierarchy to robustness in \ref{eq:sccrobustness} is independent of the form of this distribution. There is therefore no loss of generality in using such a distribution for the purpose of elaborating examples.
+
+To model the perturbations, we resample the elements $k_1, k_2, \ldots k_m$ of this matrix from probability distributions $\rho_1, \rho_2, \ldots \rho_n$ yielding
 \begin{widetext}
 $$
-\mu_{k_1,\ldots,k_m}(x,y) = \prod_{j \notin \{k_1, \ldots, k_m\} } \delta(x_j-y_j) \prod_{j \in \{k_1,\ldots,k_m\}} \mathbf{1}_{[-1,1]} (y_j) \mathbf{1}_{[-1,1]} (x_j)
+\mu_{k_1,\ldots,k_m}(x,y) = \prod_{y \notin \{x_1, \ldots, x_m\} } \delta(x_j-y_j) \prod_{y \notin \{x_1,\cdots,x_m\}} \rho_j (y_j) \rho_j (x_j)
 $$
 \end{widetext}
+Later on, when we compute particular examples, we will choose these distributions to all be the uniform distribution $\mathcal{U}(-1,1)$ on the $\connectivity$-dimensional hypercube, $H^\connectivity$, of edge length $r=2$, centered about the origin.  For this choice, we will have $\rho_i = \mathbf{1}_{[-1,1]}$.  However, for the time being, we will leave the distributions $\rho_i$ arbitrary since the result we are proving only depends upon the $x_i$'s being independent random variables, but not upon the form of their distributions.
+
+
 Under these assumptions, the expression for robustness becomes a special case of \ref{eq:robustness}:
 \begin{widetext}
 \begin{equation}\label{eq:condprobgen}
@@ -194,14 +218,14 @@ We are fundamentally interested in the relationship between \ref{eq:condprobgen}
 
 Dynamical networks of the kind described above can be viewed at the level of their interdependency graphs as being composed of more fundamental interacting subsystems \reffigexamplesystemmodules. One such kind of system composition and decomposition is given by the notion of open systems, which are distinguished by having some of the variables specified as control variables whose values are given as autonomous functions of time rather than determined by the dynamics via intrinsic interactions \cite{Vagner2014}.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, this decomposition is trivial since it is equivalent to the underlying system graph and what we instead want is an intermediate decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
 
-\begin{figure*}[!ht]
-\centering
-\noindent\includegraphics[width=0.8\textwidth]{fig/modsccsym.pdf}
-\caption{{\bf Open systems, strongly connected components and symmetries of robustness.} (A) Example of the combination of open system modules to construct closed systems. (B) SCCs highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three variable systems. The most hierarchical network, top panel, is the one that maximizes the number of SCCs and the number of links between them. We therefore define hierarchy as $max(\hbox{ED}) - \hbox{ED}$ where ED is the edit distance representing the number of link addition/deletion operations necessary to transform a given graph into the most hierarchical one. The two panels in the middle represent examples of hierarchical modular systems that posess both modularity (i.e. SCCs with more than one variable) and hierarchy. (C) Symmetries of the $\hier$ transformation between graphs and SCCs. The transformation $a$ represents an interchange of SCCs, $b$ moving a link between nodes in a component and $c$ adding a link. All three transformations represent symmetries of the $\hier$ transformation from graphs to SCCs while only $a$ and $b$ are symmetries of robustness.}
-\label{fig:modsccsym}
-\end{figure*}
+% \begin{figure*}[!ht]
+% \centering
+% \noindent\includegraphics[width=0.8\textwidth]{fig/modsccsym.pdf}
+% \caption{{\bf Open systems, strongly connected components and symmetries of robustness.} (A) Example of the combination of open system modules to construct closed systems. (B) SCCs highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three variable systems. The most hierarchical network, top panel, is the one that maximizes the number of SCCs and the number of links between them. We therefore define hierarchy as $max(\hbox{ED}) - \hbox{ED}$ where ED is the edit distance representing the number of link addition/deletion operations necessary to transform a given graph into the most hierarchical one. The two panels in the middle represent examples of hierarchical modular systems that posess both modularity (i.e. SCCs with more than one variable) and hierarchy. (C) Symmetries of the $\hier$ transformation between graphs and SCCs. The transformation $a$ represents an interchange of SCCs, $b$ moving a link between nodes in a component and $c$ adding a link. All three transformations represent symmetries of the $\hier$ transformation from graphs to SCCs while only $a$ and $b$ are symmetries of robustness.}
+% \label{fig:modsccsym}
+% \end{figure*}
 
-A strongly connected component (SCC) of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three variable systems are outlined in \reffigscc$\,$ along with their adjacency matrices and hierarchy diagrams (to be defined below).
+A strongly connected component (SCC) of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three variable systems are outlined in \reffigscc{} along with their adjacency matrices and hierarchy diagrams (to be defined below).
 The decomposition of a digraph into strongly connected components corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has strongly connected components $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $v_1, \ldots, v_{n_1}$ belong to $C_1$, $v_{n_1 + 1}, \ldots, v_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
 
 Corresponding to this decomposition we can construct a directed acyclic graph $\hier (G)$ or the condensed graph \cite{Corominas-Murtra2013}.  Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
@@ -214,10 +238,10 @@ operations which leaves $\hier(G)$ invariant for a given graph $G$.
 For instance, we may interchange the positions of the strongly
 connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.  As we shall see later, some of these operations leave invariant key dynamical quantities, in our case dynamical robustness, so we may regard them as a symmetry groupoid of our system with respect to the robustness property.
 
-The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \reffigscc (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being maximally hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
+The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \reffigscc{} (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being maximally hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
 
 \subsection{Stability and robustness analysis of particular system ensembles}
-For systems having two variables, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three variables, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. We note again that while we use the uniform distribution for the purposes of illustration, the analysis could be performed for other distributions and our result relating network hierarchy to robustness is independent of the form of the distribution. For two-variable systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
+For systems having two variables, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three variables, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. We note again that while we use the uniform distribution for the purposes of illustration, the analysis could be performed for other distributions and our result relating network hierarchy to robustness in \ref{eq:sccrobustness} is independent of the form of this distribution. For two-variable systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant. Suppose we have a stable matrix
 $$
 \begin{bmatrix}
@@ -254,32 +278,35 @@ d & c
 \end{bmatrix} \right) \right) = \frac{\int_{\genfrac{}{}{0pt}{}{\genfrac{}{}{0pt}{}{ac>bd}{a+c<0}}{H^4}} da\,db\,dc\,dd\,1}{\int_{H^4} da\,db\,dc\,dd\,1}.
 \end{align*}
 Since the trace does not involve $b$, the $T<0$ condition will be satisfied automatically and we only need to examine the determinant. Thus, we have the inequalities $ac > b'd$ and $-1 < b' < 1$ in addition to the previous constraints leading to an expression for the numerator of \ref{eq:condprobgen}
-\begin{widetext}
+% \begin{widetext}
 \begin{align*}
-P\left(\textrm{stab} \left( \begin{bmatrix}
+& P\left(\textrm{stab} \left( \begin{bmatrix}
 a & b \\
 d & c
 \end{bmatrix} \right) \textrm{ and stab} \left( \begin{bmatrix}
 a & b' \\
 d & c
-\end{bmatrix} \right) \right) = \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
+\end{bmatrix} \right) \right) = \\
+& \frac{\int_{{{ac>b'd \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,db'\,1}{\int_{H^5} da\,db\,dc\,dd\,db'\,1}.
 \end{align*}
-\end{widetext}
+% \end{widetext}
 The analogous equation for resampling $a$ is
-\begin{widetext}
+% \begin{widetext}
 \begin{align*}
-P\left(\textrm{stab} \left( \begin{bmatrix}
+& P\left(\textrm{stab} \left( \begin{bmatrix}
 a & b \\
 d & c
-\end{bmatrix} \right) \textrm{ and stab} \left( \begin{bmatrix}
+\end{bmatrix} \right) \textrm{ and stab}
+\left( \begin{bmatrix}
 a' & b \\
 d & c
-\end{bmatrix} \right) \right) = \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
+\end{bmatrix} \right) \right) = \\
+& \frac{\int_{{{{a'c>bd \atop a' + c < 0} \atop ac>bd} \atop a+c<0} \atop H^5} da\,db\,dc\,dd\,da'\,1}{\int_{H^5} da\,db\,dc\,dd\,da'\,1}.
 \end{align*}
-\end{widetext}
+% \end{widetext}
 Using this approach the probability of stability and of robustness for all two variable systems is given in \ref{tab:structstabmat}.
 
-The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. In all simulations we use $N~=~10000$ so that the maximum error is $0.005$ (see \emph{Methods}).
+The analogous results for all three variable systems are computed using Monte Carlo integration and shown in \ref{tab:structstabmat3} and \reffigrobustconnect. This process is associated with some error relative to the exact integration described above. In all simulations we use $N~=~10000$ so that the maximum error is $0.005$ (see \ref{suppsec:montecarlo}).
 
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three variable systems, the situation is not so clear cut. For two variable systems, system stability is constant across the entire range of connectivities. For three variable systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:apstab3x3}.
 
@@ -288,17 +315,17 @@ The relationship between connectivity and robustness for two variable systems is
 \ref{fig:cycle3x3} shows the robustness for all three variable systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
 
 % \subsection{Cycle number and connectivity classify robust systems}
-The combination of connectivity and cycle number as shown in \reffigconnectcycle3D3x3 provides a better classification of the dependence of robustness upon network topology. Here the robustness of three variable systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three variable systems is that of \reffigscc (top panel). This network is the most hierarchical of all three variable systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \reffigscc (top panel) has a block triangular structure.
+The combination of connectivity and cycle number as shown in \reffigconnectcycle3D3x3 provides a better classification of the dependence of robustness upon network topology. Here the robustness of three variable systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three variable systems is that of \reffigscc{} (top panel). This network is the most hierarchical of all three variable systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \reffigscc{} (top panel) has a block triangular structure.
 
-This observation suggested that graph edit distance from \reffigscc (top panel), hierarchy, might provide a better characterization of dynamical robustness. \reffigrobusthierarchy$\,$ shows dynamical robustness as a function of hierarchy. There is a monotonic correlation between the upper bound of robustness and hierarchy. \reffigconnectdist3D3x3$\,$ shows dynamical robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \reffigconnectcycle3D3x3.
+This observation suggested that graph edit distance from \reffigscc{} (top panel), hierarchy, might provide a better characterization of dynamical robustness. \reffigrobusthierarchy$\,$ shows dynamical robustness as a function of hierarchy. There is a monotonic correlation between the upper bound of robustness and hierarchy. \reffigconnectdist3D3x3$\,$ shows dynamical robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \reffigconnectcycle3D3x3.
 
-\begin{figure*}[!ht]
-\centering
-\noindent\includegraphics[width=0.8\textwidth]{fig/combinedfigs.pdf}
-\caption{{\bf Characterization of stability and robustness according to properties of system structure for three variable systems} (A) Robustness versus connectivity. The red line represents a best fit in the least-squares sense with Pearson product-moment correlation coefficient $r=0.29$. The lowest and highest robustness network architectures are labelled. Other network architectures are shown in \ref{tab:structstabmat3}. (B) Robustness versus hierarchy. Correlation coefficient $r=0.67$. (C) Number of cycles and (D) hierarchy vs connectivity and robustness. The color of each point represents the average robustness of all graphs having the parameters specified on the $x$ and $y$ axes.
-}
-\label{fig:combined}
-\end{figure*}
+% \begin{figure*}[!ht]
+% \centering
+% \noindent\includegraphics[width=0.8\textwidth]{fig/combinedfigs.pdf}
+% \caption{{\bf Characterization of stability and robustness according to properties of system structure for three variable systems} (A) Robustness versus connectivity. The red line represents a best fit in the least-squares sense with Pearson product-moment correlation coefficient $r=0.29$. The lowest and highest robustness network architectures are labelled. Other network architectures are shown in \ref{tab:structstabmat3}. (B) Robustness versus hierarchy. Correlation coefficient $r=0.67$. (C) Number of cycles and (D) hierarchy vs connectivity and robustness. The color of each point represents the average robustness of all graphs having the parameters specified on the $x$ and $y$ axes.
+% }
+% \label{fig:combined}
+% \end{figure*}
 
 \subsection{Component decomposition, hierarchy, and the symmetries of robustness}
 
@@ -328,7 +355,7 @@ probabilities:
       \sum\limits_{i=1}^n \connectivity_i}.
 \end{align}
 \end{widetext}
-For instance, if our graph is the one in \reffigscc (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is
+For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is
 \[
 \langle R(\textrm{stab}(G),\mu') \rangle_1 = \frac{2 + 0.5 + 4 \times 0.62}{2 + 1 + 4} = 0.714,
 \]
