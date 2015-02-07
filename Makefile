@@ -66,6 +66,11 @@ arxiv:
 	cp $(TOPBBLFILE) combined.bbl
 	tar --transform='flags=r;s|combined|paper|' -cvzf arxiv`date +"%m%d%Y"`.tar.gz combined.tex combined.bbl $(FIGFILES)
 
+thesis:
+	latexpand $(TOPTEX) > $(PROJECTNAME).tex
+	sed -i 's/\\makeatletter{}//g' $(PROJECTNAME).tex
+	cp $(FIGFILES) ~/projects/thesis/classicthesis/fig
+
 $(BIBFILES):
 	copybib
 
