@@ -127,6 +127,8 @@ urlcolor=[rgb]{.09 .29 .54}}
 \renewcommand*{\figureautorefname}{Fig.}
 \renewcommand*{\equationautorefname}{Eq.}
 \renewcommand*{\tableautorefname}{Table}
+\renewcommand*{\sectionautorefname}{Sec.}
+\renewcommand*{\subsectionautorefname}{Sec.}
 
 \renewcommand{\refname}{References}
 
@@ -135,6 +137,9 @@ urlcolor=[rgb]{.09 .29 .54}}
         \renewcommand{\thetable}{S\arabic{table}}%
         \setcounter{figure}{0}
         \renewcommand{\thefigure}{S\arabic{figure}}%
+        \setcounter{equation}{0}
+        \renewcommand{\theequation}{S\arabic{equation}}%
+        \renewcommand*{\sectionautorefname}{Sec.}
      }
 
 \def\tr{\mathrm{tr}}
@@ -152,4 +157,5 @@ urlcolor=[rgb]{.09 .29 .54}}
 \def\reffigrobusthierarchy{\ref{fig:combined}B}
 \def\reffigconnectcycle3D3x3{\ref{fig:combined}C}
 \def\reffigconnectdist3D3x3{\ref{fig:combined}D}
+\def\refsupp{Supplementary Material}
 %% END MACROS SECTION
