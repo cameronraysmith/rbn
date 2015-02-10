@@ -1,6 +1,6 @@
 %!TEX root = ../paper.tex
 
-% \subsection{}
+% \section{}
 % .
 
 % The dynamical model given in terms of a system of differential equations for any network can be represented in terms of an interaction graph (\ref{fig:biomodelexamples} top row). These interaction graphs can be viewed as deriving from the combination of system modules that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules). Symmetries are characterized by the ability to interchange these modules or their connectivity without changing some property of the system.
@@ -16,7 +16,7 @@
 
 % To test this prediction, we computed the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
 
-\subsection{Dynamical systems on biological networks}\label{suppsec:dynsysbionet}
+\section{Dynamical systems on biological networks}\label{suppsec:dynsysbionet}
 In the construction of a class of potential models for biological systems at any level of the biological hierarchy from metabolic to ecosystem-level networks, it is common to first attempt to define a collection of observable phenomena of interest and determine a domain (such as binary numbers, integers, or real numbers) in which each observable can be quantified. Next, it is necessary to establish which interdependencies among system components are possible. Finally, the specific manner in which the components depend upon one another must be clarified, which is often done by determining a particular system of mathematical functions that represents a hypothesis about how the quantified observables evolve in time. To the degree to which there is uncertainty about the interactions among system components, parameters are introduced to broaden the class of models under consideration. Finally, whatever model class remains may be compared to empirical observations to determine how capable the model is of representing the phenomena of interest.
 
 For the case of continuous deterministic observables, the above process can be made more precise by associating a manifold $M_i$ to each observable, a directed graph, $G$, to the interdependencies, and a vector field $V$ over the space determined by taking the product of the manifolds associated to the collection of observables, satisfying these interdependencies for each observable  \cite{Deville}. For example, if we have two observables $\{x_1,x_2\}$ where the domains in which they are quantified are given by manifolds $\{M_1,M_2\}$ such that $x_1 \in M_1 \equiv \mathbb{R}^1$ and $x_2 \in M_2 \equiv \mathbb{R}^1$, a directed graph $G_X$ describing the dependencies between these observables and vector field $V$ with components $\{F_1,F_2\}$ defined on $M_1 \otimes M_2 \equiv \mathbb{R}^2$ satisfying the dependencies determined by $G_X$. If the system under consideration has the graph given in \reffigexamplesystemmodules$\,$
@@ -90,7 +90,7 @@ When the network of components and interactions corresponds to a gene-regulatory
   {\int_S d\mu(x) \mathbf{1}_q(x)}
 \end{align}
 
-\subsection{Stability analysis of biological networks}
+\section{Stability analysis of biological networks}
 The class of dynamical quantities on which we shall focus in this
 investigation involve stability of equilibria.  Suppose that $\vec x$
 is a point on our phase space which depends upon the parameters.  Then
@@ -214,7 +214,7 @@ R (\hbox{stab}, \mu'_{k_1, \ldots, k_m})
 \end{widetext}
 We are fundamentally interested in the relationship between \ref{eq:condprobgen} and \ref{eq:robavgoverlinks} and topological properties of systems that derive from their associated graphs. In order to investigate this further, we must characterize properties of system graphs in order to evaluate correlations of those properties with dynamical robustness.
 
-\subsection{Network hierarchy and strongly connected components}
+\section{Network hierarchy and strongly connected components}
 
 Dynamical networks of the kind described above can be viewed at the level of their interdependency graphs as being composed of more fundamental interacting subsystems \reffigexamplesystemmodules. One such kind of system composition and decomposition is given by the notion of open systems, which are distinguished by having some of the variables specified as control variables whose values are given as autonomous functions of time rather than determined by the dynamics via intrinsic interactions \cite{Vagner2014}.  Given several such open systems, we may combine them to produce a larger system by setting the control variables of a subsystem equal to the dynamical variables of another system.  Taking this notion to its logical extreme, one can dissect a system into a collection of one open system for each dynamical variable.  However, this decomposition is trivial since it is equivalent to the underlying system graph and what we instead want is an intermediate decomposition into relatively self-contained modules.  One method of accomplishing this based upon the topology of the system graph is the decomposition into strongly connected components.
 
@@ -238,9 +238,9 @@ operations which leaves $\hier(G)$ invariant for a given graph $G$.
 For instance, we may interchange the positions of the strongly
 connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.  As we shall see later, some of these operations leave invariant key dynamical quantities, in our case dynamical robustness, so we may regard them as a symmetry groupoid of our system with respect to the robustness property.
 
-The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, which for three nodes is given in \reffigscc{} (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being maximally hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
+The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of vertices suggests a heuristic method of quantifying the degree of hierarchy of a given graph and thus of the system structure it represents. The most hierarchical system is considered to be the graph corresponding to the total ordering, \ref{sec:totalordering}, which for three nodes is given in \reffigscc{} (top panel). This graph maximizes the number of links between strongly connected components, which also implies maximizing the number of strongly connected components. The graph edit distance (ED) on a fixed number of vertices from one graph to another is defined as the minimum number of modifications of the first graph in order to transform it into the second \cite{Axenovich2011}. This distance between any given graph and the total ordering thus quantitatively represents how far a graph is from being maximally hierarchical. In this work we take $max(ED) - ED$ to be the definition of hierarchy, where $max(ED)$ is the maximum edit distance for all graphs with a given number of nodes.
 
-\subsection{Stability and robustness analysis of particular system ensembles}
+\section{Stability and robustness analysis of particular system ensembles}
 For systems having two variables, we can analytically compute the probability of stability and robustness from \ref{eq:condprobgen}. For those having three variables, we can estimate these same quantities using Monte Carlo simulations. Systems of larger size can be analyzed using the symmetry properties of robustness extracted from this analysis. We note again that while we use the uniform distribution for the purposes of illustration, the analysis could be performed for other distributions and our result relating network hierarchy to robustness in \ref{eq:sccrobustness} is independent of the form of this distribution. For two-variable systems having $2 \times 2$ Jacobian matrices, the aforementioned stability criteria result in the conditions $T < 0$ and $D >
 0$ where $T$ and $D$ denote the trace and the determinant. Suppose we have a stable matrix
 $$
@@ -311,10 +311,10 @@ The analogous results for all three variable systems are computed using Monte Ca
 It has been stated previously on the basis of simulation that system stability decreases with connectivity as the system size goes to infinity \cite{May1972}. For small system sizes such as the two and three variable systems, the situation is not so clear cut. For two variable systems, system stability is constant across the entire range of connectivities. For three variable systems, the trend shows a minor decrease from connectivity $4$ to $5$ followed by small fluctuations as shown in \ref{fig:apstab3x3}.
 
 The relationship between connectivity and robustness for two variable systems is shown in \ref{tab:structstabmat} and likewise for three variable systems in \ref{tab:structstabmat3} and \reffigrobustconnect. If we average over the different classes of matrices for a given connectivity we see there is a correlation between connectivity and robustness demonstrated by the red lines in \reffigrobustconnect.
-% \subsection{Cycle number is inversely correlated with robustness}
+% \section{Cycle number is inversely correlated with robustness}
 \ref{fig:cycle3x3} shows the robustness for all three variable systems as a function of the number of simple cycles (elementary circuits) of length greater than one in the corresponding directed graph \cite{Johnson1975}. There appears to be a weak negative correlation between robustness and the number of simple cycles.
 
-% \subsection{Cycle number and connectivity classify robust systems}
+% \section{Cycle number and connectivity classify robust systems}
 The combination of connectivity and cycle number as shown in \reffigconnectcycle3D3x3 provides a better classification of the dependence of robustness upon network topology. Here the robustness of three variable systems with a given number of cycles, increases monotonically with connectivity. The network with the highest robustness for three variable systems is that of \reffigscc{} (top panel). This network is the most hierarchical of all three variable systems in the sense that it represents a total ordering of the components of the network and its adjacency matrix also shown in \reffigscc{} (top panel) has a block triangular structure.
 
 This observation suggested that graph edit distance from \reffigscc{} (top panel), hierarchy, might provide a better characterization of dynamical robustness. \reffigrobusthierarchy$\,$ shows dynamical robustness as a function of hierarchy. There is a monotonic correlation between the upper bound of robustness and hierarchy. \reffigconnectdist3D3x3$\,$ shows dynamical robustness as a function of both hierarchy and connectivity. The monotonic correlation between hierarchy and robustness is refined by an underlying correlation between robustness and connectivity analogous to that of \reffigconnectcycle3D3x3.
@@ -327,7 +327,7 @@ This observation suggested that graph edit distance from \reffigscc{} (top panel
 % \label{fig:combined}
 % \end{figure*}
 
-\subsection{Component decomposition, hierarchy, and the symmetries of robustness}
+\section{Component decomposition, hierarchy, and the symmetries of robustness}
 
 The fact that the most hierarchical of networks is the most robust in the case of three variable systems can be understood in general as resulting from the previously mentioned symmetry property of network robustness.  By combining our decomposition of the graph with our analysis of the robustness of random ensembles of dynamical systems, we will deduce a general result which relates robustness to hierarchy.
 

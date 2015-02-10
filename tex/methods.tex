@@ -1,29 +1,5 @@
 %!TEX root = ../paper.tex
-\subsection{Monte carlo integration}\label{suppsec:montecarlo}
-If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
-$$
-\mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
-$$
-where $a$ and $b$ are the hyperparameters of the Beta prior and we consider the uninformative uniform prior corresponding to $a=b=1$. We consider the maximum a posteriori estimate
-$$\hat{\theta}_{MAP} = \frac{a + N_{\mathrm{stab}} - 1}{a + b + N - 2}$$
-which corresponds in this case to the maximum likelihood estimate
-$$
-\hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
-$$
-This estimate is characterized by the variance of the posterior Beta distribution
-% \begin{widetext}
-\begin{align*}
-&\mathrm{var}(\theta | \mathcal{D}) =\\
-&\frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
-\end{align*}
-% \end{widetext}
-Since for the chosen prior $a=b=1 \ll N$ this simplifies to
-$$
-\mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
-$$
-yielding the error estimate given by the associated standard deviation. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$.
-
-\subsection{Reaction Networks with Prescribed Connecctivity and Jacobians}\label{sec:reactionnetjacobian}
+\section{Reaction Networks with Prescribed Connecctivity and Jacobians}\label{sec:reactionnetjacobian}
 
 To justify our consideration of arbitrary Jacobian matrices in the case of reaction networks, we determine a simple ensemble for which arbitrary Jacobian matrices are realizable. This condition holds if one can solve for the parameter values of the system of equations corresponding to that ensemble in terms of the elements of an arbitrary Jacobian matrix. More precisely, we will show that, given an arbitrary directed graph $G$ where $G_{ii} = 1$ for all $i$, there exists a system of reactions having $G$ as its interaction graph and satisfying the following property: For any point $\vec{x}^0$ in the positive orthant and an arbitrary matrix $M$ whose interaction graph is $G$, there exists a choice of non-negative rates such that $\vec{x}^0$ is a fixed point of the network and the Jacobian equals $M$ at $\vec{x}^0$.
 
@@ -76,3 +52,39 @@ k_{2A_i \to 3A_i} \ge \max \bigg(&0, M_{ii} + \sum_{\substack{1 \le j \le N \\ j
 \end{equation}
 % \end{widetext}
 Then we may solve \ref{eq:jacobianconstraint1} for $k_{\emptyset \to A_i}$ and \ref{eq:jacobianconstraint2} for $k_{A_i \to \emptyset}$ and obtain non-negative answers. This demonstrates that arbitrary Jacobian matrices can arise from reaction network ensembles that allow for the possibility of at least those reactions in \ref{eq:arbitraryjacobianreactionnetwork}. Note that \ref{eq:crnarbitraryjacobian}, \ref{eq:jacobianconstraint1}, \ref{eq:jacobianconstraint2}, and \ref{eq:jacobianconstraint3} are linear in the parameter values. Therefore, any probability distribution on the elements of the Jacobian can be obtained from a probability distribution on the parameter values.
+
+\section{Monte carlo integration}\label{suppsec:montecarlo}
+If we sample $N = N_{\mathrm{stab}} + N_{\mathrm{unstab}}$ matrices where each has some probability $\theta$ of being stable then $N_{\mathrm{stab}}$ has a binomial distribution. We can compute a sample estimate for $\theta$, $\hat{\theta} = \frac{N_{\mathrm{stab}}}{N}$ \cite{Murphy2012}. The posterior distribution in this case is known to be a Beta distribution as a result of Beta-Binomial conjugacy
+$$
+\mathrm{Beta}(\theta | \mathcal{D}) = \mathrm{Beta}(\theta | N_{\mathrm{stab}} + a, N_{\mathrm{unstab}} + b)
+$$
+where $a$ and $b$ are the hyperparameters of the Beta prior and we consider the uninformative uniform prior corresponding to $a=b=1$. We consider the maximum a posteriori estimate
+$$\hat{\theta}_{MAP} = \frac{a + N_{\mathrm{stab}} - 1}{a + b + N - 2}$$
+which corresponds in this case to the maximum likelihood estimate
+$$
+\hat{\theta}_{MLE} = \frac{N_{\mathrm{stab}}}{N}.
+$$
+This estimate is characterized by the variance of the posterior Beta distribution
+% \begin{widetext}
+\begin{align*}
+&\mathrm{var}(\theta | \mathcal{D}) =\\
+&\frac{(a+N_{\mathrm{stab}})(b+N_{\mathrm{unstab}})}{(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}})^2(a + N_{\mathrm{stab}} + b + N_{\mathrm{unstab}}+1)}
+\end{align*}
+% \end{widetext}
+Since for the chosen prior $a=b=1 \ll N$ this simplifies to
+$$
+\mathrm{var}(\theta | \mathcal{D}) = \frac{\hat{\theta}(1-\hat{\theta})}{N}
+$$
+yielding the error estimate given by the associated standard deviation. In all simulations we use $N~=~10000$ so that the maximum error for $\hat{\theta}~=~0.5$ is $\sigma~=~\sqrt{\mathrm{var}(\theta | \mathcal{D})} \approx 0.005$.
+
+\section{Hierarchy and Total ordering}\label{sec:totalordering}
+
+A directed graph $G=(V,E)$ is a set $V$ of nodes and a set $E$ of ordered pairs of nodes \cite{Cormen2009}. For example, if $V = \{1,2,3\}$ and $E = \{(1,1),(2,2),(3,3),(1,2),(1,3),(2,3)\}$ then $G=(V,E)$ is the graph depicted in \reffigscc{} top where the labels $1$, $2$, and $3$ have been respectively assigned to the nodes vertically from top to bottom.
+
+ We refer to the most hierarchical network architecture as the directed graph associated to a total ordering on the set of system components corresponding to the set of nodes, $V$, of the graph \cite{Cormen2009}. In general, a totally ordered set is a pair $(S,R)$ consisting of a set $S$ together with a total order relation $R$ on it. An example of a total ordering is the less than or equal to relation, $R \equiv \leq$, on the subset of natural numbers $S \equiv \{1,2,3\}$ given by $R \equiv \{1 \leq 1, 2 \leq 2, 3 \leq 3, 1 \leq 2, 1 \leq 3, 2 \leq 3\}$. The graph associated to this relation is equivalent to the graph shown in \reffigscc{} top and described algebraically in the preceding paragraph. More precisely, the conditions on $R$ for arbitrary elements $x,\,y,\,z \in S$ necessary for $(S,R)$ to be a totally ordered set are
+\begin{enumerate}
+\item If $x R y$ and $y R x$ then $x=y$ (antisymmetry)
+\item If $x R y$ and $y R z$ then $x R z$ (transitivity)
+\item $x R y$ or $y R x$ (totality)
+\end{enumerate}
+The totality condition implies $x R x$ (reflexivity) corresponding to the fact that the directed graph associated to the total ordering has, for each node, an edge whose source and target are the same node.

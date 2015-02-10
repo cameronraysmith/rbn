@@ -164,7 +164,13 @@ urlcolor=[rgb]{.09 .29 .54}}
         \setcounter{equation}{0}
         \renewcommand{\theequation}{S\arabic{equation}}%
         \renewcommand*{\sectionautorefname}{Sec.}
+        \setcounter{page}{1}
      }
+
+% Usual (decimal) numbering
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 
 \def\tr{\mathrm{tr}}
 \def\Path{\mathrm{Path}}
@@ -183,3 +189,6 @@ urlcolor=[rgb]{.09 .29 .54}}
 \def\reffigconnectdist3D3x3{\ref{fig:combined}D}
 \def\refsupp{Supplementary Material}
 %% END MACROS SECTION
+
+\usepackage{flushend}
+% \usepackage{cuted}
