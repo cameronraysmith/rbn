@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     44638,       1148]
-NotebookOptionsPosition[     43658,       1117]
-NotebookOutlinePosition[     44090,       1134]
-CellTagsIndexPosition[     44047,       1131]
+NotebookDataLength[     51804,       1325]
+NotebookOptionsPosition[     50694,       1291]
+NotebookOutlinePosition[     51130,       1308]
+CellTagsIndexPosition[     51087,       1305]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -160,6 +160,23 @@ Cell[BoxData[
    3.631563549856888*^9}, {3.631563585777628*^9, 3.6315636827964907`*^9}, 
    3.631563905480034*^9, 3.6315716095303183`*^9}],
 
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"#", "\[Equal]", "0"}], ")"}], "&"}], "/@", "eom"}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x", "\[Rule]", "1.5"}], ",", 
+      RowBox[{"y", "\[Rule]", "1.5"}]}], "}"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"ex", ",", "ey"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6409980604229918`*^9, 3.6409980640923634`*^9}, {
+  3.6409991990509367`*^9, 3.640999293759956*^9}}],
+
 Cell["\<\
 Compute stability for random parameters\
 \>", "Text",
@@ -230,6 +247,34 @@ Cell[BoxData[{
                 RowBox[{"{", 
                  RowBox[{"0", ",", "2"}], "}"}]}], "]"}]}]}], "}"}]}], ";", 
           "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{"constraints", " ", "for", " ", "fp", " ", "at", " ", 
+            RowBox[{"(", 
+             RowBox[{"1", ",", "1"}], ")"}]}], " ", "*)"}], 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"constr", " ", "=", " ", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"sx", "\[Rule]", "sxx"}], ",", 
+               RowBox[{"bx", "\[Rule]", "bxx"}], ",", 
+               RowBox[{"cx", "\[Rule]", "cxx"}], ",", 
+               RowBox[{"dx", "\[Rule]", "dxx"}], ",", 
+               RowBox[{"ex", "\[Rule]", " ", 
+                RowBox[{"dxx", "+", "cxx", "-", "sxx", "-", "bxx"}]}], ",", 
+               RowBox[{"sy", "\[Rule]", "syy"}], ",", 
+               RowBox[{"by", "\[Rule]", "byy"}], ",", 
+               RowBox[{"cy", "\[Rule]", "cyy"}], ",", 
+               RowBox[{"dy", "\[Rule]", "dyy"}], ",", 
+               RowBox[{"ey", "\[Rule]", 
+                RowBox[{"dyy", "+", "cyy", "-", "syy", "-", "byy"}]}]}], 
+              "}"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{"constraints", " ", "for", " ", "fp", " ", "at", " ", 
+            RowBox[{"(", 
+             RowBox[{"1.5", ",", "1.5"}], ")"}]}], " ", "*)"}], 
+          "\[IndentingNewLine]", 
           RowBox[{"constr", " ", "=", " ", 
            RowBox[{"{", 
             RowBox[{
@@ -237,15 +282,32 @@ Cell[BoxData[{
              RowBox[{"bx", "\[Rule]", "bxx"}], ",", 
              RowBox[{"cx", "\[Rule]", "cxx"}], ",", 
              RowBox[{"dx", "\[Rule]", "dxx"}], ",", 
-             RowBox[{"ex", "\[Rule]", " ", 
-              RowBox[{"dxx", "+", "cxx", "-", "sxx", "-", "bxx"}]}], ",", 
+             RowBox[{"ex", "\[Rule]", 
+              RowBox[{
+               RowBox[{"2", "/", "3"}], 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", "2.25"}], " ", "bxx"}], "+", 
+                 RowBox[{"2.25", " ", "cxx"}], "+", 
+                 RowBox[{"1.5", " ", "dxx"}], "-", "sxx"}], ")"}]}]}], ",", 
              RowBox[{"sy", "\[Rule]", "syy"}], ",", 
              RowBox[{"by", "\[Rule]", "byy"}], ",", 
              RowBox[{"cy", "\[Rule]", "cyy"}], ",", 
              RowBox[{"dy", "\[Rule]", "dyy"}], ",", 
              RowBox[{"ey", "\[Rule]", 
-              RowBox[{"dyy", "+", "cyy", "-", "syy", "-", "byy"}]}]}], 
+              RowBox[{
+               RowBox[{"2", "/", "3"}], " ", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", "2.25"}], " ", "byy"}], "+", 
+                 RowBox[{"2.25", " ", "cyy"}], "+", 
+                 RowBox[{"1.5", " ", "dyy"}], "-", "syy"}], ")"}]}]}]}], 
             "}"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{"unconstrained", " ", "fp", " ", "location"}], " ", "*)"}],
+           "\[IndentingNewLine]", 
           RowBox[{"(*", 
            RowBox[{
             RowBox[{"constr", " ", "=", " ", 
@@ -311,8 +373,8 @@ Cell[BoxData[{
                   RowBox[{"Re", "[", "#", "]"}], ")"}], "&"}], ",", 
                 RowBox[{"var", "/.", "#"}]}], "]"}], ",", 
               RowBox[{"{", 
-               RowBox[{"1", ",", "1"}], "}"}]}], "]"}], ")"}], "&"}], ",", 
-          "fppars"}], "]"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{"1.5", ",", "1.5"}], "}"}]}], "]"}], ")"}], "&"}], ",",
+           "fppars"}], "]"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{"oneonepos", " ", "=", " ", 
         RowBox[{
          RowBox[{"Position", "[", 
@@ -390,7 +452,7 @@ Cell[BoxData[{
     RowBox[{"Table", "[", 
      RowBox[{
       RowBox[{"parjacsamp", "[", "]"}], ",", 
-      RowBox[{"{", "10000", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+      RowBox[{"{", "100", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{"randparjacs", "//", "TableForm"}], 
    "*)"}]}], "\[IndentingNewLine]"}], "Input",
@@ -437,7 +499,11 @@ Cell[BoxData[{
    3.6316347639866962`*^9}, 3.6316348077723503`*^9, {3.631635363335836*^9, 
    3.631635425049624*^9}, 3.631904245807016*^9, {3.631979525475676*^9, 
    3.631979552971128*^9}, {3.6319836920304527`*^9, 3.631983774078854*^9}, {
-   3.6319838120004396`*^9, 3.631983829751473*^9}}],
+   3.6319838120004396`*^9, 3.631983829751473*^9}, {3.640994574568363*^9, 
+   3.6409945772747*^9}, {3.640999343044529*^9, 3.640999438678*^9}, {
+   3.640999484060754*^9, 3.640999514687646*^9}, {3.640999629954619*^9, 
+   3.640999636559805*^9}, {3.6409998450258493`*^9, 3.640999857817539*^9}, 
+   3.640999946351275*^9, {3.641000121314*^9, 3.641000162921638*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -944,7 +1010,7 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"y", ",", "0", ",", "2"}], "}"}], ",", 
      RowBox[{"StreamColorFunction", "\[Rule]", "\"\<RedBlueTones\>\""}]}], 
-    "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+    "]"}], "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.631405744752995*^9, 3.631405752215454*^9}, {
    3.63140585474137*^9, 3.631405943535795*^9}, {3.6314060659743843`*^9, 
    3.631406137719891*^9}, 3.631406869594139*^9, {3.631408339991749*^9, 
@@ -955,7 +1021,8 @@ Cell[BoxData[
    3.631408936913369*^9}, 3.631409500304475*^9, {3.631542101104302*^9, 
    3.631542115771881*^9}, {3.631981159536893*^9, 3.631981178913155*^9}, {
    3.63198124622563*^9, 3.6319813101132298`*^9}, {3.631981340767907*^9, 
-   3.631981396594448*^9}, 3.6319842688282127`*^9}],
+   3.631981396594448*^9}, 3.6319842688282127`*^9, {3.640995091275832*^9, 
+   3.640995132280616*^9}}],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -1113,10 +1180,117 @@ Cell[BoxData[
    3.6319818547447643`*^9, 3.631981872181406*^9}, {3.6319819642927628`*^9, 
    3.631981971280305*^9}, {3.631982218852749*^9, 3.631982280383872*^9}, {
    3.631983541809321*^9, 3.631983551517777*^9}, {3.631983585922352*^9, 
-   3.6319836515567303`*^9}, 3.631984290910862*^9}]
+   3.6319836515567303`*^9}, 3.631984290910862*^9}],
+
+Cell[BoxData[{
+ RowBox[{"streamplot1", " ", "=", " ", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"StreamPlot", "[", 
+     RowBox[{
+      RowBox[{"eom", "/.", 
+       RowBox[{"randparjacs", "[", 
+        RowBox[{"[", 
+         RowBox[{"7", ",", "2"}], "]"}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", "0", ",", "2"}], "}"}], ",", 
+      RowBox[{"StreamColorFunction", "\[Rule]", "\"\<RedBlueTones\>\""}]}], 
+     "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"PointSize", "[", "0.05", "]"}], ",", 
+       RowBox[{"stabColor", "[", 
+        RowBox[{"randparjacs", "[", 
+         RowBox[{"[", 
+          RowBox[{"7", ",", "1"}], "]"}], "]"}], "]"}], ",", 
+       RowBox[{"Point", "[", 
+        RowBox[{"{", 
+         RowBox[{"1.5", ",", "1.5"}], "}"}], "]"}]}], "}"}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\</home/cameron/projects/rbn/fig/streamplot3.pdf\>\"", ",", 
+   "streamplot1"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"randparjacs", "[", 
+   RowBox[{"[", 
+    RowBox[{"7", ",", "1"}], "]"}], "]"}], "//", 
+  "MatrixForm"}], "\[IndentingNewLine]", 
+ RowBox[{"randparjacs", "[", 
+  RowBox[{"[", 
+   RowBox[{"7", ",", "2"}], "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"eom", "/.", 
+  RowBox[{"randparjacs", "[", 
+   RowBox[{"[", 
+    RowBox[{"7", ",", "2"}], "]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.640995143654841*^9, 3.640995235567772*^9}, {
+   3.640995276551148*^9, 3.640995318138001*^9}, {3.6409953893638563`*^9, 
+   3.6409954077397738`*^9}, {3.640995457661553*^9, 3.640995460189481*^9}, {
+   3.6409955761316547`*^9, 3.6409955978944883`*^9}, {3.640995738119934*^9, 
+   3.6409957393492603`*^9}, {3.640995793781204*^9, 3.640995796158866*^9}, {
+   3.640995881780238*^9, 3.640995883990479*^9}, {3.640996385631803*^9, 
+   3.6409964165347967`*^9}, {3.6409964648077097`*^9, 3.640996470984374*^9}, {
+   3.640996530249414*^9, 3.640996542991308*^9}, 3.6409990568552732`*^9, {
+   3.6410002492088842`*^9, 3.6410002680190353`*^9}, {3.641000353631566*^9, 
+   3.6410003636284637`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"streamplot2", " ", "=", " ", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"StreamPlot", "[", 
+     RowBox[{
+      RowBox[{"eom", "/.", 
+       RowBox[{"randparjacs", "[", 
+        RowBox[{"[", 
+         RowBox[{"8", ",", "2"}], "]"}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", "0", ",", "2"}], "}"}], ",", 
+      RowBox[{"StreamColorFunction", "\[Rule]", "\"\<RedBlueTones\>\""}]}], 
+     "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"PointSize", "[", "0.05", "]"}], ",", 
+       RowBox[{"stabColor", "[", 
+        RowBox[{"randparjacs", "[", 
+         RowBox[{"[", 
+          RowBox[{"8", ",", "1"}], "]"}], "]"}], "]"}], ",", 
+       RowBox[{"Point", "[", 
+        RowBox[{"{", 
+         RowBox[{"1.5", ",", "1.5"}], "}"}], "]"}]}], "}"}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\</home/cameron/projects/rbn/fig/streamplot4.pdf\>\"", ",", 
+   "streamplot2"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"randparjacs", "[", 
+   RowBox[{"[", 
+    RowBox[{"8", ",", "1"}], "]"}], "]"}], "//", 
+  "MatrixForm"}], "\[IndentingNewLine]", 
+ RowBox[{"randparjacs", "[", 
+  RowBox[{"[", 
+   RowBox[{"8", ",", "2"}], "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"eom", "/.", 
+  RowBox[{"randparjacs", "[", 
+   RowBox[{"[", 
+    RowBox[{"8", ",", "2"}], "]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.640995143654841*^9, 3.640995235567772*^9}, {
+   3.640995276551148*^9, 3.640995318138001*^9}, {3.6409953893638563`*^9, 
+   3.6409954077397738`*^9}, {3.640995621238847*^9, 3.640995630063222*^9}, {
+   3.640995721576023*^9, 3.640995730736321*^9}, {3.64099580509303*^9, 
+   3.640995827357354*^9}, {3.640996550528037*^9, 3.6409965764532137`*^9}, 
+   3.640999063118807*^9, {3.641000278776918*^9, 3.641000299555957*^9}, {
+   3.6410003572075987`*^9, 3.641000370619433*^9}}]
 },
-WindowSize->{1366, 744},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{960, 1028},
+WindowMargins->{{Automatic, 950}, {Automatic, -10}},
 Magnification:>1.25 Inherited,
 FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
 StyleDefinitions->FrontEnd`FileName[{"Article"}, "Preprint.nb", 
@@ -1134,22 +1308,25 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[557, 20, 137, 3, 37, "Text"],
-Cell[697, 25, 1818, 51, 175, "Input"],
+Cell[697, 25, 1818, 51, 221, "Input"],
 Cell[2518, 78, 125, 3, 37, "Text"],
-Cell[2646, 83, 2944, 77, 205, "Input"],
-Cell[5593, 162, 180, 4, 37, "Text"],
-Cell[5776, 168, 12204, 271, 681, "Input"],
-Cell[17983, 441, 2705, 69, 129, "Input"],
-Cell[20691, 512, 2315, 67, 152, "Input"],
-Cell[23009, 581, 5154, 124, 198, "Input"],
-Cell[28166, 707, 794, 23, 60, "Input"],
-Cell[28963, 732, 586, 14, 36, "Input"],
-Cell[29552, 748, 4564, 105, 290, "Input"],
-Cell[34119, 855, 3994, 102, 336, "Input"],
-Cell[38116, 959, 2018, 49, 106, "Input"],
-Cell[40137, 1010, 82, 1, 37, "Text"],
-Cell[40222, 1013, 1305, 42, 60, "Input"],
-Cell[41530, 1057, 2124, 58, 129, "Input"]
+Cell[2646, 83, 2944, 77, 234, "Input"],
+Cell[5593, 162, 510, 15, 36, "Input"],
+Cell[6106, 179, 180, 4, 37, "Text"],
+Cell[6289, 185, 14513, 320, 934, "Input"],
+Cell[20805, 507, 2705, 69, 244, "Input"],
+Cell[23513, 578, 2315, 67, 198, "Input"],
+Cell[25831, 647, 5154, 124, 336, "Input"],
+Cell[30988, 773, 794, 23, 83, "Input"],
+Cell[31785, 798, 586, 14, 36, "Input"],
+Cell[32374, 814, 4564, 105, 382, "Input"],
+Cell[36941, 921, 4021, 103, 359, "Input"],
+Cell[40965, 1026, 2018, 49, 129, "Input"],
+Cell[42986, 1077, 82, 1, 37, "Text"],
+Cell[43071, 1080, 1305, 42, 83, "Input"],
+Cell[44379, 1124, 2124, 58, 129, "Input"],
+Cell[46506, 1184, 2196, 53, 198, "Input"],
+Cell[48705, 1239, 1985, 50, 198, "Input"]
 }
 ]
 *)
