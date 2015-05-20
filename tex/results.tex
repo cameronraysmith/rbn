@@ -142,7 +142,7 @@ where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\
 $$
 y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
 $$
-for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$. This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$ \cite{Gantmacher1959}.
+for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$.
 
 Even though the determination of stability only requires examining
 linearized equations of motion, it is worth noting that knowing the
@@ -405,41 +405,41 @@ that the components of $G_{\mathrm{max}}$ are $C_1, \ldots C_n$ and
 $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$.  By our formula,
 $\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_1 = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 
-This argument also works when we resample more than one entry,
-although the notation becomes more complicated.  Suppose that we
-resample $m$ nodes.  Define
-\begin{widetext}
-\begin{equation*}
-M = \left\{(m_0, m_1, \ldots, m_n) \,\bigg|\,
-m = \sum_{i=0}^n m_i \quad\&\quad
-m_0 \le \sum_{i=1}^{n-1} \sum_{j=i+1}^n \ell_{ij} \quad\&\quad
-(\forall i \in \{1, \ldots, n\}) \; m_i < \connectivity_i \right\}.
-\end{equation*}
-\end{widetext}
-Then, given $(m_0, m_1, \ldots, m_n) \in M$, there are ${m \choose
-m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
-$m_0$ links between strongly connected components.  Hence, our
-weighted average becomes
-\begin{widetext}
-\begin{equation}
-\langle R(\hbox{stab} (G), \mu') \rangle_m =
-\frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
-      {m \choose m_0, m_1, \ldots. m_n}
-      \left(m_0 + \sum\limits_{i=1}^n m_i \langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \right)}
-     {\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
-      {m \choose m_0, m_1, \ldots. m_n} m}
-\end{equation}
-\end{widetext}
+% This argument also works when we resample more than one entry,
+% although the notation becomes more complicated.  Suppose that we
+% resample $m$ nodes.  Define
+% \begin{widetext}
+% \begin{equation*}
+% M = \left\{(m_0, m_1, \ldots, m_n) \,\bigg|\,
+% m = \sum_{i=0}^n m_i \quad\&\quad
+% m_0 \le \sum_{i=1}^{n-1} \sum_{j=i+1}^n \ell_{ij} \quad\&\quad
+% (\forall i \in \{1, \ldots, n\}) \; m_i < \connectivity_i \right\}.
+% \end{equation*}
+% \end{widetext}
+% Then, given $(m_0, m_1, \ldots, m_n) \in M$, there are ${m \choose
+% m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
+% $m_0$ links between strongly connected components.  Hence, our
+% weighted average becomes
+% \begin{widetext}
+% \begin{equation}
+% \langle R(\hbox{stab} (G), \mu') \rangle_m =
+% \frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
+%       {m \choose m_0, m_1, \ldots. m_n}
+%       \left(m_0 + \sum\limits_{i=1}^n m_i \langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \right)}
+%      {\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
+%       {m \choose m_0, m_1, \ldots. m_n} m}
+% \end{equation}
+% \end{widetext}
 
-As before, since $\langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \le 1$, we may
-increase $\langle R(\hbox{stab} (G), \mu') \rangle_m$ by increasing the maximum
-possible value of $m_0$ while keeping the strongly connected
-components the same.  Again, if we fix $\hier(G)$, the maximum
-possible value of $m_0$ is $\sum_{(i,j) \in \hier(G)} v_i v_j$
-whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{i=1}^n
-v_i)^2 - \sum_{i=1}^n v_i^2)$, which is attained when $\hier(G_{max}) =
-G_{tot}$.  Hence, we conclude that $\langle R(\hbox{stab} (G), \mu') \rangle_m \le
-\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_m$.
+% As before, since $\langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \le 1$, we may
+% increase $\langle R(\hbox{stab} (G), \mu') \rangle_m$ by increasing the maximum
+% possible value of $m_0$ while keeping the strongly connected
+% components the same.  Again, if we fix $\hier(G)$, the maximum
+% possible value of $m_0$ is $\sum_{(i,j) \in \hier(G)} v_i v_j$
+% whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{i=1}^n
+% v_i)^2 - \sum_{i=1}^n v_i^2)$, which is attained when $\hier(G_{max}) =
+% G_{tot}$.  Hence, we conclude that $\langle R(\hbox{stab} (G), \mu') \rangle_m \le
+% \langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_m$.
 
 The preceding argument demonstrates that robustness is
 maximized by maximizing the number of edges \emph{between} the strongly

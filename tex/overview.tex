@@ -25,7 +25,7 @@ where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$ Jacobian matrix $A$ h
 $$
 a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 $$
-The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenvalues of $A$ all have real parts less than zero and $A$ is then referred to as a stable matrix (\refsupp{}). The Lotka-Volterra model has
+The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenvalues of $A$ all have real parts less than zero and $A$ is then referred to as a stable matrix (\refsupp{}). This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$ \cite{Gantmacher1959}. As an example of a Jacobian matrix, the Lotka-Volterra model has
  \begin{equation}\label{eq:lotkavolterrajacobian}
    a_{ij} = \left\{
      \begin{array}{lr}
@@ -61,7 +61,7 @@ These interaction graphs can be viewed as deriving from the combination of syste
 
 The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{} and \reffigscc). This map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, has a collection of intrinsic symmetries shown in \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated. Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
 
-In the process of biological evolution, the parameter values $\vec{p}$ or the form of the functions $F_i$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due, for example, to mutations or environmental fluctuations. These changes may alter the capacity of a given system to achieve a stable steady state. In order to evaluate this we consider a stochastic process whereby for a given dynamical system associated to a stable matrix $A$, we consider a perturbation of the system leading to $A'$ where $\adj(G_A) = \adj(G_{A'})$. This corresponds to a dynamical system whose connectivity is preserved, but where the underlying model is defined in terms of a different vector of parameters ${\vec{p}}\,'$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This probability is what we refer to as dynamical robustness.
+In the process of biological evolution, the parameter values $\vec{p}$ or the form of the functions $F_i$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due, for example, to mutations or environmental fluctuations. These changes may alter the capacity of a given system to achieve a stable steady state. In order to evaluate this we consider a stochastic process whereby for a given dynamical system associated to a stable matrix $A$, we consider a perturbation of the system leading to $A'$ where $\adj(G_A) = \adj(G_{A'})$ \ref{fig:robustnessconcept}. This corresponds to a dynamical system whose connectivity is preserved, but where the underlying model is defined in terms of a different vector of parameters ${\vec{p}}\,'$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This probability is what we refer to as dynamical robustness.
 
 We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. The entries of the Jacobian are sampled independently from a generic probability distribution. Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:jacobianvectorfields}. The expression in \ref{eq:sccrobustness} holds for the case of simultaneously perturbing any number of elements of the Jacobian, but can be schematized for the case of perturbing a single element as \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
 \begin{equation}\label{eq:robschematic}
@@ -77,6 +77,42 @@ $$l_{max} = \sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i
 v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n}
 v_i^2,$$
 Hence, we conclude that $R_{tot} \le R_{max}$ where $R_{max}$ is equivalent to \ref{eq:robschematic} with $l_{max}$ substituted for $l$ and the upper bound is attained (\refsupp{}).
+
+This argument also works when we resample more than one entry,
+although the notation becomes more complicated.  Suppose that we
+resample $m$ nodes.  Define
+\begin{widetext}
+\begin{equation*}
+M = \left\{(m_0, m_1, \ldots, m_n) \,\bigg|\,
+m = \sum_{i=0}^n m_i \quad\&\quad
+m_0 \le \sum_{i=1}^{n-1} \sum_{j=i+1}^n \ell_{ij} \quad\&\quad
+(\forall i \in \{1, \ldots, n\}) \; m_i < \connectivity_i \right\}.
+\end{equation*}
+\end{widetext}
+Then, given $(m_0, m_1, \ldots, m_n) \in M$, there are ${m \choose
+m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
+$m_0$ links between strongly connected components.  Hence, our
+weighted average becomes
+\begin{widetext}
+\begin{equation}
+\langle R(\hbox{stab} (G), \mu') \rangle_m =
+\frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
+      {m \choose m_0, m_1, \ldots. m_n}
+      \left(m_0 + \sum\limits_{i=1}^n m_i \langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \right)}
+     {\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
+      {m \choose m_0, m_1, \ldots. m_n} m}
+\end{equation}
+\end{widetext}
+
+As before, since $\langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \le 1$, we may
+increase $\langle R(\hbox{stab} (G), \mu') \rangle_m$ by increasing the maximum
+possible value of $m_0$ while keeping the strongly connected
+components the same.  Again, if we fix $\hier(G)$, the maximum
+possible value of $m_0$ is $\sum_{(i,j) \in \hier(G)} v_i v_j$
+whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{i=1}^n
+v_i)^2 - \sum_{i=1}^n v_i^2)$, which is attained when $\hier(G_{max}) =
+G_{tot}$.  Hence, we conclude that $\langle R(\hbox{stab} (G), \mu') \rangle_m \le
+\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_m$.
 
 This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any network whose associated dynamical system has the interaction graph equivalent to the total ordering like that of \reffigscc{} top will be more robust than those associated to any of the other interaction graphs in \reffigscc{}. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
 
