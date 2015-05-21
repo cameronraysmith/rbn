@@ -2,7 +2,7 @@
 
 \begin{figure*}[!ht]
 \centering
-\noindent\includegraphics[width=0.8\textwidth]{fig/biomodelexamples.pdf}
+\noindent\includegraphics[width=1.0\textwidth]{fig/biomodelexamples.pdf}
 \caption{{\bf Dynamical models in systems biology.} The top row represents a chemical reaction network (CRN) \cite{Shinar2010}, a gene regulatory network (GRN) \cite{Karlebach2008}, and an ecological regulatory network (ERN) \cite{Rohr2014} in terms of the graphical methods specific to each field mapped into the interaction graph, which provides a unified representation for networks across these fields. The second row represents a particular example of a system of differential equations that are used to model a biological network within each of the domains of application considered here. The third row shows the general form of a system of differential equations that can be used to model any network architecture within each domain.}
 \label{fig:biomodelexamples}
 \end{figure*}
@@ -12,15 +12,24 @@
 \begin{figure*}[!htbp]
 \centering
 \noindent\includegraphics[width=1.0\textwidth]{fig/robustnessconceptvis.pdf}
-\caption{{\bf Stability and robustness of biological networks.} Linearization around a steady-state of a model of a biological network allows for the assessment of the stability of that state. For two-dimensional systems, assessment of stability in terms of the trace and determinant of the Jacobian matrix associated to a particular steady-state geometrically partitions the plane into a stable region (S, blue) and an unstable region (U, red). The stochastic process induced on the stable and unstable regions that results from modifications to a given dynamical model over evolutionary timescales is represented by the state transition diagram (bottom middle). The probability of remaining in the stable region in the context of such modifications, given a previously existing stable network, is then provided by estimating $R$.}
+\caption{{\bf Stability and equivalence classes of fixed points.} Linearization around a steady-state of a model of a biological network allows for the assessment of the stability of that state. For two-dimensional systems, assessment of stability in terms of the trace and determinant of the Jacobian matrix associated to a particular steady-state geometrically partitions the plane into a stable region (S, blue) and an unstable region (U, red). For larger systems in higher dimensions this geometry is too complicated to visualize, but it is nevertheless well-defined and can be investigated algebraically and numerically. (top center) Jacobian matrices such as $A_1$ partition the space of fixed points into equivalence classes $[A_1]$, each of which is either stable or unstable.}
 \label{fig:robustnessconcept}
+\end{figure*}
+
+\pagebreak
+
+\begin{figure*}[!htbp]
+\centering
+\noindent\includegraphics[width=1.0\textwidth]{fig/robustnessprocess.pdf}
+\caption{{\bf Assessment of dynamical robustness.} (A) Any stochastic process induced on the stable and unstable regions of the space of fixed points can be represented as a state transition diagram. The probability of remaining in the stable region in the context of such modifications, given a previously existing stable state, is then provided by estimating $R$. (B) The stochastic process that results from modifications to a given dynamical model over evolutionary timescales induces a stochastic process on the equivalence classes of fixed points $\mathcal{F}/{\sim}$ represented by the boxes in the top row. This in turn induces a process on the stable and unstable regions, which can be used to estimate robustness. (C) Each network architecture encoded by a directed graph, $\{G_1, \ldots, G_k \}$, that indicates the manner in which the variables of a biological network depend upon one another selects a particular subset of equivalence classes from $\mathcal{F}/{\sim}$ (see \ref{eq:jacgrapheqs}). Robustness can therefore be estimated for each network architecture independently.}
+\label{fig:robustnessprocess}
 \end{figure*}
 
 \pagebreak
 
 \begin{figure*}[!ht]
 \centering
-\noindent\includegraphics[width=0.8\textwidth]{fig/modsccsym.pdf}
+\noindent\includegraphics[width=1.0\textwidth]{fig/modsccsym.pdf}
 \caption{{\bf Open systems, strongly connected components and symmetries of robustness.} (A) Example of the combination of open system modules to construct closed systems. (B) SCCs highlighted in gray for each of the four graphs representing the interdependencies relevant to four different three variable systems. The most hierarchical network, top panel, is the one that maximizes the number of SCCs and the number of links between them. We therefore define hierarchy as $max(\hbox{ED}) - \hbox{ED}$ where ED is the edit distance representing the number of link addition/deletion operations necessary to transform a given graph into the most hierarchical one. The two panels in the middle represent examples of hierarchical modular systems that posess both modularity (i.e. SCCs with more than one variable) and hierarchy. (C) Symmetries of the $\hier$ transformation between graphs and SCCs. The transformation $a$ represents an interchange of SCCs, $b$ moving a link between nodes in a component and $c$ adding a link. All three transformations represent symmetries of the $\hier$ transformation from graphs to SCCs while only $a$ and $b$ are symmetries of robustness.}
 \label{fig:modsccsym}
 \end{figure*}
@@ -29,7 +38,7 @@
 
 \begin{figure*}[!ht]
 \centering
-\noindent\includegraphics[width=0.8\textwidth]{fig/combinedfigs.pdf}
+\noindent\includegraphics[width=1.0\textwidth]{fig/combinedfigs.pdf}
 \caption{{\bf Characterization of stability and robustness according to properties of system structure for three variable systems} (A) Robustness versus connectivity. The red line represents a best fit in the least-squares sense with Pearson product-moment correlation coefficient $r=0.29$. The lowest and highest robustness network architectures are labelled. Other network architectures are shown in \ref{tab:structstabmat3}. (B) Robustness versus hierarchy. Correlation coefficient $r=0.67$. (C) Number of cycles and (D) hierarchy vs connectivity and robustness. The color of each point represents the average robustness of all graphs having the parameters specified on the $x$ and $y$ axes.
 }
 \label{fig:combined}
