@@ -6,7 +6,10 @@ whose components are solutions to the arbitrary first order system
 \begin{equation}\label{eq:eom}
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t), \vec{p}), \; (i=1,\ldots,n)
 \end{equation}
-where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p}$ is the vector of parameters of the $F_i$. These parameters typically represent reaction rates in chemical and gene-regulatory networks, interaction strengths in ecological networks, or cooperativity exponents. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$.
+where $F_i$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^s$ is the vector of $s$ parameters of the $F_i$. These parameters typically represent reaction rates in chemical and gene-regulatory networks, interaction strengths in ecological networks, or cooperativity exponents. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$. The set of all such dynamical systems, $\mathcal{D}$, is then
+\begin{equation}\label{eq:setdynsys}
+\mathcal{D} = \{ (F,\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
+\end{equation}
 
 Fixed points are the simplest class of solutions to the dynamical system characterizing its long-term behavior. If $\vec x$ is a fixed point (i.e. $F_i(\vec{x})=0$ for all $i$), we
 may proceed to ask whether it is dynamically stable.
@@ -14,7 +17,10 @@ Intuitively, dynamic stability means that, if one chooses the initial
 conditions sufficiently close to the fixed point, the solution will
 stay nearby.  Physically, this is important because,
 if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
-observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $n_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{N} b_{ij} n_j = 0$.
+observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $n_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{N} b_{ij} n_j = 0$. The set of all such fixed points, $\mathcal{F}$, is then
+\begin{equation}\label{eq:setdynsys}
+\mathcal{F} = \{ (F,\vec{p},\vec{x}^0) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s, F(\vec{x}^0,\vec{p})=0 \}.
+\end{equation}
 
 To determine stability, we linearize the equations of motion (\refsupp{}) about the
 fixed point $\vec{x}^0$:
@@ -35,9 +41,20 @@ The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenva
    \right.
 \end{equation}
 
+Jacobian matrices define an equivalence relation on fixed points given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}',\vec{x}^{0'}) $ if and only if
+\begin{equation}\label{eq:jaceqrel}
+\left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} =
+\left. \frac{\partial F'(\vec{x},\vec{p}')}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^{0'}}.
+\end{equation}
+This relation then partitions the set of all fixed points into equivalence classes where the class $[A]$ of $\mathcal{F} / \sim$ associated to Jacobian matrix $A \in \mathbb{R}^{n \times n}$ is
+\begin{equation}\label{eq:jaceqs}
+[A] = \left\{ (F,\vec{p},\vec{x}^0) \; | \; \left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} = A \right\}.
+\end{equation}
+
+
 % \subsection{Overview}
 The dynamical model given in terms of a system of differential equations for any network can be represented in terms of a global interaction graph (\ref{fig:biomodelexamples} top row).
-For a general system the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ for $F_i \hbox{ depends on } x_j$ and $0$ for $F_i \hbox{ does not depend on } x_j$. These two conditions on global system interactions are expressed respectively in terms of elements of the Jacobian matrix as $\frac{\partial F_i}{\partial x_j}(\vec{x}) \neq 0$ for all $\vec{x}$ and $\frac{\partial F_i}{\partial x_j}(\vec{x}) = 0$ for all $\vec{x}$.
+For a general system $X \in \mathcal{D}$ the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ if $F_i \hbox{ depends on } x_j$ and $0$ if $F_i \hbox{ does not depend on } x_j$. These two conditions on global system interactions are expressed respectively for all $\vec{x}$ in terms of elements of the Jacobian matrix as $\frac{\partial F_i}{\partial x_j}(\vec{x}) \neq 0$ and $\frac{\partial F_i}{\partial x_j}(\vec{x}) = 0$.
 %  \begin{displaymath}
 %    \adj(G_X)_{ij} = \left\{
 %      \begin{array}{ll}
@@ -58,6 +75,12 @@ We can also associate a local interaction graph $G_A$ given by an adjacency matr
 \end{equation}
 In general, the graph $G_A$ is a subgraph of $G_X$, however, $G_A$ is almost always equivalent to $G_X$ (\refsupp{}). We define the connectivity to be equal to the number of edges in $G_A$, which is equivalent to summing up the number of non-zero entries of $\adj(G_A)$.
 These interaction graphs can be viewed as deriving from the combination of system components that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules).
+
+Each distinct directed graph $G$ selects a subset of $\mathcal{F} / \sim$
+\begin{equation}\label{eq:jaceqs}
+[G] = \left\{ [A] \; | \; G_A = G \right\}.
+\end{equation}
+The $G$-classes thereby partition the collection of fixed points, $\mathcal{F}$, over the space of dynamical systems, $\mathcal{D}$, according to the interactions among the variables of the dynamical system represented by the topology of $G$. This partition, $\mathcal{F} / G$, is a coarsening of $\mathcal{F} / \sim$.
 
 The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{} and \reffigscc). This map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, has a collection of intrinsic symmetries shown in \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated. Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
 
