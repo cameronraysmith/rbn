@@ -6,9 +6,9 @@ whose components are solutions to the arbitrary first order system
 \begin{equation}\label{eq:eom}
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t), \vec{p}), \; (i=1,\ldots,n)
 \end{equation}
-where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^s$ is the vector of $s$ parameters of the $F_i$. These parameters typically represent reaction rates in chemical and gene-regulatory networks, interaction strengths in ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$. The set of all such dynamical systems, $\mathcal{D}$, for a given number of state variables $n$ and a given number of parameters $s$, is then
+where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^s$ is the vector of $s$ parameters of the $F_i$. These parameters typically represent reaction rates in chemical and gene-regulatory networks, interaction strengths in ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$. The set of all dynamical systems, $\mathcal{D}$, for a given number of state variables $n$ and a given number of parameters $s$, is then
 \begin{equation}\label{eq:setdynsys}
-\mathcal{D} = \{ (F,\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
+\mathcal{D} = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
 \end{equation}
 
 Fixed points are the simplest class of solutions to the dynamical system characterizing its long-term behavior. If $\vec x$ is a fixed point (i.e. $F_i(\vec{x})=0$ for all $i$), we
@@ -19,7 +19,7 @@ stay nearby.  Physically, this is important because,
 if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
 observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $n_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{N} b_{ij} n_j = 0$. The set of all such fixed points, $\mathcal{F}$, is then
 \begin{equation}\label{eq:setfixedpoints}
-\mathcal{F} = \{ (F,\vec{p},\vec{x}^0) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s, F(\vec{x}^0,\vec{p})=0 \}.
+\mathcal{F} = \{ (d,\vec{x}^0) \; | \; d=(F(-,\vec{p}),\vec{p}) \in \mathcal{D}, \vec{x}^0 \in \mathbb{R}^n,F(\vec{x}^0,\vec{p})=0 \}.
 \end{equation}
 
 To determine stability, we linearize the equations of motion (\refsupp{}) about the
@@ -31,7 +31,7 @@ where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$ Jacobian matrix $A$ h
 $$
 a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 $$
-The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenvalues of $A$ all have real parts less than zero and $A$ is then referred to as a stable matrix (\refsupp{}). This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$ \cite{Gantmacher1959}. As an example of a Jacobian matrix, the Lotka-Volterra model has
+The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenvalues of $A$ all have real parts less than zero and $A$ is then referred to as a stable matrix (\refsupp{}). This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$. In the 2-dimensional case, $\chi(A) = z^2 + Tr(A)z+Det(A)$ has solutions $z$ with negative real parts if $Tr(A)<0$ and $Det(A)>0$, which we make use of in examples. Generalized conditions for higher dimensions are available in \cite{Gantmacher1959}. As an example of a Jacobian matrix, the Lotka-Volterra model has
  \begin{equation}\label{eq:lotkavolterrajacobian}
    a_{ij} = \left\{
      \begin{array}{lr}
@@ -40,11 +40,12 @@ The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenva
      \end{array}.
    \right.
 \end{equation}
+Evaluation of the stability criterion occurs on a space of two states $\mathcal{S} = \{ S, U \}$ where $S$ stands for stable and $U$ stands for unstable. The stability criterion defines an equivalence relation on the set of all Jacobian matrices $A \in \mathbb{R}^{n \times n}$ deriving from fixed points on $n$ variables that simply splits the set into two classes $S=\{ A \, | \, A \hbox{ is stable}  \}$ and $U~=~\{ A \, | \, A \hbox{ is unstable} \}$.
 
-Jacobian matrices define an equivalence relation, $\sim$, on fixed points given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}',\vec{x}^{0'}) $ if and only if
+Jacobian matrices define an equivalence relation, $\sim$, on fixed points given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}\,',\vec{x}^{0'}) $ if and only if
 \begin{equation}\label{eq:jaceqrel}
 \left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} =
-\left. \frac{\partial F'(\vec{x},\vec{p}')}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^{0'}}.
+\left. \frac{\partial F'(\vec{x},\vec{p}\,')}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^{0'}}.
 \end{equation}
 This relation then partitions the set of all fixed points into equivalence classes $\mathcal{F}/{\sim}$, where the class $[A]$ associated to Jacobian matrix $A \in \mathbb{R}^{n \times n}$ is
 \begin{equation}\label{eq:jaceqs}
@@ -82,11 +83,44 @@ Each distinct directed graph $G$, of which there are $k=2^{n(n-1)}$ that could b
 \end{equation}
 The $G$-classes thereby partition the collection of fixed points, $\mathcal{F}$, over the space of dynamical systems, $\mathcal{D}$, according to the interactions among the variables of the dynamical system represented by the topology of $G$. This partition, $\mathcal{F} / G$, is a coarsening of $\mathcal{F} / {\sim}$.
 
-In the process of biological evolution, the parameter values $\vec{p}$, form of the functions $F$, and environmental conditions restricting access to different fixed points $\vec{x}^0$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due to environmental fluctuations. These modifications induce a stochastic process on the equivalence classes of fixed points $\mathcal{F}/{\sim}$ \ref{fig:robustnessprocess}B. These changes may likewise alter the capacity of a given system to achieve a stable steady state, thereby inducing a coarse-grained stochastic process on the stable regions of the space of fixed points \ref{fig:robustnessprocess}A and B. In order to evaluate this we consider a process whereby perturbations are applied to a given dynamical system and fixed point associated to a stable matrix $A$ leading to $A'$. In order to classify the properties of this process according to network architecture, we enforce the condition $\adj(G_A) = \adj(G_{A'})$, which results in analogous processes defined on each $G$-class of $\mathcal{F}/G$ \ref{fig:robustnessconcept}C. This corresponds to an ensemble of dynamical systems with equivalent connectivities, but where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness. Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched in a process selecting for higher $R$ values.
+In the course of biological evolution, the parameter values $\vec{p}$, form of the functions $F$, and environmental conditions restricting access to different fixed points $\vec{x}^0$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due to environmental fluctuations. The stochastic process by which these modifications occur induces one on the set of fixed points that results in the assignment of a probability $P(f^T)$ for each history of length $T$, $f^T = \{ f_1,f_2,\ldots,f_T \} \in \mathcal{F}^T$.
+% $$
+% P(f',t+1 | f,t) = \mathcal{T}_{\mathcal{F}}(f',f)
+% $$
+% for all $f,f' \in \mathcal{F}$.
+These dynamics induce a stochastic process on the equivalence classes of fixed points $\mathcal{F}/{\sim}$ indexed by Jacobian matrices given by
+$$
+P([A]^T) = \sum_{ \{ f^T \mid f_i^T \in [A]_i^T \} } P(f^T)
+$$
+for each history of length $T$, $[A]^T = \{ [A_1], [A_2], \ldots, [A_T]\} \in (\mathcal{F}/{\sim})^T$
+% $$
+% P([A'],t+1 | [A],t) = \mathcal{T}_{\mathcal{F}/{\sim}}([A'],[A])
+% $$
+% for all $A,A' \in \mathcal{F}/{\sim}$
+as visualized in \ref{fig:robustnessprocess}B. These changes can alter the capacity of a given system to achieve a stable steady state, thereby inducing an even more coarse-grained stochastic process on the stable regions of the space of fixed points given by
+$$
+P(s^T) = \sum_{ \{ A^T \mid A_i^T \in s_i^T \} } P(A^T)
+$$
+for each history of length $T$, $s^T = \{ s_1, s_2, \ldots, s_T \} \in \mathcal{S}^T$
+as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we consider a process whereby perturbations are applied to a given dynamical system and fixed point associated to a stable matrix $A$ leading to $A'$. In order to classify the properties of this process according to network architecture, we enforce the condition $\adj(G_A) = \adj(G_{A'})$, which results in an analogous processes defined on each $G$-class $[G] \in \mathcal{F}/G$ given by
+$$
+P([A]^T \mid G_A {=} G) = \sum_{ \{ f^T \mid f_i^T \in [A]_i^T \} } P(f^T)
+$$
+for each history of length $T$, $[A]^T = \{ [A_1], [A_2], \ldots, [A_T]\} \in [G]^T$
+as visualized in \ref{fig:robustnessprocess}C. This corresponds to an ensemble of dynamical systems with equivalent connectivities, but where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over continguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
+$$
+r = \frac{\sum_{t=0}^{T-1}s_{t+1}^T s_{t}^T}{\sum_{t=0}^{T-1} s_{t}^T},
+$$
+where we make numerical substitutions for the values of $\mathcal{S}$ such that $S = 1$ and $U = 0$.
+Given that the process $P(s^T)$ has stationary probability $P^{\infty}(s)$ for $s \in \mathcal{S}$, the expectation of $r$ as $T \rightarrow \infty$ is approximated by
+$$
+R = E[r] \approx \frac{\sum_{s,s'} P^{\infty}(s)P^{\infty}(s' \mid s)}{P^{\infty}(S)}.
+$$
+This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness. Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched in a process selecting for higher $R$ values.
 
 The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{} and \reffigscc). This map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, has a collection of intrinsic symmetries shown in \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated. Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
 
-We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. The entries of the Jacobian are sampled independently from a generic probability distribution. Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. The expression in \ref{eq:sccrobustness} holds for the case of simultaneously perturbing any number of elements of the Jacobian, but can be schematized for the case of perturbing a single element as \ref{eq:robschematic} (see \reffigscc$\,$ for examples demonstrating this expression)
+We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. The entries of the Jacobian are sampled independently from a generic probability distribution. Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. The result ultimately holds for the case of simultaneously perturbing any number of elements of the Jacobian. To anchor the intuition before stating the more general result, \ref{eq:robschematic} shows a schematized version for the case of perturbing a single element  (see \reffigscc$\,$ for examples demonstrating this expression)
 \begin{equation}\label{eq:robschematic}
 R_{tot} = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
 \end{equation}
