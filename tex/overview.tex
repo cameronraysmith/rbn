@@ -83,7 +83,7 @@ Each distinct directed graph $G$, of which there are $k=2^{n(n-1)}$ that could b
 \end{equation}
 The $G$-classes thereby partition the collection of fixed points, $\mathcal{F}$, over the space of dynamical systems, $\mathcal{D}$, according to the interactions among the variables of the dynamical system represented by the topology of $G$. This partition, $\mathcal{F} / G$, is a coarsening of $\mathcal{F} / {\sim}$.
 
-In the course of biological evolution, the parameter values $\vec{p}$, form of the functions $F$, and environmental conditions restricting access to different fixed points $\vec{x}^0$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due to environmental fluctuations. The stochastic process by which these modifications occur induces one on the set of fixed points that results in the assignment of a probability $P(f^T)$ for each history of length $T$, $f^T = \{ f_1,f_2,\ldots,f_T \} \in \mathcal{F}^T$.
+In the course of biological evolution, the parameter values $\vec{p}$, form of the functions $F$, and environmental conditions restricting access to the basins associated to different fixed points $\vec{x}^0$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due to environmental fluctuations. The stochastic process by which these modifications occur induces one on the set of fixed points that results in the assignment of a probability $P(f^T)$ to each history of length $T$, $f^T = ( f_1,f_2,\ldots,f_T ) \in \mathcal{F}^T$.
 % $$
 % P(f',t+1 | f,t) = \mathcal{T}_{\mathcal{F}}(f',f)
 % $$
@@ -92,7 +92,7 @@ These dynamics induce a stochastic process on the equivalence classes of fixed p
 $$
 P([A]^T) = \sum_{ \{ f^T \mid f_i^T \in [A]_i^T \} } P(f^T)
 $$
-for each history of length $T$, $[A]^T = \{ [A_1], [A_2], \ldots, [A_T]\} \in (\mathcal{F}/{\sim})^T$
+for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in (\mathcal{F}/{\sim})^T$
 % $$
 % P([A'],t+1 | [A],t) = \mathcal{T}_{\mathcal{F}/{\sim}}([A'],[A])
 % $$
@@ -101,12 +101,12 @@ as visualized in \ref{fig:robustnessprocess}B. These changes can alter the capac
 $$
 P(s^T) = \sum_{ \{ A^T \mid A_i^T \in s_i^T \} } P(A^T)
 $$
-for each history of length $T$, $s^T = \{ s_1, s_2, \ldots, s_T \} \in \mathcal{S}^T$
+for each history of length $T$, $s^T = ( s_1, s_2, \ldots, s_T ) \in \mathcal{S}^T$
 as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we consider a process whereby perturbations are applied to a given dynamical system and fixed point associated to a stable matrix $A$ leading to $A'$. In order to classify the properties of this process according to network architecture, we enforce the condition $\adj(G_A) = \adj(G_{A'})$, which results in an analogous processes defined on each $G$-class $[G] \in \mathcal{F}/G$ given by
 $$
 P([A]^T \mid G_A {=} G) = \sum_{ \{ f^T \mid f_i^T \in [A]_i^T \} } P(f^T)
 $$
-for each history of length $T$, $[A]^T = \{ [A_1], [A_2], \ldots, [A_T]\} \in [G]^T$
+for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in [G]^T$
 as visualized in \ref{fig:robustnessprocess}C. This corresponds to an ensemble of dynamical systems with equivalent connectivities, but where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over continguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
 $$
 r = \frac{\sum_{t=0}^{T-1}s_{t+1}^T s_{t}^T}{\sum_{t=0}^{T-1} s_{t}^T},
