@@ -97,7 +97,7 @@ for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in (\m
 % P([A'],t+1 | [A],t) = \mathcal{T}_{\mathcal{F}/{\sim}}([A'],[A])
 % $$
 % for all $A,A' \in \mathcal{F}/{\sim}$
-as visualized in \ref{fig:robustnessprocess}B. These changes can alter the capacity of a given system to achieve a stable steady state, thereby inducing an even more coarse-grained stochastic process on the stable regions of the space of fixed points given by
+as visualized in \ref{fig:robustnessprocess}B. These changes can alter the stability of a given system, thereby inducing an even more coarse-grained stochastic process on the stable regions of the space of fixed points given by
 $$
 P(s^T) = \sum_{ \{ A^T \mid A_i^T \in s_i^T \} } P(A^T)
 $$
@@ -109,12 +109,14 @@ $$
 for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in [G]^T$
 as visualized in \ref{fig:robustnessprocess}C. This corresponds to an ensemble of dynamical systems with equivalent connectivities, but where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over continguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
 $$
-r = \frac{\sum_{t=0}^{T-1}s_{t+1}^T s_{t}^T}{\sum_{t=0}^{T-1} s_{t}^T},
+r = \frac{\sum_{t=0}^{T-1} \mathbf{1}_S (s_{t+1}^T) \mathbf{1}_S (s_{t}^T)}{\sum_{t=0}^{T-1} \mathbf{1}_S (s_{t}^T)},
 $$
-where we make numerical substitutions for the values of $\mathcal{S}$ such that $S = 1$ and $U = 0$.
-Given that the process $P(s^T)$ has stationary probability $P^{\infty}(s)$ for $s \in \mathcal{S}$, the expectation of $r$ as $T \rightarrow \infty$ is approximated by
+where we have introduced the indicator function $\mathbf{1}_S$ on $\mathcal{S}$ such that $\mathbf{1}_S(S) = 1$ and $\mathbf{1}_S(U) = 0$.
+If the process $P(s^T)$ has limits $\mu(s) = \lim_{t \rightarrow \infty} P(s_t^T=s)$ and $\tau(s' \mid s) = \lim_{t \rightarrow \infty} P(s_{t+1}^T = s' \mid s_t^T = s)$ for $s,s' \in \mathcal{S}$
+%stationary probability $P^{\infty}(s)$ for $s \in \mathcal{S}$
+, the expectation of $r$ as $T \rightarrow \infty$ is approximated by
 $$
-R = E[r] \approx \frac{\sum_{s,s'} P^{\infty}(s)P^{\infty}(s' \mid s)}{P^{\infty}(S)}.
+R(S,\mu,\tau) = E[r] \approx \frac{\sum_{s,s'} \mu(s) \tau(s' \mid s)}{\sum_{s=S} \mu(s)}.
 $$
 This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness. Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched in a process selecting for higher $R$ values.
 
