@@ -22,16 +22,46 @@ observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to 
 \mathcal{F} = \{ (d,\vec{x}^0) \; | \; d=(F(-,\vec{p}),\vec{p}) \in \mathcal{D}, \vec{x}^0 \in \mathbb{R}^n,F(\vec{x}^0,\vec{p})=0 \}.
 \end{equation}
 
-To determine stability, we linearize the equations of motion (\refsupp{}) about the
-fixed point $\vec{x}^0$:
+% To determine stability, we linearize the equations of motion (\refsupp{}) about the
+% fixed point $\vec{x}^0$:
+% \begin{equation}\label{eq:lineardynsys}
+% \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
+% \end{equation}
+% where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$ Jacobian matrix $A$ has components
+% $$
+% a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
+% $$
+To determine stability, we use the Taylor series expansion of the equations of motion \ref{eq:eom} about the fixed point $\vec{x}^0$ where $\vec{y} = \vec{x} - \vec{x}^0$ by
+\begin{equation}\label{eq:taylorseries}
+\begin{aligned}
+\frac{dx_i(t)}{dt} \approx & F_i(\vec{x}^0)
++ \sum_{j=1}^{N} \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0} y_j\\
+& + \frac{1}{2}\sum_{j,k=1}^{N} \left. \frac{\partial^2 F_i}{\partial x_j \partial x_k} \right|_{\vec{x} = \vec{x}^0} y_j y_k + \cdots
+\end{aligned}
+\end{equation}
+The zeroth order term vanishes since $F_i(\vec{x}^0)=0$ by definition and thus neglecting terms higher than first order from \ref{eq:taylorseries} results in
+% \begin{equation*}
+% \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
+% \end{equation*}
 \begin{equation}\label{eq:lineardynsys}
 \frac{d\vec{y}(t)}{dt} = A \vec{y}(t),
 \end{equation}
-where $\vec{y} = \vec{x} - \vec{x}^0$ and the $n \times n$ Jacobian matrix $A$ has components
+where the $n \times n$-matrix $A$ has components
 $$
 a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 $$
-The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenvalues of $A$ all have real parts less than zero and $A$ is then referred to as a stable matrix (\refsupp{}). This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$. In the 2-dimensional case, $\chi(A) = z^2 + Tr(A)z+Det(A)$ has solutions $z$ with negative real parts if $Tr(A)<0$ and $Det(A)>0$, which we make use of in examples. Generalized conditions for higher dimensions are available in \cite{Gantmacher1959}. As an example of a Jacobian matrix, the Lotka-Volterra model has
+
+The system defined by $F_i$, $\vec{p}$, and $\vec{x}^0$ is dynamically stable if the eigenvalues of $A$ all have real parts less than zero and $A$ is then referred to as a stable matrix. The spectral abscissa of the matrix $A$ is defined as
+$$
+\eta(A) = \max_i \{\Re(\lambda_i)\}
+$$
+where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$. This is because the general solution to \ref{eq:lineardynsys} is
+$$
+y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
+$$
+for some matrix $B=(b_{ij})$ and thus all $\vec{y} = \vec{x} - \vec{x}^0$ decay to zero when all $\lambda_i < 0$.
+
+This criterion can be checked equivalently in terms of conditions on the coefficients of the characteristic polynomials $\chi(A)$ associated to the systems described by matrices $A$. In the $2$-dimensional case, $\chi(A) = \lambda^2 + Tr(A)\lambda+Det(A)$ has solutions $\lambda$ with negative real parts if $Tr(A)<0$ and $Det(A)>0$, which we make use of in examples. Generalized conditions for higher dimensions are available in \cite{Gantmacher1959}. As an example of a Jacobian matrix, the Lotka-Volterra model has
  \begin{equation}\label{eq:lotkavolterrajacobian}
    a_{ij} = \left\{
      \begin{array}{lr}
@@ -40,7 +70,17 @@ The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the eigenva
      \end{array}.
    \right.
 \end{equation}
-Evaluation of the stability criterion occurs on a space of two states $\mathcal{S} = \{ S, U \}$ where $S$ stands for stable and $U$ stands for unstable. The stability criterion defines an equivalence relation on the set of all Jacobian matrices $A \in \mathbb{R}^{n \times n}$ deriving from fixed points on $n$ variables that simply splits the set into two classes $S=\{ A \, | \, A \hbox{ is stable}  \}$ and $U~=~\{ A \, | \, A \hbox{ is unstable} \}$.
+
+Evaluation of the stability criterion occurs on a space of two states inducing a mapping from matrices to binary values $\mathcal{S} \colon \mathbb{R}^{n \times n} \rightarrow \{ 1, 0 \}$ given by
+ \begin{equation}\label{eq:stabeval}
+   \mathcal{S}(A) = \left\{
+     \begin{array}{lr}
+       1, & \eta (A) < 0\\
+       0, & \eta (A) \geq 0
+     \end{array},
+   \right.
+\end{equation}
+where $1$ stands for $S$ or stable and $0$ stands for $U$ or unstable. The stability criterion defines an equivalence relation on the set of all Jacobian matrices $A \in \mathbb{R}^{n \times n}$ deriving from fixed points on $n$ variables that simply splits the set into two classes $S=\{ A \, | \, A \hbox{ is stable}  \}$ and $U~=~\{ A \, | \, A \hbox{ is unstable} \}$.
 
 Jacobian matrices define an equivalence relation, $\sim$, on fixed points given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}\,',\vec{x}^{0'}) $ if and only if
 \begin{equation}\label{eq:jaceqrel}
@@ -99,32 +139,67 @@ for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in (\m
 % for all $A,A' \in \mathcal{F}/{\sim}$
 as visualized in \ref{fig:robustnessprocess}B. These changes can alter the stability of a given system, thereby inducing an even more coarse-grained stochastic process on the stable regions of the space of fixed points given by
 $$
-P(s^T) = \sum_{ \{ A^T \mid A_i^T \in s_i^T \} } P(A^T)
+P(s^T) = \sum_{ \{ A^T \mid \mathcal{S}(A_i^T) = s_i^T \} } P(A^T)
 $$
-for each history of length $T$, $s^T = ( s_1, s_2, \ldots, s_T ) \in \mathcal{S}^T$
-as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we consider a process whereby perturbations are applied to a given dynamical system and fixed point associated to a stable matrix $A$ leading to $A'$. In order to classify the properties of this process according to network architecture, we enforce the condition $\adj(G_A) = \adj(G_{A'})$, which results in an analogous processes defined on each $G$-class $[G] \in \mathcal{F}/G$ given by
+for each history of length $T$, $s^T = ( s_1, s_2, \ldots, s_T ) \in \{0,1\}^T$
+as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we consider a process whereby perturbations applied to a given dynamical system and fixed point associated to a stable Jacobian matrix $A$ lead to another Jacobian matrix $A'$.  This corresponds to an ensemble of fixed points of dynamical systems where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over continguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
+$$
+r = \frac{\sum_{t=0}^{T-1} s_{t+1}^T s_{t}^T}{\sum_{t=0}^{T-1} s_{t}^T}.
+$$
+If the process $P(s^T)$ has limits $\mu(s) = \lim_{t \rightarrow \infty} P(s_t^T=s)$ and $\tau(s' \mid s) = \lim_{t \rightarrow \infty} P(s_{t+1}^T = s' \mid s_t^T = s)$ for $s,s' \in \{0,1\}$
+%stationary probability $P^{\infty}(s)$ for $s \in \mathcal{S}$
+, the expectation of $r$ as $T \rightarrow \infty$ is approximated by
+\begin{equation}\label{eq:robustnessfromstoch}
+R(S,\mu,\tau) = E[r] \approx \frac{\sum_{s,s'} \mu(s) \tau(s' \mid s)}{\sum_{s=1} \mu(s)}.
+\end{equation}
+This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness.
+
+In terms of Jacobian matrices $A$ and $A'$, if the underlying process $P([A]^T)$ has analogous limits
+$$\mu(A) = \lim_{t \rightarrow \infty} P(A_t^T=A)$$
+and
+$$\tau(A' \mid A) = \lim_{t \rightarrow \infty} P(A_{t+1}^T = A' \mid A_t^T = A)$$
+for $A,A' \in \mathbb{R}^{n \times n}$, \ref{eq:robustnessfromstoch} becomes
+\begin{equation}
+R(S,\mu,\tau) = \frac{\int_{A,A' \in \mathbb{R}^{n \times n}} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int_{A \in \mathbb{R}^{n \times n}} d\mu(A) \mathcal{S}(A)}.
+\end{equation}
+
+In order to classify the properties of this process according to network architecture, we consider cases where the condition $\adj(G_A) = \adj(G_{A'})$ holds, which results in an analogous processes defined on each $G$-class $[G] \in \mathcal{F}/G$ given by
 $$
 P([A]^T \mid G_A {=} G) = \sum_{ \{ f^T \mid f_i^T \in [A]_i^T \} } P(f^T)
 $$
 for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in [G]^T$
-as visualized in \ref{fig:robustnessprocess}C. This corresponds to an ensemble of dynamical systems with equivalent connectivities, but where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask, for each distinct network topology on $n$ components, what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over continguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
-$$
-r = \frac{\sum_{t=0}^{T-1} \mathbf{1}_S (s_{t+1}^T) \mathbf{1}_S (s_{t}^T)}{\sum_{t=0}^{T-1} \mathbf{1}_S (s_{t}^T)},
-$$
-where we have introduced the indicator function $\mathbf{1}_S$ on $\mathcal{S}$ such that $\mathbf{1}_S(S) = 1$ and $\mathbf{1}_S(U) = 0$.
-If the process $P(s^T)$ has limits $\mu(s) = \lim_{t \rightarrow \infty} P(s_t^T=s)$ and $\tau(s' \mid s) = \lim_{t \rightarrow \infty} P(s_{t+1}^T = s' \mid s_t^T = s)$ for $s,s' \in \mathcal{S}$
-%stationary probability $P^{\infty}(s)$ for $s \in \mathcal{S}$
-, the expectation of $r$ as $T \rightarrow \infty$ is approximated by
-$$
-R(S,\mu,\tau) = E[r] \approx \frac{\sum_{s,s'} \mu(s) \tau(s' \mid s)}{\sum_{s=S} \mu(s)}.
-$$
-This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness. Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched in a process selecting for higher $R$ values.
+as visualized in \ref{fig:robustnessprocess}C. This now corresponds to a collection of ensembles of dynamical systems each with equivalent connectivities corresponding to a graph $G$. For each graph, there is a potentially different value of robustness given by
+\begin{equation}\label{eq:robustnessbygraph}
+\begin{aligned}
+R(G,S,\mu,\tau)  & = \\
+& \frac{\int_{A,A' \in \mathbb{R}^{n \times n}, G_A = G} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int_{A \in \mathbb{R}^{n \times n}, G_A = G} d\mu(A) \mathcal{S}(A)}.
+\end{aligned}
+\end{equation}
+Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched relative to others in an evolutionary process where selection is imposed in a manner that results in a bias toward higher $R$ values.
 
 The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{} and \reffigscc). This map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, has a collection of intrinsic symmetries shown in \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated. Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
 
-We have derived an analytical expression for dynamical robustness, $R_{tot}$, of a network in terms of its interaction graph as a weighted average of the robustness of the SCCs, $R_i$, the corresponding number of links within each SCC, $d_i$, and the number of links between the SCCs, $l$. The entries of the Jacobian are sampled independently from a generic probability distribution. Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. The result ultimately holds for the case of simultaneously perturbing any number of elements of the Jacobian. To anchor the intuition before stating the more general result, \ref{eq:robschematic} shows a schematized version for the case of perturbing a single element  (see \reffigscc$\,$ for examples demonstrating this expression)
+Now we derive an analytical expression for dynamical robustness, $R$, of a network in terms of its interaction graph, $G$, as a weighted average of the robustness, $R_{\alpha}$, of the SCCs, $C_{\alpha}$, the corresponding number of links within each SCC, $d_{\alpha}$, and the number of links between the SCCs, $l$ to give $d = l + \sum_{\alpha} d_{\alpha}$. The result ultimately holds for the case of simultaneously perturbing any number of elements of the Jacobian. To anchor the intuition before stating the more general result, we derive the expression for the case of perturbing a single element at each timestep of the process. Let the index $i$ range over the non-zero entries $a_i$ of $A$. The entries of the Jacobian are sampled independently from a generic probability distribution $\rho_i$ for each entry. Under the given assumptions then
+\begin{equation}
+\begin{aligned}
+\mu(A) &= \prod_i \rho_i(a_i),\\
+\tau(A' \mid A) &= \frac{1}{d} \sum_i \tau_i (A' \mid A),
+\end{aligned}
+\end{equation}
+where
+$$
+\tau_i(A',A) = \rho_i(a'_i)\rho_i(a_i) \prod_{j \neq i} \delta(a'_j - a_j).
+$$
+
+Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomial factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between SCCs) and does not depend upon what order the components appear. This fact implies that the terms evaluating stability such as $\mathcal{S}(A)$ from \ref{eq:robustnessbygraph} decompose into products over the SCCs
+$$
+\mathcal{S}(A) = \prod_{C_\alpha \in \hier(G)} \mathcal{S}(C_{\alpha}).
+$$
+
+
+Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} shows a schematized version for the case of perturbing a single element  (see \reffigscc$\,$ for examples demonstrating this expression)
 \begin{equation}\label{eq:robschematic}
-R_{tot} = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
+R = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
 \end{equation}
 For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat} up to sampling error.
 

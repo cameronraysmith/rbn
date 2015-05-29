@@ -110,7 +110,7 @@ if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
 observing the solution ${\vec x}(t) = {\vec x}^0$.
 
 To determine stability, we use the Taylor series expansion of the equations of motion \ref{eq:eom} about the fixed point $\vec{x}^0$ where $\vec{y} = \vec{x} - \vec{x}^0$ by
-\begin{equation}\label{eq:taylorseries}
+\begin{equation}%\label{eq:taylorseries}
 \begin{aligned}
 \frac{dx_i(t)}{dt} \approx & F_i(\vec{x}^0)
 + \sum_{j=1}^{N} \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0} y_j\\
@@ -140,7 +140,7 @@ The spectral abscissa of the matrix $A$ is defined as
 $$
 \eta(A) = \max_i \{\Re(\lambda_i)\}
 $$
-where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$ and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$. This is because the general solution to \ref{eq:lineardynsys} is
+where $\lambda_i$ are the eigenvalues of $A$. The system defined by $F_i$, and $\vec{x}^0$ is dynamically stable if the spectral abscissa of $A$ is less than zero, equivalently, $\eta(A) < 0$. This is because the general solution to \ref{eq:lineardynsys} is
 $$
 y_i(t) = \sum_j b_{ij} e^{\lambda_j t}, \; (i=1,\ldots,n)
 $$
