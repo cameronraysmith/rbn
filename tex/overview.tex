@@ -1,4 +1,5 @@
 %!TEX root = ../paper.tex
+\section{Dynamical Systems on Biological Networks}
 
 In the general case of a dynamical system with $n$ components, where the components may be concentrations of chemical species, genes, or biological species, we have an $n$-dimensional vector of state variables or observables $(x_1(t), \ldots x_n(t)) = \vec{x}(t)
 $
@@ -31,6 +32,7 @@ observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to 
 % $$
 % a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 % $$
+\subsection{Stability analysis of biological networks}
 To determine stability, we use the Taylor series expansion of the equations of motion \ref{eq:eom} about the fixed point $\vec{x}^0$ where $\vec{y} = \vec{x} - \vec{x}^0$ by
 \begin{equation}\label{eq:taylorseries}
 \begin{aligned}
@@ -82,6 +84,7 @@ Evaluation of the stability criterion occurs on a space of two states inducing a
 \end{equation}
 where $1$ stands for $S$ or stable and $0$ stands for $U$ or unstable. The stability criterion defines an equivalence relation on the set of all Jacobian matrices $A \in \mathbb{R}^{n \times n}$ deriving from fixed points on $n$ variables that simply splits the set into two classes $S=\{ A \, | \, A \hbox{ is stable}  \}$ and $U~=~\{ A \, | \, A \hbox{ is unstable} \}$.
 
+\subsection{Equivalence classes of systems associated to Jacobian Matrices}
 Jacobian matrices define an equivalence relation, $\sim$, on fixed points given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}\,',\vec{x}^{0'}) $ if and only if
 \begin{equation}\label{eq:jaceqrel}
 \left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} =
@@ -94,6 +97,7 @@ This relation then partitions the set of all fixed points into equivalence class
 An example with two members of $\mathcal{F}$ from each of four different equivalence classes $[A_1]$, $[A_2]$, $[A_3]$, and $[A_4]$ of $\mathcal{F}/{\sim}$ is shown in \ref{fig:robustnessconcept}.
 
 % \subsection{Overview}
+\subsection{Interaction graphs encoding network architecture}
 The interactions among variables in a dynamical model for any network can be represented in terms of a global interaction graph (\ref{fig:biomodelexamples} top row).
 For a general system $X \in \mathcal{D}$ the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ if $F_i \hbox{ depends on } x_j$ and $0$ if $F_i \hbox{ does not depend on } x_j$. These two conditions on global system interactions are expressed respectively for all $\vec{x}$ in terms of elements of the Jacobian matrix as $\frac{\partial F_i}{\partial x_j}(\vec{x}) \neq 0$ and $\frac{\partial F_i}{\partial x_j}(\vec{x}) = 0$.
 %  \begin{displaymath}
@@ -123,7 +127,8 @@ Each distinct directed graph $G$, of which there are $k=2^{n(n-1)}$ that could b
 \end{equation}
 The $G$-classes thereby partition the collection of fixed points, $\mathcal{F}$, over the space of dynamical systems, $\mathcal{D}$, according to the interactions among the variables of the dynamical system represented by the topology of $G$. This partition, $\mathcal{F} / G$, is a coarsening of $\mathcal{F} / {\sim}$.
 
-In the course of biological evolution, the parameter values $\vec{p}$, form of the functions $F$, and environmental conditions restricting access to the basins associated to different fixed points $\vec{x}^0$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due to environmental fluctuations. The stochastic process by which these modifications occur induces one on the set of fixed points that results in the assignment of a probability $P(f^T)$ to each history of length $T$, $f^T = ( f_1,f_2,\ldots,f_T ) \in \mathcal{F}^T$.
+\section{Evolutionary processes sampling dynamical systems}
+In the course of biological evolution, the parameter values $\vec{p}$, form of the functions $F$, and environmental conditions restricting access to the basins associated to different fixed points $\vec{x}^0$ corresponding to all different types of networks considered in \ref{fig:biomodelexamples} are subject to, potentially drastic, modifications due to environmental fluctuations. The stochastic process by which these modifications occur induces one on the set of fixed points that results in the assignment of a probability $P(f^T)$ to each history of length $T$, $f^T = ( f_1,f_2,\ldots,f_T ) \in \mathcal{F}^T$ \cite{RobertM.Gray130}.
 % $$
 % P(f',t+1 | f,t) = \mathcal{T}_{\mathcal{F}}(f',f)
 % $$
@@ -146,7 +151,7 @@ as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we c
 $$
 r = \frac{\sum_{t=0}^{T-1} s_{t+1}^T s_{t}^T}{\sum_{t=0}^{T-1} s_{t}^T}.
 $$
-If the process $P(s^T)$ has limits $\mu(s) = \lim_{t \rightarrow \infty} P(s_t^T=s)$ and $\tau(s' \mid s) = \lim_{t \rightarrow \infty} P(s_{t+1}^T = s' \mid s_t^T = s)$ for $s,s' \in \{0,1\}$
+If the process $P(s^T)$ has limits $\mu(s) = \lim_{t,T \rightarrow \infty} P(s_t^T=s)$ and $\tau(s' \mid s) = \lim_{t,T \rightarrow \infty} P(s_{t+1}^T = s' \mid s_t^T = s)$ for $s,s' \in \{0,1\}$
 %stationary probability $P^{\infty}(s)$ for $s \in \mathcal{S}$
 , the expectation of $r$ as $T \rightarrow \infty$ is approximated by
 \begin{equation}\label{eq:robustnessfromstoch}
@@ -155,9 +160,9 @@ R(S,\mu,\tau) = E[r] \approx \frac{\sum_{s,s'} \mu(s) \tau(s' \mid s)}{\sum_{s=1
 This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness.
 
 In terms of Jacobian matrices $A$ and $A'$, if the underlying process $P([A]^T)$ has analogous limits
-$$\mu(A) = \lim_{t \rightarrow \infty} P(A_t^T=A)$$
+$$\mu(A) = \lim_{t,T \rightarrow \infty} P(A_t^T=A)$$
 and
-$$\tau(A' \mid A) = \lim_{t \rightarrow \infty} P(A_{t+1}^T = A' \mid A_t^T = A)$$
+$$\tau(A' \mid A) = \lim_{t,T \rightarrow \infty} P(A_{t+1}^T = A' \mid A_t^T = A)$$
 for $A,A' \in \mathbb{R}^{n \times n}$, \ref{eq:robustnessfromstoch} becomes
 \begin{equation}
 R(S,\mu,\tau) = \frac{\int_{A,A' \in \mathbb{R}^{n \times n}} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int_{A \in \mathbb{R}^{n \times n}} d\mu(A) \mathcal{S}(A)}.
@@ -171,50 +176,138 @@ for each history of length $T$, $[A]^T = ( [A_1], [A_2], \ldots, [A_T] ) \in [G]
 as visualized in \ref{fig:robustnessprocess}C. This now corresponds to a collection of ensembles of dynamical systems each with equivalent connectivities corresponding to a graph $G$. For each graph, there is a potentially different value of robustness given by
 \begin{equation}\label{eq:robustnessbygraph}
 \begin{aligned}
-R(G,S,\mu,\tau)  & = \\
-& \frac{\int_{A,A' \in \mathbb{R}^{n \times n}, G_A = G} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int_{A \in \mathbb{R}^{n \times n}, G_A = G} d\mu(A) \mathcal{S}(A)}.
+R(G,S,\mu,\tau)  =
+ \frac{\int\limits_{A,A' \in \mathbb{R}^{n \times n} \atop G_A = G} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int\limits_{A \in \mathbb{R}^{n \times n} \atop G_A = G} d\mu(A) \mathcal{S}(A)}.
 \end{aligned}
 \end{equation}
 Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched relative to others in an evolutionary process where selection is imposed in a manner that results in a bias toward higher $R$ values.
 
-The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs, see \refsupp{} and \reffigscc). This map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, has a collection of intrinsic symmetries shown in \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated. Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
+\section{Abstracting network architectures to their strongly connected components and the symmetries of robustness}
+The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs). A SCC of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The strongly connected components of some examples of three variable systems are outlined in \reffigscc{} along with their adjacency matrices. 
 
-Now we derive an analytical expression for dynamical robustness, $R$, of a network in terms of its interaction graph, $G$, as a weighted average of the robustness, $R_{\alpha}$, of the SCCs, $C_{\alpha}$, the corresponding number of links within each SCC, $d_{\alpha}$, and the number of links between the SCCs, $l$ to give $d = l + \sum_{\alpha} d_{\alpha}$. The result ultimately holds for the case of simultaneously perturbing any number of elements of the Jacobian. To anchor the intuition before stating the more general result, we derive the expression for the case of perturbing a single element at each timestep of the process. Let the index $i$ range over the non-zero entries $a_i$ of $A$. The entries of the Jacobian are sampled independently from a generic probability distribution $\rho_i$ for each entry. Under the given assumptions then
-\begin{equation}
+The map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, results in a decomposition of $G$ into its SCCs. Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
+
+One can also perform this construction in the opposite direction.  Start with a directed acyclic graph $H$.  To each node $n$ of $H$ associate
+a strongly connected graph $C_n$.  To each link $(i,j)$ of $H$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = H$ and furthermore, every graph $G$ such that $\hier(G) = H$ can be obtained in this manner.
+
+This map $\hier$ is many-to-one and so there is a large class of
+operations which leaves $\hier(G)$ invariant for a given graph $G$ \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated.
+For instance, we may interchange the positions of the strongly
+connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.  
+
+Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries of $\hier$ are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
+
+\section{Derivation of the relationship between network architecture and robustness}
+Now we derive an analytical expression for dynamical robustness, $R$, of a network in terms of its interaction graph, $G$, as a weighted average of the robustness, $R_{\alpha}$, of the SCCs, $C_{\alpha}$, the corresponding number of links within each SCC, $d_{\alpha}$, and the number of links between the SCCs, $l$ to give $d = l + \sum_{\alpha} d_{\alpha}$. The result ultimately holds for the case of simultaneously perturbing any number of elements of the Jacobian. To anchor the intuition before stating the more general result, we derive the expression for the case of perturbing a single element at each timestep of the process. 
+\subsection{Independent modification process to individual network interactions}
+Let the index $i$ range over the non-zero entries $a_i$ of $A$. The entries of the Jacobian are sampled independently from a generic probability distribution $\rho_i$ for each entry. Under the given assumptions then
+\begin{equation}\label{eq:singleresamplemutau}
 \begin{aligned}
 \mu(A) &= \prod_i \rho_i(a_i),\\
-\tau(A' \mid A) &= \frac{1}{d} \sum_i \tau_i (A' \mid A),
+\tau^{(1)}(A' \mid A) &= \frac{1}{d} \sum_i \tau^{(1)}_i (A' \mid A),
 \end{aligned}
 \end{equation}
 where
 $$
-\tau_i(A',A) = \rho_i(a'_i)\rho_i(a_i) \prod_{j \neq i} \delta(a'_j - a_j).
+\tau^{(1)}_i(A' \mid A) = \rho_i(a'_i) \prod_{j \neq i} \delta(a'_j - a_j).
 $$
+
+The decomposition of a digraph into SCCs corresponds to a block triangular decomposition of its adjacency matrix.  Say that the graph $G$ has SCCs $C_1, C_2, \ldots C_n$, which have been labelled in such a way that there are no links from vertices in component $C_i$ to component $C_j$ when $i < j$.  Label the vertices in such a way that $V_1, \ldots, V_{n_1}$ belong to $C_1$, $V_{n_1 + 1}, \ldots, V_{n_2}$ belong to $C_2$, etc.  Then, if we choose basis vectors corresponding to this labelling of the vertices, we will have $a_{ij} = 0$ whenever $i$ and $j$ correspond to different components and $i > j$.  This condition is equivalent to stating that the matrix is block triangular with blocks of size $n_1, n_2, \ldots$.
 
 Since the determinant of a triangular matrix equals the product of the determinants of its diagonal blocks, it follows that the characteristic polynomial factors as the product of the charactericstic polynomials of its diagonal blocks.  Hence, a block triangular matrix is stable if and only if its diagonal blocks are stable.  Note that this condition does not depend upon the entries off the diagonal (which correspond to links between SCCs) and does not depend upon what order the components appear. This fact implies that the terms evaluating stability such as $\mathcal{S}(A)$ from \ref{eq:robustnessbygraph} decompose into products over the SCCs
-$$
-\mathcal{S}(A) = \prod_{C_\alpha \in \hier(G)} \mathcal{S}(C_{\alpha}).
-$$
+\begin{equation}\label{eq:stabfactor}
+\mathcal{S}(A) = \prod_{C_\alpha \in \hier(G)} \mathcal{S}(\pi_{C_{\alpha}}(A))
+\end{equation}
+where $\pi_{C_{\alpha}}(A)$ denotes the projection of the matrix $A$ onto the SCC $C_{\alpha}$.
 
-
-Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} shows a schematized version for the case of perturbing a single element  (see \reffigscc$\,$ for examples demonstrating this expression)
+To relate the robustness of a graph to the robustness of its SCCs, we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessfromstoch}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct strongly connected components.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
+\begin{widetext}
+\begin{equation}\label{eq:robustncessforsccs}
+\begin{aligned}
+\frac{\int d\mu(A) d\tau^{(1)}_i (A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}
+       {\int d\mu(A) \mathcal{S}(A)}
+&= \frac{\begin{matrix}
+  \int \prod\limits_{k \in C_\alpha} da_k\,d{a'}_k\, \rho(a_k)
+    \rho_i({a'}_i) \prod\limits_{j \in C_\alpha \setminus i} \delta ({a'}_j - a_j)       
+    \mathcal{S}(\pi_{C_{\alpha}}(A)) \mathcal{S}(\pi_{C_{\alpha}}(A')) \times \\
+ \prod\limits_{C_\beta \in \hier(G) \setminus C_\alpha} \int 
+   \prod\limits_{j \in C_\beta} da_k\,d{a'}_k\, \rho({a'}_j) \delta ({a'}_j - a_j)
+      \mathcal{S}(\pi_{C_{\beta}}(A)) \mathcal{S}(\pi_{C_{\beta}}(A')) \times \\
+ \prod\limits_{l \in L} \int da_l\,d{a'}_l\,\rho({a'}_l) \delta({a'}_l - a_l) \end{matrix}}
+{\begin{matrix}\int \prod\limits_{k \in C_\alpha} da_k\,\rho(a_k) \mathcal{S}(\pi_{C_{\alpha}}(A)) \times \\
+ \prod_{C_\beta \in \hier(G) \setminus C_\alpha}
+   \int \prod\limits_{h \in C_\alpha} da_h,\rho(a_h) \mathcal{S}(\pi_{C_{\beta}}(A)) \times \\
+ \prod\limits_{l \in L} \int da_l\,\rho(a_l) \end{matrix}} \\
+&= \frac{\int \prod\limits_{k \in C_\alpha} da_k\,d{a'}_k\,\rho(a_k)
+    \rho_i({a'}_i) \prod\limits_{j \in C_\alpha \setminus i} \delta ({a'}_j - a_j)       
+    \mathcal{S}(\pi_{C_{\alpha}}(A)) \mathcal{S}(\pi_{C_{\alpha}}(A'))}
+{\int \prod\limits_{k \in C_\alpha} dk\, \rho(a_k) \mathcal{S}(\pi_{C_{\alpha}}(A))} \\
+&= R(C_{\alpha}, S, \mu_\alpha, \tau^{(1)}_\alpha)
+\end{aligned}
+\end{equation}
+where $\mu_\alpha$ and $\tau^{(1)}_\alpha$ refer to the analogues of \ref{eq:singleresamplemutau} for the subgraph $C_\alpha$ of $G$. \ref{eq:robustncessforsccs} shows that the terms in the sum over the elements of $A$, or equivalently the edges of $G$, that comprise a given SCC of $G$ reduce to the robustness of that SCC alone.  Likewise, when $i \in L$, we have
+\begin{equation}
+\begin{aligned}
+\frac{\int d\mu(A) d\tau^{(1)}_i (A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}
+       {\int d\mu(A) \mathcal{S}(A)}
+&= \frac{\begin{matrix}
+  \prod\limits_{C_\alpha \in \hier(G)} \int 
+   \prod\limits_{j \in C_\beta} da_k\,d{a'}_k\, \rho({a'}_j) \delta ({a'}_j - a_j)
+      \mathcal{S}(\pi_{C_\alpha}(A)) \mathcal{S}(\pi_{C_\alpha}(A')) \times \\
+ \int da_i d{a'}_i \rho_i(a) \rho_a({a'}_i) \times
+ \prod\limits_{l \in L\setminus i} \int da_l\,d{a'}_l\,\rho({a'}_l) \delta({a'}_l - a_l) \end{matrix}}
+{\prod_{C_\alpha \in \hier(G)}
+   \int \prod\limits_{h \in C_\alpha} da_h,\rho(a_h) \mathcal{S}(\pi_{C_\alpha}(A)) \times
+ \int da_i \rho(a_i) \times
+ \prod\limits_{l \in L \setminus i} \int da_l\,\rho(a_l)} \\
+&= 1
+\end{aligned}
+\end{equation}
+\end{widetext}
+For each $C_{\alpha} \in \hier(G)$, there will be $d_\alpha$ values of $i$ such that $i \in C_{\alpha}$; likewise, there will be $l$ values of $i$ such that $i \in L$.  Hence, when we perform the summation over $i$ to compute the robustness of $G$, we will obtain a weighted average:
 \begin{equation}\label{eq:robschematic}
 R = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
 \end{equation}
-For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat} up to sampling error.
+Here $R_\alpha$ is shorthand for $R(C_\alpha,S,\mu_\alpha,\tau^{(1)}_\alpha)$ and $R$ is shorthand for $R(G,S,\mu,\tau^{(1)})$.
+Examples of vector fields that correspond to this sampling of Jacobian matrices are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} shows a schematized version of \ref{eq:robustnessbygraph} for the case of perturbing a single element  (see \reffigscc$\,$ for examples demonstrating this expression). For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat} up to sampling error.
 
-Examining this expression noting that $R_i$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R_{tot}$.  Given two connected components $C_i$ and $C_j$ with $v_i$ and $v_j$ nodes respectively, we have a maximum of $v_i v_j$ links going from $C_i$ to $C_j$.  Hence, $l \le \sum_{(ij) \in \hier(G)} v_i v_j$.  Since every acyclic digraph can be embedded into a totally ordered
+Examining this expression noting that $R_{\alpha}$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R$.  Given two connected components $C_{\alpha}$ and $C_{\beta}$ with $v_{\alpha}$ and $v_{\beta}$ nodes respectively, we have a maximum of $v_{\alpha} v_{\beta}$ links going from $C_{\alpha}$ to $C_{\beta}$.  Hence, $l \le \sum_{(\alpha,\beta) \in \hier(G)} v_{\alpha} v_{\beta}$.  Since every acyclic digraph can be embedded into a totally ordered
 set, we may assume without loss of generality that our components have
-been ordered in a way such that, if $(i,j) \in \hier(G)$, then $i <
-j$.  Hence, $l \le l_{max}$ where
-$$l_{max} = \sum_{i=1}^{n-1}\sum_{j=i+1}^{n}v_i
-v_j~=~\frac{1}{2} \left( \sum_{i=1}^{n} v_i \right)^2-\frac{1}{2} \sum_{i=1}^{n}
-v_i^2,$$
-Hence, we conclude that $R_{tot} \le R_{max}$ where $R_{max}$ is equivalent to \ref{eq:robschematic} with $l_{max}$ substituted for $l$ and the upper bound is attained (\refsupp{}).
-
+been ordered in a way such that, if $(\alpha,\beta) \in \hier(G)$, then $\alpha <
+\beta$.  Hence, $l \le l_{max}$ where
+$$l_{max} = \sum_{\alpha=1}^{n-1}\sum_{\beta=\alpha+1}^{n}v_{\alpha}
+v_{\beta}~=~\frac{1}{2} \left( \sum_{\alpha=1}^{n} v_{\alpha} \right)^2-\frac{1}{2} \sum_{\alpha=1}^{n}
+v_{\alpha}^2.$$
+Suppose we have a graph $G$ with SCCs $C_1,\ldots,C_n$ and that $G_{\mathrm{tot}}$
+is the graph on $n$ nodes with a link from node $i$ to node $j$ whenever $i < j$.  Then we have a graph $G_{\mathrm{max}}$ such that $\hier (G_{\mathrm{max}}) = G_{\mathrm{tot}}$, the components of $G_{\mathrm{max}}$ are also $C_1, \ldots, C_n$, but that includes all possible links between each pair of components. In this case $R(G) \le R(G_{\mathrm{max}})$ for all $G \ne G_{\mathrm{max}}$ where $R(G_{\mathrm{max}})$ is equivalent to \ref{eq:robschematic} with $l_{max}$ substituted for $l$ 
+\begin{widetext}
+\begin{align} \label{eq:sccmaxrobustness}
+R(G_{\mathrm{max}}) =
+\frac{\frac{1}{2} ((\sum_{\alpha=1}^n v_{\alpha})^2 - \sum_{\alpha=1}^n v_{\alpha}^2) +
+                    \sum_{\alpha=1}^n \connectivity_{\alpha} 
+                    % \langle R(\hbox{stab}(C_i),\mu') \rangle_1
+                R(C_{\alpha},S,\mu_{\alpha},\tau_{\alpha})}
+     {\frac{1}{2} ((\sum_{\alpha=1}^n v_{\alpha})^2 - \sum_{\alpha=1}^n v_{\alpha}^2) +
+                    \sum_{\alpha=1}^n \connectivity_{\alpha}}.
+\end{align}
+\end{widetext}
+% where $R(G_{\mathrm{max}},S,\mu,\tau) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
+%This bound is attained by $G_{\mathrm{max}}$.  
+% $\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_1 = R_{\mathrm{max}}(C_1, \ldots C_n)$.
+\subsection{Independent modification process to arbitrary network interactions}
 This argument also works when we resample more than one entry,
 although the notation becomes more complicated.  Suppose that we
-resample $m$ nodes.  Define
+resample $m$ nodes.  Then the analogue of \ref{eq:singleresamplemutau} is
+\begin{equation}\label{eq:multipleresamplemutau}
+\begin{aligned}
+\tau^{(m)}(A' \mid A) &= \frac{1}{\binom{d}{m}} \sum_{i_1, \ldots, i_m}
+  \tau^{(m)}_{i_1, \ldots, i_m} (A' \mid A) \\
+\tau^{(m)}_{i_1, \ldots, i_m} (A' \mid A) &= 
+ \prod_{k=1}^m \rho_{i_k} (a'_{i_k})
+ \prod_{j \notin \{i_1, \ldots i_m\}} \delta(a'_j - a_j)
+\end{aligned}
+\end{equation}
+Define
 \begin{widetext}
 \begin{equation*}
 M = \left\{(m_0, m_1, \ldots, m_n) \,\bigg|\,
@@ -228,26 +321,26 @@ m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
 $m_0$ links between strongly connected components.  Hence, our
 weighted average becomes
 \begin{widetext}
-\begin{equation}
-\langle R(\hbox{stab} (G), \mu') \rangle_m =
+\begin{equation}\label{eq:robustnessmultiple}
+R(G, S, \mu, \tau^{(m)}) =
 \frac{\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
       {m \choose m_0, m_1, \ldots. m_n}
-      \left(m_0 + \sum\limits_{i=1}^n m_i \langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \right)}
+      \left(m_0 + \sum\limits_{\alpha=1}^n m_\alpha R(C_\alpha, S, \mu, \tau^{(m_\alpha)}) \right)}
      {\sum\limits_{(m_0, m_1, \ldots m_n) \in M}
       {m \choose m_0, m_1, \ldots. m_n} m}
 \end{equation}
 \end{widetext}
 
-As before, since $\langle R(\hbox{stab} (C_i), \mu') \rangle_{m_i} \le 1$, we may
-increase $\langle R(\hbox{stab} (G), \mu') \rangle_m$ by increasing the maximum
+As before, since $R(C_\alpha, S, \mu, \tau^{(m_i)}) \le 1$, we may
+increase $R(G, S, \mu, \tau^{(m)})$ by increasing the maximum
 possible value of $m_0$ while keeping the strongly connected
 components the same.  Again, if we fix $\hier(G)$, the maximum
-possible value of $m_0$ is $\sum_{(i,j) \in \hier(G)} v_i v_j$
-whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{i=1}^n
-v_i)^2 - \sum_{i=1}^n v_i^2)$, which is attained when $\hier(G_{max}) =
-G_{tot}$.  Hence, we conclude that $\langle R(\hbox{stab} (G), \mu') \rangle_m \le
-\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_m$.
+possible value of $m_0$ is $\sum_{(\alpha,\beta) \in \hier(G)} v_\alpha v_\beta$
+whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{\alpha=1}^n
+v_\alpha)^2 - \sum_{\alpha=1}^n v_\alpha^2)$, which is attained when $\hier(G_{max}) =
+G_{tot}$.  Hence, we conclude that $R(G, S, \mu, \tau^{(m)}) \le
+R(G_{\mathrm{max}}, S, \mu, \tau^{(m)})$.
 
 This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any network whose associated dynamical system has the interaction graph equivalent to the total ordering like that of \reffigscc{} top will be more robust than those associated to any of the other interaction graphs in \reffigscc{}. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
 
-To test the prediction of this analytical result, we computed the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
+To test the prediction of the analytical results in \ref{eq:robschematic} and \ref{eq:robustnessmultiple}, we computed the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
