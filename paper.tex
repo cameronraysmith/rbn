@@ -37,7 +37,7 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 % \listoftodos
 % \tableofcontents
 
-\begin{bibunit}[pnas]
+% \begin{bibunit}[pnas]
 
 % comment to omit numbering of sections
 \setcounter{secnumdepth}{4}
@@ -60,10 +60,11 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \section*{Acknowlegements}
 \input{tex/acknowledgements}
 
-% \bibliographystyle{Science}
-% \bibliography{bib/books,bib/papers}
+% \nocite{*}
+\bibliographystyle{pnas}
+\bibliography{bib/books,bib/papers}
 
-\putbib[bib/books,bib/papers]
+% \putbib[bib/books,bib/papers]
 
 \pagebreak
 \FloatBarrier
@@ -73,7 +74,7 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 % \section{Figures}
 \input{tex/figures}
 
-\end{bibunit}
+% \end{bibunit}
 \pagebreak
 \twocolumngrid
 
@@ -83,7 +84,7 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \beginsupplement
 \setcounter{secnumdepth}{4}
 
-\begin{bibunit}[unsrtnat]
+% \begin{bibunit}[unsrtnat]
 
 \begin{widetext}
 \begin{center}
@@ -99,9 +100,9 @@ $*$to whom correspondence should be addressed: aviv@einstein.yu.edu}
 \input{tex/results}
 \input{tex/methods}
 
-\putbib[bib/books,bib/papers]
+% \putbib[bib/books,bib/papers]
 
-\end{bibunit}
+% \end{bibunit}
 
 \pagebreak
 \onecolumngrid
