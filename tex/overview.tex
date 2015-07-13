@@ -9,8 +9,9 @@ whose components are solutions to the arbitrary first order system
 \end{equation}
 where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^s$ is the vector of $s$ parameters of the $F_i$. These parameters typically represent reaction rates or interaction strengths in chemical, gene-regulatory and ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$. The set of all dynamical systems, $\mathcal{D}$, for a given number of state variables $n$ and a given number of parameters $s$, is then
 \begin{equation}\label{eq:setdynsys}
-\mathcal{D} = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
+\mathcal{D'} = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
 \end{equation}
+The space of all $F$ is too large to precisely define probabilities over, so we consider various subspaces $\mathcal{D} \subset \mathcal{D}'$. In some cases these may be given by parametrized models with a single fixed form of $F$ and then only $\vec{p}$ is allowed to vary.
 
 Fixed points are the simplest class of solutions to the dynamical system characterizing its long-term behavior. If $\vec x$ is a fixed point (i.e. $F_i(\vec{x})=0$ for all $i$), we
 may proceed to ask whether it is dynamically stable.
