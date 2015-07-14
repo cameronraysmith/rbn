@@ -7,7 +7,7 @@ whose components are solutions to the arbitrary first order system
 \begin{equation}\label{eq:eom}
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t), \vec{p}), \; (i=1,\ldots,n)
 \end{equation}
-where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^s$ is the vector of $s$ parameters of the $F_i$. These parameters typically represent reaction rates or interaction strengths in chemical, gene-regulatory and ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (n_1, \ldots, n_N)$, $\vec{p}=(r_1,\ldots,r_N,b_{11},\ldots,b_{NN})$, and $F_i = r_i n_i + \sum_{j=1}^{N} b_{ij} n_i n_j$. The set of all dynamical systems, $\mathcal{D}$, for a given number of state variables $n$ and a given number of parameters $s$, is then
+where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^s$ is the vector of $s$ parameters of the $F_i$. These parameters typically represent reaction rates or interaction strengths in chemical, gene-regulatory and ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (x_1, \ldots, x_n)$, $\vec{p}=(r_1,\ldots,r_n,b_{11},\ldots,b_{nn})$, and $F_i = r_i x_i + \sum_{j=1}^{n} b_{ij} x_i x_j$. The set of all dynamical systems, $\mathcal{D}$, for a given number of state variables $n$ and a given number of parameters $s$, is then
 \begin{equation}\label{eq:setdynsys}
 \mathcal{D'} = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^s \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
 \end{equation}
@@ -19,7 +19,7 @@ Intuitively, dynamic stability means that, if one chooses the initial
 conditions sufficiently close to the fixed point, the solution will
 stay nearby.  Physically, this is important because,
 if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
-observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $n_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{N} b_{ij} n_j = 0$. The set of all such fixed points, $\mathcal{F}$, is then
+observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $x_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{n} b_{ij} x_j = 0$. The set of all such fixed points, $\mathcal{F}$, is then
 \begin{equation}\label{eq:setfixedpoints}
 \mathcal{F} = \{ (d,\vec{x}^0) \; | \; d=(F(-,\vec{p}),\vec{p}) \in \mathcal{D}, \vec{x}^0 \in \mathbb{R}^n,F(\vec{x}^0,\vec{p})=0 \}.
 \end{equation}
@@ -68,8 +68,8 @@ This criterion can be checked equivalently in terms of conditions on the coeffic
  \begin{equation}\label{eq:lotkavolterrajacobian}
    a_{ij} = \left\{
      \begin{array}{lr}
-       r_i + b_{ii} n_i + \sum_{k=1}^{N} b_{ik} n_{k}, & i \neq j\\
-       b_{ii} n_i & i=j
+       r_i + b_{ii} x_i + \sum_{k=1}^{n} b_{ik} x_{k}, & i \neq j\\
+       b_{ii} x_i & i=j
      \end{array}.
    \right.
 \end{equation}
@@ -169,7 +169,7 @@ for $A,A' \in \mathbb{R}^{n \times n}$, \ref{eq:robustnessfromstoch} becomes
 R(S,\mu,\tau) = \frac{\int_{A,A' \in \mathbb{R}^{n \times n}} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int_{A \in \mathbb{R}^{n \times n}} d\mu(A) \mathcal{S}(A)}.
 \end{equation}
 
-In order to classify the properties of this process according to network architecture, we consider cases where the condition $\adj(G_A) = \adj(G_{A'})$ holds, which results in an analogous processes defined on each $G$-class $[G] \in \mathcal{F}/G$ given by
+We would like to determine whether selection for dynamical robustness would result in a preference for the maintenance of one kind of network architecture relative to another. In order to then classify the properties of this process according to network architecture, we consider cases where the condition $\adj(G_A) = \adj(G_{A'})$ holds, which results in an analogous processes defined on each $G$-class $[G] \in \mathcal{F}/G$ given by
 $$
 P([A]^T \mid G_A {=} G) = \sum_{ \{ f^T \mid f_i^T \in [A]_i^T \} } P(f^T)
 $$
@@ -183,14 +183,17 @@ R(G,S,\mu,\tau)  =
 \end{equation}
 Comparing the values of $R$ for each $G$-class in $\mathcal{F}/G$ places a partial ordering on network architectures, $G$, which allows for the determination of which network architectures would be expected to be enriched relative to others in an evolutionary process where selection is imposed in a manner that results in a bias toward higher $R$ values.
 
-\section{Abstracting network architectures to their strongly connected components and the symmetries of robustness}
-The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by mapping the interaction graph to the network of strongly connected components (SCCs). A SCC of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The SCCs of some examples of three variable systems are outlined in \reffigscc{} along with their adjacency matrices.
+\section{Properties of network architecture}
 
-The map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, results in a decomposition of $G$ into its SCCs. Each node of $\hier (G)$ corresponds to a strongly connected component of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of strongly connected components, $\hier (G)$ is acyclic.
+\subsection{Abstracting network architectures to their strongly connected components}
+We will ultimately find that it is possible to decompose the computation of dynamical robustness from \ref{eq:robustnessfromstoch} over a certain kind of modular structure intrinsic to any network architecture. Here we introduce the manner in which such a decomposition can be consistently performed for any architecture. The network architecture represented in terms of the adjacency matrix, \ref{eq:lininterdepadj}, can be abstracted into modules by decomposing the interaction graph into its associated network of strongly connected components (SCCs). A SCC of a graph is a maximal subset of vertices where each vertex within the subset can be reached from any other \cite{Cormen2009}. The SCCs of some examples of three variable systems are outlined in \reffigscc{} along with their adjacency matrices.
 
-One can also perform this construction in the opposite direction.  Start with a directed acyclic graph $H$.  To each node $n$ of $H$ associate
+The map from the interaction graph of a network to its SCCs, referred to as $\hier$ in \ref{fig:modsccsym}, results in a decomposition of $G$ into its SCCs. Each node of $\hier (G)$ corresponds to a SCC of $G$. There is an edge from the node corresponding to component $C$ to the node corresponding to component $C'$ if and only if there exists a link from some vertex in $C$ to some vertex in $C'$ in $G$.  Because of the maximality of SCCs, $\hier (G)$ is acyclic for any $G$.
+
+One can also perform this construction in the opposite direction to produce one of the graphs consistent with a given specification of SCCs and their connectivity.  Start with a directed acyclic graph $H$.  To each node $n$ of $H$ associate
 a strongly connected graph $C_n$.  To each link $(i,j)$ of $H$ associate a non-empty subset of $\Vertex(C_i) \times \Vertex(C_j)$.  The result will be a graph $G$ such that $\hier(G) = H$ and furthermore, every graph $G$ such that $\hier(G) = H$ can be obtained in this manner.
 
+\subsection{Symmetries of SCCs and their relationship to robustness}
 This map $\hier$ is many-to-one and so there is a large class of
 operations which leaves $\hier(G)$ invariant for a given graph $G$ \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated.
 For instance, we may interchange the positions of the strongly
@@ -199,8 +202,10 @@ connected components relative to each other \reffighiertransformations$a$.  Leav
 Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries of $\hier$ are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph.
 
 \section{Derivation of the relationship between network architecture and robustness}
-Now we derive an analytical expression for dynamical robustness, $R$, of a network in terms of its interaction graph, $G$, as a weighted average of the robustness, $R_{\alpha}$, of the SCCs, $C_{\alpha}$, the corresponding number of links within each SCC, $d_{\alpha}$, and the number of links between the SCCs, $l$ to give $d = l + \sum_{\alpha} d_{\alpha}$. The result ultimately holds for the case of simultaneously perturbing any number of elements of the Jacobian. To anchor the intuition before stating the more general result, we derive the expression for the case of perturbing a single element at each timestep of the process.
-\subsection{Independent modification process to individual network interactions}
+Here we show that dynamical robustness is maximized by the most hierarchical of network architectures. In doing so, we restrict to a set of graphs which has the same SCCs but may have different links between the components, consider a stochastic process as a simple model for evolution that independently resamples individual elements of Jacobian matrices, and maximize robustness in that context.
+
+We demonstrate that the Jacobian matrix associated to a system at a fixed point is stable in the sense of \ref{eq:stabeval} if and only if each of the blocks corresponding to its SCCs are all independently stable. We derive an analytical expression for dynamical robustness, $R$, of a network in terms of its interaction graph, $G$, as a weighted average of the dynamical robustness values, $R_{\alpha}$, of the SCCs, $C_{\alpha}$, the corresponding number of links within each SCC, $d_{\alpha}$, and the number of links between the SCCs, $l$ to give a total connectivity $d = l + \sum_{\alpha} d_{\alpha}$. The network architecture having $l=l_{max}$ is the most hierarchical one. Comparing the robustness of a network architecture having $l = l_{max}$ to any other network architecture having any other value of $l$, we show that the most hierarchical network architecture maximizes dynamical robustness. The result ultimately holds for those processes involving simultaneous perturbation of any number of elements of the Jacobian. To anchor the intuition before stating the more general result, we derive the expression for the case of perturbing a single element at each timestep of the process.
+\subsection{Decomposition of stability over SCCs}
 Let the index $i$ range over the non-zero entries $a_i$ of $A$. The entries of the Jacobian are sampled independently from a generic probability distribution $\rho_i$ for each entry. Under this assumption then
 \begin{equation}\label{eq:singleresamplemutau}
 \begin{aligned}
@@ -221,6 +226,8 @@ Since the determinant of a triangular matrix equals the product of the determina
 \end{equation}
 where $\pi_{C_{\alpha}}(A)$ denotes the projection of the matrix $A$ onto the SCC $C_{\alpha}$.
 
+\subsection{General computation of dynamical robustness}
+
 To relate the robustness of a graph to the robustness of its SCCs, we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessfromstoch}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct strongly connected components.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
 \begin{widetext}
 \begin{equation}\label{eq:robustncessforsccs}
@@ -238,7 +245,7 @@ To relate the robustness of a graph to the robustness of its SCCs, we substitute
 {\begin{matrix}\int \prod\limits_{k \in C_\alpha} da_k\,\rho(a_k) \mathcal{S}(\pi_{C_{\alpha}}(A)) \times \\
  \prod_{C_\beta \in \hier(G) \setminus C_\alpha}
    \int \prod\limits_{h \in C_\alpha} da_h,\rho(a_h) \mathcal{S}(\pi_{C_{\beta}}(A)) \times \\
- \prod\limits_{l \in L} \int da_l\,\rho(a_l) \end{matrix}} \\
+ \prod\limits_{l \in L} \int da_l\,\rho(a_l) \end{matrix}} \\[1em]
 &= \frac{\int \prod\limits_{k \in C_\alpha} da_k\,d{a'}_k\,\rho(a_k)
     \rho_i({a'}_i) \prod\limits_{j \in C_\alpha \setminus i} \delta ({a'}_j - a_j)
     \mathcal{S}(\pi_{C_{\alpha}}(A)) \mathcal{S}(\pi_{C_{\alpha}}(A'))}
@@ -272,8 +279,11 @@ For each $C_{\alpha} \in \hier(G)$, there will be $d_\alpha$ values of $i$ such 
 R = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
 \end{equation}
 Here $R_\alpha$ is shorthand for $R(C_\alpha,S,\mu_\alpha,\tau^{(1)}_\alpha)$ and $R$ is shorthand for $R(G,S,\mu,\tau^{(1)})$.
+
+\subsection{Example computation of robustness}
 Examples of vector fields that correspond to the sampling of Jacobian matrices used in the computation of robustness for particular examples are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} shows a schematized version of \ref{eq:robustnessbygraph} for the case of perturbing a single element at a time  (see \reffigscc$\,$ for examples demonstrating this expression). For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat} up to sampling error.
 
+\subsection{Most hierarchical network architecture maximizes robustness}
 Examining this expression noting that $R_{\alpha}$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R$.  Given two connected components $C_{\alpha}$ and $C_{\beta}$ with $v_{\alpha}$ and $v_{\beta}$ nodes respectively, we have a maximum of $v_{\alpha} v_{\beta}$ links going from $C_{\alpha}$ to $C_{\beta}$.  Hence, $l \le \sum_{(\alpha,\beta) \in \hier(G)} v_{\alpha} v_{\beta}$.  Since every acyclic digraph can be embedded into a totally ordered
 set, we may assume without loss of generality that our components have
 been ordered in a way such that, if $(\alpha,\beta) \in \hier(G)$, then $\alpha <
@@ -297,7 +307,7 @@ R(G_{\mathrm{max}}) =
 % where $R(G_{\mathrm{max}},S,\mu,\tau) = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 %This bound is attained by $G_{\mathrm{max}}$.
 % $\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_1 = R_{\mathrm{max}}(C_1, \ldots C_n)$.
-\subsection{Modifying multiple interactions simultaneously}
+\subsection{Simultaneous perturbation of multiple interaction strengths}
 This argument also works when relationships between multiple system components are perturbed simultaneously,
 although the notation becomes more complicated.  Suppose that we
 resample $m$ interactions.  Then the analogue of \ref{eq:singleresamplemutau} is
@@ -344,6 +354,8 @@ v_\alpha)^2 - \sum_{\alpha=1}^n v_\alpha^2)$, which is attained when $\hier(G_{m
 G_{tot}$.  Hence, we conclude that $R(G, S, \mu, \tau^{(m)}) \le
 R(G_{\mathrm{max}}, S, \mu, \tau^{(m)})$.
 
-This implies that the interaction graphs for systems that are the most robust will maximize the number of links between SCCs as well as the overall number of SCCs with respect to a particular system size. This analytical result predicts that any network whose associated dynamical system has the interaction graph equivalent to the total ordering will be more robust than those associated to any of the other interaction graphs in \reffigscc{}. The graph associated to the total ordering is the most hierarchical network architecture for any given number of system components like that of \reffigscc{} top for three component systems where the \emph{highest} component in the hierarchy has directed links to all other nodes in the network, the second highest component has directed links to all other nodes in the network except the highest one, \emph{et cetera} (\refsupp{}). Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
+This implies that the interaction graphs for systems that are the most robust will maximize the number of links between a given set of SCCs. This analytical result predicts that any network whose associated dynamical system has the interaction graph equivalent to the total ordering will be more robust than those associated to any of the other interaction graphs in \reffigscc{}. The graph associated to the total ordering is the most hierarchical network architecture for any given number of system components like that of \reffigscc{} top for three component systems where the \emph{highest} component in the hierarchy has directed links to all other nodes in the network, the second highest component has directed links to all other nodes in the network except the highest one, \emph{et cetera} (\refsupp{}). Because this result is purely topological in nature, it does not depend at all upon any particular details such as the probability distribution from which the component interaction strengths are sampled or the size of the system. The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
+
+\subsection{Demonstration of the analytical relationship between hierarchy and robustness}
 
 To test the prediction of the analytical results in \ref{eq:robschematic} and \ref{eq:robustnessmultiple}, we computed approximations to the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting components (see \refsupp{} \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis of the symmetries of robustness, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
