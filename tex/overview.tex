@@ -99,8 +99,8 @@ An example with two members of $\mathcal{F}$ from each of four different equival
 
 % \subsection{Overview}
 \subsection{Interaction graphs encoding network architecture}
-The interactions among variables in a dynamical model for any network can be represented in terms of a global interaction graph (\ref{fig:biomodelexamples} top row).
-For a general system $X \in \mathcal{D}$ the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ if $F_i \hbox{ depends on } x_j$ and $0$ if $F_i \hbox{ does not depend on } x_j$. These two conditions on global system interactions are expressed respectively for all $\vec{x}$ in terms of elements of the Jacobian matrix as $\frac{\partial F_i}{\partial x_j}(\vec{x}) \neq 0$ and $\frac{\partial F_i}{\partial x_j}(\vec{x}) = 0$.
+We are interested in the manner in which interactions among system variables are encoded by a directed graph associated to the system or some property of it. Strictly speaking, the interactions among variables in a dynamical model for any network can be represented in terms of a global interaction graph (\ref{fig:biomodelexamples} top row).
+For a general system $X \in \mathcal{D}$ the directed graph $G_X$ that describes the manner in which each of the variables depends upon one another is given by the adjacency matrix $\adj(G_X)$ where $\adj(G_X)_{ij}$ is $1$ if $F_i \hbox{ depends on } x_j$ and $0$ if $F_i \hbox{ does not depend on } x_j$. These two conditions on global system interactions are expressed locally for all $\vec{x}$ in terms of elements of the Jacobian matrix as $\frac{\partial F_i}{\partial x_j}(\vec{x}) \neq 0$ and $\frac{\partial F_i}{\partial x_j}(\vec{x}) = 0$.
 %  \begin{displaymath}
 %    \adj(G_X)_{ij} = \left\{
 %      \begin{array}{ll}
@@ -119,10 +119,10 @@ We can also associate a local interaction graph $G_A$ given by an adjacency matr
      \end{array}.
    \right.
 \end{equation}
-In general, the graph $G_A$ is a subgraph of $G_X$, however, $G_A$ is almost always equivalent to $G_X$ (\refsupp{}). We define the connectivity to be equal to the number of edges in $G_A$, which is equivalent to summing up the number of non-zero entries of $\adj(G_A)$.
+In general, the graph $G_A$ is a subgraph of $G_X$, however, $G_A$ is equal to $G_X$, and thus $\adj(G_A) = \adj(G_X)$, for the classes of systems of interest here (see \refsupp{} \ref{sec:reactionnetjacobian}). We define the connectivity to be equal to the number of edges in $G_A$, which is equivalent to summing up the number of non-zero entries of $\adj(G_A)$.
 These interaction graphs can be viewed as deriving from the combination of system components that accept a given pattern of inputs and produce a given pattern of outputs (\reffigexamplesystemmodules).
 
-Each distinct directed graph $G$, of which there are $k=2^{n(n-1)}$ that could be associated to the interactions in a model defined on $n$ variables, selects a subset of $\mathcal{F} / {\sim}$ (see~\ref{fig:robustnessprocess}C)
+Each distinct labeled directed graph $G$ (of which there are $k=2^{n(n-1)}$) that could be associated to the interactions in a model defined on $n$ variables, selects a subset of $\mathcal{F} / {\sim}$ (see~\ref{fig:robustnessprocess}C)
 \begin{equation}\label{eq:jacgrapheqs}
 [G] = \left\{ [A] \; | \; G_A = G \right\}.
 \end{equation}
