@@ -11,7 +11,7 @@ where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functi
 \begin{equation}\label{eq:setdynsys}
 \mathcal{D'} = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^{n'} \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
 \end{equation}
-The space of all $F$ is too large to precisely define probabilities over, so we consider various subspaces $\mathcal{D} \subset \mathcal{D}'$. In some cases these may be given by parametrized models with a single fixed form of $F$ and then only $\vec{p}$ is allowed to vary.
+The space of all possible $F$ may be too large to precisely define probabilities over, in which case it is possible to consider various subspaces $\mathcal{D} \subset \mathcal{D}'$. In some cases these may even be given by parametrized models with a single fixed form of $F$ and then varying $\vec{p}$ alone would be sufficient to vary within that class of dynamical systems.
 
 Fixed points are the simplest class of solutions to the dynamical system characterizing its long-term behavior. If $\vec x$ is a fixed point (i.e. $F_i(\vec{x})=0$ for all $i$), we
 may proceed to ask whether it is dynamically stable.
@@ -147,7 +147,7 @@ as visualized in \ref{fig:robustnessprocess}B. These changes can alter the stabi
 $$
 P(s^T) = \sum_{ \{ A^T \mid \mathcal{S}(A_i^T) = s_i^T \} } P(A^T)
 $$
-for each history of length $T$, $s^T = ( s_1, s_2, \ldots, s_T ) \in \{0,1\}^T$ where $s=1 \equiv S,\, s=0 \equiv U$ as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we consider a process whereby perturbations applied to a given dynamical system and fixed point associated to a stable Jacobian matrix $A$ lead to another Jacobian matrix $A'$.  This corresponds to an ensemble of fixed points of dynamical systems where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over continguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
+for each history of length $T$, $s^T = ( s_1, s_2, \ldots, s_T ) \in \{0,1\}^T$ where $s=1 \equiv S,\, s=0 \equiv U$ as visualized in \ref{fig:robustnessprocess}A and B. In order to model this we consider a process whereby perturbations applied to a given dynamical system and fixed point associated to a stable Jacobian matrix $A$ lead to another Jacobian matrix $A'$.  This corresponds to an ensemble of fixed points of dynamical systems where each model in the ensemble may otherwise be defined in terms of a different collection of rate functions $F'$, vector of parameters ${\vec{p}}\,'$, or environmental conditions restricting access to $\vec{x}^{0'}$ (\refsupp{}). We then ask what is the probability, given $A$ is a stable matrix, that $A'$ is also a stable matrix. This quantifies the intuitive statement that, over evolutionary timescales, it is not enough for a system to be stable, but rather that it have a reasonably high probability of remaining stable over contiguous timeframes. In terms of a history $s^T$ over the states specifying the stability property, $\mathcal{S}$, this is given by
 $$
 r = \frac{\sum_{t=0}^{T-1} s_{t+1}^T s_{t}^T}{\sum_{t=0}^{T-1} s_{t}^T}.
 $$
@@ -159,12 +159,14 @@ R(S,\mu,\tau) = E[r] \approx \frac{\sum_{s,s'} \mu(s) \tau(s' \mid s)}{\sum_{s=1
 \end{equation}
 This conditional probability corresponds to the parameter $R$ of the two-state process depicted in \ref{fig:robustnessprocess}A, and it is what we refer to as dynamical robustness.
 
+Conceptually, one might consider the quantity defined by \ref{eq:robustnessfromstoch} to be related to structural stability \cite{Smale1967}, but its definition differs in several important ways (see \ref{sec:dynrobustandstructstab}). Briefly, structural stability is a qualitative, global property that distinguishes dynamical systems whose associated vector field topologies are invariant to \emph{any} sufficiently small perturbation from those whose topologies undergo some change under any such perturbations. Dynamical robustness, on the other hand, is a quantitative, local property that specifies the probability of the stability of a fixed point undergoing a transformation from stable to unstable when the system is subjected to, potentially large, perturbations in one or a few interactions among system variables.
+
 In terms of Jacobian matrices $A$ and $A'$, if the underlying process $P([A]^T)$ has analogous limits
 $$\mu(A) = \lim_{t,T \rightarrow \infty} P(A_t^T=A)$$
 and
 $$\tau(A' \mid A) = \lim_{t,T \rightarrow \infty} P(A_{t+1}^T = A' \mid A_t^T = A)$$
 for $A,A' \in \mathbb{R}^{n \times n}$, \ref{eq:robustnessfromstoch} becomes
-\begin{equation}
+\begin{equation}\label{eq:robustnessonjacobians}
 R(S,\mu,\tau) = \frac{\int_{A,A' \in \mathbb{R}^{n \times n}} d\mu(A) d\tau(A' \mid A) \mathcal{S}(A) \mathcal{S}(A')}{\int_{A \in \mathbb{R}^{n \times n}} d\mu(A) \mathcal{S}(A)}.
 \end{equation}
 
