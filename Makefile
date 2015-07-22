@@ -1,4 +1,4 @@
-.PHONY: default copybib clean cleanall test
+.PHONY: default copybib copydownloadsbib linkbib dropbox arxiv thesis latexdiff clean cleanall test
 
 #---------------------------------------------
 # Define variables
@@ -22,6 +22,8 @@ TEMPLATE = plos2009.bst
 FIGFILES = $(shell grep -v '^%' tex/*.tex | grep -ohP 'fig/.*(?=\})')
 
 TEXFILES = $(shell ls tex/*.tex)
+
+PREVIOUSCOMMIT = 831a8ec5
 
 #---------------------------------------------
 # Default target
@@ -70,6 +72,11 @@ thesis:
 	latexpand $(TOPTEX) > $(PROJECTNAME).tex
 	sed -i 's/\\makeatletter{}//g' $(PROJECTNAME).tex
 	cp $(FIGFILES) ~/projects/thesis/classicthesis/fig
+
+# run as make latexdiff PREVIOUSCOMMIT="commit-hash"
+# to diff with a different commit
+latexdiff:
+	git-latexdiff --ignore-latex-errors --latexmk --ignore-makefile --ln-untracked --main $(TOPTEX) $(PREVIOUSCOMMIT) HEAD
 
 $(BIBFILES):
 	copybib
