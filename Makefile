@@ -75,6 +75,7 @@ thesis:
 
 # run as make latexdiff PREVIOUSCOMMIT="commit-hash"
 # to diff with a different commit
+# see: https://gitlab.com/git-latexdiff/git-latexdiff
 latexdiff:
 	git-latexdiff --ignore-latex-errors --latexmk --ignore-makefile --ln-untracked --main $(TOPTEX) $(PREVIOUSCOMMIT) HEAD
 
