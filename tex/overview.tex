@@ -93,14 +93,14 @@ Evaluation of the stability criterion occurs on a space of two states inducing a
 where $1$ stands for $S$ or stable and $0$ stands for $U$ or unstable. The stability criterion defines an equivalence relation on the set of all Jacobian matrices $A \in \mathbb{R}^{n \times n}$ deriving from fixed points on $n$ variables that simply splits the set into two classes $S=\{ A \, | \, A \hbox{ is stable}  \}$ and $U~=~\{ A \, | \, A \hbox{ is unstable} \}$.
 
 \subsection{Equivalence classes of systems associated to Jacobian Matrices}
-Jacobian matrices define an equivalence relation, $\sim$, on fixed points given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}\,',\vec{x}^{0'}) $ if and only if
+We would ultimately like to determine the probability of a stable system remaining stable in the context of evolution modeled as a stochastic process operating on a large set of dynamical systems. Any given Jacobian matrix, which is what characterizes the stability of a system near a given fixed point, does not refer to a single dynamical system, but rather a set of fundamentally distinct dynamical systems from which that Jacobian matrix could have derived. More precisely, Jacobian matrices define an equivalence relation, $\sim$, on fixed points, $\mathcal{F}$, given by $(F,\vec{p},\vec{x}^0) \sim (F',\vec{p}\,',\vec{x}^{0'}) $ if and only if
 \begin{equation}\label{eq:jaceqrel}
 \left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} =
 \left. \frac{\partial F'(\vec{x},\vec{p}\,')}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^{0'}}.
 \end{equation}
 This relation then partitions the set of all fixed points into equivalence classes $\mathcal{F}/{\sim}$, where the class $[A]$ associated to Jacobian matrix $A \in \mathbb{R}^{n \times n}$ is
 \begin{equation}\label{eq:jaceqs}
-[A] = \left\{ (F,\vec{p},\vec{x}^0) \; | \; \left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} = A \right\}.
+[A] = \left\{ (F,\vec{p},\vec{x}^0) \; \Bigg| \; \left. \frac{\partial F(\vec{x},\vec{p})}{\partial \vec{x}} \right|_{\vec{x} = \vec{x}^0} = A \right\}.
 \end{equation}
 An example with two members of $\mathcal{F}$ from each of four different equivalence classes $[A_1]$, $[A_2]$, $[A_3]$, and $[A_4]$ of $\mathcal{F}/{\sim}$ is shown in \ref{fig:robustnessconcept}.
 
