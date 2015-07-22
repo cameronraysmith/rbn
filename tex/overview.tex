@@ -41,13 +41,13 @@ F(\vec{x}^0,\vec{p}) &= 0
 % a_{ij} = \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0}.
 % $$
 \subsection{Stability analysis of biological networks}
-To determine stability, we use the Taylor series expansion of the equations of motion \ref{eq:eom} about the fixed point $\vec{x}^0$ where $\vec{y} = \vec{x} - \vec{x}^0$ by
+To determine stability, we use the Taylor series expansion of the equations of motion, \ref{eq:eom}, about the fixed point $\vec{x}^0$ where $\vec{y} = \vec{x} - \vec{x}^0$ given by
 \begin{equation}\label{eq:taylorseries}
 \begin{aligned}
 \frac{dx_i(t)}{dt} \approx & F_i(\vec{x}^0)
 + \sum_{j=1}^{N} \left. \frac{\partial F_i}{\partial x_j} \right|_{\vec{x} = \vec{x}^0} y_j\\
 & + \frac{1}{2}\sum_{j,k=1}^{N} \left. \frac{\partial^2 F_i}{\partial x_j \partial x_k} \right|_{\vec{x} = \vec{x}^0} y_j y_k + \cdots
-\end{aligned}
+\end{aligned}.
 \end{equation}
 The zeroth order term vanishes since $F_i(\vec{x}^0)=0$ by definition and thus neglecting terms higher than first order from \ref{eq:taylorseries} results in
 % \begin{equation*}
