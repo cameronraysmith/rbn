@@ -208,8 +208,7 @@ The relationship between $G$ and $\hier(G)$ for all $G$ with a given number of n
 \subsection{Symmetries of SCCs and their relationship to robustness}
 This map $\hier$ is many-to-one and so there is a large class of
 operations which leaves $\hier(G)$ invariant for a given graph $G$ \reffighiertransformations{}. These three symmetries, \reffigscc{}, represent transformations that can be performed on the interaction graph that do not change the network of SCCs to which it is associated.
-For instance, we may interchange the positions of the strongly
-connected components relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.
+For instance, we may interchange the positions of the SCCs relative to each other \reffighiertransformations$a$.  Leaving the components fixed, we may move links between nodes in a component \reffighiertransformations$b$ or between components, or even add or delete links \reffighiertransformations$c$.
 
 Symmetries with respect to some property of the system are characterized by the ability to interchange these modules or their connectivity without changing that property. Two of these three intrinsic symmetries of $\hier$ are also symmetries with respect to dynamical robustness. \ref{fig:robustnesssymmetries} shows an example of these latter symmetries applied to a specific interaction graph. The collections of networks that have equivalent dynamical robustness characterized by its symmetries allow for a classification of neutral networks with respect to any process in which maximal robustness is selected for.
 
@@ -240,7 +239,7 @@ where $\pi_{C_{\alpha}}(A)$ denotes the projection of the matrix $A$ onto the SC
 
 \subsection{General computation of dynamical robustness}
 
-To relate the robustness of a graph to the robustness of its SCCs, we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessbygraph}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct strongly connected components.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
+To relate the robustness of a graph to the robustness of its SCCs, we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessbygraph}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct SCCs.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
 \begin{widetext}
 \begin{equation}\label{eq:robustncessforsccs}
 \begin{aligned}
@@ -343,7 +342,7 @@ m_0 \le \sum_{i=1}^{n-1} \sum_{j=i+1}^n \ell_{ij} \quad\&\quad
 \end{widetext}
 Then, given $(m_0, m_1, \ldots, m_n) \in M$, there are ${m \choose
 m_0, m_1, \ldots. m_n}$ ways of choosing $m_i$ links from $C_i$ and
-$m_0$ links between strongly connected components.  Hence, our
+$m_0$ links between SCCs.  Hence, our
 weighted average becomes
 \begin{widetext}
 \begin{equation}\label{eq:robustnessmultiple}
@@ -358,8 +357,7 @@ R(G, S, \mu, \tau^{(m)}) =
 
 As before, since $R(C_\alpha, S, \mu, \tau^{(m_i)}) \le 1$, we may
 increase $R(G, S, \mu, \tau^{(m)})$ by increasing the maximum
-possible value of $m_0$ while keeping the strongly connected
-components the same.  Again, if we fix $\hier(G)$, the maximum
+possible value of $m_0$ while keeping the SCCs the same.  Again, if we fix $\hier(G)$, the maximum
 possible value of $m_0$ is $\sum_{(\alpha,\beta) \in \hier(G)} v_\alpha v_\beta$
 whereas, if we allow it to vary, the maximum is $\frac{1}{2} ((\sum_{\alpha=1}^n
 v_\alpha)^2 - \sum_{\alpha=1}^n v_\alpha^2)$, which is attained when $\hier(G_{max}) =
