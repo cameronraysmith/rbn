@@ -7,9 +7,9 @@ whose components are solutions to the arbitrary first order system
 \begin{equation}\label{eq:eom}
 \frac{dx_i(t)}{dt} = F_i(\vec{x}(t), \vec{p}), \; (i=1,\ldots,n)
 \end{equation}
-where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^{n'}$ is the vector of $n'$ parameters of the $F_i$. These parameters typically represent reaction rates or interaction strengths in chemical, gene-regulatory and ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (x_1, \ldots, x_n)$, $\vec{p}=(r_1,\ldots,r_n,b_{11},\ldots,b_{nn})$, and $F_i = r_i x_i + \sum_{j=1}^{n} b_{ij} x_i x_j$. The set of all dynamical systems, $\mathcal{D}$, for a given number of state variables $n$ and a given number of parameters $n'$, is then
+where $F=\{F_1,\ldots,F_i,\ldots,F_n\}$ represent, potentially nonlinear, functions of the given vector of state variables and $\vec{p} \in \mathbb{R}^{n'}$ is the vector of $n'$ parameters of the $F_i$. These parameters typically represent reaction rates or interaction strengths in chemical, gene-regulatory and ecological networks. For example, in the Lotka-Volterra model in \ref{fig:biomodelexamples}, $\vec{x} = (x_1, \ldots, x_n)$, $\vec{p}=(r_1,\ldots,r_n,b_{11},\ldots,b_{nn})$, and $F_i = r_i x_i + \sum_{j=1}^{n} b_{ij} x_i x_j$. The set of all dynamical systems, $\mathcal{D}'$, for a given number of state variables $n$ and a given number of parameters $n'$, is then
 \begin{equation}\label{eq:setdynsys}
-\mathcal{D'} = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^{n'} \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
+\mathcal{D}' = \{ (F(-,\vec{p}),\vec{p}) | F \colon \mathbb{R}^n \times \mathbb{R}^{n'} \rightarrow \mathbb{R}^n, \vec{p} \in \mathbb{R}^s \}.
 \end{equation}
 The space of all possible $F$ may be too large to precisely define probabilities over, in which case it is possible to consider various subspaces $\mathcal{D} \subset \mathcal{D}'$. In some cases these may even be given by parametrized models with a single fixed form of $F$ and then varying $\vec{p}$ alone would be sufficient to vary within that class of dynamical systems.
 
@@ -19,9 +19,16 @@ Intuitively, dynamic stability means that, if one chooses the initial
 conditions sufficiently close to the fixed point, the solution will
 stay nearby.  Physically, this is important because,
 if a fixed point ${\vec x}^0$ is unstable, we have zero probability of
-observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $x_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{n} b_{ij} x_j = 0$. The set of all such fixed points, $\mathcal{F}$, is then
+observing the solution ${\vec x}(t) = {\vec x}^0$ in the absence of coupling to another system. The Lotka-Volterra model has two fixed points: the trivial one of all zero species $x_i=0$ and the other given implicitly by $r_i + \sum_{j=1}^{n} b_{ij} x_j = 0$. The set of all such fixed points, $\mathcal{F}$, for a collection of dynamical systems $\mathcal{D}$ is then
 \begin{equation}\label{eq:setfixedpoints}
-\mathcal{F} = \{ (d,\vec{x}^0) \; | \; d=(F(-,\vec{p}),\vec{p}) \in \mathcal{D}, \vec{x}^0 \in \mathbb{R}^n,F(\vec{x}^0,\vec{p})=0 \}.
+\mathcal{F} = \left\{ (d,\vec{x}^0) \; \left| \;
+\begin{aligned}
+d = (F(-,\vec{p}),\vec{p}) &\in \mathcal{D}, \\
+\vec{x}^0 &\in \mathbb{R}^n,\\
+F(\vec{x}^0,\vec{p}) &= 0
+\end{aligned}
+\right.
+\right\}.
 \end{equation}
 
 % To determine stability, we linearize the equations of motion (\refsupp{}) about the
