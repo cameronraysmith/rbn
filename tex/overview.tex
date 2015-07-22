@@ -220,7 +220,7 @@ We demonstrate that the Jacobian matrix associated to a system at a fixed point 
 These results ultimately hold for those processes involving simultaneous perturbation of any number of elements of the Jacobian. To anchor the intuition before stating the more general result, we derive the expression for the case of perturbing a single element at each timestep of the stochastic process being used as a simplistic model of evolution.
 
 \subsection{Decomposition of stability over SCCs}
-Let the index $i$ range over the non-zero entries $a_i$ of $A$. The entries of the Jacobian are sampled independently from a generic probability distribution $\rho_i$ for each entry. Under this assumption then
+We begin by expressing the stability of a network in terms of the stabilities of its SCCs. Let the index $i$ range over the non-zero entries $a_i$ of $A$. The entries of the Jacobian are sampled independently from a generic probability distribution $\rho_i$ for each entry. Under this assumption then
 \begin{equation}\label{eq:singleresamplemutau}
 \begin{aligned}
 \mu(A) &= \prod_i \rho_i(a_i),\\
