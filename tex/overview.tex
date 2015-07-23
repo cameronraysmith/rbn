@@ -240,9 +240,9 @@ Since the determinant of a triangular matrix equals the product of the determina
 \end{equation}
 where $\pi_{C_{\alpha}}(A)$ denotes the projection of the matrix $A$ onto the SCC $C_{\alpha}$.
 
-\subsection{General computation of dynamical robustness}
+\subsection{Decompositon of dynamical robustness over SCCs}
 
-To relate the robustness of a graph to the robustness of its SCCs, we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessbygraph}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct SCCs.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
+We use the fact that stability decomposes over the SCCs of a network to relate the robustness of a network to the robustness of its SCCs. To derive this relationship we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessbygraph}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct SCCs.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
 \begin{widetext}
 \begin{equation}\label{eq:robustncessforsccs}
 \begin{aligned}
@@ -294,11 +294,37 @@ R = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
 \end{equation}
 Here $R_\alpha$ is shorthand for $R(C_\alpha,S,\mu_\alpha,\tau^{(1)}_\alpha)$ and $R$ is shorthand for $R(G,S,\mu,\tau^{(1)})$.
 
-\subsection{Example computation of robustness}
-Examples of vector fields that correspond to the sampling of Jacobian matrices used in the computation of robustness for particular examples are shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} shows a schematized version of \ref{eq:robustnessbygraph} for the case of perturbing a single element at a time  (see \reffigscc$\,$ for examples demonstrating this expression). For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat} up to sampling error.
+\subsection{Example computation of dynamical robustness}
+Before proceeding to demonstrate which network architectures maximize dynamical robustness we illustrate how the result of the previous section applies to simple examples. Dynamical robustness can be computed for systems like those that derive from the sampling of Jacobian matrices shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} is a schematized version of \ref{eq:robustnessbygraph} for the case of perturbing a single element at a time.  \reffigscc$\,$ shows examples demonstrating the usage of this expression. For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat3} up to sampling error.
+
+Due to the symmetries of robustness, there are two more network architectures having the same SCCs but different dynamical robustness values. Their values for dynamical robustness are given for $l=0,1,2$ in
+$$
+R = \frac{l+1 \times 0.5 + 4 \times 0.62}{l+1+4}.
+$$
+Inspection of this formula demonstrates that dynamical robustness takes on higher values for $l=2$ than $l=1$ and also for $l=1$ than $l=0$. These correspond to network architectures specified by the following adjacency matrices
+\begin{equation}
+\begin{aligned}
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}, & \;\; l = 0, \;\; & R = 0.596,\\
+\begin{pmatrix}
+1 & 1 & 0\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}, & \;\; l = 1, \;\; & R = 0.663\\
+\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}, & \;\; l = 2, \;\; & R = 0.711,
+\end{aligned},
+\end{equation}
+where the SCCs correspond to the upper $1 \times 1$ and lower $2 \times 2$ blocks and the other entries correspond to $l$, the links between the SCCs. Thus, in this simple case, we see that maximizing the number of links between SCCs maximizes dynamical robustness.
 
 \subsection{Most hierarchical network architectures maximize dynamical robustness}
-Here we show that dynamical robustness is maximized for a given collection of SCCs by maximizing the number of links between them. This is accomplished by demonstrating that any graph $G$ with fewer than the maximum, $l_{\mathrm{max}}$, of links between the given collection of SCCs must have a lower dynamical robustness than the graph, $G_{\mathrm{max}}$, with $l=l_{\mathrm{max}}$ and that this $G_{\mathrm{max}}$ is indeed the graph $G_{\mathrm{tot}}$ which gives the total ordering on the SCCs. Examining the expression in \ref{eq:robschematic} and noting that $R_{\alpha}$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R$.  Given two connected components $C_{\alpha}$ and $C_{\beta}$ with $v_{\alpha}$ and $v_{\beta}$ nodes respectively, we have a maximum of $v_{\alpha} v_{\beta}$ links going from $C_{\alpha}$ to $C_{\beta}$.  Hence, $l \le \sum_{(\alpha,\beta) \in \hier(G)} v_{\alpha} v_{\beta}$.  Since every acyclic digraph can be embedded into a totally ordered
+Following the examples of the previous section, here we show, in general, that dynamical robustness is maximized for a given collection of SCCs by maximizing the number of links between them. This is accomplished by demonstrating that any graph $G$ with fewer than the maximum, $l_{\mathrm{max}}$, of links between the given collection of SCCs must have a lower dynamical robustness than the graph, $G_{\mathrm{max}}$, with $l=l_{\mathrm{max}}$ and that this $G_{\mathrm{max}}$ is indeed the graph $G_{\mathrm{tot}}$ which gives the total ordering on the SCCs. Examining the expression in \ref{eq:robschematic} and noting that $R_{\alpha}$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R$.  Given two connected components $C_{\alpha}$ and $C_{\beta}$ with $v_{\alpha}$ and $v_{\beta}$ nodes respectively, we have a maximum of $v_{\alpha} v_{\beta}$ links going from $C_{\alpha}$ to $C_{\beta}$.  Hence, $l \le \sum_{(\alpha,\beta) \in \hier(G)} v_{\alpha} v_{\beta}$.  Since every acyclic digraph can be embedded into a totally ordered
 set, we may assume without loss of generality that our components have
 been ordered in a way such that, if $(\alpha,\beta) \in \hier(G)$, then $\alpha <
 \beta$.  Hence, $l \le l_{\mathrm{max}}$ where
