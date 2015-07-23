@@ -324,7 +324,9 @@ Inspection of this formula demonstrates that dynamical robustness takes on highe
 where the SCCs correspond to the upper $1 \times 1$ and lower $2 \times 2$ blocks and the other entries correspond to $l$, the links between the SCCs. Thus, in this simple case, we see that maximizing the number of links between SCCs maximizes dynamical robustness.
 
 \subsection{Most hierarchical network architectures maximize dynamical robustness}
-Following the examples of the previous section, here we show, in general, that dynamical robustness is maximized for a given collection of SCCs by maximizing the number of links between them. This is accomplished by demonstrating that any graph $G$ with fewer than the maximum, $l_{\mathrm{max}}$, of links between the given collection of SCCs must have a lower dynamical robustness than the graph, $G_{\mathrm{max}}$, with $l=l_{\mathrm{max}}$ and that this $G_{\mathrm{max}}$ is indeed the graph $G_{\mathrm{tot}}$ which gives the total ordering on the SCCs. Examining the expression in \ref{eq:robschematic} and noting that $R_{\alpha}$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R$.  Given two connected components $C_{\alpha}$ and $C_{\beta}$ with $v_{\alpha}$ and $v_{\beta}$ nodes respectively, we have a maximum of $v_{\alpha} v_{\beta}$ links going from $C_{\alpha}$ to $C_{\beta}$.  Hence, $l \le \sum_{(\alpha,\beta) \in \hier(G)} v_{\alpha} v_{\beta}$.  Since every acyclic digraph can be embedded into a totally ordered
+Following the examples of the previous section, here we show, in general, that dynamical robustness is maximized for a given collection of SCCs by maximizing the number of links between them. This is accomplished by demonstrating that any graph $G$ with $l < l_{\mathrm{max}}$, that is with fewer than the maximum possible number of links between the given collection of SCCs, must have a lower dynamical robustness than one of the graphs having $l=l_{\mathrm{max}}$, $G_{\mathrm{max}}$, and that this $G_{\mathrm{max}}$ has SCCs related by the graph $G_{\mathrm{tot}}$ which gives the total ordering on those SCCs.
+
+Examining the expression in \ref{eq:robschematic} and noting that $R_{\alpha}$ are all strictly less than one proves that networks maximizing $l$, will also maximize $R$.  Given two connected components $C_{\alpha}$ and $C_{\beta}$ with $v_{\alpha}$ and $v_{\beta}$ nodes respectively, we have a maximum of $v_{\alpha} v_{\beta}$ links going from $C_{\alpha}$ to $C_{\beta}$.  Hence, $l \le \sum_{(\alpha,\beta) \in \hier(G)} v_{\alpha} v_{\beta}$.  Since every acyclic digraph can be embedded into a totally ordered
 set, we may assume without loss of generality that our components have
 been ordered in a way such that, if $(\alpha,\beta) \in \hier(G)$, then $\alpha <
 \beta$.  Hence, $l \le l_{\mathrm{max}}$ where
@@ -348,9 +350,9 @@ R(G_{\mathrm{max}}) =
 %This bound is attained by $G_{\mathrm{max}}$.
 % $\langle R(\hbox{stab} (G_{\mathrm{max}}), \mu') \rangle_1 = R_{\mathrm{max}}(C_1, \ldots C_n)$.
 \subsection{Simultaneous perturbation of multiple interaction strengths}
-This argument also works when relationships between multiple system variables are perturbed simultaneously,
+The results of the previous sections all work when relationships between multiple system variables are perturbed simultaneously,
 although the notation becomes more complicated.  Suppose that we
-resample $m$ interactions.  Then the analogue of \ref{eq:singleresamplemutau} is
+resample $m$ interactions.  Then the analog of \ref{eq:singleresamplemutau} is
 \begin{equation}\label{eq:multipleresamplemutau}
 \begin{aligned}
 \tau^{(m)}(A' \mid A) &= \frac{1}{\binom{d}{m}} \sum_{i_1, \ldots, i_m}
