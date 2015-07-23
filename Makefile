@@ -17,7 +17,7 @@ TOPBBLFILE = $(TOPTEX:.tex=.bbl)
 BIBFILES = bib/books.bib \
 	   bib/papers.bib
 
-TEMPLATE = plos2009.bst
+TEMPLATE = pnas.bst
 
 FIGFILES = $(shell grep -v '^%' tex/*.tex | grep -ohP 'fig/.*(?=\})')
 
