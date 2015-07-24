@@ -242,7 +242,7 @@ where $\pi_{C_{\alpha}}(A)$ denotes the projection of the matrix $A$ onto the SC
 
 \subsection{Decompositon of dynamical robustness over SCCs}
 
-We use the fact that stability decomposes over the SCCs of a network to relate the robustness of a network to the robustness of its SCCs. To derive this relationship we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessbygraph}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct SCCs.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
+In this section we derive \ref{eq:robschematic}, which relates the dynamical robustness of a network to the dynamical robustness' of its SCCs and the number of links that connect distinct SCCs. We use the fact that stability decomposes over the SCCs of a network. More specifically, to derive this relationship we substitute \ref{eq:singleresamplemutau} and \ref{eq:stabfactor} into \ref{eq:robustnessbygraph}, collect factors corresponding to components, decompose integrals into their respective products, collapse integrals over delta distributions, and cancel common factors between numerator and denominator.  Let $L$ denote the set of edges of $G$ that connect distinct SCCs.  Then, if $i \in C_\alpha$ for some SCC $C_\alpha$, we have
 \begin{widetext}
 \begin{equation}\label{eq:robustncessforsccs}
 \begin{aligned}
@@ -292,7 +292,7 @@ For each $C_{\alpha} \in \hier(G)$, there will be $d_\alpha$ values of $i$ such 
 \begin{equation}\label{eq:robschematic}
 R = \frac{l+d_1 R_1 + d_2 R_2 + \cdots}{l+d_1 + d_2 + \cdots}.
 \end{equation}
-Here $R_\alpha$ is shorthand for $R(C_\alpha,S,\mu_\alpha,\tau^{(1)}_\alpha)$ and $R$ is shorthand for $R(G,S,\mu,\tau^{(1)})$.
+Here $R_\alpha$ is shorthand for $R(C_\alpha,S,\mu_\alpha,\tau^{(1)}_\alpha)$ and $R$ is shorthand for $R(G,S,\mu,\tau^{(1)})$. \ref{eq:robschematic} demonstrates just as stability decomposes over the SCCs of a network architecture, which was shown in the previous section, so does dynamical robustness.
 
 \subsection{Example computation of dynamical robustness}
 Before proceeding to demonstrate which network architectures maximize dynamical robustness we illustrate how the result of the previous section applies to simple examples. Dynamical robustness can be computed for systems like those that derive from the sampling of Jacobian matrices shown in \ref{fig:robustnessconcept} and \ref{fig:jacobianvectorfields}. \ref{eq:robschematic} is a schematized version of \ref{eq:robustnessbygraph} for the case of perturbing a single element at a time.  \reffigscc$\,$ shows examples demonstrating the usage of this expression. For instance, if our graph is the one in \reffigscc{} (middle panels), then we have two connected components, one with two nodes, and one with one node.  From \ref{tab:structstabmat}, we know that the graph with two nodes has probability $0.25$ of being stable and robustness $0.62$.  The graph with one node corresponds to a $1 \times 1$ matrix, so we have probability $0.5$ of stability and robustness $0.5$.  Thus, the probability of our 3-node graph being stable is $0.5 \times 0.25 = 0.125$ and its robustness is computed from \ref{eq:robschematic} in \reffigscc{}, which agrees with the value computed in \ref{tab:structstabmat3} up to sampling error.
