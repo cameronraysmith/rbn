@@ -393,6 +393,31 @@ R(G_{\mathrm{max}}, S, \mu, \tau^{(m)})$.
 
 This analytical result implies that the interaction graphs for systems that are the most robust will maximize the number of links between a given set of SCCs. Because this result is purely topological in nature, it does not depend at all upon any particular details such as the size of the system or the probability distribution from which the variable interaction strengths are sampled. Any network whose associated dynamical system has the interaction graph among its SCCs equivalent to the total ordering is more robust than those associated to any of the other interaction graphs in \reffigscc{}. The graph associated to the total ordering is the most hierarchical network architecture for any given number of SCCs like that of \reffigscc{} top for three variable systems where the \emph{highest} variable in the hierarchy has directed links to all other variables in the network, the second highest variable has directed links to all other variables in the network except the highest one, \emph{et cetera} (\refsupp{} \ref{sec:totalordering}). The result that dynamical robustness is correlated with network hierarchy therefore applies to an even broader class of dynamical systems than the particular random ensembles we have studied directly.
 
+\subsection{The most dynamically robust network architectures have a single type of SCC}
+The previously considered optimization problem maximized dynamical robustness subject to the constraint that the network have a particular set of SCCs.  We will now generalize this to situations in which we fix the types of SCCs which may appear in our network, but allow arbitrary numbers of each type.  We will study the constrained optimization problem where we fix the total number of nodes to constant $N$. This analysis will show that the most dynamically robust networks will be homogeneous in the types of their SCCs thereby having only a single type. This result drastically limits the number of different networks on $N$ nodes that are candidates for being the most dynamically robust.
+
+Suppose that ${\hat C}_1, \ldots, {\hat C}_n$ is a collection of non-isomorphic strongly connected directed graphs and that $G$ is a directed graph such that every SCC of $G$ is isomorphic to some ${\hat C}_i$ for some $i$.  For all $i \in \{1, \ldots, n\}$, let $k_i$ be the number of SCCs of $G$ which are isomorphic to ${\hat C}_i$.  Then, following algebraic manipulation, \ref{eq:robschematic} can be rewritten as follows:
+\begin{equation}\label{eq:robtype}
+1-R(G) = \frac{\sum_{i=1}^n k_i d_i (1-R_i)}{l + \sum_{i=1}^n k_i d_i}.
+\end{equation}
+Maximizing $R$ is equivalent to minimizing $1-R$.  Even though the $k_i$'s are integer variables, we will approximate them as positive real variables.  The accuracy of this approximation increases in the limit of large networks.
+
+When maximizing robustness subject to a fixed number $N$ of nodes, we can make use of our previous result in \ref{eq:sccmaxrobustness} to restrict attention to directed graphs with the maximal number of links between SCCs.  Hence, we can replace $l$ with $l_{\mathrm{max}}$ in \ref{eq:robtype} to obtain
+\begin{equation}
+1-R(G) = \frac{\sum_{i=1}^n k_i d_i (1-R_i)}
+  {\frac{1}{2} N^2 - \frac{1}{2} \sum_{i=1}^n k_i v_i^2 + \sum_{i=1}^n k_i d_i} .
+\end{equation}
+The condition on the total number of nodes means that the $k_i$'s cannot be varied independently but are subject to the constraint $\sum_{i=1}^n k_i v_i = N$.  Geometrically, this constraint defines a hyperplane and the interesection of this hyperplane with the positive orthant is the simplex whose vertices are the points $(N/v_1, 0, \ldots, 0), (0, N/v_2, \ldots, 0), \ldots, (0, 0, \ldots, N/v_n)$.
+
+Since both numerator and denominator are linear in the variables $k_i$ over which we are optimizing, an elementary argument shows the quantity will assume its minimum value at one of the vertices of the simplex.
+The value at the $i$-th vertex equals
+\begin{equation}
+ q_i =
+ \frac{2 d_i (1 - R_i)}
+      {(k_i - 1) v_i^2 + 2 d_i},
+\end{equation}
+hence the network which maximizes robustness will have as many SCCs as possible be of the type which have the smallest value of $q_i$.
+
 \subsection{Examples of the relationship between hierarchy and robustness}
 
 To test the prediction of the analytical results in \ref{eq:robschematic} and \ref{eq:robustnessmultiple}, we computed approximations to the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting variables (see \refsupp{} \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
