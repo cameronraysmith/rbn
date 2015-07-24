@@ -1,0 +1,170 @@
+%!TEX root = ../paper.tex
+% \onecolumn
+\begin{longtable*}{ c | c || c | c | c | c | c | c | c }
+% \begin{table}[H]
+% \begin{center}
+% \begin{tabular}{ c | c || c | c | c | c | c }
+\hline
+matrix & \specialcell{orbit\\size} & \specialcell{number\\of SCCs} & connectivity & \specialcell{edit\\distance} & \specialcell{cycle\\number} & \specialcell{dynamical \\ robustness} & \specialcell{probability\\of stability} & \specialcell{q \\ (\ref{eq:robqual})}\\
+\hline
+$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 1 & 3 & 3 & 3 & 0 & 0.499 & 0.126 & \\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 0\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 2 & 4 & 4 & 1 & 0.505 & 0.121 & \\
+$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 6 & 2 & 4 & 2 & 0 & 0.622 & 0.127 & \\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 12 & 2 & 5 & 3 & 1 & 0.595 & 0.121 & \\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 1 & 0\\
+\end{pmatrix}$ & 6 & 1 & 5 & 5 & 2 & 0.494 & 0.128 & 1.687\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 0 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 12 & 1 & 5 & 3 & 2 & 0.41 & 0.061 & 1.967\\
+$\begin{pmatrix}
+0 & 1 & 0\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 1 & 5 & 3 & 1 & 0.43 & 0.078 & 1.900\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 0\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 12 & 2 & 5 & 3 & 1 & 0.605 & 0.12 & \\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 0 & 0\\
+\end{pmatrix}$ & 6 & 1 & 5 & 3 & 2 & 0.405 & 0.06 & 1.983\\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 6 & 3 & 5 & 1 & 0 & 0.698 & 0.122 & \\
+$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 3 & 2 & 5 & 3 & 1 & 0.587 & 0.128 & \\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 0\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 6 & 3 & 5 & 1 & 0 & 0.707 & 0.127 & \\
+$\begin{pmatrix}
+0 & 0 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 6 & 1 & 6 & 4 & 2 & 0.578 & 0.121 & 1.688\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 0 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 6 & 1 & 6 & 4 & 3 & 0.487 & 0.081 & 2.052\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 12 & 1 & 6 & 2 & 2 & 0.543 & 0.098 & 1.828\\
+$\begin{pmatrix}
+0 & 1 & 0\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 6 & 1 & 6 & 2 & 2 & 0.501 & 0.088 & 1.996\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 0\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 12 & 2 & 6 & 2 & 1 & 0.662 & 0.123 & \\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 1 & 0\\
+\end{pmatrix}$ & 12 & 1 & 6 & 4 & 3 & 0.467 & 0.079 & 2.132\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 1 & 0\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 3 & 1 & 6 & 4 & 2 & 0.583 & 0.13 & 1.668\\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 12 & 2 & 6 & 2 & 1 & 0.659 & 0.124 & \\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+0 & 0 & 1\\
+\end{pmatrix}$ & 6 & 3 & 6 & 0 & 0 & 0.751 & 0.124 & \\
+$\begin{pmatrix}
+1 & 1 & 0\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 2 & 1 & 6 & 2 & 1 & 0.604 & 0.097 & 1.584\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 12 & 1 & 7 & 3 & 3 & 0.564 & 0.103 & 2.034\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 0 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 3 & 1 & 7 & 5 & 5 & 0.475 & 0.068 & 2.450\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 1 & 7 & 3 & 3 & 0.591 & 0.108 & 1.909\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+0 & 1 & 1\\
+\end{pmatrix}$ & 6 & 2 & 7 & 1 & 1 & 0.717 & 0.119 & \\
+$\begin{pmatrix}
+1 & 0 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 3 & 1 & 7 & 3 & 2 & 0.648 & 0.122 & 1.643\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1\\
+\end{pmatrix}$ & 6 & 1 & 7 & 1 & 2 & 0.627 & 0.105 & 1.741\\
+$\begin{pmatrix}
+0 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 3 & 1 & 8 & 4 & 5 & 0.577 & 0.093 & 2.256\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 6 & 1 & 8 & 2 & 3 & 0.639 & 0.109 & 1.925\\
+$\begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1\\
+\end{pmatrix}$ & 1 & 1 & 9 & 3 & 5 & 0.638 & 0.106 & 2.172\\
+% \end{tabular}
+% \end{center}
+\caption{{\bf Robustness and stability for three variable systems estimated via Monte Carlo sampling.} All matrices not listed have $0$ probability of stability.}\label{tab:structstabmat3}
+% \end{table}
+\end{longtable*}
+% \twocolumn
