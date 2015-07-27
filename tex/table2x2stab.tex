@@ -7,29 +7,29 @@
 \begin{center}
 \begin{tabular}{ c || c | c | c | c | c }
 \hline
-matrix & \specialcell{number\\of SCCs} & connectivity & \specialcell{dynamical \\ robustness} & \specialcell{probability\\of stability} & \specialcell{$\lim_{N \rightarrow \infty} Nq$ \\ (\ref{eq:robqual})}\\
+\specialcell{adjacency \\ matrix} & \specialcell{number\\of SCCs} & connectivity & \specialcell{dynamical \\ robustness} & \specialcell{probability\\of stability} & \specialcell{$\frac{2d_i}{v_i}(1-R_i)$ \\ (\ref{eq:maxrobcond})}\\
 \hline
   $\begin{pmatrix}
-a & b \\
-d & c
+1 & 1 \\
+1 & 1
 \end{pmatrix}$ & 1 & 4 & 0.62 & 0.25 & 1.52\\
   $\begin{pmatrix}
-a & b \\
-d & 0
+1 & 1 \\
+1 & 0
 \end{pmatrix}$, $\begin{pmatrix}
-0 & b \\
-d & c
+0 & 1 \\
+1 & 1
 \end{pmatrix}$ & 1 & 3 & 0.5 & 0.25 & 1.5\\
   $\begin{pmatrix}
-a & 0 \\
-d & c
+1 & 0 \\
+1 & 1
 \end{pmatrix}$, $\begin{pmatrix}
-a & b \\
-0 & c
+1 & 1 \\
+0 & 1
 \end{pmatrix}$ & 2 & 3 & 0.67 & 0.25 & \\
 $\begin{pmatrix}
-a & 0 \\
-0 & c
+1 & 0 \\
+0 & 1
 \end{pmatrix}$ & 2 & 2 & 0.5 & 0.25 & \\
 \end{tabular}
 \end{center}

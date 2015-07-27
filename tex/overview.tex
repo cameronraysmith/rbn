@@ -407,17 +407,25 @@ When maximizing robustness subject to a fixed number $N$ of nodes, we can make u
 1-R(G) = \frac{\sum_{i=1}^n k_i d_i (1-R_i)}
   {\frac{1}{2} N^2 - \frac{1}{2} \sum_{i=1}^n k_i v_i^2 + \sum_{i=1}^n k_i d_i} .
 \end{equation}
-The condition on the total number of nodes means that the $k_i$'s cannot be varied independently but are subject to the constraint $\sum_{i=1}^n k_i v_i = N$.  Geometrically, this constraint defines a hyperplane and the interesection of this hyperplane with the positive orthant is the simplex whose vertices are the points $(N/v_1, 0, \ldots, 0), (0, N/v_2, \ldots, 0), \ldots, (0, 0, \ldots, N/v_n)$.
+The condition on the total number of nodes means that the $k_i$'s cannot be varied independently but are subject to the constraint $\sum_{i=1}^n k_i v_i = N$.  Geometrically, this constraint defines a hyperplane and the interesection of this hyperplane with the positive orthant is the simplex whose vertices are the points $(N/v_1, 0, \ldots, 0), (0, N/v_2, \ldots, 0), \ldots, (0, 0, \ldots, N/v_n)$. When $v_i = 1$ this corresponds to the dynamical robustness of the SCC with a single node and link to itself.
 
-Since both numerator and denominator are linear in the variables $k_i$ over which we are optimizing, an elementary argument shows the quantity will assume its minimum value at one of the vertices of the simplex.
+Since both numerator and denominator are linear in the variables $k_i$ over which we are optimizing, the quantity will assume its minimum value at one of the vertices of the simplex.
 The value at the $i$-th vertex equals
 \begin{equation}\label{eq:robqual}
  q_i =
  \frac{2 d_i (1 - R_i)}
       {(k_i - 1) v_i^2 + 2 d_i},
 \end{equation}
-hence the network that maximizes robustness will have as many SCCs as possible be of the type which have the smallest value of $q_i$. For the SCC consisting of a single node that has a link connecting to itself $\lim_{N \rightarrow \infty} Nq = 1$. For other SCCs of two and three nodes this quantity is computed in \refsupp{} \ref{tab:structstabmat} and \ref{tab:structstabmat3}.
+hence the network that maximizes robustness will have as many SCCs as possible be of the type which have the smallest value of $q_i$.
+
+% $\lim_{N \rightarrow \infty} Nq = 1$
 
 \subsection{Examples of the relationship between hierarchy and robustness}
 
 To test the prediction of the analytical results in \ref{eq:robschematic} and \ref{eq:robustnessmultiple}, we computed approximations to the probability distribution of stability and dynamical robustness relative to network architecture for ensembles of systems having two or three interacting variables (see \refsupp{} \ref{tab:structstabmat} and \ref{tab:structstabmat3}). For all of these, we found that robustness is correlated with connectivity, but that the most robust systems have intermediate connectivity for a given network size (\reffigrobustconnect). Accounting for the number of cycles in a network architecture reveals a strong correlation between robustness and connectivity that was hidden when networks with any number of cycles were considered together (\reffigconnectcycle3D3x3). While the most hierarchical network architecture will always lack cycles altogether, cycle number alone is clearly insufficient to account for robustness as the members of each class span nearly the entire range of possible robustness values. Consistent with our analysis, we found that the most hierarchical network architecture is the most robust (\reffigrobusthierarchy). Moreover, if we consider hierarchy partitioned by connectivity, we find that there is a monotonic increase in robustness following any line of increasing hierarchy in \reffigconnectdist3D3x3.
+
+For the SCC consisting of a single node that has a link connecting to itself, which is the only SCC in the network corresponding to the total ordering on the network variables, \ref{eq:robqual} gives $q= \frac{1}{N+1}$. Assuming this value needs to be smaller than the corresponding value of $q_i$ for any other SCC, $\frac{1}{N+1} < q_i$, and simplifying the algebra, results in a sufficient condition for networks that contain only the single node SCC to have a higher value of dynamical robustness than networks containing any combination of alternative SCCs:
+\begin{equation}\label{eq:maxrobcond}
+\frac{2 d_i}{v_i} (1-R_i) > 1.
+\end{equation}
+For SCCs of two and three nodes this quantity is computed in \refsupp{} \ref{tab:structstabmat} and \ref{tab:structstabmat3}, where all of these SCCs satisfy this condition. On this basis, we conjecture that, in addition to the fact that the most dynamically robust network architectures correspond to the total ordering on a given collection of SCCs demonstrated by the analysis leading up to \ref{eq:robschematic}, that the most dynamically robust network architectures also correspond to the graph associated to the total ordering on all network variables.
